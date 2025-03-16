@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="406.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="cr.ac.una.tarea_a.d.s.controller.PrincipalViewController">
+<AnchorPane id="AnchorPane" prefHeight="406.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.PrincipalViewController">
    <children>
       <Label alignment="BOTTOM_LEFT" prefHeight="79.0" prefWidth="569.0" text="BALLIVERSE">
          <font>
@@ -18,7 +17,7 @@
       </Label>
       <VBox layoutX="14.0" layoutY="132.0" prefHeight="52.0" prefWidth="182.0">
          <children>
-            <MFXButton fx:id="btnJugar" alignment="CENTER" buttonType="RAISED" graphicTextGap="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="71.0" prefWidth="181.0" rippleColor="#bdbdbd" text="Jugar">
+            <MFXButton fx:id="btnJugar" alignment="CENTER" buttonType="RAISED" graphicTextGap="100.0" nodeOrientation="RIGHT_TO_LEFT" onAction="#OnActionBtnJugar" prefHeight="71.0" prefWidth="181.0" rippleColor="#bdbdbd" text="Jugar">
                <font>
                   <Font size="25.0" />
                </font>
