@@ -4,8 +4,12 @@
  */
 package cr.ac.una.tarea_a.d.s.controller;
 
+
+import io.github.palexdev.materialfx.controls.MFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
@@ -15,6 +19,12 @@ import javafx.fxml.Initializable;
  */
 public class PrincipalViewController implements Initializable {
 
+    @FXML
+    private MFXButton btnJugar;
+    @FXML
+    private MFXButton btnSalir;
+
+
     /**
      * Initializes the controller class.
      */
@@ -22,5 +32,10 @@ public class PrincipalViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
+
+    @FXML
+    private void OnActionBtnJugar(ActionEvent event) {
+    }
+
+  
 }

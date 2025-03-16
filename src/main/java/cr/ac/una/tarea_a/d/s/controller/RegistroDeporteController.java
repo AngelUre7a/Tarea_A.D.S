@@ -4,11 +4,12 @@
  */
 package cr.ac.una.tarea_a.d.s.controller;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
-
 
 
 /**
@@ -16,8 +17,12 @@ import javafx.fxml.Initializable;
  *
  * @author Usuario
  */
-public class RegistroDeporteController implements Initializable {
+public class RegistroDeporteController implements Initializable {  
 
+    @FXML
+    private MFXButton btnVolver;
+    @FXML
+    private MFXButton btnRegistrar;
     /**
      * Initializes the controller class.
      */
@@ -25,5 +30,14 @@ public class RegistroDeporteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
+
+    @FXML
+    private void onActionBtnVolver(ActionEvent event) {
+    }
+
+    @FXML
+    private void onActionBtnRegistrar(ActionEvent event) {
+    }
+
+ 
 }
