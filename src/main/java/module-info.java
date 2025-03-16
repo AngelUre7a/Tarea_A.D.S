@@ -6,4 +6,6 @@ module cr.ac.una.tarea_a.d.s {
     opens cr.ac.una.tarea_a.d.s to javafx.fxml;
     exports cr.ac.una.tarea_a.d.s.controller to javafx.fxml;
     exports cr.ac.una.tarea_a.d.s;
+    exports cr.ac.una.tarea_a.d.s.controller to javafx.fxml;
+    
 }
