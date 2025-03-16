@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="406.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.PrincipalViewController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="406.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.PrincipalViewController">
    <children>
       <Label alignment="BOTTOM_LEFT" prefHeight="79.0" prefWidth="569.0" text="BALLIVERSE">
          <font>
@@ -35,7 +35,7 @@
       </VBox>
       <VBox layoutX="170.0" layoutY="309.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="52.0" prefWidth="190.0">
          <children>
-                  <MFXButton fx:id="btnSalir" buttonType="RAISED" prefHeight="39.0" prefWidth="189.0" text="Salir">
+                  <MFXButton fx:id="btnSalir" buttonType="RAISED" onAction="#OnActionBtnSalir" prefHeight="39.0" prefWidth="189.0" text="Salir">
                <font>
                   <Font size="25.0" />
                </font>

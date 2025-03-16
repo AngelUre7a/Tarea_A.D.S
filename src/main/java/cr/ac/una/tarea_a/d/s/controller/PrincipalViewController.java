@@ -11,6 +11,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -23,6 +25,8 @@ public class PrincipalViewController implements Initializable {
     private MFXButton btnJugar;
     @FXML
     private MFXButton btnSalir;
+    @FXML
+    private AnchorPane root;
 
 
     /**
@@ -35,6 +39,12 @@ public class PrincipalViewController implements Initializable {
 
     @FXML
     private void OnActionBtnJugar(ActionEvent event) {
+    }
+
+    @FXML
+    private void OnActionBtnSalir(ActionEvent event) {
+        ((Stage) root.getScene().getWindow()).close();
+        
     }
 
   
