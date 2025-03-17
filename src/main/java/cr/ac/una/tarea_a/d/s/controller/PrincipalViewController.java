@@ -27,8 +27,6 @@ public class PrincipalViewController implements Initializable {
     private MFXButton btnSalir;
     @FXML
     private AnchorPane root;
-    @FXML
-    private AnchorPane apJugar;
 
 
     /** 
@@ -41,7 +39,7 @@ public class PrincipalViewController implements Initializable {
 
     @FXML
     private void OnActionBtnJugar(ActionEvent event) {
-        apJugar.toFront();
+        
     }
 
     @FXML

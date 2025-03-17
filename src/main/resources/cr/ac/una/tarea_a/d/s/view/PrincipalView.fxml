@@ -47,6 +47,5 @@
             <Image url="@../resources/Logo-Principal-View.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="apJugar" prefHeight="406.0" prefWidth="600.0" style="-fx-background-color: black;" />
    </children>
 </AnchorPane>
