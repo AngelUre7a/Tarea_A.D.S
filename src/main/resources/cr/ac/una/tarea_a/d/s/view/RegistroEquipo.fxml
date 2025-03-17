@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RegistroEquipoController">
-    
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RegistroEquipoController">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="4.0" prefHeight="400.0" prefWidth="594.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Registro Equipo con balon" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <MFXTextField fx:id="txtNombreEquipo" floatMode="BORDER" floatingText="Inserte el nombre del equipo" prefHeight="30.0" prefWidth="270.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <MFXTextField floatMode="BORDER" floatingText="Adjuntar imagen del equipo" prefHeight="30.0" prefWidth="270.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="215.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolverEquipo" prefHeight="30.0" prefWidth="125.0" text="Volver" />
+                  <MFXButton fx:id="btnRegistrar" onAction="#onActionBtnRegistrarEquipo" prefHeight="30.0" prefWidth="125.0" text="Registrar" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>

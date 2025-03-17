@@ -5,6 +5,7 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -23,6 +24,8 @@ public class RegistroDeporteController implements Initializable {
     private MFXButton btnVolver;
     @FXML
     private MFXButton btnRegistrar;
+    @FXML
+    private MFXTextField txtNombreDeporte;
     /**
      * Initializes the controller class.
      */
