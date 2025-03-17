@@ -7,12 +7,16 @@ package cr.ac.una.tarea_a.d.s.controller;
 import cr.ac.una.tarea_a.d.s.App;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 
 
 /**
@@ -28,6 +32,10 @@ public class RegistroDeporteController implements Initializable {
     private MFXButton btnRegistrar;
     @FXML
     private MFXTextField txtNombreDeporte;
+    @FXML
+    private MFXButton btnCargarImagen;
+    @FXML
+    private ImageView imageView;
     /**
      * Initializes the controller class.
      */
@@ -44,6 +52,20 @@ public class RegistroDeporteController implements Initializable {
     @FXML
     private void onActionBtnRegistrar(ActionEvent event)   throws IOException {
           App.setRoot("RegistroListaDeporteBalon");
+    }
+
+    @FXML
+    private void onActionBtnCargarImagen(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imagenes", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp"));
+        
+        File archivoSeleccionado = fileChooser.showOpenDialog(null);
+
+        if (archivoSeleccionado != null) {
+            Image imagen = new Image(archivoSeleccionado.toURI().toString());
+
+            imageView.setImage(imagen);
+        }
     }
 
  
