@@ -18,13 +18,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
-
 /**
  * FXML Controller class
  *
  * @author Usuario
  */
-public class RegistroDeporteController implements Initializable {  
+public class RegistroDeporteController implements Initializable {
 
     @FXML
     private MFXButton btnVolver;
@@ -36,29 +35,30 @@ public class RegistroDeporteController implements Initializable {
     private MFXButton btnCargarImagen;
     @FXML
     private ImageView imageView;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-
-    @FXML
-    private void onActionBtnVolver(ActionEvent event)  throws IOException {
-            App.setRoot("RegistroListaDeporteBalon");
+        DragAndDropForImageView();
     }
 
     @FXML
-    private void onActionBtnRegistrar(ActionEvent event)   throws IOException {
-          App.setRoot("RegistroListaDeporteBalon");
+    private void onActionBtnVolver(ActionEvent event) throws IOException {
+        App.setRoot("RegistroListaDeporteBalon");
+    }
+
+    @FXML
+    private void onActionBtnRegistrar(ActionEvent event) throws IOException {
+        App.setRoot("RegistroListaDeporteBalon");
     }
 
     @FXML
     private void onActionBtnCargarImagen(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imagenes", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp"));
-        
+
         File archivoSeleccionado = fileChooser.showOpenDialog(null);
 
         if (archivoSeleccionado != null) {
@@ -68,5 +68,34 @@ public class RegistroDeporteController implements Initializable {
         }
     }
 
- 
+    private void DragAndDropForImageView() {
+        imageView.setOnDragOver(event -> {
+            if (event.getGestureSource() != imageView && event.getDragboard().hasFiles()) {
+                event.acceptTransferModes(javafx.scene.input.TransferMode.COPY);
+            }
+            event.consume();
+        });
+
+        imageView.setOnDragDropped(event -> {
+            var db = event.getDragboard();
+            boolean success = false;
+            if (db.hasFiles()) {
+                File archivoSeleccionado = db.getFiles().get(0);
+                if (archivoSeleccionado != null) {
+                    try {
+                        Image imagen = new Image(archivoSeleccionado.toURI().toString());
+                        imageView.setImage(imagen);
+                        success = true;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            event.setDropCompleted(success);
+            event.consume();
+
+        });
+
+    }
+
 }
