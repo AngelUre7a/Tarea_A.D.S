@@ -4,8 +4,10 @@
  */
 package cr.ac.una.tarea_a.d.s.controller;
 
+import cr.ac.una.tarea_a.d.s.App;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -35,7 +37,8 @@ public class RegistroDeporteController implements Initializable {
     }    
 
     @FXML
-    private void onActionBtnVolver(ActionEvent event) {
+    private void onActionBtnVolver(ActionEvent event)  throws IOException {
+            App.setRoot("Menu");
     }
 
     @FXML
