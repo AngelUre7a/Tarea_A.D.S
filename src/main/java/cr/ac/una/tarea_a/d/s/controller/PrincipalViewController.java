@@ -5,7 +5,9 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
 
+import cr.ac.una.tarea_a.d.s.App;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -38,8 +40,8 @@ public class PrincipalViewController implements Initializable {
     }    
 
     @FXML
-    private void OnActionBtnJugar(ActionEvent event) {
-        
+    private void OnActionBtnJugar(ActionEvent event) throws IOException {
+        App.setRoot("Menu");
     }
 
     @FXML

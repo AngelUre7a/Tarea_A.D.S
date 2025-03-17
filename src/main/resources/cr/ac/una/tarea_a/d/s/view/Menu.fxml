@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.MenuController">
-    
+
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="cr.ac.una.tarea_a.d.s.controller.MenuController">
+   <children>
+      <Label alignment="CENTER" prefHeight="130.0" prefWidth="484.0" text="Balliverse" AnchorPane.bottomAnchor="270.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="141.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font size="72.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER" layoutY="125.0" prefHeight="275.0" prefWidth="484.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="141.0" AnchorPane.topAnchor="125.0">
+         <children>
+            <MFXButton fx:id="btnRegistroDeportes" onAction="#onActionBtnRegistroDeportes" prefHeight="31.0" prefWidth="336.0" text="Registro de Deportes" />
+            <MFXButton fx:id="BtnRegistroEquipos" onAction="#onActionBtnRegistroEquipos" prefHeight="25.0" prefWidth="330.0" text="Registro de Equipos" />
+            <MFXButton fx:id="btnEstadisticas" onAction="#onActionBtnEstadisticas" prefHeight="25.0" prefWidth="346.0" text="Estadisticas" />
+            <MFXButton fx:id="btnVolverMenuPrincipal" onAction="#onActionBtnVolverMenuPrincipal" prefHeight="25.0" prefWidth="193.0" text="Volver al menu principal" />
+         </children>
+      </VBox>
+      <ImageView fitHeight="130.0" fitWidth="143.0" layoutX="482.0" layoutY="-5.0" AnchorPane.bottomAnchor="275.0" AnchorPane.leftAnchor="482.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-5.0">
+         <image>
+            <Image url="@../resources/Logo-Principal-View.png" />
+         </image>
+      </ImageView>
+   </children>
 </AnchorPane>

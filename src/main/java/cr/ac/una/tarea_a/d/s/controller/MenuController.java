@@ -4,9 +4,13 @@
  */
 package cr.ac.una.tarea_a.d.s.controller;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -15,6 +19,17 @@ import javafx.fxml.Initializable;
  */
 public class MenuController implements Initializable {
 
+    @FXML
+    private AnchorPane root;
+    @FXML
+    private MFXButton btnRegistroDeportes;
+    @FXML
+    private MFXButton BtnRegistroEquipos;
+    @FXML
+    private MFXButton btnEstadisticas;
+    @FXML
+    private MFXButton btnVolverMenuPrincipal;
+
     /**
      * Initializes the controller class.
      */
@@ -22,5 +37,21 @@ public class MenuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void onActionBtnRegistroDeportes(ActionEvent event) {
+    }
+
+    @FXML
+    private void onActionBtnRegistroEquipos(ActionEvent event) {
+    }
+
+    @FXML
+    private void onActionBtnEstadisticas(ActionEvent event) {
+    }
+
+    @FXML
+    private void onActionBtnVolverMenuPrincipal(ActionEvent event) {
+    }
     
 }
