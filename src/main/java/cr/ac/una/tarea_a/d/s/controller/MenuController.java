@@ -42,7 +42,7 @@ public class MenuController implements Initializable {
 
     @FXML
     private void onActionBtnRegistroDeportes(ActionEvent event) throws IOException {
-          App.setRoot("RegistroDeporte");
+          App.setRoot("RegistroListaDeporteBalon");
     }
 
     @FXML
