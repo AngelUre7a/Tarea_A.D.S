@@ -38,7 +38,7 @@ public class RegistroDeporteController implements Initializable {
 
     @FXML
     private void onActionBtnVolver(ActionEvent event)  throws IOException {
-            App.setRoot("Menu");
+            App.setRoot("RegistroListaDeporteBalon");
     }
 
     @FXML

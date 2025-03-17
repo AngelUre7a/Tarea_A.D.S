@@ -4,9 +4,15 @@
  */
 package cr.ac.una.tarea_a.d.s.controller;
 
+import cr.ac.una.tarea_a.d.s.App;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -15,6 +21,13 @@ import javafx.fxml.Initializable;
  */
 public class RegistroListaDeporteBalonController implements Initializable {
 
+    @FXML
+    private AnchorPane root;
+    @FXML
+    private MFXButton btnVolver;
+    @FXML
+    private MFXButton btnAgregar;
+
     /**
      * Initializes the controller class.
      */
@@ -22,5 +35,15 @@ public class RegistroListaDeporteBalonController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void onActionBtnVolver(ActionEvent event) throws IOException {
+        App.setRoot("Menu");
+    }
+
+    @FXML
+    private void onActionBtnAgregar(ActionEvent event) throws IOException {
+        App.setRoot("RegistroDeporte");
+    }
     
 }
