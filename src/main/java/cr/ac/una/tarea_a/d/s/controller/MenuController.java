@@ -4,7 +4,9 @@
  */
 package cr.ac.una.tarea_a.d.s.controller;
 
+import cr.ac.una.tarea_a.d.s.App;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -51,7 +53,8 @@ public class MenuController implements Initializable {
     }
 
     @FXML
-    private void onActionBtnVolverMenuPrincipal(ActionEvent event) {
+    private void onActionBtnVolverMenuPrincipal(ActionEvent event) throws IOException {
+        App.setRoot("PrincipalView");
     }
     
 }
