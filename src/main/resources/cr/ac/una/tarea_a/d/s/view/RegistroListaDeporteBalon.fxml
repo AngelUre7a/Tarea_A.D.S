@@ -25,25 +25,20 @@
                   <Insets left="430.0" />
                </VBox.margin>
             </MFXButton>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="520.0" spacing="40.0">
                <children>
-                  <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="520.0" spacing="40.0">
-                     <children>
-                        <Label text="ID">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <Label text="Nombre" />
-                        <Label text="Imagen" />
-                        <Label text="Eliminar" />
-                        <Label text="Editar" />
-                     </children>
-                  </HBox>
+                  <Label text="ID">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <Label text="Nombre" />
+                  <Label text="Imagen" />
+                  <Label text="Eliminar" />
+                  <Label text="Editar" />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
-            <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" pickOnBounds="false" prefHeight="29.0" prefWidth="87.0" text="Volver" />
          </children></VBox>
+      <MFXButton fx:id="btnVolver" layoutX="16.0" layoutY="20.0" onAction="#onActionBtnVolver" pickOnBounds="false" prefHeight="29.0" prefWidth="63.0" text="Volver" />
    </children>
 </AnchorPane>

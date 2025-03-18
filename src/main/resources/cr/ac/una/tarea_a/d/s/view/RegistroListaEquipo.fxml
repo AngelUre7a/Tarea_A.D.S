@@ -44,7 +44,7 @@
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" />
-            <MFXButton fx:id="btnVolver" buttonType="RAISED" onAction="#onActionBtnVolver" prefHeight="29.0" prefWidth="87.0" text="Volver" />
          </children></VBox>
+      <MFXButton fx:id="btnVolver" buttonType="RAISED" layoutX="13.0" layoutY="21.0" onAction="#onActionBtnVolver" prefHeight="29.0" prefWidth="65.0" text="Volver" />
    </children>
 </AnchorPane>
