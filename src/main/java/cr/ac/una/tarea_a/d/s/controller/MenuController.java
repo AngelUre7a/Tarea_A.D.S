@@ -47,7 +47,7 @@ public class MenuController implements Initializable {
 
     @FXML
     private void onActionBtnRegistroEquipos(ActionEvent event)throws IOException {
-         App.setRoot("RegistroEquipo");
+         App.setRoot("RegistroListaEquipo");
     }
 
     @FXML
