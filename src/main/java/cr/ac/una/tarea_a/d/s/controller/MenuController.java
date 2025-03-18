@@ -51,7 +51,8 @@ public class MenuController implements Initializable {
     }
 
     @FXML
-    private void onActionBtnEstadisticas(ActionEvent event) {
+    private void onActionBtnEstadisticas(ActionEvent event) throws IOException {
+        App.setRoot("Estadisticas");
     }
 
     @FXML
