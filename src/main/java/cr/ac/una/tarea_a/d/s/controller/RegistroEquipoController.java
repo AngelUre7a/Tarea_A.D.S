@@ -54,7 +54,8 @@ public class RegistroEquipoController implements Initializable {
     }
 
     @FXML
-    private void onActionBtnRegistrarEquipo(ActionEvent event) {
+    private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
+        App.setRoot("RegistroListaEquipo");
     }
 
     @FXML
