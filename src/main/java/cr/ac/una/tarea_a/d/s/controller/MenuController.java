@@ -31,6 +31,10 @@ public class MenuController implements Initializable {
     private MFXButton btnEstadisticas;
     @FXML
     private MFXButton btnVolverMenuPrincipal;
+    @FXML
+    private MFXButton btnCrearTorneo;
+    @FXML
+    private MFXButton btnRanking;
 
     /**
      * Initializes the controller class.
@@ -58,6 +62,14 @@ public class MenuController implements Initializable {
     @FXML
     private void onActionBtnVolverMenuPrincipal(ActionEvent event) throws IOException {
         App.setRoot("PrincipalView");
+    }
+
+    @FXML
+    private void onActionBtnCrearTorneo(ActionEvent event) {
+    }
+
+    @FXML
+    private void onActionBtnRanking(ActionEvent event) {
     }
     
 }

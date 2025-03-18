@@ -15,10 +15,12 @@
             <Font size="72.0" />
          </font>
       </Label>
-      <VBox alignment="CENTER" layoutY="125.0" prefHeight="275.0" prefWidth="484.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="141.0" AnchorPane.topAnchor="125.0">
+      <VBox alignment="CENTER" layoutY="125.0" prefHeight="300.0" prefWidth="484.0" spacing="30.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="141.0" AnchorPane.topAnchor="125.0">
          <children>
             <MFXButton fx:id="btnRegistroDeportes" onAction="#onActionBtnRegistroDeportes" prefHeight="30.0" prefWidth="330.0" text="Registro de Deportes" />
             <MFXButton fx:id="BtnRegistroEquipos" onAction="#onActionBtnRegistroEquipos" prefHeight="30.0" prefWidth="330.0" text="Registro de Equipos" />
+            <MFXButton fx:id="btnCrearTorneo" onAction="#onActionBtnCrearTorneo" prefHeight="25.0" prefWidth="330.0" text="Crear Torneo" />
+            <MFXButton fx:id="btnRanking" onAction="#onActionBtnRanking" prefHeight="25.0" prefWidth="330.0" text="Ranking" />
             <MFXButton fx:id="btnEstadisticas" onAction="#onActionBtnEstadisticas" prefHeight="30.0" prefWidth="330.0" text="Estadisticas" />
             <MFXButton fx:id="btnVolverMenuPrincipal" onAction="#onActionBtnVolverMenuPrincipal" prefHeight="25.0" prefWidth="193.0" text="Volver al menu principal" />
          </children>
