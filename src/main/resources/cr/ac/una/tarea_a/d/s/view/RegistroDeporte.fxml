@@ -19,7 +19,7 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <MFXTextField fx:id="txtNombreDeporte" floatMode="BORDER" floatingText="Inserte el nombre del equipo" prefHeight="30.0" prefWidth="270.0" />
+                        <MFXTextField fx:id="txtNombreDeporte" floatMode="ABOVE" floatingText="Inserte el nombre del equipo" prefHeight="30.0" prefWidth="270.0" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
