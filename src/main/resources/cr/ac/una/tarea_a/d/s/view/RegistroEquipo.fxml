@@ -2,31 +2,42 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.PerspectiveCamera?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RegistroEquipoController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="4.0" prefHeight="400.0" prefWidth="594.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="104.0" prefWidth="594.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Registro Equipo con balon" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Registro Equipo con balon" wrappingWidth="139.822265625" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="129.0" prefWidth="594.0">
                <children>
                   <MFXTextField fx:id="txtNombreEquipo" floatMode="BORDER" floatingText="Inserte el nombre del equipo" prefHeight="30.0" prefWidth="270.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="158.0" prefWidth="594.0">
                <children>
-                  <MFXTextField floatMode="BORDER" floatingText="Adjuntar imagen del equipo" prefHeight="30.0" prefWidth="270.0" />
+                  <VBox alignment="CENTER" prefHeight="90.0" prefWidth="196.0" spacing="20.0">
+                     <children>
+                        <MFXButton fx:id="btnAbrirCamera" onAction="#OnActionBtnAbrirCamera" text="Abrir Camara" />
+                        <MFXButton fx:id="btnTomarFoto" onAction="#onActionBtnTomarFoto" text="Tomar Foto" />
+                     </children>
+                  </VBox>
+                  <PerspectiveCamera />
+                  <MediaView fx:id="mdCamera" fitHeight="200.0" fitWidth="200.0" />
+                  <ImageView fx:id="ivFotoTomada" fitHeight="200.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="215.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="215.0" prefHeight="110.0" prefWidth="594.0" spacing="20.0">
                <children>
                   <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolverEquipo" prefHeight="30.0" prefWidth="125.0" text="Volver" />
                   <MFXButton fx:id="btnRegistrar" onAction="#onActionBtnRegistrarEquipo" prefHeight="30.0" prefWidth="125.0" text="Registrar" />

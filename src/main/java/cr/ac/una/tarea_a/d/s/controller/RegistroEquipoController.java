@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -27,6 +28,12 @@ public class RegistroEquipoController implements Initializable {
     private MFXButton btnRegistrar;
     @FXML
     private MFXTextField txtNombreEquipo;
+    @FXML
+    private MFXButton btnAbrirCamera;
+    @FXML
+    private MFXButton btnTomarFoto;
+    @FXML
+    private ImageView ivFotoTomada;
 
     /**
      * Initializes the controller class.
@@ -43,6 +50,14 @@ public class RegistroEquipoController implements Initializable {
 
     @FXML
     private void onActionBtnRegistrarEquipo(ActionEvent event) {
+    }
+
+    @FXML
+    private void OnActionBtnAbrirCamera(ActionEvent event) {
+    }
+
+    @FXML
+    private void onActionBtnTomarFoto(ActionEvent event) {
     }
     
 }
