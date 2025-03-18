@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.MenuController">
    <children>
-      <Label alignment="CENTER" prefHeight="130.0" prefWidth="484.0" text="Balliverse" AnchorPane.bottomAnchor="270.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="141.0" AnchorPane.topAnchor="0.0">
+      <Label alignment="CENTER" prefHeight="130.0" prefWidth="484.0" text="Balliverse" AnchorPane.bottomAnchor="305.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="141.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font size="72.0" />
          </font>
