@@ -16,22 +16,6 @@
                   <Insets />
                </VBox.margin>
             </Label>
-            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="520.0" spacing="60.0" VBox.vgrow="ALWAYS">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-               <children>
-                  <Label text="ID">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-                  <Label text="Nombre" />
-                  <Label text="Imagen" />
-                  <Label text="Eliminar" />
-                  <Label text="Editar" />
-               </children>
-            </HBox>
          </children>
       </VBox>
       <VBox alignment="TOP_CENTER" layoutX="40.0" layoutY="97.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="70.0">
@@ -41,7 +25,25 @@
                   <Insets left="430.0" />
                </VBox.margin>
             </MFXButton>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="520.0" spacing="40.0">
+                     <children>
+                        <Label text="ID">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="Nombre" />
+                        <Label text="Imagen" />
+                        <Label text="Eliminar" />
+                        <Label text="Editar" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+            <MFXButton fx:id="btnVolver" buttonType="RAISED" onAction="#onActionBtnVolver" prefHeight="29.0" prefWidth="87.0" text="Volver" />
          </children></VBox>
-      <MFXButton fx:id="btnVolver" buttonType="RAISED" layoutX="507.0" layoutY="14.0" onAction="#onActionBtnVolver" prefHeight="29.0" prefWidth="87.0" text="Volver" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
    </children>
 </AnchorPane>

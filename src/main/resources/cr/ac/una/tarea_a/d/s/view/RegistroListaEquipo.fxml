@@ -1,11 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RegistroListaEquipoController">
-    
+    <children>
+      <VBox alignment="TOP_CENTER" layoutX="143.0" layoutY="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="42.0" prefWidth="439.0" AnchorPane.bottomAnchor="310.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Label alignment="TOP_CENTER" text="Lista de Deportes con balón " VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="520.0" spacing="60.0" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <children>
+                  <Label text="ID">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <Label text="Nombre" />
+                  <Label text="Imagen" />
+                  <Label text="Eliminar" />
+                  <Label text="Editar" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="40.0" layoutY="97.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="70.0">
+         <children>
+            <MFXButton fx:id="btnAgregar" buttonType="RAISED" onAction="#onActionBtnAgregar" prefHeight="29.0" prefWidth="87.0" text="Agregar">
+               <VBox.margin>
+                  <Insets left="430.0" />
+               </VBox.margin>
+            </MFXButton>
+         </children></VBox>
+      <MFXButton fx:id="btnVolver" buttonType="RAISED" layoutX="507.0" layoutY="14.0" onAction="#onActionBtnVolver" prefHeight="29.0" prefWidth="87.0" text="Volver" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+   </children>
 </AnchorPane>
