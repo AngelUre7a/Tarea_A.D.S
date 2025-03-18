@@ -24,7 +24,7 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
                     <children>
-                        <MFXButton fx:id="btnCargarImagen" onAction="#onActionBtnCargarImagen" prefHeight="68.0" prefWidth="158.0" text="cargar imagen del balon" />
+                        <MFXButton fx:id="btnCargarImagen" onAction="#onActionBtnCargarImagen" prefHeight="68.0" prefWidth="158.0" text="Cargar imagen del balon" />
                         <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                     </children>
                 </HBox>

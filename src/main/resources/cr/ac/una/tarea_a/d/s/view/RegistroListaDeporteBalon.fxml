@@ -20,7 +20,7 @@
       </VBox>
       <VBox alignment="TOP_CENTER" layoutX="40.0" layoutY="97.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="70.0">
          <children>
-            <MFXButton fx:id="btnAgregar" buttonType="RAISED" onAction="#onActionBtnAgregar" prefHeight="29.0" prefWidth="87.0" text="Agregar">
+            <MFXButton fx:id="btnAgregar" buttonType="RAISED" onAction="#onActionBtnAgregar" pickOnBounds="false" prefHeight="29.0" prefWidth="87.0" text="Agregar">
                <VBox.margin>
                   <Insets left="430.0" />
                </VBox.margin>
@@ -43,7 +43,7 @@
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" />
-            <MFXButton fx:id="btnVolver" buttonType="RAISED" onAction="#onActionBtnVolver" prefHeight="29.0" prefWidth="87.0" text="Volver" />
+            <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" pickOnBounds="false" prefHeight="29.0" prefWidth="87.0" text="Volver" />
          </children></VBox>
    </children>
 </AnchorPane>

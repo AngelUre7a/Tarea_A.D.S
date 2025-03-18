@@ -21,7 +21,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="129.0" prefWidth="594.0">
                <children>
-                  <MFXTextField fx:id="txtNombreEquipo" floatMode="BORDER" floatingText="Inserte el nombre del equipo" prefHeight="30.0" prefWidth="270.0" />
+                  <MFXTextField fx:id="txtNombreEquipo" floatMode="BORDER" floatingText="Inserte el nombre del equipo" pickOnBounds="false" prefHeight="30.0" prefWidth="270.0" />
                </children>
             </HBox>
             <HBox prefHeight="158.0" prefWidth="594.0">
