@@ -10,6 +10,12 @@
         <maven.compiler.target>21</maven.compiler.target>
     </properties>
     <dependencies>
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.32</version> 
+        <scope>provided</scope>
+    </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -34,6 +40,8 @@
                 <version>3.8.0</version>
                 <configuration>
                     <release>21</release>
+                     <source>${maven.compiler.source}</source>
+                <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>
             <plugin>

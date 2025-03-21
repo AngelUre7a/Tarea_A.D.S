@@ -1,5 +1,6 @@
 package cr.ac.una.tarea_a.d.s;
 
+import cr.ac.una.tarea_a.d.s.model.Deporte;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,6 +35,8 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        Deporte deporte = new Deporte();
+        
         System.out.println("Hola");
         System.out.println("Hola 2.0");
         System.out.println("Hola 2.1");
