@@ -11,12 +11,17 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import nu.pattern.OpenCV;
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.videoio.VideoCapture;
 
 /**
  * FXML Controller class
@@ -40,17 +45,20 @@ public class RegistroEquipoController implements Initializable {
     @FXML
     private ImageView ImageView;
 
+    private VideoCapture capture;
+    private boolean isCameraRunning = false;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        OpenCV.loadShared();
+    }
 
     @FXML
-    private void onActionBtnVolverEquipo(ActionEvent event) throws IOException  {
-           App.setRoot("Menu");
+    private void onActionBtnVolverEquipo(ActionEvent event) throws IOException {
+        App.setRoot("Menu");
     }
 
     @FXML
@@ -60,10 +68,44 @@ public class RegistroEquipoController implements Initializable {
 
     @FXML
     private void OnActionBtnAbrirCamera(ActionEvent event) {
+        if (!isCameraRunning) {
+            capture = new VideoCapture(0);
+            if (!capture.isOpened()) {
+                System.out.println("No se pudo abrir la camara");
+                return;
+            }
+            isCameraRunning = true;
+            Thread cameraThread = new Thread(() -> {
+                Mat Frame = new Mat();
+                while (isCameraRunning) {
+                    if (capture.read(Frame)) {
+                        Imgproc.cvtColor(Frame, Frame, Imgproc.COLOR_BGR2RGB);
+                        javafx.scene.image.Image image = matToImage(Frame);
+
+                        Platform.runLater(() -> {
+                            ImageView.setImage(image);
+                        });
+                    } else {
+                        System.out.println("Errror");
+                    }
+                }
+            });
+            cameraThread.setDaemon(true);
+            cameraThread.start();
+
+        }
     }
 
     @FXML
     private void onActionBtnTomarFoto(ActionEvent event) {
+        if (capture != null && capture.isOpened()) {
+            Mat Frame = new Mat();
+            if (capture.read(Frame)) {
+                Imgproc.cvtColor(Frame, Frame, Imgproc.COLOR_BGR2RGB);
+                javafx.scene.image.Image image = matToImage(Frame);
+                ImageView.setImage(image);
+            }
+        }
     }
 
     @FXML
@@ -79,5 +121,30 @@ public class RegistroEquipoController implements Initializable {
             ImageView.setImage(imagen);
         }
     }
-    
+
+    private javafx.scene.image.Image matToImage(Mat Frame) {
+        int width = Frame.width();
+        int height = Frame.height();
+
+        byte[] data = new byte[width * height * (int) Frame.elemSize()];
+        Frame.get(0, 0, data);
+
+        javafx.scene.image.WritableImage writableImage = new javafx.scene.image.WritableImage(width, height);
+        javafx.scene.image.PixelWriter pixelWriter = writableImage.getPixelWriter();
+
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                int index = (i * width + j) * 3;
+
+                int r = data[index] & 0xFF;
+                int g = data[index + 1] & 0xFF;
+                int b = data[index + 2] & 0xFF;
+
+                pixelWriter.setColor(j, i, javafx.scene.paint.Color.rgb(r, g, b));
+            }
+        }
+
+        return writableImage;
+    }
+
 }
