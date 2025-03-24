@@ -6,6 +6,7 @@ package cr.ac.una.tarea_a.d.s.controller;
 
 
 import cr.ac.una.tarea_a.d.s.App;
+import cr.ac.una.tarea_a.d.s.util.FlowController;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import java.io.IOException;
 import java.net.URL;
@@ -21,7 +22,7 @@ import javafx.stage.Stage;
  *
  * @author Usuario
  */
-public class PrincipalViewController implements Initializable {
+public class PrincipalViewController extends Controller implements Initializable {
 
     @FXML
     private MFXButton btnJugar;
@@ -48,6 +49,10 @@ public class PrincipalViewController implements Initializable {
     private void OnActionBtnSalir(ActionEvent event) {
         ((Stage) root.getScene().getWindow()).close();
         
+    }
+
+    @Override
+    public void initialize() {
     }
 
   

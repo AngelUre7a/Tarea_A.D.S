@@ -19,7 +19,7 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author Usuario
  */
-public class RegistroListaDeporteBalonController implements Initializable {
+public class RegistroListaDeporteBalonController extends Controller implements Initializable {
 
     @FXML
     private AnchorPane root;
@@ -44,6 +44,10 @@ public class RegistroListaDeporteBalonController implements Initializable {
     @FXML
     private void onActionBtnAgregar(ActionEvent event) throws IOException {
         App.setRoot("RegistroDeporte");
+    }
+
+    @Override
+    public void initialize() {
     }
     
 }

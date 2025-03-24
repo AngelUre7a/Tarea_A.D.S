@@ -18,7 +18,7 @@ import javafx.fxml.Initializable;
  *
  * @author Usuario
  */
-public class RegistroListaEquipoController implements Initializable {
+public class RegistroListaEquipoController extends Controller implements Initializable {
 
     @FXML
     private MFXButton btnAgregar;
@@ -41,6 +41,10 @@ public class RegistroListaEquipoController implements Initializable {
     @FXML
     private void onActionBtnVolver(ActionEvent event)throws IOException  {
           App.setRoot("Menu");
+    }
+
+    @Override
+    public void initialize() {
     }
     
    

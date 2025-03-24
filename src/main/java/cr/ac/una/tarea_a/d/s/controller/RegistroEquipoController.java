@@ -28,7 +28,7 @@ import org.opencv.videoio.VideoCapture;
  *
  * @author Usuario
  */
-public class RegistroEquipoController implements Initializable {
+public class RegistroEquipoController extends Controller implements Initializable {
 
     @FXML
     private MFXButton btnVolver;
@@ -145,6 +145,10 @@ public class RegistroEquipoController implements Initializable {
         }
 
         return writableImage;
+    }
+
+    @Override
+    public void initialize() {
     }
 
 }

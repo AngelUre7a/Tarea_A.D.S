@@ -143,7 +143,7 @@ public class FlowController {
         Controller controller = loader.getController();
         controller.initialize();
         Stage stage = new Stage();
-        stage.getIcons().add(new Image("cr/ac/una/tarea_a.d.s/resources/Logo-Principal-View.png"));
+        stage.getIcons().add(new Image("cr/ac/una/tarea_a/d/s/resources/Logo-Principal-View.png"));
         stage.setTitle(controller.getNombreVista());
         stage.setOnHidden((WindowEvent event) -> {
             controller.getStage().getScene().setRoot(new Pane());

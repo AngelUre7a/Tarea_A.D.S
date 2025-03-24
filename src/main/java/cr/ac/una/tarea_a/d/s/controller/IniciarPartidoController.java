@@ -13,7 +13,7 @@ import javafx.fxml.Initializable;
  *
  * @author Usuario
  */
-public class IniciarPartidoController implements Initializable {
+public class IniciarPartidoController extends Controller implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -23,5 +23,9 @@ public class IniciarPartidoController implements Initializable {
         System.out.println("prueba");
         // TODO
     }    
+
+    @Override
+    public void initialize() {
+    }
     
 }

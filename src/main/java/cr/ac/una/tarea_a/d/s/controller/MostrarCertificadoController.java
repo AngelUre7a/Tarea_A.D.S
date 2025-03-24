@@ -13,7 +13,7 @@ import javafx.fxml.Initializable;
  *
  * @author Usuario
  */
-public class MostrarCertificadoController implements Initializable {
+public class MostrarCertificadoController extends Controller implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -22,5 +22,9 @@ public class MostrarCertificadoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @Override
+    public void initialize() {
+    }
     
 }

@@ -13,7 +13,7 @@ import javafx.fxml.Initializable;
  *
  * @author Usuario
  */
-public class CreacionTorneoController implements Initializable {
+public class CreacionTorneoController extends Controller implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -24,5 +24,9 @@ public class CreacionTorneoController implements Initializable {
         
             System.out.println("Hola 2.1");
     }    
+
+    @Override
+    public void initialize() {
+    }
     
 }

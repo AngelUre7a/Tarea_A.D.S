@@ -13,7 +13,7 @@ import javafx.fxml.Initializable;
  *
  * @author Usuario
  */
-public class RankingController implements Initializable {
+public class RankingController extends Controller implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -22,5 +22,9 @@ public class RankingController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @Override
+    public void initialize() {
+    }
     
 }

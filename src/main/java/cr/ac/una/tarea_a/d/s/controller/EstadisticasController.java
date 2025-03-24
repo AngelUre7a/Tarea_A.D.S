@@ -18,7 +18,7 @@ import javafx.fxml.Initializable;
  *
  * @author Usuario
  */
-public class EstadisticasController implements Initializable {
+public class EstadisticasController extends Controller implements Initializable {
 
     @FXML
     private MFXButton btnVolver;
@@ -34,6 +34,10 @@ public class EstadisticasController implements Initializable {
     @FXML
     private void onActionBtnVolver(ActionEvent event) throws IOException {
         App.setRoot("Menu");
+    }
+
+    @Override
+    public void initialize() {
     }
     
 }

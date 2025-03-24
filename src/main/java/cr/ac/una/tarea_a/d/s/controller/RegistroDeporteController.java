@@ -23,7 +23,7 @@ import javafx.stage.FileChooser;
  *
  * @author Usuario
  */
-public class RegistroDeporteController implements Initializable {
+public class RegistroDeporteController extends Controller implements Initializable {
 
     @FXML
     private MFXButton btnVolver;
@@ -96,6 +96,10 @@ public class RegistroDeporteController implements Initializable {
 
         });
 
+    }
+
+    @Override
+    public void initialize() {
     }
 
 }

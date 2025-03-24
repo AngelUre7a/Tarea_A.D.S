@@ -19,7 +19,7 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author Usuario
  */
-public class MenuController implements Initializable {
+public class MenuController extends Controller implements Initializable {
 
     @FXML
     private AnchorPane root;
@@ -70,6 +70,10 @@ public class MenuController implements Initializable {
 
     @FXML
     private void onActionBtnRanking(ActionEvent event) {
+    }
+
+    @Override
+    public void initialize() {
     }
     
 }
