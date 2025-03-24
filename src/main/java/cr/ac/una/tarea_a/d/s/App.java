@@ -1,6 +1,7 @@
 package cr.ac.una.tarea_a.d.s;
 
 import cr.ac.una.tarea_a.d.s.model.Deporte;
+import cr.ac.una.tarea_a.d.s.util.FlowController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import javafx.scene.image.Image;
 
 /**
  * JavaFX App
@@ -18,9 +20,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("PrincipalView"), 640, 480);
-        stage.setScene(scene);
-        stage.show();
+        FlowController.getInstance().InitializeFlow(stage,null);
+        stage.getIcons().add(new Image("cr/ac/una/tarea_a.d.s/resources/Logo-Principal-View.png"));
+        stage.setTitle("BALLIVERSE");
+        //FlowController.getInstance().goViewInWindow("LogInView");
     }
 
    
