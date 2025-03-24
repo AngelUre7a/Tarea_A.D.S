@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -24,6 +25,8 @@ public class RegistroListaEquipoController extends Controller implements Initial
     private MFXButton btnAgregar;
     @FXML
     private MFXButton btnVolver;
+    @FXML
+    private AnchorPane root;
 
     /**
      * Initializes the controller class.

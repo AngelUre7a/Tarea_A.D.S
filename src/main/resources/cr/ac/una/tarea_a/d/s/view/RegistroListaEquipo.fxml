@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RegistroListaEquipoController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RegistroListaEquipoController">
     <children>
       <VBox alignment="TOP_CENTER" layoutX="40.0" layoutY="100.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="100.0">
          <children>
-            <MFXButton fx:id="btnAgregar" buttonType="RAISED" onAction="#onActionBtnAgregar" prefHeight="29.0" prefWidth="87.0" text="Agregar">
+            <MFXButton fx:id="btnAgregar" buttonType="RAISED" onAction="#onActionBtnAgregar" pickOnBounds="false" prefHeight="29.0" prefWidth="87.0" text="Agregar">
                <VBox.margin>
                   <Insets left="430.0" />
                </VBox.margin>
@@ -34,7 +34,6 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
          </children></VBox>
       <VBox layoutX="2.0" layoutY="4.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="90.0" prefWidth="600.0" AnchorPane.bottomAnchor="306.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="4.0">
          <children>
