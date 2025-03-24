@@ -9,16 +9,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RegistroListaDeporteBalonController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="143.0" layoutY="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="42.0" prefWidth="439.0" AnchorPane.bottomAnchor="310.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
-         <children>
-            <Label alignment="TOP_CENTER" text="Lista de Deportes con balón " VBox.vgrow="ALWAYS">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Label>
-         </children>
-      </VBox>
-      <VBox alignment="TOP_CENTER" layoutX="40.0" layoutY="97.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="70.0">
+      <VBox alignment="TOP_CENTER" layoutX="40.0" layoutY="90.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="90.0">
          <children>
             <MFXButton fx:id="btnAgregar" buttonType="RAISED" onAction="#onActionBtnAgregar" pickOnBounds="false" prefHeight="29.0" prefWidth="87.0" text="Agregar">
                <VBox.margin>
@@ -38,7 +29,17 @@
                   <Label text="Editar" />
                </children>
             </HBox>
-         </children></VBox>
-      <MFXButton fx:id="btnVolver" layoutX="16.0" layoutY="20.0" onAction="#onActionBtnVolver" pickOnBounds="false" prefHeight="29.0" prefWidth="63.0" text="Volver" />
+         </children>
+      </VBox>
+      <VBox layoutY="2.0" prefHeight="81.0" prefWidth="600.0">
+         <children>
+            <MFXButton fx:id="btnVolver" layoutX="20.0" layoutY="20.0" onAction="#onActionBtnVolver" pickOnBounds="false" prefHeight="30.0" prefWidth="70.0" styleClass="boton-volver" stylesheets="@../css/styleVolver.css" text="Volver" />
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label alignment="TOP_CENTER" text="Lista de Deportes con balón " />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

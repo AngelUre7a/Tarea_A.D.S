@@ -12,6 +12,11 @@
    <children>
       <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="4.0" prefHeight="400.0" prefWidth="594.0">
          <children>
+            <VBox prefHeight="85.0" prefWidth="594.0">
+               <children>
+                  <MFXButton fx:id="btnVolver" layoutX="20.0" layoutY="20.0" onAction="#onActionBtnVolverEquipo" prefHeight="30.0" prefWidth="70.0" styleClass="boton-volver" stylesheets="@../css/styleVolver.css" text="Volver" />
+               </children>
+            </VBox>
             <HBox alignment="CENTER" prefHeight="104.0" prefWidth="594.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Registro Equipo con balon" wrappingWidth="139.822265625" />
@@ -36,7 +41,6 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="215.0" prefHeight="110.0" prefWidth="594.0" spacing="20.0">
                <children>
-                  <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolverEquipo" prefHeight="30.0" prefWidth="125.0" text="Volver" />
                   <MFXButton fx:id="btnRegistrar" onAction="#onActionBtnRegistrarEquipo" prefHeight="30.0" prefWidth="125.0" text="Registrar" />
                </children>
             </HBox>
