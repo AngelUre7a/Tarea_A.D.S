@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.MenuController">
-   <children>
-      <Label alignment="CENTER" prefHeight="130.0" prefWidth="484.0" text="Balliverse" AnchorPane.bottomAnchor="305.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="141.0" AnchorPane.topAnchor="0.0">
-         <font>
-            <Font size="72.0" />
-         </font>
-      </Label>
-      <VBox alignment="CENTER" layoutY="125.0" prefHeight="300.0" prefWidth="484.0" spacing="30.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="141.0" AnchorPane.topAnchor="125.0">
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.MenuController">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+   </center>
+   <left>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="389.0" prefWidth="115.0" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
-            <MFXButton fx:id="btnRegistroDeportes" onAction="#onActionBtnRegistroDeportes" prefHeight="30.0" prefWidth="330.0" text="Registro de Deportes" />
-            <MFXButton fx:id="BtnRegistroEquipos" onAction="#onActionBtnRegistroEquipos" prefHeight="30.0" prefWidth="330.0" text="Registro de Equipos" />
-            <MFXButton fx:id="btnCrearTorneo" onAction="#onActionBtnCrearTorneo" prefHeight="25.0" prefWidth="330.0" text="Crear Torneo" />
-            <MFXButton fx:id="btnRanking" onAction="#onActionBtnRanking" prefHeight="25.0" prefWidth="330.0" text="Ranking" />
-            <MFXButton fx:id="btnEstadisticas" onAction="#onActionBtnEstadisticas" prefHeight="30.0" prefWidth="330.0" text="Estadisticas" />
-            <MFXButton fx:id="btnVolverMenuPrincipal" onAction="#onActionBtnVolverMenuPrincipal" prefHeight="25.0" prefWidth="193.0" text="Volver al menu principal" />
+            <VBox minHeight="-Infinity" prefHeight="0.0" prefWidth="75.0" spacing="5.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="115.0" text="Menu Balliverse" VBox.vgrow="ALWAYS" />
+                  <MFXButton fx:id="btnRegistroDeporte" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegistroDeporte" prefHeight="50.0" text="Registro Deporte" />
+                  <MFXButton fx:id="btnRegistroEquipo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegistroEquipo" prefHeight="50.0" text="Registro Equipo" />
+                  <MFXButton fx:id="btnCrearTorneo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnCrearTorneo" prefHeight="50.0" text="Crear Torneo" />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" minHeight="-Infinity" prefHeight="0.0" prefWidth="75.0" spacing="5.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <MFXButton fx:id="btnEstadisticas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnEstadisticas" prefHeight="50.0" text="Estadisticas" />
+                  <MFXButton fx:id="btnRanking" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRanking" prefHeight="50.0" text="Ranking" />
+                  <MFXButton fx:id="btnVolver" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnVolver" prefHeight="50.0" text="Volver" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </VBox>
          </children>
       </VBox>
-      <ImageView fitHeight="130.0" fitWidth="143.0" layoutX="482.0" layoutY="-5.0" AnchorPane.bottomAnchor="275.0" AnchorPane.leftAnchor="482.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-5.0">
-         <image>
-            <Image url="@../resources/Logo-Principal-View.png" />
-         </image>
-      </ImageView>
-   </children>
-</AnchorPane>
+   </left>
+</BorderPane>

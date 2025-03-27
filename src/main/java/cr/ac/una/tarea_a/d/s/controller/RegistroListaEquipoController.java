@@ -4,7 +4,7 @@
  */
 package cr.ac.una.tarea_a.d.s.controller;
 
-import cr.ac.una.tarea_a.d.s.App;
+import cr.ac.una.tarea_a.d.s.util.FlowController;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import java.io.IOException;
 import java.net.URL;
@@ -24,8 +24,6 @@ public class RegistroListaEquipoController extends Controller implements Initial
     @FXML
     private MFXButton btnAgregar;
     @FXML
-    private MFXButton btnVolver;
-    @FXML
     private AnchorPane root;
 
     /**
@@ -38,12 +36,7 @@ public class RegistroListaEquipoController extends Controller implements Initial
 
     @FXML
     private void onActionBtnAgregar(ActionEvent event)throws IOException  {
-         App.setRoot("RegistroEquipo");
-    }
-
-    @FXML
-    private void onActionBtnVolver(ActionEvent event)throws IOException  {
-          App.setRoot("Menu");
+        FlowController.getInstance().goViewInWindow("RegistroDeporte");
     }
 
     @Override
