@@ -7,17 +7,15 @@ package cr.ac.una.tarea_a.d.s.model;
 import lombok.Data;
 
 
-
 /**
  *
  * @author dasly
  */
-@Data
 
+@Data 
 public class Deporte {
     private String nombre;
     private String imagen;
     private String tipo;
-    
     
 }
