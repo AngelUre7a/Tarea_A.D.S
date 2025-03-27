@@ -1,0 +1,33 @@
+
+*{
+    -fx-color-celeste:#7BD5F5;
+    -fx-color-morado:#787FF6;
+    -fx-color-verde_agua:#4ADEDE;
+    -fx-color-azul:#1CA7EC;
+    -fx-color-azul_oscuro:#1F2F98;
+    -fx-color-naranja:#FFD091;
+}
+
+.button {
+   -fx-background-color: -fx-color-celeste;
+   -fx-padding: 5;
+   -fx-text-fill: white;
+   -fx-font-size: 18px;
+   -mfx-button-type:RAISED;
+   -fx-alignment:CENTER;
+   -fx-font-weight:bold;
+}
+.button:hover,.button:focused {
+   -fx-background-color: -fx-color-naranja;
+}
+
+/*.button:focused {
+   -fx-background-color: -fx-color-naranja;
+   -fx-font-weight:bold;
+}*/
+
+.jfx-button-long-text{
+    -fx-font-size: 12px;
+}
+
+
