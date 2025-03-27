@@ -8,8 +8,12 @@
     -fx-color-naranja:#FFD091;
 }
 
+.anchor-pane {
+    -fx-background-color: -fx-color-celeste;
+}
+
 .button {
-   -fx-background-color: -fx-color-celeste;
+   -fx-background-color: -fx-color-azul;
    -fx-padding: 5;
    -fx-text-fill: white;
    -fx-font-size: 18px;
@@ -21,13 +25,16 @@
    -fx-background-color: -fx-color-naranja;
 }
 
-/*.button:focused {
-   -fx-background-color: -fx-color-naranja;
-   -fx-font-weight:bold;
-}*/
 
 .jfx-button-long-text{
     -fx-font-size: 12px;
 }
 
+.label {
+    -fx-text-fill: white;
+    -fx-font-weight:bold;
+}
 
+BorderPane {
+    -fx-background-color: -fx-color-celeste;
+}

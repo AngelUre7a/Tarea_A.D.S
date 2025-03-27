@@ -17,7 +17,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import nu.pattern.OpenCV;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
@@ -30,8 +32,6 @@ import org.opencv.videoio.VideoCapture;
  */
 public class RegistroEquipoController extends Controller implements Initializable {
 
-    @FXML
-    private MFXButton btnVolver;
     @FXML
     private MFXButton btnRegistrar;
     @FXML
@@ -47,6 +47,8 @@ public class RegistroEquipoController extends Controller implements Initializabl
 
     private VideoCapture capture;
     private boolean isCameraRunning = false;
+    @FXML
+    private AnchorPane root;
 
     /**
      * Initializes the controller class.
@@ -57,13 +59,8 @@ public class RegistroEquipoController extends Controller implements Initializabl
     }
 
     @FXML
-    private void onActionBtnVolverEquipo(ActionEvent event) throws IOException {
-        App.setRoot("Menu");
-    }
-
-    @FXML
     private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
-        App.setRoot("RegistroListaEquipo");
+       ((Stage) root.getScene().getWindow()).close();
     }
 
     @FXML

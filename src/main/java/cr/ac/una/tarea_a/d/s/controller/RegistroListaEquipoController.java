@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -36,7 +37,7 @@ public class RegistroListaEquipoController extends Controller implements Initial
 
     @FXML
     private void onActionBtnAgregar(ActionEvent event)throws IOException  {
-        FlowController.getInstance().goViewInWindow("RegistroDeporte");
+        FlowController.getInstance().goViewInWindowModal("RegistroEquipo", ((Stage) root.getScene().getWindow()), false);
     }
 
     @Override

@@ -16,7 +16,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -26,8 +28,6 @@ import javafx.stage.FileChooser;
 public class RegistroDeporteController extends Controller implements Initializable {
 
     @FXML
-    private MFXButton btnVolver;
-    @FXML
     private MFXButton btnRegistrar;
     @FXML
     private MFXTextField txtNombreDeporte;
@@ -35,6 +35,8 @@ public class RegistroDeporteController extends Controller implements Initializab
     private MFXButton btnCargarImagen;
     @FXML
     private ImageView imageView;
+    @FXML
+    private AnchorPane root;
 
     /**
      * Initializes the controller class.
@@ -44,14 +46,10 @@ public class RegistroDeporteController extends Controller implements Initializab
         DragAndDropForImageView();
     }
 
-    @FXML
-    private void onActionBtnVolver(ActionEvent event) throws IOException {
-        App.setRoot("RegistroListaDeporteBalon");
-    }
 
     @FXML
     private void onActionBtnRegistrar(ActionEvent event) throws IOException {
-        App.setRoot("RegistroListaDeporteBalon");
+        ((Stage) root.getScene().getWindow()).close();
     }
 
     @FXML
