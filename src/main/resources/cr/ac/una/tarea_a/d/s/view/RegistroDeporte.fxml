@@ -15,12 +15,12 @@
             <VBox prefHeight="52.0" prefWidth="594.0" />
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                     <children>
-                  <Label alignment="CENTER" prefHeight="37.0" prefWidth="169.0" text="Registro Equipo con balon" />
+                  <Label alignment="CENTER" prefHeight="37.0" prefWidth="169.0" text="Registro Deporte con balon" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <MFXTextField fx:id="txtNombreDeporte" floatMode="BORDER" floatingText="Inserte el nombre del equipo" prefHeight="30.0" prefWidth="270.0" />
+                        <MFXTextField fx:id="txtNombreDeporte" floatMode="BORDER" floatingText="Inserte el nombre del deporte" prefHeight="30.0" prefWidth="270.0" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
