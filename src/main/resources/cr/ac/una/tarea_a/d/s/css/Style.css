@@ -6,10 +6,17 @@
     -fx-color-azul:#1CA7EC;
     -fx-color-azul_oscuro:#1F2F98;
     -fx-color-naranja:#FFD091;
+     -fx-color-medium_slate_blue: #6666ff;
+-fx-color-periwinkle: #b8baff;
+-fx-color-columbia_blue: #c9e8ff;
+-fx-color-rich_black: #0c0c16;
+-fx-color-celadon: #b9f0d7;
+
+   
 }
 
 .anchor-pane {
-    -fx-background-color: -fx-color-celeste;
+    -fx-background-color: -fx-color-columbia_blue;
 }
 
 .button {
@@ -22,7 +29,7 @@
    -fx-font-weight:bold;
 }
 .button:hover,.button:focused {
-   -fx-background-color: -fx-color-naranja;
+   -fx-background-color: -fx-color-azul_oscuro;
 }
 
 
@@ -31,10 +38,10 @@
 }
 
 .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-font-weight:bold;
 }
 
 BorderPane {
-    -fx-background-color: -fx-color-celeste;
+    -fx-background-color: -fx-color-columbia_blue;
 }
