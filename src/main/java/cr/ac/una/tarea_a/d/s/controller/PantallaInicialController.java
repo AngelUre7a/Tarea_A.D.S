@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -28,6 +29,8 @@ public class PantallaInicialController extends Controller implements Initializab
     private MFXButton btnSalir;
     @FXML
     private AnchorPane root;
+    @FXML
+    private Label title;
 
 
     /** 
@@ -35,7 +38,7 @@ public class PantallaInicialController extends Controller implements Initializab
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        title.setFocusTraversable(true);
     }    
 
     @FXML

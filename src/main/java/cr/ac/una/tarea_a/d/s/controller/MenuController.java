@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -36,13 +37,15 @@ public class MenuController extends Controller implements Initializable {
     private MFXButton btnVolver;
     @FXML
     private MFXButton btnRanking;
+    @FXML
+    private Label title;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       title.setFocusTraversable(true);
     }    
 
     @FXML

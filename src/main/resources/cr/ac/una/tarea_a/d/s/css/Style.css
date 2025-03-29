@@ -33,8 +33,11 @@
    -fx-alignment:CENTER;
    -fx-font-weight:bold;
 }
-.button:hover,.button:focused {
+.button:hover{
    -fx-background-color: -fx-color-azul_oscuro;
+}
+.button:focused{
+    -fx-background-color: -fx-color-celadon;
 }
 
 
@@ -45,8 +48,13 @@
 .label {
     -fx-text-fill: black;
     -fx-font-weight:bold;
+    font-family:"algerian";
 }
 
 BorderPane {
     -fx-background-color: -fx-color-columbia_blue;
+}
+
+.separator{
+    -fx-background-color:black
 }

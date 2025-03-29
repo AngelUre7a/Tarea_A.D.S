@@ -3,8 +3,6 @@
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -16,16 +14,11 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Label alignment="BOTTOM_LEFT" prefHeight="94.0" prefWidth="384.0" text="BALLIVERSE">
+                  <Label fx:id="title" alignment="BOTTOM_LEFT" prefHeight="94.0" prefWidth="384.0" text="BALLIVERSE">
                      <font>
                         <Font size="65.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="160.0" fitWidth="200.0">
-                     <image>
-                        <Image url="@../resources/Logo-Principal-View.png" />
-                     </image>
-                  </ImageView>
                </children>
                <padding>
                   <Insets left="15.0" right="15.0" top="15.0" />

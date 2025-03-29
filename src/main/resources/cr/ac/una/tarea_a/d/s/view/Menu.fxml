@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.MenuController">
@@ -11,33 +12,26 @@
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
    </center>
    <left>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="389.0" prefWidth="115.0" spacing="5.0" BorderPane.alignment="CENTER">
+      <HBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="500.0" prefWidth="122.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox minHeight="-Infinity" prefHeight="0.0" prefWidth="75.0" spacing="5.0" VBox.vgrow="ALWAYS">
+            <VBox minHeight="-Infinity" prefHeight="500.0" prefWidth="125.0" spacing="5.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="115.0" text="Menu Balliverse" VBox.vgrow="ALWAYS" />
+                  <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="115.0" text="Menu Balliverse" VBox.vgrow="ALWAYS" />
+                  <Separator prefWidth="200.0" />
                   <MFXButton fx:id="btnRegistroDeporte" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegistroDeporte" prefHeight="50.0" styleClass="jfx-button-long-text" text="Registro Deporte" />
                   <MFXButton fx:id="btnRegistroEquipo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegistroEquipo" prefHeight="50.0" styleClass="jfx-button-long-text" text="Registro Equipo" />
                   <MFXButton fx:id="btnCrearTorneo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnCrearTorneo" prefHeight="50.0" styleClass="jfx-button-long-text" text="Crear Torneo" />
+                  <VBox alignment="BOTTOM_CENTER" minHeight="-Infinity" prefHeight="273.0" prefWidth="98.0" spacing="5.0">
+                     <children>
+                        <MFXButton fx:id="btnEstadisticas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnEstadisticas" prefHeight="50.0" text="Estadisticas" />
+                        <MFXButton fx:id="btnRanking" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRanking" prefHeight="50.0" text="Ranking" />
+                        <MFXButton fx:id="btnVolver" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnVolver" prefHeight="50.0" text="Volver" />
+                     </children>
+                  </VBox>
                </children>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
             </VBox>
-            <VBox alignment="BOTTOM_CENTER" minHeight="-Infinity" prefHeight="0.0" prefWidth="75.0" spacing="5.0" VBox.vgrow="ALWAYS">
-               <children>
-                  <MFXButton fx:id="btnEstadisticas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnEstadisticas" prefHeight="50.0" text="Estadisticas" />
-                  <MFXButton fx:id="btnRanking" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRanking" prefHeight="50.0" text="Ranking" />
-                  <MFXButton fx:id="btnVolver" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnVolver" prefHeight="50.0" text="Volver" />
-               </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="500.0" prefWidth="5.0" />
          </children>
-         <padding>
-            <Insets left="3.0" right="3.0" />
-         </padding>
-      </VBox>
+      </HBox>
    </left>
 </BorderPane>
