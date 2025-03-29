@@ -35,7 +35,7 @@
                <children>
                   <VBox prefHeight="80.0">
                      <children>
-                        <MFXButton fx:id="btnJugar" alignment="CENTER" buttonType="RAISED" graphicTextGap="100.0" nodeOrientation="RIGHT_TO_LEFT" onAction="#OnActionBtnJugar" prefHeight="80.0" prefWidth="250.0" rippleColor="#bdbdbd" text="Jugar">
+                        <MFXButton fx:id="btnJugar" alignment="CENTER" buttonType="RAISED" graphicTextGap="100.0" nodeOrientation="RIGHT_TO_LEFT" onAction="#OnActionBtnJugar" prefHeight="80.0" prefWidth="250.0" rippleColor="#bdbdbd" styleClass="jfx-button-main-text" text="Jugar">
                            <font>
                               <Font size="25.0" />
                            </font>
@@ -44,7 +44,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="80.0">
                      <children>
-                        <MFXButton buttonType="RAISED" prefHeight="80.0" prefWidth="250.0" text="Acerca de">
+                        <MFXButton buttonType="RAISED" prefHeight="80.0" prefWidth="250.0" styleClass="jfx-button-main-text" text="Acerca de">
                            <font>
                               <Font size="25.0" />
                            </font>
@@ -53,7 +53,7 @@
                   </VBox>
                   <VBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="80.0">
                      <children>
-                              <MFXButton fx:id="btnSalir" buttonType="RAISED" onAction="#OnActionBtnSalir" prefHeight="80.0" prefWidth="250.0" text="Salir">
+                              <MFXButton fx:id="btnSalir" buttonType="RAISED" onAction="#OnActionBtnSalir" prefHeight="80.0" prefWidth="250.0" styleClass="jfx-button-main-text" text="Salir">
                            <font>
                               <Font size="25.0" />
                            </font>
