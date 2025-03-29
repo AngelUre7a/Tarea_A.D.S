@@ -14,8 +14,44 @@ package cr.ac.una.tarea_a.d.s.model;
 
 //@Data 
 public class Deporte {
-    private String nombre;
-    private String imagen;
-    private String tipo;
-    
+     private String nombreDeporte;
+    private String imagenDeporte;
+    private String tipoDeporte;
+
+    // Constructor sin parámetros
+    public Deporte() {
+    }
+
+    // Constructor con parámetros
+    public Deporte(String nombreDeporte, String imagenDeporte, String tipoDeporte) {
+        this.nombreDeporte = nombreDeporte;
+        this.imagenDeporte = imagenDeporte;
+        this.tipoDeporte = tipoDeporte;
+    }
+
+    // Métodos getter y setter
+    public String getNombreDeporte() {
+        return nombreDeporte;
+    }
+
+    public void setNombreDeporte(String nombreDeporte) {
+        this.nombreDeporte = nombreDeporte;
+    }
+
+    public String getImagenDeporte() {
+        return imagenDeporte;
+    }
+
+    public void setImagenDeporte(String imagenDeporte) {
+        this.imagenDeporte = imagenDeporte;
+    }
+
+    public String getTipoDeporte() {
+        return tipoDeporte;
+    }
+
+    public void setTipoDeporte(String tipoDeporte) {
+        this.tipoDeporte = tipoDeporte;
+    }
+
 }
