@@ -3,25 +3,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package cr.ac.una.tarea_a.d.s.model;
-
+import javafx.scene.image.Image;
 /**
  *
  * @author dasly
- */
-public class Equipo {
-     private String nombreEquipo;
-    private String ciudad;
-    private String entrenador;
+ */public class Equipo {
+    private String nombreEquipo;
+    private Image imagenEquipo;
 
     // Constructor sin parámetros
     public Equipo() {
     }
 
     // Constructor con parámetros
-    public Equipo(String nombreEquipo, String ciudad, String entrenador) {
+    public Equipo(String nombreEquipo, Image imagenEquipo) {
         this.nombreEquipo = nombreEquipo;
-        this.ciudad = ciudad;
-        this.entrenador = entrenador;
+        this.imagenEquipo = imagenEquipo;
     }
 
     // Métodos getter y setter
@@ -33,19 +30,11 @@ public class Equipo {
         this.nombreEquipo = nombreEquipo;
     }
 
-    public String getCiudad() {
-        return ciudad;
+    public Image getImagenEquipo() {
+        return imagenEquipo;
     }
 
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
-
-    public String getEntrenador() {
-        return entrenador;
-    }
-
-    public void setEntrenador(String entrenador) {
-        this.entrenador = entrenador;
+    public void setImagenEquipo(Image imagenEquipo) {
+        this.imagenEquipo = imagenEquipo;
     }
 }
