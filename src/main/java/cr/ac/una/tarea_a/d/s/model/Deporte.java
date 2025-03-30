@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package cr.ac.una.tarea_a.d.s.model;
-
+import javafx.scene.image.Image;
 //import lombok.Data;
 
 
@@ -14,8 +14,8 @@ package cr.ac.una.tarea_a.d.s.model;
 
 //@Data 
 public class Deporte {
-     private String nombreDeporte;
-    private String imagenDeporte;
+    private String nombreDeporte;
+    private Image imagenDeporte;
     private String tipoDeporte;
 
     // Constructor sin parámetros
@@ -23,7 +23,7 @@ public class Deporte {
     }
 
     // Constructor con parámetros
-    public Deporte(String nombreDeporte, String imagenDeporte, String tipoDeporte) {
+    public Deporte(String nombreDeporte, Image imagenDeporte, String tipoDeporte) {
         this.nombreDeporte = nombreDeporte;
         this.imagenDeporte = imagenDeporte;
         this.tipoDeporte = tipoDeporte;
@@ -38,11 +38,11 @@ public class Deporte {
         this.nombreDeporte = nombreDeporte;
     }
 
-    public String getImagenDeporte() {
+    public Image getImagenDeporte() {
         return imagenDeporte;
     }
 
-    public void setImagenDeporte(String imagenDeporte) {
+    public void setImagenDeporte(Image imagenDeporte) {
         this.imagenDeporte = imagenDeporte;
     }
 
