@@ -66,6 +66,7 @@ public class AppContext {
     public void delete(String parameter) {
         context.put(parameter, null);
     }
+    //
     public boolean containsItem(String name) {
         return context.containsKey(name);
     }

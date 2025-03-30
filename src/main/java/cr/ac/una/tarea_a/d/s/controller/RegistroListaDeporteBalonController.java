@@ -26,26 +26,25 @@ import javafx.stage.Stage;
  */
 public class RegistroListaDeporteBalonController extends Controller implements Initializable {
 
+    private Deporte deporte = new Deporte();
+     
     @FXML
     private AnchorPane root;
     @FXML
     private MFXButton btnAgregar;
     @FXML
-    private Label lbNombre;
+    private Label lbNombreD;
     @FXML
-    private ImageView imgImagen;
-
-     private Deporte deporte = new Deporte();
+    private ImageView imgImagenD;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-     
       if(AppContext.getInstance().containsItem("DEPORTE")){
       deporte = (Deporte) AppContext.getInstance().get("DEPORTE");
-      lbNombre.setText(deporte.getNombreDeporte());
-      imgImagen.setImage(deporte.getImagenDeporte());
+      lbNombreD.setText(deporte.getNombreDeporte());
+      imgImagenD.setImage(deporte.getImagenDeporte());
       }
         // TODO
     }    
@@ -53,8 +52,8 @@ public class RegistroListaDeporteBalonController extends Controller implements I
     public void initialize() {
       if(AppContext.getInstance().containsItem("DEPORTE")){
       deporte = (Deporte) AppContext.getInstance().get("DEPORTE");
-      lbNombre.setText(deporte.getNombreDeporte());
-      imgImagen.setImage(deporte.getImagenDeporte());
+      lbNombreD.setText(deporte.getNombreDeporte());
+      imgImagenD.setImage(deporte.getImagenDeporte());
       }
     }
     
@@ -63,5 +62,4 @@ public class RegistroListaDeporteBalonController extends Controller implements I
         FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
     }
 
-    
 }

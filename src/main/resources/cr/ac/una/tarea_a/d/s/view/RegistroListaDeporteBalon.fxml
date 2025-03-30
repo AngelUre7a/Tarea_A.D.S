@@ -36,8 +36,8 @@
                <children>
                   <Label prefHeight="40.0" prefWidth="33.0" text="Label" />
                   <Label prefHeight="40.0" prefWidth="40.0" text="Label" />
-                  <Label fx:id="lbNombre" prefHeight="40.0" prefWidth="40.0" text="Label" />
-                  <ImageView fx:id="imgImagen" fitHeight="40.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="lbNombreD" prefHeight="40.0" prefWidth="40.0" text="Label" />
+                  <ImageView fx:id="imgImagenD" fitHeight="40.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" />
                   <Button mnemonicParsing="false" text="Button" />
                   <Button mnemonicParsing="false" text="Button" />
                </children>

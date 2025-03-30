@@ -29,7 +29,9 @@ import javafx.stage.Stage;
  * @author Usuario
  */
 public class RegistroDeporteController extends Controller implements Initializable {
-
+    
+    private Deporte deporte = new Deporte(); 
+    
     @FXML
     private MFXButton btnRegistrar;
     @FXML
@@ -41,7 +43,6 @@ public class RegistroDeporteController extends Controller implements Initializab
     @FXML
     private AnchorPane root;
     
-   private Deporte deporte = new Deporte();
     /**
      * Initializes the controller class.
      */

@@ -5,6 +5,8 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.App;
+import cr.ac.una.tarea_a.d.s.model.Equipo;
+import cr.ac.una.tarea_a.d.s.util.AppContext;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.File;
@@ -31,6 +33,8 @@ import org.opencv.videoio.VideoCapture;
  * @author Usuario
  */
 public class RegistroEquipoController extends Controller implements Initializable {
+    
+    private Equipo equipo = new Equipo();
 
     @FXML
     private MFXButton btnRegistrar;
@@ -49,7 +53,8 @@ public class RegistroEquipoController extends Controller implements Initializabl
     private boolean isCameraRunning = false;
     @FXML
     private AnchorPane root;
-
+    
+   
     /**
      * Initializes the controller class.
      */
@@ -60,6 +65,10 @@ public class RegistroEquipoController extends Controller implements Initializabl
 
     @FXML
     private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
+        equipo.setImagenEquipo(ImageView.getImage());
+        equipo.setNombreEquipo(txtNombreEquipo.getText());
+        AppContext.getInstance().set("EQUIPO", equipo);
+        
        ((Stage) root.getScene().getWindow()).close();
     }
 
