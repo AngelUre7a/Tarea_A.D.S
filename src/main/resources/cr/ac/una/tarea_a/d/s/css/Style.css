@@ -23,7 +23,17 @@
        -fx-background-repeat: no-repeat;
        
 }
-
+/*.jfx-button-long-text, 
+#btnEstadisticas, 
+#btnRanking, 
+#btnVolver,
+#btnRegistroDeporte,
+#btnRegistroEquipo,
+#btnCrearTorneo,
+#title
+{
+    -fx-font-size: 15px;  Ajusta el tamaño según lo necesites 
+}*/
 .button {
    -fx-background-color: -fx-color-azul;
    -fx-padding: 5;

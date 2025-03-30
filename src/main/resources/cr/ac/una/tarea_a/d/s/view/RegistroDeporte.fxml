@@ -10,20 +10,19 @@
 
 <AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" styleClass="anchor-pane" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RegistroDeporteController">
     <children>
-        <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="4.0" prefHeight="400.0" prefWidth="594.0">
+        <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="4.0" prefHeight="400.0" prefWidth="600.0">
             <children>
-            <VBox prefHeight="52.0" prefWidth="594.0" />
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                <HBox alignment="CENTER" prefHeight="40.0" prefWidth="600.0">
                     <children>
                   <Label alignment="CENTER" prefHeight="37.0" prefWidth="169.0" text="Registro Deporte con balon" />
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="270.0">
                     <children>
                         <MFXTextField fx:id="txtNombreDeporte" floatMode="BORDER" floatingText="Inserte el nombre del deporte" prefHeight="30.0" prefWidth="270.0" />
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
+                <HBox alignment="CENTER" prefHeight="200.0" prefWidth="600.0" spacing="100.0">
                     <children>
                         <MFXButton fx:id="btnCargarImagen" onAction="#onActionBtnCargarImagen" prefHeight="68.0" prefWidth="158.0" styleClass="jfx-button-long-text" text="Cargar imagen del balon" />
                         <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />

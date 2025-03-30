@@ -10,22 +10,21 @@
 
 <AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" styleClass="anchor-pane" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RegistroEquipoController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="4.0" prefHeight="400.0" prefWidth="594.0">
+      <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="4.0" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <VBox prefHeight="22.0" prefWidth="594.0" />
-            <HBox alignment="CENTER" prefHeight="56.0" prefWidth="594.0">
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="600.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="24.0" prefWidth="190.0" text="Registro Equipo con balon" />
+                  <Label fx:id="lbRegistroE" alignment="CENTER" prefHeight="10.0" prefWidth="220.0" text="Registro Equipo con balon" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="88.0" prefWidth="594.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="270.0">
                <children>
                   <MFXTextField fx:id="txtNombreEquipo" floatMode="BORDER" floatingText="Inserte el nombre del equipo" pickOnBounds="false" prefHeight="30.0" prefWidth="270.0" />
                </children>
             </HBox>
-            <HBox prefHeight="212.0" prefWidth="594.0">
+            <HBox prefHeight="200.0" prefWidth="600.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="90.0" prefWidth="196.0" spacing="20.0">
+                  <VBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <MFXButton fx:id="btnCargarImagen" onAction="#onActionBtnCargarImagen" prefHeight="70.0" prefWidth="150.0" text="Cargar Imagen" />
                         <MFXButton fx:id="btnAbrirCamera" onAction="#OnActionBtnAbrirCamera" prefHeight="70.0" prefWidth="150.0" text="Abrir Camara" />
@@ -35,7 +34,7 @@
                   <ImageView fx:id="ImageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="215.0" prefHeight="110.0" prefWidth="594.0" spacing="20.0">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="215.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
                   <MFXButton fx:id="btnRegistrar" onAction="#onActionBtnRegistrarEquipo" prefHeight="30.0" prefWidth="125.0" text="Registrar" />
                </children>

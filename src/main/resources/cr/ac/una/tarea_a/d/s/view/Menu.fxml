@@ -14,18 +14,27 @@
    <left>
       <HBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="500.0" prefWidth="122.0" BorderPane.alignment="CENTER">
          <children>
+            <Separator orientation="VERTICAL" prefHeight="500.0" prefWidth="5.0" />
             <VBox minHeight="-Infinity" prefHeight="500.0" prefWidth="125.0" spacing="5.0">
                <children>
+                  <Separator prefWidth="200.0" />
                   <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="115.0" text="Menu Balliverse" VBox.vgrow="ALWAYS" />
                   <Separator prefWidth="200.0" />
                   <MFXButton fx:id="btnRegistroDeporte" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegistroDeporte" prefHeight="50.0" styleClass="jfx-button-long-text" text="Registro Deporte" />
+                  <Separator prefWidth="200.0" />
                   <MFXButton fx:id="btnRegistroEquipo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegistroEquipo" prefHeight="50.0" styleClass="jfx-button-long-text" text="Registro Equipo" />
+                  <Separator prefWidth="200.0" />
                   <MFXButton fx:id="btnCrearTorneo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnCrearTorneo" prefHeight="50.0" styleClass="jfx-button-long-text" text="Crear Torneo" />
-                  <VBox alignment="BOTTOM_CENTER" minHeight="-Infinity" prefHeight="273.0" prefWidth="98.0" spacing="5.0">
+                  <Separator prefWidth="200.0" />
+                  <VBox alignment="BOTTOM_CENTER" minHeight="-Infinity" prefHeight="273.0" prefWidth="125.0" spacing="5.0">
                      <children>
+                        <Separator prefWidth="200.0" />
                         <MFXButton fx:id="btnEstadisticas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnEstadisticas" prefHeight="50.0" text="Estadisticas" />
+                        <Separator prefWidth="200.0" />
                         <MFXButton fx:id="btnRanking" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRanking" prefHeight="50.0" text="Ranking" />
+                        <Separator prefWidth="200.0" />
                         <MFXButton fx:id="btnVolver" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnVolver" prefHeight="50.0" text="Volver" />
+                        <Separator prefWidth="200.0" />
                      </children>
                   </VBox>
                </children>
