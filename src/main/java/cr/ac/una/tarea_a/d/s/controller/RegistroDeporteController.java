@@ -7,6 +7,7 @@ package cr.ac.una.tarea_a.d.s.controller;
 import cr.ac.una.tarea_a.d.s.App;
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
+import cr.ac.una.tarea_a.d.s.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.File;
@@ -17,6 +18,7 @@ import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -58,6 +60,9 @@ public class RegistroDeporteController extends Controller implements Initializab
         deporte.setImagenDeporte(imageView.getImage());
         deporte.setNombreDeporte(txtNombreDeporte.getText());
         AppContext.getInstance().set("DEPORTE", deporte);
+        Mensaje mensaje = new Mensaje();
+        mensaje.show(Alert.AlertType.INFORMATION,"BALLIVERSE", "Se agregó el deporte correctamente");
+
         
         ((Stage) root.getScene().getWindow()).close();
     }

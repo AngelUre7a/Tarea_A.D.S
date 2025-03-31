@@ -5,6 +5,7 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.util.FlowController;
+import cr.ac.una.tarea_a.d.s.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import java.io.IOException;
 import java.net.URL;
@@ -32,29 +33,33 @@ public class PantallaInicialController extends Controller implements Initializab
     @FXML
     private Label title;
 
-
-    /** 
+    /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         title.setFocusTraversable(true);
-    }    
+    }
 
     @FXML
     private void OnActionBtnJugar(ActionEvent event) throws IOException {
         FlowController.getInstance().goMain();
-       ((Stage) root.getScene().getWindow()).close();
+        ((Stage) root.getScene().getWindow()).close();
     }
 
     @FXML
     private void OnActionBtnSalir(ActionEvent event) {
-        ((Stage) root.getScene().getWindow()).close();
+        Mensaje mensaje = new Mensaje();
+        Boolean respuesta = mensaje.showConfirmation("BALLIVERSE", "¿Estás seguro que deseas cerrar BALLIVERSE?");
+        if (respuesta) {
+            ((Stage) root.getScene().getWindow()).close();
+        } else {
+            return;
+        }
     }
 
     @Override
     public void initialize() {
     }
 
-  
 }

@@ -2,7 +2,6 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -28,8 +27,8 @@
                   <Label text="?" />
                   <Label text="Nombre" />
                   <Label text="Imagen" />
-                  <Label text="Eliminar" />
-                  <Label text="Editar" />
+                  <MFXButton fx:id="btnEditar" onAction="#onActionBtnEditar" text="Editar" />
+                  <MFXButton fx:id="btnEliminar" onAction="#onActionBtnEliminar" text="Eliminar" />
                </children>
             </HBox>
             <HBox prefHeight="55.0" prefWidth="520.0" spacing="20.0">
@@ -38,8 +37,6 @@
                   <Label prefHeight="40.0" prefWidth="40.0" text="Label" />
                   <Label fx:id="lbNombreD" prefHeight="40.0" prefWidth="40.0" text="Label" />
                   <ImageView fx:id="imgImagenD" fitHeight="40.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button mnemonicParsing="false" text="Button" />
-                  <Button mnemonicParsing="false" text="Button" />
                </children>
             </HBox>
          </children>

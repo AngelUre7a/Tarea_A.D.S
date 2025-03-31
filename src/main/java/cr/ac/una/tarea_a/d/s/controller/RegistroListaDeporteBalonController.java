@@ -36,6 +36,10 @@ public class RegistroListaDeporteBalonController extends Controller implements I
     private Label lbNombreD;
     @FXML
     private ImageView imgImagenD;
+    @FXML
+    private MFXButton btnEditar;
+    @FXML
+    private MFXButton btnEliminar;
     /**
      * Initializes the controller class.
      */
@@ -60,6 +64,15 @@ public class RegistroListaDeporteBalonController extends Controller implements I
     @FXML
     private void onActionBtnAgregar(ActionEvent event) throws IOException {
         FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
+    }
+
+    @FXML
+    private void onActionBtnEditar(ActionEvent event) {
+        FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
+    }
+
+    @FXML
+    private void onActionBtnEliminar(ActionEvent event) {
     }
 
 }

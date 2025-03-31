@@ -7,6 +7,7 @@ package cr.ac.una.tarea_a.d.s.controller;
 import cr.ac.una.tarea_a.d.s.App;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
+import cr.ac.una.tarea_a.d.s.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.File;
@@ -17,6 +18,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -69,6 +71,9 @@ public class RegistroEquipoController extends Controller implements Initializabl
         equipo.setNombreEquipo(txtNombreEquipo.getText());
         AppContext.getInstance().set("EQUIPO", equipo);
         
+        Mensaje mensaje= new Mensaje();
+        mensaje.show(Alert.AlertType.INFORMATION,"BALLIVERSE", "Se agregó el equipo correctamente");
+
        ((Stage) root.getScene().getWindow()).close();
     }
 
