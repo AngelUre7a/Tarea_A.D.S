@@ -1,6 +1,5 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
-import cr.ac.una.tarea_a.d.s.App;
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 import cr.ac.una.tarea_a.d.s.util.Mensaje;
@@ -10,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -49,6 +47,10 @@ public class RegistroDeporteController extends Controller implements Initializab
         DragAndDropForImageView();
     }
 
+
+    @Override
+    public void initialize() {
+    }
 
     @FXML
     private void onActionBtnRegistrar(ActionEvent event) throws IOException {
@@ -105,10 +107,6 @@ public class RegistroDeporteController extends Controller implements Initializab
 
         });
 
-    }
-
-    @Override
-    public void initialize() {
     }
 
 }
