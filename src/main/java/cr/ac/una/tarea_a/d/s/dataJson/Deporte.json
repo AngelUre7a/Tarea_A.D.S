@@ -10,5 +10,53 @@
     "nombre": "Tenis",
     "imagen": "imagenes/tenis.png",
     "tipo": "Individual"
+  },
+  {
+    "id": "e90b3c60-23c1-4d92-8009-495c178a03bc",
+    "nombre": "Futbol",
+    "imagen": "imagenes/futbol.png",
+    "tipo": "Colectivo"
+  },
+  {
+    "id": "d76a7d13-eab5-4e6b-bb51-d13eb8cf433c",
+    "nombre": "Tenis",
+    "imagen": "imagenes/tenis.png",
+    "tipo": "Individual"
+  },
+  {
+    "id": "a80584a4-5f30-4a8e-b300-35e18d0a9051",
+    "nombre": "Futbol",
+    "imagen": "imagenes/futbol.png",
+    "tipo": "Colectivo"
+  },
+  {
+    "id": "6470da8f-5915-48a9-859d-b540ce873897",
+    "nombre": "Tenis",
+    "imagen": "imagenes/tenis.png",
+    "tipo": "Individual"
+  },
+  {
+    "id": "7b34aa39-4d0d-4ba7-9cfb-b1e4e2c49a8b",
+    "nombre": "Futbol",
+    "imagen": "imagenes/futbol.png",
+    "tipo": "Colectivo"
+  },
+  {
+    "id": "750a8575-34d4-40eb-988f-5c01f42fb543",
+    "nombre": "Tenis",
+    "imagen": "imagenes/tenis.png",
+    "tipo": "Individual"
+  },
+  {
+    "id": "9a00e2a8-d540-4b42-aa50-60b5a4e36302",
+    "nombre": "Futbol",
+    "imagen": "imagenes/futbol.png",
+    "tipo": "Colectivo"
+  },
+  {
+    "id": "9409b875-3da7-4017-aaa6-623132ea4850",
+    "nombre": "Tenis",
+    "imagen": "imagenes/tenis.png",
+    "tipo": "Individual"
   }
 ]

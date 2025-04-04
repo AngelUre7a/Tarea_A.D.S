@@ -9,6 +9,7 @@ package cr.ac.una.tarea_a.d.s.model;
 
 //@Data 
 public class Deporte {
+    
     private String id;
     private String nombre;
     private String imagen; // Nuevo atributo

@@ -10,5 +10,53 @@
     "nombre": "Los Lakers",
     "imagen": "imagenes/lakers.png",
     "categoria": "Baloncesto"
+  },
+  {
+    "id": "eb6d3fac-7564-4f93-9deb-b5a1231ef324",
+    "nombre": "Real Madrid",
+    "imagen": "imagenes/realmadrid.png",
+    "categoria": "Futbol"
+  },
+  {
+    "id": "a37b2097-4fce-43a3-9ff8-61fd6eb24502",
+    "nombre": "Los Lakers",
+    "imagen": "imagenes/lakers.png",
+    "categoria": "Baloncesto"
+  },
+  {
+    "id": "c99fcc30-08c8-4cd3-9148-c2db0de5737b",
+    "nombre": "Real Madrid",
+    "imagen": "imagenes/realmadrid.png",
+    "categoria": "Futbol"
+  },
+  {
+    "id": "6e195e64-9efc-4991-a5db-1e41a3e9f12d",
+    "nombre": "Los Lakers",
+    "imagen": "imagenes/lakers.png",
+    "categoria": "Baloncesto"
+  },
+  {
+    "id": "69a4de7a-f359-4a71-88be-852393fbeeea",
+    "nombre": "Real Madrid",
+    "imagen": "imagenes/realmadrid.png",
+    "categoria": "Futbol"
+  },
+  {
+    "id": "59e04cf8-3e5b-4cb0-9019-38895b3d8163",
+    "nombre": "Los Lakers",
+    "imagen": "imagenes/lakers.png",
+    "categoria": "Baloncesto"
+  },
+  {
+    "id": "b49638f4-e863-43c1-9b41-3d23bea60633",
+    "nombre": "Real Madrid",
+    "imagen": "imagenes/realmadrid.png",
+    "categoria": "Futbol"
+  },
+  {
+    "id": "2b46db13-20d8-4166-bf9c-d28fd1cac711",
+    "nombre": "Los Lakers",
+    "imagen": "imagenes/lakers.png",
+    "categoria": "Baloncesto"
   }
 ]

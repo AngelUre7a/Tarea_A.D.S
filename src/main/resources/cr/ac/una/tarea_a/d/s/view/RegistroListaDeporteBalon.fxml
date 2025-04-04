@@ -1,54 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RegistroListaDeporteBalonController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RegistroListaDeporteBalonController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="40.0" layoutY="100.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="100.0">
-         <children>
-            <MFXButton fx:id="btnAgregar" buttonType="RAISED" onAction="#onActionBtnAgregar" pickOnBounds="false" prefHeight="30.0" prefWidth="90.0" text="Agregar">
-               <VBox.margin>
-                  <Insets left="430.0" />
-               </VBox.margin>
-            </MFXButton>
-            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="520.0" spacing="40.0">
-               <children>
-                  <Label text="ID">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-                  <Label text="?" />
-                  <Label text="Nombre" />
-                  <Label text="Imagen" />
-                  <MFXButton fx:id="btnEditar" onAction="#onActionBtnEditar" text="Editar" />
-                  <MFXButton fx:id="btnEliminar" onAction="#onActionBtnEliminar" text="Eliminar" />
-               </children>
-            </HBox>
-            <HBox prefHeight="55.0" prefWidth="520.0" spacing="20.0">
-               <children>
-                  <Label prefHeight="40.0" prefWidth="33.0" text="Label" />
-                  <Label prefHeight="40.0" prefWidth="40.0" text="Label" />
-                  <Label fx:id="lbNombreD" prefHeight="40.0" prefWidth="40.0" text="Label" />
-                  <ImageView fx:id="imgImagenD" fitHeight="40.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-      <VBox layoutY="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="80.0" prefWidth="600.0">
+      <VBox layoutY="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="80.0" prefWidth="600.0" AnchorPane.bottomAnchor="318.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label alignment="TOP_CENTER" text="Lista de Deportes con balón " />
+                  <MFXButton fx:id="btnAgregar" buttonType="RAISED" onAction="#onActionBtnAgregar" pickOnBounds="false" prefHeight="30.0" prefWidth="90.0" text="Agregar">
+                     <VBox.margin>
+                        <Insets left="430.0" />
+                     </VBox.margin>
+                  </MFXButton>
+                  <MFXTextField fx:id="filterField" floatMode="BORDER" floatingText="Buscador" floatingTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="563.0" />
                </children>
             </VBox>
          </children>
       </VBox>
+      <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="24.0" layoutY="89.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="311.0" prefWidth="553.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="89.0">
+        <columns>
+          <TableColumn fx:id="colID" prefWidth="75.0" text="ID" />
+          <TableColumn prefWidth="75.0" text="?" />
+            <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
+            <TableColumn fx:id="colImagen" prefWidth="75.0" text="Imagen" />
+            <TableColumn fx:id="colEditar" prefWidth="75.0" resizable="false" text="Editar">
+               <graphic>
+                  <MFXButton prefHeight="25.0" prefWidth="75.0" text="Editar" />
+               </graphic></TableColumn>
+            <TableColumn fx:id="colEliminar" resizable="false" text="Eliminar">
+               <graphic>
+                  <MFXButton prefHeight="25.0" prefWidth="66.0" text="Eliminar" />
+               </graphic></TableColumn>
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
    </children>
 </AnchorPane>
