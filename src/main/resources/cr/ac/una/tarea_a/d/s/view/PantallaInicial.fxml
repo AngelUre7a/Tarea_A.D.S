@@ -12,16 +12,24 @@
    <children>
       <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <padding>
                   <Insets left="15.0" right="15.0" top="15.0" />
                </padding>
+               <children>
+                  <Label fx:id="title" styleClass="jfx-title-B" text="B" />
+                  <Label styleClass="jfx-title-A" text="A" />
+                  <Label styleClass="jfx-title-L" text="L" />
+                  <Label styleClass="jfx-title-LL" text="L" />
+                  <Label styleClass="jfx-title-I" text="I" />
+                  <Label styleClass="jfx-title-V" text="V" />
+                  <Label styleClass="jfx-title-E" text="E" />
+                  <Label styleClass="jfx-title-R" text="R" />
+                  <Label styleClass="jfx-title-S" text="S" />
+                  <Label styleClass="jfx-title-EE" text="E" />
+               </children>
             </HBox>
-            <Label fx:id="title" alignment="BOTTOM_LEFT" prefHeight="43.0" prefWidth="384.0" text="BALLIVERSE">
-               <font>
-                  <Font size="65.0" />
-               </font>
-            </Label>
             <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="261.0" prefWidth="700.0" spacing="20.0" VBox.vgrow="ALWAYS">
                <children>
                   <VBox prefHeight="80.0">

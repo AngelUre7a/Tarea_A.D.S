@@ -68,3 +68,42 @@ BorderPane {
 .separator{
     -fx-background-color:black
 }
+.jfx-title-label-menu{
+    -fx-font-size:24px;
+    -fx-text-fill:-fx-color-azul;
+}
+.vBox{
+    -fx-background-color:-fx-color-celadon;
+}
+.jfx-title-B{
+    -fx-text-fill:chartreuse;
+    -fx-font-size:65px;
+}
+.jfx-title-A{
+    -fx-text-fill:#b8baff;
+    -fx-font-size:65px;
+}.jfx-title-L{
+    -fx-text-fill:#1CA7EC;
+    -fx-font-size:65px;
+}.jfx-title-LL{
+    -fx-text-fill:cadetblue;
+    -fx-font-size:65px;
+}.jfx-title-I{
+    -fx-text-fill:#6666ff;
+    -fx-font-size:65px;
+}.jfx-title-V{
+    -fx-text-fill:#c9e8ff;
+    -fx-font-size:65px;
+}.jfx-title-E{
+    -fx-text-fill:brown;
+    -fx-font-size:65px;
+}.jfx-title-R{
+    -fx-text-fill:darkorchid;
+    -fx-font-size:65px;
+}.jfx-title-S{
+    -fx-text-fill:#FFD091;
+    -fx-font-size:65px;
+}.jfx-title-EE{
+    -fx-text-fill:hotpink;
+    -fx-font-size:65px;
+}
