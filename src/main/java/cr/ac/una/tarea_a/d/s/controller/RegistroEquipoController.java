@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.App;
@@ -36,7 +32,7 @@ import org.opencv.videoio.VideoCapture;
  */
 public class RegistroEquipoController extends Controller implements Initializable {
     
-    private Equipo equipo = new Equipo();
+//    private Equipo equipo = new Equipo();
 
     @FXML
     private MFXButton btnRegistrar;
@@ -67,12 +63,12 @@ public class RegistroEquipoController extends Controller implements Initializabl
 
     @FXML
     private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
-        equipo.setImagenEquipo(ImageView.getImage());
-        equipo.setNombreEquipo(txtNombreEquipo.getText());
-        AppContext.getInstance().set("EQUIPO", equipo);
-        
-        Mensaje mensaje= new Mensaje();
-        mensaje.show(Alert.AlertType.INFORMATION,"BALLIVERSE", "Se agregó el equipo correctamente");
+//        equipo.setImagenEquipo(ImageView.getImage());
+//        equipo.setNombreEquipo(txtNombreEquipo.getText());
+//        AppContext.getInstance().set("EQUIPO", equipo);
+//        
+//        Mensaje mensaje= new Mensaje();
+//        mensaje.show(Alert.AlertType.INFORMATION,"BALLIVERSE", "Se agregó el equipo correctamente");
 
        ((Stage) root.getScene().getWindow()).close();
     }

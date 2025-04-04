@@ -1,40 +1,60 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cr.ac.una.tarea_a.d.s.model;
-import javafx.scene.image.Image;
+//import javafx.scene.image.Image;
 /**
  *
  * @author dasly
  */public class Equipo {
-    private String nombreEquipo;
-    private Image imagenEquipo;
+     private String id;
+    private String nombre;
+    private String imagen;
+    private String categoria; // Similar a "tipo" en la clase Deporte
 
-    // Constructor sin parámetros
-    public Equipo() {
+    public Equipo(String id, String nombre, String imagen, String categoria) {
+        this.id = id;
+        this.nombre = nombre;
+        this.imagen = imagen;
+        this.categoria = categoria;
     }
 
-    // Constructor con parámetros
-    public Equipo(String nombreEquipo, Image imagenEquipo) {
-        this.nombreEquipo = nombreEquipo;
-        this.imagenEquipo = imagenEquipo;
+    public String getId() {
+        return id;
     }
 
-    // Métodos getter y setter
-    public String getNombreEquipo() {
-        return nombreEquipo;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setNombreEquipo(String nombreEquipo) {
-        this.nombreEquipo = nombreEquipo;
+    public String getNombre() {
+        return nombre;
     }
 
-    public Image getImagenEquipo() {
-        return imagenEquipo;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setImagenEquipo(Image imagenEquipo) {
-        this.imagenEquipo = imagenEquipo;
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    @Override
+    public String toString() {
+        return "Equipo{" +
+                "id='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", imagen='" + imagen + '\'' +
+                ", categoria='" + categoria + '\'' +
+                '}';
     }
 }

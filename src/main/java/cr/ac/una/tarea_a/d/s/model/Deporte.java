@@ -1,5 +1,5 @@
 package cr.ac.una.tarea_a.d.s.model;
-import javafx.scene.image.Image;
+//import javafx.scene.image.Image;
 //import lombok.Data;
 
 /**
@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 
 //@Data 
 public class Deporte {
-     private String id;
+    private String id;
     private String nombre;
     private String imagen; // Nuevo atributo
     private String tipo;   // Nuevo atributo

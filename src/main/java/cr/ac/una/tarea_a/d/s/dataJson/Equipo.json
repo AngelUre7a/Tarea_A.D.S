@@ -1,3 +1,14 @@
-{
-    "name": "dasly"
-}
+[
+  {
+    "id": "c38d61cb-ecb6-4214-a4f0-39f4f613d005",
+    "nombre": "Real Madrid",
+    "imagen": "imagenes/realmadrid.png",
+    "categoria": "Futbol"
+  },
+  {
+    "id": "5d5b362b-96f7-4ab4-8ae4-d141d3236922",
+    "nombre": "Los Lakers",
+    "imagen": "imagenes/lakers.png",
+    "categoria": "Baloncesto"
+  }
+]

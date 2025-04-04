@@ -1,16 +1,12 @@
 [
   {
-    "id": " ",
-    "nombre": "Futbol"
-  },
-  {
-    "id": "dcbad473-8b35-487f-9a4c-d9c11a0ae120",
+    "id": "fef072d5-1302-435d-993f-d384b7bdab8b",
     "nombre": "Futbol",
     "imagen": "imagenes/futbol.png",
     "tipo": "Colectivo"
   },
   {
-    "id": "79de89a8-db9c-4143-8b2f-f4b7525dcf7f",
+    "id": "2759ff26-e9a0-4db8-ad72-fd3e25dc655d",
     "nombre": "Tenis",
     "imagen": "imagenes/tenis.png",
     "tipo": "Individual"

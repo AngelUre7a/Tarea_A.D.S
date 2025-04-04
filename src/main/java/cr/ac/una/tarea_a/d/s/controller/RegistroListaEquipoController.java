@@ -26,8 +26,8 @@ import javafx.stage.Stage;
  */
 public class RegistroListaEquipoController extends Controller implements Initializable {
 
-    private Equipo equipo = new Equipo();
-     
+//    private Equipo equipo = new Equipo();
+//     
     @FXML
     private MFXButton btnAgregar;
     @FXML
@@ -42,20 +42,20 @@ public class RegistroListaEquipoController extends Controller implements Initial
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-          if(AppContext.getInstance().containsItem("EQUIPO")){
-      equipo = (Equipo) AppContext.getInstance().get("EQUIPO");
-      lbNombreE.setText(equipo.getNombreEquipo());
-      imgImagenE.setImage(equipo.getImagenEquipo());
-      }
+//          if(AppContext.getInstance().containsItem("EQUIPO")){
+//      equipo = (Equipo) AppContext.getInstance().get("EQUIPO");
+//      lbNombreE.setText(equipo.getNombreEquipo());
+//      imgImagenE.setImage(equipo.getImagenEquipo());
+//      }
         // TODO
     }    
     @Override
     public void initialize() {
-          if(AppContext.getInstance().containsItem("EQUIPO")){
-      equipo = (Equipo) AppContext.getInstance().get("EQUIPO");
-      lbNombreE.setText(equipo.getNombreEquipo());
-      imgImagenE.setImage(equipo.getImagenEquipo());
-      }
+//          if(AppContext.getInstance().containsItem("EQUIPO")){
+//      equipo = (Equipo) AppContext.getInstance().get("EQUIPO");
+//      lbNombreE.setText(equipo.getNombreEquipo());
+//      imgImagenE.setImage(equipo.getImagenEquipo());
+//      }
     }
     
    
