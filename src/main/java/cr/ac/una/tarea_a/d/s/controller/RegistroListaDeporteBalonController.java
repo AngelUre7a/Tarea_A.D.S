@@ -22,8 +22,8 @@ import javafx.stage.Stage;
  */
 public class RegistroListaDeporteBalonController extends Controller implements Initializable {
 
-    private Deporte deporte = new Deporte();
-     
+//    private Deporte deporte = new Deporte();
+//     
     @FXML
     private AnchorPane root;
     @FXML
@@ -41,20 +41,20 @@ public class RegistroListaDeporteBalonController extends Controller implements I
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      if(AppContext.getInstance().containsItem("DEPORTE")){
-      deporte = (Deporte) AppContext.getInstance().get("DEPORTE");
-      lbNombreD.setText(deporte.getNombreDeporte());
-      imgImagenD.setImage(deporte.getImagenDeporte());
-      }
+//      if(AppContext.getInstance().containsItem("DEPORTE")){
+//      deporte = (Deporte) AppContext.getInstance().get("DEPORTE");
+//      lbNombreD.setText(deporte.getNombreDeporte());
+//      imgImagenD.setImage(deporte.getImagenDeporte());
+//      }
         // TODO
     }    
     @Override
     public void initialize() {
-      if(AppContext.getInstance().containsItem("DEPORTE")){
-      deporte = (Deporte) AppContext.getInstance().get("DEPORTE");
-      lbNombreD.setText(deporte.getNombreDeporte());
-      imgImagenD.setImage(deporte.getImagenDeporte());
-      }
+//      if(AppContext.getInstance().containsItem("DEPORTE")){
+//      deporte = (Deporte) AppContext.getInstance().get("DEPORTE");
+//      lbNombreD.setText(deporte.getNombreDeporte());
+//      imgImagenD.setImage(deporte.getImagenDeporte());
+//      }
     }
     
     @FXML

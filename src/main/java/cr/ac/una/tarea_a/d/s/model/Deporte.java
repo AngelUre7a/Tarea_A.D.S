@@ -9,41 +9,75 @@ import javafx.scene.image.Image;
 
 //@Data 
 public class Deporte {
-    private String nombreDeporte;
-    private Image imagenDeporte;
-    private String tipoDeporte;
+      // Atributos
+    private String id;
+    private String nombre;
 
-    public Deporte() {
-    }
-
-    public Deporte(String nombreDeporte, Image imagenDeporte, String tipoDeporte) {
-        this.nombreDeporte = nombreDeporte;
-        this.imagenDeporte = imagenDeporte;
-        this.tipoDeporte = tipoDeporte;
-    }
-    
-    public String getNombreDeporte() {
-        return nombreDeporte;
+    // Constructor
+    public Deporte(String id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
     }
 
-    public void setNombreDeporte(String nombreDeporte) {
-        this.nombreDeporte = nombreDeporte;
+    // Getters y Setters
+    public String getId() {
+        return id;
     }
 
-    public Image getImagenDeporte() {
-        return imagenDeporte;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setImagenDeporte(Image imagenDeporte) {
-        this.imagenDeporte = imagenDeporte;
+    public String getNombre() {
+        return nombre;
     }
 
-    public String getTipoDeporte() {
-        return tipoDeporte;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setTipoDeporte(String tipoDeporte) {
-        this.tipoDeporte = tipoDeporte;
+    @Override
+    public String toString() {
+        return "Deporte{" +
+                "id='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
+                '}';
     }
+//    private String nombreDeporte;
+//    private Image imagenDeporte;
+//    private String tipoDeporte;
+//
+//    public Deporte() {
+//    }
+//
+//    public Deporte(String nombreDeporte, Image imagenDeporte, String tipoDeporte) {
+//        this.nombreDeporte = nombreDeporte;
+//        this.imagenDeporte = imagenDeporte;
+//        this.tipoDeporte = tipoDeporte;
+//    }
+//    
+//    public String getNombreDeporte() {
+//        return nombreDeporte;
+//    }
+//
+//    public void setNombreDeporte(String nombreDeporte) {
+//        this.nombreDeporte = nombreDeporte;
+//    }
+//
+//    public Image getImagenDeporte() {
+//        return imagenDeporte;
+//    }
+//
+//    public void setImagenDeporte(Image imagenDeporte) {
+//        this.imagenDeporte = imagenDeporte;
+//    }
+//
+//    public String getTipoDeporte() {
+//        return tipoDeporte;
+//    }
+//
+//    public void setTipoDeporte(String tipoDeporte) {
+//        this.tipoDeporte = tipoDeporte;
+//    }
 
 }

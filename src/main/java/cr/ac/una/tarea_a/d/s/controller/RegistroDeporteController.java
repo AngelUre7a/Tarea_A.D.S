@@ -26,8 +26,8 @@ import javafx.stage.Stage;
  */
 public class RegistroDeporteController extends Controller implements Initializable {
     
-    private Deporte deporte = new Deporte(); 
-    
+//    private Deporte deporte = new Deporte(); 
+//    
     @FXML
     private MFXButton btnRegistrar;
     @FXML
@@ -55,11 +55,11 @@ public class RegistroDeporteController extends Controller implements Initializab
     @FXML
     private void onActionBtnRegistrar(ActionEvent event) throws IOException {
        
-        deporte.setImagenDeporte(imageView.getImage());
-        deporte.setNombreDeporte(txtNombreDeporte.getText());
-        AppContext.getInstance().set("DEPORTE", deporte);
-        Mensaje mensaje = new Mensaje();
-        mensaje.show(Alert.AlertType.INFORMATION,"BALLIVERSE", "Se agregó el deporte correctamente");
+//        deporte.setImagenDeporte(imageView.getImage());
+//        deporte.setNombreDeporte(txtNombreDeporte.getText());
+//        AppContext.getInstance().set("DEPORTE", deporte);
+//        Mensaje mensaje = new Mensaje();
+//        mensaje.show(Alert.AlertType.INFORMATION,"BALLIVERSE", "Se agregó el deporte correctamente");
 
         
         ((Stage) root.getScene().getWindow()).close();

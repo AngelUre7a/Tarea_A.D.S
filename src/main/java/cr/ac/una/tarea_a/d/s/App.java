@@ -25,6 +25,8 @@ public class App extends Application {
         stage.getIcons().add(new Image("cr/ac/una/tarea_a/d/s/resources/Logo-Principal-View.png"));
         stage.setTitle("BALLIVERSE");
         FlowController.getInstance().goViewInWindow("PantallaInicial");
+           LoadData data = new LoadData();
+        data.load();
     }
 
    
@@ -39,8 +41,8 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        Deporte deporte = new Deporte();
-        
+//        Deporte deporte = new Deporte();
+//        
         launch();
     }
 
