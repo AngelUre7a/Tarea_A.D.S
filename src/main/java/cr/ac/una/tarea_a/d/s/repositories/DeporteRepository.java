@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package cr.ac.una.tarea_a.d.s.repositories;
 
 import com.google.gson.Gson;
@@ -113,24 +108,5 @@ public class  DeporteRepository implements IDeporteRepository  {
 
         return removed;
     }
-//    @Override
-//    public Deporte save(Deporte deporte) throws IOException {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public List<Deporte> findAll() throws IOException {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public Optional<Deporte> findById(String id) throws IOException {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public boolean deleteById(String id) throws IOException {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-    
+
 }

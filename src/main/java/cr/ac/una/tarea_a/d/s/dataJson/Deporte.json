@@ -2,5 +2,17 @@
   {
     "id": " ",
     "nombre": "Futbol"
+  },
+  {
+    "id": "dcbad473-8b35-487f-9a4c-d9c11a0ae120",
+    "nombre": "Futbol",
+    "imagen": "imagenes/futbol.png",
+    "tipo": "Colectivo"
+  },
+  {
+    "id": "79de89a8-db9c-4143-8b2f-f4b7525dcf7f",
+    "nombre": "Tenis",
+    "imagen": "imagenes/tenis.png",
+    "tipo": "Individual"
   }
 ]
