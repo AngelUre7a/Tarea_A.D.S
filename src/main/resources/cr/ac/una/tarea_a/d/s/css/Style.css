@@ -23,6 +23,14 @@
        -fx-background-repeat: no-repeat;
        
 }
+.vBox {
+    /*-fx-background-color: -fx-color-columbia_blue;*/
+    -fx-background-image: url("../resources/fondoPp.png");
+     -fx-background-size: cover;
+   /*   -fx-background-position:center center;*/
+       -fx-background-repeat: no-repeat;
+       
+}
 /*.jfx-button-long-text, 
 #btnEstadisticas, 
 #btnRanking, 
@@ -35,7 +43,7 @@
     -fx-font-size: 15px;  Ajusta el tamaño según lo necesites 
 }*/
 .button {
-   -fx-background-color: -fx-color-azul;
+   -fx-background-color: -fx-color-azul_oscuro;
    -fx-padding: 5;
    -fx-text-fill: white;
    -fx-font-size: 18px;
@@ -44,10 +52,10 @@
    -fx-font-weight:bold;
 }
 .button:hover{
-   -fx-background-color: -fx-color-azul_oscuro;
+   -fx-background-color: -fx-color-azul;
 }
 .button:focused{
-    -fx-background-color: -fx-color-celadon;
+    -fx-background-color: -fx-color-rich_black;
 }
 
 
@@ -62,7 +70,7 @@
 }
 
 BorderPane {
-    -fx-background-color: -fx-color-columbia_blue;
+    -fx-background-color: -fx-color-periwinkle;
 }
 
 .separator{
@@ -70,7 +78,7 @@ BorderPane {
 }
 .jfx-title-label-menu{
     -fx-font-size:24px;
-    -fx-text-fill:-fx-color-azul;
+    -fx-text-fill:-fx-color-rich_black;
 }
 .vBox{
     -fx-background-color:-fx-color-celadon;

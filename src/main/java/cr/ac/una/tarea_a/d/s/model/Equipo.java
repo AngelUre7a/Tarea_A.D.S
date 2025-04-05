@@ -4,7 +4,7 @@ package cr.ac.una.tarea_a.d.s.model;
  *
  * @author dasly
  */public class Equipo {
-     private String id;
+    private String id;
     private String nombre;
     private String imagen;
     private String categoria; // Similar a "tipo" en la clase Deporte
