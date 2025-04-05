@@ -24,18 +24,12 @@
       </VBox>
       <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="24.0" layoutY="136.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="464.0" prefWidth="731.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="136.0">
         <columns>
-          <TableColumn fx:id="colID" prefWidth="75.0" text="ID" />
-          <TableColumn prefWidth="75.0" text="?" />
-            <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
-            <TableColumn fx:id="colImagen" prefWidth="75.0" text="Imagen" />
-            <TableColumn fx:id="colEditar" prefWidth="75.0" resizable="false" text="Editar">
-               <graphic>
-                  <MFXButton prefHeight="25.0" prefWidth="75.0" text="Editar" />
-               </graphic></TableColumn>
-            <TableColumn fx:id="colEliminar" resizable="false" text="Eliminar">
-               <graphic>
-                  <MFXButton prefHeight="25.0" prefWidth="66.0" text="Eliminar" />
-               </graphic></TableColumn>
+          <TableColumn fx:id="colID" prefWidth="69.0" text="ID" />
+          <TableColumn prefWidth="107.0" text="?" />
+            <TableColumn fx:id="colNombre" prefWidth="150.0" text="Nombre" />
+            <TableColumn fx:id="colImagen" prefWidth="139.0" text="Imagen" />
+            <TableColumn fx:id="colEditar" prefWidth="126.0" resizable="false" text="Editar" />
+            <TableColumn fx:id="colEliminar" prefWidth="134.0" resizable="false" text="Eliminar" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

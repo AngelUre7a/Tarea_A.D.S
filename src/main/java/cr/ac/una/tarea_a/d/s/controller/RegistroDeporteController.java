@@ -34,7 +34,17 @@ public class RegistroDeporteController extends Controller implements Initializab
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        DragAndDropForImageView();
+        // Limpiar los campos de texto y la imagen
+        txtNombreDeporte.clear();
+        imageView.setImage(null);
+
+        // Verificar si hay un deporte para editar
+        if (AppContext.getInstance().containsItem("DEPORTE_EDITAR")) {
+            Deporte deporte = (Deporte) AppContext.getInstance().get("DEPORTE_EDITAR");
+            txtNombreDeporte.setText(deporte.getNombre());  // Cargar nombre
+            imageView.setImage(deporte.getImagen());         // Cargar imagen
+        }
+        DragAndDropForImageView();  // Restablecer la funcionalidad de drag-and-drop
     }
 
     @Override
@@ -51,18 +61,31 @@ public class RegistroDeporteController extends Controller implements Initializab
             return;
         }
 
-        // Crear el nuevo deporte
-        String id = java.util.UUID.randomUUID().toString(); // Genera un ID único
-        Deporte deporte = new Deporte(id, nombre, imagen, "balon");
+        // Crear el nuevo deporte o actualizar el existente
+        String id = java.util.UUID.randomUUID().toString(); // Genera un ID único si es nuevo
+        Deporte deporte;
+
+        if (AppContext.getInstance().containsItem("DEPORTE_EDITAR")) {
+            // Si es un deporte que se está editando, actualiza el objeto
+            deporte = (Deporte) AppContext.getInstance().get("DEPORTE_EDITAR");
+            deporte.setNombre(nombre);
+            deporte.setImagen(imagen);
+            AppContext.getInstance().delete("DEPORTE_EDITAR");  // Limpiar el contexto
+        } else {
+            // Si es un deporte nuevo, crea un objeto nuevo
+            deporte = new Deporte(id, nombre, imagen, "balon");
+        }
 
         // Guardarlo en el AppContext
         AppContext.getInstance().set("DEPORTE_NUEVO", deporte);
 
-        new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "Se agregó el deporte correctamente");
+        new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "Deporte guardado correctamente");
 
         // Limpiar los campos antes de cerrar la ventana
         txtNombreDeporte.clear();
         imageView.setImage(null);
+
+        // Cerrar la ventana actual
         ((Stage) root.getScene().getWindow()).close();
     }
 
