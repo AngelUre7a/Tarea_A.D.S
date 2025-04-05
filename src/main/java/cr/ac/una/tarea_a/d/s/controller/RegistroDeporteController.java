@@ -19,15 +19,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Usuario
- */
 public class RegistroDeporteController extends Controller implements Initializable {
-    
-//    private Deporte deporte = new Deporte(); 
-//    
+
     @FXML
     private MFXButton btnRegistrar;
     @FXML
@@ -38,15 +31,11 @@ public class RegistroDeporteController extends Controller implements Initializab
     private ImageView imageView;
     @FXML
     private AnchorPane root;
-    
-    /**
-     * Initializes the controller class.
-     */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         DragAndDropForImageView();
     }
-
 
     @Override
     public void initialize() {
@@ -54,14 +43,26 @@ public class RegistroDeporteController extends Controller implements Initializab
 
     @FXML
     private void onActionBtnRegistrar(ActionEvent event) throws IOException {
-       
-//        deporte.setImagenDeporte(imageView.getImage());
-//        deporte.setNombreDeporte(txtNombreDeporte.getText());
-//        AppContext.getInstance().set("DEPORTE", deporte);
-//        Mensaje mensaje = new Mensaje();
-//        mensaje.show(Alert.AlertType.INFORMATION,"BALLIVERSE", "Se agregó el deporte correctamente");
+        String nombre = txtNombreDeporte.getText();
+        Image imagen = imageView.getImage();
 
-        
+        if (nombre == null || nombre.isBlank() || imagen == null) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar un nombre y una imagen.");
+            return;
+        }
+
+        // Crear el nuevo deporte
+        String id = java.util.UUID.randomUUID().toString(); // Genera un ID único
+        Deporte deporte = new Deporte(id, nombre, imagen, "balon");
+
+        // Guardarlo en el AppContext
+        AppContext.getInstance().set("DEPORTE_NUEVO", deporte);
+
+        new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "Se agregó el deporte correctamente");
+
+        // Limpiar los campos antes de cerrar la ventana
+        txtNombreDeporte.clear();
+        imageView.setImage(null);
         ((Stage) root.getScene().getWindow()).close();
     }
 
