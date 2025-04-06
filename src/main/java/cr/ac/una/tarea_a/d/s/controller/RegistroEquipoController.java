@@ -30,14 +30,9 @@ import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
 
-/**
- * FXML Controller class
- *
- * @author Usuario
- */
+
 public class RegistroEquipoController extends Controller implements Initializable {
 
-//    private Equipo equipo = new Equipo();
     @FXML
     private MFXButton btnRegistrar;
     @FXML
@@ -53,6 +48,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
 
     private VideoCapture capture;
     private boolean isCameraRunning = false;
+    
     @FXML
     private AnchorPane root;
     @FXML
@@ -60,9 +56,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
     @FXML
     private ComboBox<Deporte> ComboBoxDeportes;
 
-    /**
-     * Initializes the controller class.
-     */
+  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         OpenCV.loadShared();
@@ -139,6 +133,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
         ImageView.setImage(null);
         ComboBoxDeportes.setValue(null);
 
+        cerrarCamara(); // cerrar la cámara antes de cerrar la ventana
         ((Stage) root.getScene().getWindow()).close();
     }
 
@@ -225,6 +220,14 @@ public class RegistroEquipoController extends Controller implements Initializabl
 
     @Override
     public void initialize() {
+    }
+
+    private void cerrarCamara() {
+        if (isCameraRunning && capture != null && capture.isOpened()) {
+            isCameraRunning = false;
+            capture.release();
+            System.out.println("Cámara cerrada");
+        }
     }
 
 }

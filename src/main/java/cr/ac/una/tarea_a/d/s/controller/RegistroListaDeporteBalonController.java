@@ -103,7 +103,6 @@ public class RegistroListaDeporteBalonController extends Controller implements I
                 }
             }
         });
-
         // Configuracion del botón de editar para cada fila
         colEditar.setCellFactory(column -> new javafx.scene.control.TableCell<Deporte, String>() {
             private final MFXButton btnEditar = new MFXButton("Editar");
@@ -176,9 +175,6 @@ public class RegistroListaDeporteBalonController extends Controller implements I
         }
     }
 
-    private void onActionBtnEditar(ActionEvent event) {
-        FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
-    }
-
+   
    
 }
