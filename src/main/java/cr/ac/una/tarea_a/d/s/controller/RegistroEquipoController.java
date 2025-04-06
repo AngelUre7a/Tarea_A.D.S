@@ -66,16 +66,14 @@ public class RegistroEquipoController extends Controller implements Initializabl
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         OpenCV.loadShared();
-        
+
         List<Deporte> listaDeportes = new ArrayList<>();
         listaDeportes.add(new Deporte("Futbol"));
         listaDeportes.add(new Deporte("Baloncesto"));
         listaDeportes.add(new Deporte("Tenis"));
 
-        
         ComboBoxDeportes.getItems().addAll(listaDeportes);
 
-        
         ComboBoxDeportes.setCellFactory(param -> new javafx.scene.control.ListCell<Deporte>() {
             @Override
             protected void updateItem(Deporte item, boolean empty) {
@@ -95,15 +93,12 @@ public class RegistroEquipoController extends Controller implements Initializabl
                 }
             }
         });
-        
-        
+
     }
 
 //    @FXML
 //    private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
 //        
-
-    
     ////        equipo.setImagenEquipo(ImageView.getImage());
 ////        equipo.setNombreEquipo(txtNombreEquipo.getText());
 ////        AppContext.getInstance().set("EQUIPO", equipo);
@@ -114,14 +109,13 @@ public class RegistroEquipoController extends Controller implements Initializabl
 //       ((Stage) root.getScene().getWindow()).close();
 //    }
 @FXML
-private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
+    private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
         String nombre = txtNombreEquipo.getText();
         Image imagen = ImageView.getImage();
-        String Deporte = ComboBoxDeportes.getValue().getNombre();
-        
+        String Deporte = ComboBoxDeportes.getValue() != null ? ComboBoxDeportes.getValue().getNombre() : null;
 
-        if (nombre == null || nombre.isBlank() || imagen == null) {
-            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar un nombre y una imagen.");
+        if (nombre == null || nombre.isBlank() || imagen == null || Deporte == null) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar un nombre, una imagen y un tipo de deporte.");
             return;
         }
 
@@ -143,6 +137,7 @@ private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
 
         txtNombreEquipo.clear();
         ImageView.setImage(null);
+        ComboBoxDeportes.setValue(null);
 
         ((Stage) root.getScene().getWindow()).close();
     }
