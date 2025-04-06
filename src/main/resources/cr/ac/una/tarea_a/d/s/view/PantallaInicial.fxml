@@ -31,7 +31,7 @@
                   <Label styleClass="jfx-title-EE" text="E" />
                </children>
             </HBox>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="261.0" prefWidth="700.0" spacing="20.0" VBox.vgrow="ALWAYS">
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="261.0" prefWidth="700.0" spacing="20.0" styleClass="borderSombr" VBox.vgrow="ALWAYS">
                <children>
                   <VBox prefHeight="80.0">
                      <children>

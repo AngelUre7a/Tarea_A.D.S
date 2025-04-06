@@ -31,17 +31,6 @@
        -fx-background-repeat: no-repeat;
        
 }
-/*.jfx-button-long-text, 
-#btnEstadisticas, 
-#btnRanking, 
-#btnVolver,
-#btnRegistroDeporte,
-#btnRegistroEquipo,
-#btnCrearTorneo,
-#title
-{
-    -fx-font-size: 15px;  Ajusta el tamaño según lo necesites 
-}*/
 .button {
    -fx-background-color: -fx-color-azul_oscuro;
    -fx-padding: 5;
@@ -51,13 +40,24 @@
    -fx-alignment:CENTER;
    -fx-font-weight:bold;
 }
+.borderViews {
+    -fx-border-color: black;
+    -fx-border-width: 3px;
+    -fx-border-style: solid;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.3, 5, 5);
+}
+
 .button:hover{
    -fx-background-color: -fx-color-rich_black;
 }
 .button:focused{
     -fx-background-color: -fx-color-rich_black;
 }
-
+.borderSombr{
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.3, 5, 5);
+}
 
 .jfx-button-long-text{
     -fx-font-size: 12px;
