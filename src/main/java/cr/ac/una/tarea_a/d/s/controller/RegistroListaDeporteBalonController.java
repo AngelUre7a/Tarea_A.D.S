@@ -31,8 +31,6 @@ public class RegistroListaDeporteBalonController extends Controller implements I
     @FXML
     private AnchorPane root;
     @FXML
-    private MFXButton btnAgregar;
-    @FXML
     private MFXTextField filterField;
     @FXML
     private TableView<Deporte> tableView;
@@ -48,6 +46,9 @@ public class RegistroListaDeporteBalonController extends Controller implements I
     private TableColumn<Deporte, String> colEliminar;
 
     private final ObservableList<Deporte> deportesLista = FXCollections.observableArrayList();
+    
+    @FXML
+    private MFXButton btnAgregar;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -179,4 +180,5 @@ public class RegistroListaDeporteBalonController extends Controller implements I
         FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
     }
 
+   
 }

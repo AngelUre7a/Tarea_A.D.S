@@ -52,7 +52,7 @@
    -fx-font-weight:bold;
 }
 .button:hover{
-   -fx-background-color: -fx-color-azul;
+   -fx-background-color: -fx-color-rich_black;
 }
 .button:focused{
     -fx-background-color: -fx-color-rich_black;

@@ -31,9 +31,8 @@ import org.opencv.videoio.VideoCapture;
  * @author Usuario
  */
 public class RegistroEquipoController extends Controller implements Initializable {
-    
-//    private Equipo equipo = new Equipo();
 
+//    private Equipo equipo = new Equipo();
     @FXML
     private MFXButton btnRegistrar;
     @FXML
@@ -51,8 +50,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
     private boolean isCameraRunning = false;
     @FXML
     private AnchorPane root;
-    
-   
+
     /**
      * Initializes the controller class.
      */
@@ -61,16 +59,49 @@ public class RegistroEquipoController extends Controller implements Initializabl
         OpenCV.loadShared();
     }
 
-    @FXML
-    private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
-//        equipo.setImagenEquipo(ImageView.getImage());
-//        equipo.setNombreEquipo(txtNombreEquipo.getText());
-//        AppContext.getInstance().set("EQUIPO", equipo);
+//    @FXML
+//    private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
 //        
-//        Mensaje mensaje= new Mensaje();
-//        mensaje.show(Alert.AlertType.INFORMATION,"BALLIVERSE", "Se agregó el equipo correctamente");
 
-       ((Stage) root.getScene().getWindow()).close();
+    
+    ////        equipo.setImagenEquipo(ImageView.getImage());
+////        equipo.setNombreEquipo(txtNombreEquipo.getText());
+////        AppContext.getInstance().set("EQUIPO", equipo);
+////        
+////        Mensaje mensaje= new Mensaje();
+////        mensaje.show(Alert.AlertType.INFORMATION,"BALLIVERSE", "Se agregó el equipo correctamente");
+//
+//       ((Stage) root.getScene().getWindow()).close();
+//    }
+@FXML
+private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
+        String nombre = txtNombreEquipo.getText();
+        Image imagen = ImageView.getImage();
+
+        if (nombre == null || nombre.isBlank() || imagen == null) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar un nombre y una imagen.");
+            return;
+        }
+
+        String id = java.util.UUID.randomUUID().toString();
+        Equipo equipo;
+
+        if (AppContext.getInstance().containsItem("EQUIPO_EDITAR")) {
+            equipo = (Equipo) AppContext.getInstance().get("EQUIPO_EDITAR");
+            equipo.setNombre(nombre);
+            equipo.setImagen(imagen);
+            AppContext.getInstance().delete("EQUIPO_EDITAR");
+        } else {
+            equipo = new Equipo(id, nombre, imagen, "jugador");
+        }
+
+        AppContext.getInstance().set("EQUIPO_NUEVO", equipo);
+        new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "Equipo guardado correctamente");
+
+        txtNombreEquipo.clear();
+        ImageView.setImage(null);
+
+        ((Stage) root.getScene().getWindow()).close();
     }
 
     @FXML
