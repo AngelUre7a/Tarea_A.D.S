@@ -152,7 +152,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
 
         sortedData.comparatorProperty().bind(tableView.comparatorProperty());
 
-        tableView.setItems(sortedData);
+        tableView.setItems(deportesLista);
     }
 
     @Override

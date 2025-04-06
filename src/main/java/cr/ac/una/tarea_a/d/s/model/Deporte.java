@@ -1,4 +1,5 @@
 package cr.ac.una.tarea_a.d.s.model;
+import java.io.File;
 import javafx.scene.image.Image;
 //import lombok.Data;
 
@@ -12,7 +13,8 @@ public class Deporte {
      
     private String id;
     private String nombre;
-    private Image imagen; // Nuevo atributo
+    private transient Image imagen; // Nuevo atributo
+    private String rutaImagen;
     private String tipo;   // Nuevo atributo
 
     // Constructor completo
@@ -20,6 +22,19 @@ public class Deporte {
         this.id = id;
         this.nombre = nombre;
         this.imagen = imagen;
+        this.tipo = tipo;
+    }
+    public Deporte(String id, String nombre, String rutaImagen, String tipo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.rutaImagen = rutaImagen;
+        File file = new File(rutaImagen);
+        if(file.exists()){
+        this.imagen= new Image(file.toURI().toString());
+        }else{
+            System.out.println("No se encontro la imagen en:"+ rutaImagen);
+            this.imagen=null;
+        }
         this.tipo = tipo;
     }
     public Deporte(String nombre){
@@ -68,7 +83,7 @@ public class Deporte {
                 ", tipo='" + tipo + '\'' +
                 '}';
     }
-    //esto sirve en el json
+//esto sirve en el json
 //    
 //    private String id;
 //    private String nombre;
