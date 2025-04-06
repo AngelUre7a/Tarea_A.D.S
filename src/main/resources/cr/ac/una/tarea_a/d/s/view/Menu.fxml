@@ -2,6 +2,7 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -17,11 +18,14 @@
                     <children>
                         <Label fx:id="title1" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="18.0" prefHeight="50.0" prefWidth="115.0" styleClass="jfx-title-label-menu" text="Menu" />
                         <Label fx:id="title" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="115.0" styleClass="jfx-title-label-menu" text="Balliverse" VBox.vgrow="ALWAYS" />
+                  <Separator prefWidth="200.0" />
                         <MFXButton fx:id="btnRegistroDeporte" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegistroDeporte" prefHeight="50.0" styleClass="jfx-button-long-text" text="Registro Deporte" />
                         <MFXButton fx:id="btnRegistroEquipo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegistroEquipo" prefHeight="50.0" styleClass="jfx-button-long-text" text="Registro Equipo" />
                         <MFXButton fx:id="btnCrearTorneo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnCrearTorneo" prefHeight="50.0" styleClass="jfx-button-long-text" text="Crear Torneo" />
+                  <Separator prefWidth="200.0" />
                         <VBox alignment="BOTTOM_CENTER" minHeight="-Infinity" prefHeight="298.0" prefWidth="122.0" spacing="10.0">
                             <children>
+                        <Separator prefWidth="200.0" />
                                 <MFXButton fx:id="btnEstadisticas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnEstadisticas" prefHeight="50.0" text="Estadisticas" />
                                 <MFXButton fx:id="btnRanking" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRanking" prefHeight="50.0" text="Ranking" />
                                 <MFXButton fx:id="btnVolver" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnVolver" prefHeight="50.0" prefWidth="122.0" text="Volver" />

@@ -56,7 +56,7 @@ public class Equipo {
                 + ", categoria='" + categoria + '\''
                 + '}';
     }
-//
+//esto con funciona json
 //    private String id;
 //    private String nombre;
 //    private String imagen;

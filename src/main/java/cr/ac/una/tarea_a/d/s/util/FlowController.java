@@ -201,12 +201,5 @@ public class FlowController {
     public void salir() {
         this.mainStage.close();
     }
-//public void goViewInWindowModal(String viewName, Stage stage, boolean modal) throws IOException {
-//    // Asegúrate de que "RegistroEquipo" esté correctamente mapeado
-//    FXMLLoader loader = new FXMLLoader(getClass().getResource("/path/to/RegistroEquipo.fxml"));
-//    Parent root = loader.load();
-//    stage.setScene(new Scene(root));
-//    stage.show();
-//}
 
 }
