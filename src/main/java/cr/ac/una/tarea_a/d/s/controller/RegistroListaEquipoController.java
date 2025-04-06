@@ -86,6 +86,8 @@ public class RegistroListaEquipoController extends Controller implements Initial
     @FXML
     private TableColumn<Equipo, String> colID;
     @FXML
+    private TableColumn<Equipo, String> colDeporte;
+    @FXML
     private TableColumn<Equipo, String> colNombre;
     @FXML
     private TableColumn<Equipo, Image> colImagen;
@@ -95,10 +97,12 @@ public class RegistroListaEquipoController extends Controller implements Initial
     private TableColumn<Equipo, String> colEliminar;
 
     private final ObservableList<Equipo> equiposLista = FXCollections.observableArrayList();
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colDeporte.setCellValueFactory(new PropertyValueFactory<>("categoria"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colImagen.setCellValueFactory(new PropertyValueFactory<>("imagen"));
 

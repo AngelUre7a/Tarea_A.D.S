@@ -22,6 +22,9 @@ public class Deporte {
         this.imagen = imagen;
         this.tipo = tipo;
     }
+    public Deporte(String nombre){
+        this.nombre = nombre;
+    }
 
     // Getters y Setters
     public String getId() {

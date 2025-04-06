@@ -1,6 +1,7 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.App;
+import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 import cr.ac.una.tarea_a.d.s.util.Mensaje;
@@ -9,12 +10,16 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -50,6 +55,10 @@ public class RegistroEquipoController extends Controller implements Initializabl
     private boolean isCameraRunning = false;
     @FXML
     private AnchorPane root;
+    @FXML
+    private Label lbRegistroE;
+    @FXML
+    private ComboBox<Deporte> ComboBoxDeportes;
 
     /**
      * Initializes the controller class.
@@ -57,6 +66,37 @@ public class RegistroEquipoController extends Controller implements Initializabl
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         OpenCV.loadShared();
+        
+        List<Deporte> listaDeportes = new ArrayList<>();
+        listaDeportes.add(new Deporte("Futbol"));
+        listaDeportes.add(new Deporte("Baloncesto"));
+        listaDeportes.add(new Deporte("Tenis"));
+
+        
+        ComboBoxDeportes.getItems().addAll(listaDeportes);
+
+        
+        ComboBoxDeportes.setCellFactory(param -> new javafx.scene.control.ListCell<Deporte>() {
+            @Override
+            protected void updateItem(Deporte item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item != null) {
+                    setText(item.getNombre());
+                }
+            }
+        });
+
+        ComboBoxDeportes.setButtonCell(new javafx.scene.control.ListCell<Deporte>() {
+            @Override
+            protected void updateItem(Deporte item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item != null) {
+                    setText(item.getNombre());
+                }
+            }
+        });
+        
+        
     }
 
 //    @FXML
@@ -77,6 +117,8 @@ public class RegistroEquipoController extends Controller implements Initializabl
 private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
         String nombre = txtNombreEquipo.getText();
         Image imagen = ImageView.getImage();
+        String Deporte = ComboBoxDeportes.getValue().getNombre();
+        
 
         if (nombre == null || nombre.isBlank() || imagen == null) {
             new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar un nombre y una imagen.");
@@ -90,9 +132,10 @@ private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
             equipo = (Equipo) AppContext.getInstance().get("EQUIPO_EDITAR");
             equipo.setNombre(nombre);
             equipo.setImagen(imagen);
+            equipo.setCategoria(Deporte);
             AppContext.getInstance().delete("EQUIPO_EDITAR");
         } else {
-            equipo = new Equipo(id, nombre, imagen, "jugador");
+            equipo = new Equipo(id, nombre, imagen, Deporte);
         }
 
         AppContext.getInstance().set("EQUIPO_NUEVO", equipo);
