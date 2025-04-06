@@ -3,11 +3,6 @@ import java.io.File;
 import javafx.scene.image.Image;
 //import lombok.Data;
 
-/**
- *
- * @author dasly
- */
-
 //@Data 
 public class Deporte {
      

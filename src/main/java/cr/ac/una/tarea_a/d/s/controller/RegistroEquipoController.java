@@ -1,6 +1,5 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
-import cr.ac.una.tarea_a.d.s.App;
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
@@ -89,19 +88,6 @@ public class RegistroEquipoController extends Controller implements Initializabl
         });
 
     }
-
-//    @FXML
-//    private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
-//        
-    ////        equipo.setImagenEquipo(ImageView.getImage());
-////        equipo.setNombreEquipo(txtNombreEquipo.getText());
-////        AppContext.getInstance().set("EQUIPO", equipo);
-////        
-////        Mensaje mensaje= new Mensaje();
-////        mensaje.show(Alert.AlertType.INFORMATION,"BALLIVERSE", "Se agregó el equipo correctamente");
-//
-//       ((Stage) root.getScene().getWindow()).close();
-//    }
 @FXML
     private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
         String nombre = txtNombreEquipo.getText();
