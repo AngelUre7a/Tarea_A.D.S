@@ -97,6 +97,8 @@ public class RegistroListaEquipoController extends Controller implements Initial
     private TableColumn<Equipo, String> colEliminar;
 
     private final ObservableList<Equipo> equiposLista = FXCollections.observableArrayList();
+    @FXML
+    private MFXButton btnActualizar;
     
 
     @Override
@@ -199,5 +201,10 @@ public class RegistroListaEquipoController extends Controller implements Initial
                 AppContext.getInstance().delete("EQUIPO_NUEVO");
             }
         }
+    }
+
+    @FXML
+    private void onActionBtnActualizar(ActionEvent event) {
+        tableView.refresh();
     }
 }

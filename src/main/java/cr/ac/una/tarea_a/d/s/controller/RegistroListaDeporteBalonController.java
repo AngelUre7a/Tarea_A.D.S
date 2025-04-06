@@ -49,6 +49,8 @@ public class RegistroListaDeporteBalonController extends Controller implements I
     
     @FXML
     private MFXButton btnAgregar;
+    @FXML
+    private MFXButton btnActualizar;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -173,6 +175,11 @@ public class RegistroListaDeporteBalonController extends Controller implements I
                 AppContext.getInstance().delete("DEPORTE_NUEVO"); // Limpiar el contexto
             }
         }
+    }
+
+    @FXML
+    private void onActionBtnActualizar(ActionEvent event) {
+        tableView.refresh();
     }
 
    
