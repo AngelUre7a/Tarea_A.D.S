@@ -186,7 +186,7 @@ public class RegistroListaEquipoController extends Controller implements Initial
 
     @FXML
     private void onActionBtnAgregar(ActionEvent event) throws IOException {
-//        FlowController.getInstance().goViewInWindowModal("RegistroEquipo", ((Stage) root.getScene().getWindow()), false);
+        FlowController.getInstance().goViewInWindowModal("RegistroEquipo", ((Stage) root.getScene().getWindow()), false);
 
         if (AppContext.getInstance().containsItem("EQUIPO_NUEVO")) {
             Equipo nuevo = (Equipo) AppContext.getInstance().get("EQUIPO_NUEVO");
