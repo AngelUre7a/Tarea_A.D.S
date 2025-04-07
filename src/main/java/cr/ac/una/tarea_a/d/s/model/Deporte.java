@@ -19,6 +19,7 @@ public class Deporte {
         this.imagen = imagen;
         this.tipo = tipo;
     }
+    
     public Deporte(String id, String nombre, String rutaImagen, String tipo) {
         this.id = id;
         this.nombre = nombre;

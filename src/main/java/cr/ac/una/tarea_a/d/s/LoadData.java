@@ -24,8 +24,8 @@ public class LoadData {
 //        deporteRepo.save(deporte2);
 
         // Cargar equipos
-//        Equipo equipo1 = new Equipo(null, "Real Madrid", "imagenes/realmadrid.png", "Futbol");
-//        equipoRepo.save(equipo1);
+        Equipo equipo1 = new Equipo(null, "Real Madrid", "imagenes/realmadrid.png", "Futbol");
+        equipoRepo.save(equipo1);
 //
 //        Equipo equipo2 = new Equipo(null, "Los Lakers", "imagenes/lakers.png", "Baloncesto");
 //        equipoRepo.save(equipo2);

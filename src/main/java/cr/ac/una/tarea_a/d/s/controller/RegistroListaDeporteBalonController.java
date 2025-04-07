@@ -1,6 +1,7 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.model.Deporte;
+import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 
 import cr.ac.una.tarea_a.d.s.util.FlowController;
@@ -46,6 +47,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
     private TableColumn<Deporte, String> colEliminar;
 
     private final ObservableList<Deporte> deportesLista = FXCollections.observableArrayList();
+    private final DeporteRepository Deporterepo = new DeporteRepository();
     
     @FXML
     private MFXButton btnAgregar;
@@ -57,7 +59,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colImagen.setCellValueFactory(new PropertyValueFactory<>("imagen"));
-        // Mostrar imagen en ImageView dentro de la tabla
+        
         colImagen.setCellFactory(column -> new javafx.scene.control.TableCell<>() {
             private final ImageView imageView = new ImageView();
 
@@ -72,6 +74,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setGraphic(null);
+                    System.out.println("No se cargo la imagen");
                 } else {
                     imageView.setImage(item);
                     setGraphic(imageView);
@@ -130,6 +133,12 @@ public class RegistroListaDeporteBalonController extends Controller implements I
             }
         });
 
+        try {
+            deportesLista.addAll(Deporterepo.findAll());
+        } catch (IOException e) {
+            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar datos", "No se pudieron cargar los deportes.");
+        }
+        
         FilteredList<Deporte> filteredData = new FilteredList<>(deportesLista, b -> true);
 
         filterField.textProperty().addListener((observable, oldValue, newValue) -> {

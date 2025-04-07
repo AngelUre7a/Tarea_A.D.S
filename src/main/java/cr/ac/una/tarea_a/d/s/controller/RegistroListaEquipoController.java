@@ -1,6 +1,7 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.model.Equipo;
+import cr.ac.una.tarea_a.d.s.repositories.EquipoRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 import cr.ac.una.tarea_a.d.s.util.FlowController;
 import cr.ac.una.tarea_a.d.s.util.Mensaje;
@@ -49,6 +50,8 @@ public class RegistroListaEquipoController extends Controller implements Initial
     private TableColumn<Equipo, String> colEliminar;
 
     private final ObservableList<Equipo> equiposLista = FXCollections.observableArrayList();
+    private final EquipoRepository Equiporepo = new EquipoRepository();
+    
     @FXML
     private MFXButton btnActualizar;
     
@@ -74,6 +77,7 @@ public class RegistroListaEquipoController extends Controller implements Initial
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setGraphic(null);
+                    System.out.println("No se cargo la imagen del equipo");
                 } else {
                     imageView.setImage(item);
                     setGraphic(imageView);
@@ -131,6 +135,12 @@ public class RegistroListaEquipoController extends Controller implements Initial
                 return equipo.getNombre().toLowerCase().contains(lowerCaseFilter);
             });
         });
+        
+        try {
+            equiposLista.addAll(Equiporepo.findAll());
+        } catch (IOException e) {
+            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar datos", "No se pudieron cargar los deportes.");
+        }
 
         SortedList<Equipo> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(tableView.comparatorProperty());

@@ -1,18 +1,33 @@
 package cr.ac.una.tarea_a.d.s.model;
+import java.io.File;
 import javafx.scene.image.Image;
 
 public class Equipo {
     
     private String id;
     private String nombre;
-    private Image imagen;
+    private transient Image imagen;
     private String categoria; // Similar a "tipo" en la clase Deporte
+    private String rutaImagen;
 
     public Equipo(String id, String nombre, Image imagen, String categoria) {
         this.id = id;
         this.nombre = nombre;
         this.imagen = imagen;
         this.categoria = categoria;
+    }
+    
+    public Equipo(String id, String nombre, String rutaImagen, String tipo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.rutaImagen = rutaImagen;
+        File file = new File(rutaImagen);
+        if(file.exists()){
+        this.imagen= new Image(file.toURI().toString());
+        }else{
+            System.out.println("No se encontro la imagen en:"+ rutaImagen);
+            this.imagen=null;
+        }
     }
 
     public String getId() {

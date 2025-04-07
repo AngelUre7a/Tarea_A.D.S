@@ -59,6 +59,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
         OpenCV.loadShared();
 
         List<Deporte> deportes = (List<Deporte>) AppContext.getInstance().get("LISTA_DEPORTES");
+        
         if (deportes != null) {
             ComboBoxDeportes.getItems().addAll(deportes);
         }
