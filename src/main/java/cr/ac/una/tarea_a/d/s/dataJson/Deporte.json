@@ -10,5 +10,47 @@
     "nombre": "Futbol",
     "rutaImagen": "FOND.png",
     "tipo": "Colectivo"
+  },
+  {
+    "id": "d18c832b-db5b-4c12-ade5-ad8606f8df3e",
+    "nombre": "Futbol",
+    "rutaImagen": "FOND.png",
+    "tipo": "Colectivo"
+  },
+  {
+    "id": "1ea62be8-86a0-4eeb-8f78-02ab73291cb6",
+    "nombre": "Futbol",
+    "rutaImagen": "FOND.png",
+    "tipo": "Colectivo"
+  },
+  {
+    "id": "1336f32b-c902-453f-9d04-9fedd765534a",
+    "nombre": "Futbol",
+    "rutaImagen": "FOND.png",
+    "tipo": "Colectivo"
+  },
+  {
+    "id": "4faed10d-4473-495a-98f8-6388079a6ed5",
+    "nombre": "Futbol",
+    "rutaImagen": "FOND.png",
+    "tipo": "Colectivo"
+  },
+  {
+    "id": "66068208-38d5-4dd0-b260-93beba771621",
+    "nombre": "Futbol",
+    "rutaImagen": "FOND.png",
+    "tipo": "Colectivo"
+  },
+  {
+    "id": "a2fc913b-ef82-41e6-828e-6fbddbe9dfe4",
+    "nombre": "Futbol",
+    "rutaImagen": "FOND.png",
+    "tipo": "Colectivo"
+  },
+  {
+    "id": "fbcc17a1-5957-49db-bba5-644c6c3b2539",
+    "nombre": "Futbol",
+    "rutaImagen": "FOND.png",
+    "tipo": "Colectivo"
   }
 ]

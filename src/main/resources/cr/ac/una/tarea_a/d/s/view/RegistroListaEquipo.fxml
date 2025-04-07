@@ -12,7 +12,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="root" prefHeight="600.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RegistroListaEquipoController">
    <children>
-      <VBox alignment="CENTER" layoutY="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="146.0" prefWidth="778.0" spacing="20.0" stylesheets="@../css/Style.css" AnchorPane.bottomAnchor="452.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
+      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="130.0" prefWidth="760.0" spacing="20.0" stylesheets="@../css/Style.css" AnchorPane.bottomAnchor="470.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label alignment="TOP_CENTER" text="Lista de Equipos " />
             <HBox alignment="TOP_CENTER" prefHeight="23.0" prefWidth="778.0" spacing="10.0">

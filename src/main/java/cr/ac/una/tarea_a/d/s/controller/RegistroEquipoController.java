@@ -29,7 +29,6 @@ import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
 
-
 public class RegistroEquipoController extends Controller implements Initializable {
 
     @FXML
@@ -47,7 +46,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
 
     private VideoCapture capture;
     private boolean isCameraRunning = false;
-    
+
     @FXML
     private AnchorPane root;
     @FXML
@@ -55,40 +54,60 @@ public class RegistroEquipoController extends Controller implements Initializabl
     @FXML
     private ComboBox<Deporte> ComboBoxDeportes;
 
-  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         OpenCV.loadShared();
 
-        List<Deporte> listaDeportes = new ArrayList<>();
-        listaDeportes.add(new Deporte("Futbol"));
-        listaDeportes.add(new Deporte("Baloncesto"));
-        listaDeportes.add(new Deporte("Tenis"));
+        List<Deporte> deportes = (List<Deporte>) AppContext.getInstance().get("LISTA_DEPORTES");
+        if (deportes != null) {
+            ComboBoxDeportes.getItems().addAll(deportes);
+        }
 
-        ComboBoxDeportes.getItems().addAll(listaDeportes);
-
-        ComboBoxDeportes.setCellFactory(param -> new javafx.scene.control.ListCell<Deporte>() {
+        // Configura cómo mostrar los nombres
+        ComboBoxDeportes.setCellFactory(param -> new javafx.scene.control.ListCell<>() {
             @Override
             protected void updateItem(Deporte item, boolean empty) {
                 super.updateItem(item, empty);
-                if (item != null) {
-                    setText(item.getNombre());
-                }
+                setText(item == null || empty ? null : item.getNombre());
             }
+//
+//        List<Deporte> listaDeportes = new ArrayList<>();
+//        listaDeportes.add(new Deporte("Futbol"));
+//        listaDeportes.add(new Deporte("Baloncesto"));
+//        listaDeportes.add(new Deporte("Tenis"));
+//
+//        ComboBoxDeportes.getItems().addAll(listaDeportes);
+//
+//        ComboBoxDeportes.setCellFactory(param -> new javafx.scene.control.ListCell<Deporte>() {
+//            @Override
+//            protected void updateItem(Deporte item, boolean empty) {
+//                super.updateItem(item, empty);
+//                if (item != null) {
+//                    setText(item.getNombre());
+//                }
+//            }
         });
 
-        ComboBoxDeportes.setButtonCell(new javafx.scene.control.ListCell<Deporte>() {
+        ComboBoxDeportes.setButtonCell(new javafx.scene.control.ListCell<>() {
             @Override
             protected void updateItem(Deporte item, boolean empty) {
                 super.updateItem(item, empty);
-                if (item != null) {
-                    setText(item.getNombre());
-                }
+                setText(item == null || empty ? null : item.getNombre());
             }
         });
+//        ComboBoxDeportes.setButtonCell(new javafx.scene.control.ListCell<Deporte>() {
+//            @Override
+//            protected void updateItem(Deporte item, boolean empty) {
+//                super.updateItem(item, empty);
+//                if (item != null) {
+//                    setText(item.getNombre());
+//                }
+//            }
+//        });
 
     }
-@FXML
+
+    @FXML
     private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
         String nombre = txtNombreEquipo.getText();
         Image imagen = ImageView.getImage();
