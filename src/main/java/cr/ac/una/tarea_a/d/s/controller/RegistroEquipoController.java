@@ -2,6 +2,7 @@ package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
+import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 import cr.ac.una.tarea_a.d.s.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -57,9 +58,16 @@ public class RegistroEquipoController extends Controller implements Initializabl
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         OpenCV.loadShared();
-
-        List<Deporte> deportes = (List<Deporte>) AppContext.getInstance().get("LISTA_DEPORTES");
         
+        List<Deporte> deportes = null;
+        try {
+            DeporteRepository deporteRepo = new DeporteRepository();
+            deportes = deporteRepo.findAll(); // carga desde el JSON
+            AppContext.getInstance().set("LISTA_DEPORTES", deportes); // guardamos en el contexto
+        } catch (IOException e) {
+            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar deportes", "No se pudo cargar la lista de deportes.");
+            e.printStackTrace(); // opcional
+        }
         if (deportes != null) {
             ComboBoxDeportes.getItems().addAll(deportes);
         }

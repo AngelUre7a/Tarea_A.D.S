@@ -1,21 +1,6 @@
 [
   {
-    "id": "9e867ac3-a8f6-483e-9783-8fb52d5c005b",
-    "nombre": "Real Madrid",
-    "rutaImagen": "imagenes/realmadrid.png"
-  },
-  {
-    "id": "15693b2e-fa35-47a5-95c0-cdb6df7cdd4a",
-    "nombre": "Real Madrid",
-    "rutaImagen": "imagenes/realmadrid.png"
-  },
-  {
-    "id": "08d00abc-0179-4ead-92ca-4cb7209de081",
-    "nombre": "Real Madrid",
-    "rutaImagen": "imagenes/realmadrid.png"
-  },
-  {
-    "id": "654a8544-0cff-4610-a75e-542bbf201ce4",
+    "id": "d747f435-8c0e-4eac-aebe-c5dc6bee6f58",
     "nombre": "Real Madrid",
     "rutaImagen": "imagenes/realmadrid.png"
   }
