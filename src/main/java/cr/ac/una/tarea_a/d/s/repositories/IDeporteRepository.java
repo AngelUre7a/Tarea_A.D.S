@@ -5,10 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-/**
- *
- * @author dasly
- */
+
 public interface IDeporteRepository {
       
     Deporte save(Deporte deporte) throws IOException;

@@ -79,22 +79,6 @@ public class RegistroEquipoController extends Controller implements Initializabl
                 super.updateItem(item, empty);
                 setText(item == null || empty ? null : item.getNombre());
             }
-//
-//        List<Deporte> listaDeportes = new ArrayList<>();
-//        listaDeportes.add(new Deporte("Futbol"));
-//        listaDeportes.add(new Deporte("Baloncesto"));
-//        listaDeportes.add(new Deporte("Tenis"));
-//
-//        ComboBoxDeportes.getItems().addAll(listaDeportes);
-//
-//        ComboBoxDeportes.setCellFactory(param -> new javafx.scene.control.ListCell<Deporte>() {
-//            @Override
-//            protected void updateItem(Deporte item, boolean empty) {
-//                super.updateItem(item, empty);
-//                if (item != null) {
-//                    setText(item.getNombre());
-//                }
-//            }
         });
 
         ComboBoxDeportes.setButtonCell(new javafx.scene.control.ListCell<>() {
@@ -104,16 +88,6 @@ public class RegistroEquipoController extends Controller implements Initializabl
                 setText(item == null || empty ? null : item.getNombre());
             }
         });
-//        ComboBoxDeportes.setButtonCell(new javafx.scene.control.ListCell<Deporte>() {
-//            @Override
-//            protected void updateItem(Deporte item, boolean empty) {
-//                super.updateItem(item, empty);
-//                if (item != null) {
-//                    setText(item.getNombre());
-//                }
-//            }
-//        });
-
     }
 
     @FXML
