@@ -8,6 +8,7 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -89,7 +90,8 @@ public class RegistroDeporteController extends Controller implements Initializab
     }
 
     // Recupera la lista y agrega el deporte registrado
-    ObservableList<Deporte> listaDeportes = (ObservableList<Deporte>) AppContext.getInstance().get("LISTA_DEPORTES");
+    List<Deporte> deportes = (List<Deporte>) AppContext.getInstance().get("LISTA_DEPORTES");
+    ObservableList<Deporte> listaDeportes = FXCollections.observableArrayList(deportes);
     listaDeportes.add(deporte);
 
     // Mostrar mensaje de éxito

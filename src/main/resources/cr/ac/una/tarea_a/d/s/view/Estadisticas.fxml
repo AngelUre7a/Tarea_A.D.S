@@ -1,5 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.EstadisticasController" />
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.EstadisticasController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <Label text="Estadisticas" />
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="23.0" prefWidth="778.0" spacing="10.0">
+               <children>
+                  <MFXTextField fx:id="filterField" floatMode="BORDER" floatingText="Buscador" floatingTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="475.0" />
+                  <ComboBox fx:id="ComboBoxDeportes" maxWidth="200.0" prefHeight="35.0" prefWidth="150.0" />
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+      <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="34.0" layoutY="146.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="464.0" prefWidth="731.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="146.0">
+         <columns>
+            <TableColumn fx:id="colImagen" prefWidth="112.0" text="Imagen" />
+            <TableColumn fx:id="colNombre" prefWidth="252.0" text="Nombre" />
+            <TableColumn fx:id="colDeporte" prefWidth="158.0" text="Deporte" />
+            <TableColumn fx:id="colPuntos" prefWidth="129.0" text="Puntos" />
+            <TableColumn fx:id="colGoles" prefWidth="129.0" text="Goles a favor" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </children>
+</AnchorPane>

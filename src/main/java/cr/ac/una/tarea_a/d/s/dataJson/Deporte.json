@@ -3,5 +3,15 @@
     "id": "2e8db757-b230-46b3-81f8-ef1ed844ef14",
     "nombre": "daa",
     "tipo": "balon"
+  },
+  {
+    "id": "46b6a9b3-474f-4ede-b3f4-b9b51119a193",
+    "nombre": "Basquetball",
+    "tipo": "balon"
+  },
+  {
+    "id": "5f372841-8fff-4bae-9d14-f111f8f19996",
+    "nombre": "Futbol",
+    "tipo": "balon"
   }
 ]
