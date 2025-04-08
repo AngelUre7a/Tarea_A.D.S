@@ -11,6 +11,8 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -48,7 +50,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
 
     private final ObservableList<Deporte> deportesLista = FXCollections.observableArrayList();
     private final DeporteRepository Deporterepo = new DeporteRepository();
-    
+
     @FXML
     private MFXButton btnAgregar;
     @FXML
@@ -59,7 +61,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colImagen.setCellValueFactory(new PropertyValueFactory<>("imagen"));
-        
+
         colImagen.setCellFactory(column -> new javafx.scene.control.TableCell<>() {
             private final ImageView imageView = new ImageView();
 
@@ -97,10 +99,16 @@ public class RegistroListaDeporteBalonController extends Controller implements I
 
                         // Eliminar el deporte de la lista
                         deportesLista.remove(deporteSeleccionado);
+                        
+                        // Eliminar el deporte del repositorio
+                        try {
+                            Deporterepo.deleteById(deporteSeleccionado.getId());
+                        } catch (IOException e) {
+                            new Mensaje().show(Alert.AlertType.ERROR, "Error al eliminar deporte", "No se pudo eliminar el deporte.");
+                        }
 
-                        // Eliminar el deporte de AppContext si lo estás usando
-                        AppContext.getInstance().delete("DEPORTE_" + deporteSeleccionado.getId());
-
+//                        // Eliminar el deporte de AppContext si lo estás usando
+//                        AppContext.getInstance().delete("DEPORTE_" + deporteSeleccionado.getId());
                         // Mostrar un mensaje o notificación de que se ha eliminado
                         new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "El Deporte se ha eliminado correctamente.");
                     });
@@ -138,7 +146,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
         } catch (IOException e) {
             new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar datos", "No se pudieron cargar los deportes.");
         }
-        
+
         FilteredList<Deporte> filteredData = new FilteredList<>(deportesLista, b -> true);
 
         filterField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -171,14 +179,15 @@ public class RegistroListaDeporteBalonController extends Controller implements I
     @FXML
     private void onActionBtnAgregar(ActionEvent event) throws IOException {
         FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
-
         // Verificar si hay un nuevo deporte creado
         if (AppContext.getInstance().containsItem("DEPORTE_NUEVO")) {
             // Obtener el nuevo deporte desde el AppContext
             Deporte nuevo = (Deporte) AppContext.getInstance().get("DEPORTE_NUEVO");
-
             // Asegúrate de que la lista no se reinicie al agregar
             if (nuevo != null) {
+                // Guardar el nuevo deporte en el repositorio
+                Deporterepo.save(nuevo);
+
                 // Agregar el nuevo deporte a la lista sin eliminar los anteriores
                 deportesLista.add(nuevo);
                 AppContext.getInstance().delete("DEPORTE_NUEVO"); // Limpiar el contexto
@@ -191,5 +200,4 @@ public class RegistroListaDeporteBalonController extends Controller implements I
         tableView.refresh();
     }
 
-   
 }

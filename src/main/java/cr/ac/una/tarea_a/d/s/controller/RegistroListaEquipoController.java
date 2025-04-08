@@ -10,6 +10,8 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -97,7 +99,12 @@ public class RegistroListaEquipoController extends Controller implements Initial
                     btnEliminar.setOnAction(event -> {
                         Equipo equipoSeleccionado = getTableView().getItems().get(getIndex());
                         equiposLista.remove(equipoSeleccionado);
-                        AppContext.getInstance().delete("EQUIPO_" + equipoSeleccionado.getId());
+                        try {
+                            Equiporepo.deleteById(equipoSeleccionado.getId());
+                        } catch (IOException ex) {
+                             new Mensaje().show(Alert.AlertType.ERROR, "Error al eliminar equipo", "No se pudo eliminar el equipo.");
+                        }
+//                        AppContext.getInstance().delete("EQUIPO_" + equipoSeleccionado.getId());
                         new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "El Equipo se ha eliminado correctamente.");
                     });
                     setGraphic(btnEliminar);
@@ -159,6 +166,8 @@ public class RegistroListaEquipoController extends Controller implements Initial
         if (AppContext.getInstance().containsItem("EQUIPO_NUEVO")) {
             Equipo nuevo = (Equipo) AppContext.getInstance().get("EQUIPO_NUEVO");
             if (nuevo != null) {
+                Equiporepo.save(nuevo);
+    
                 equiposLista.add(nuevo);
                 AppContext.getInstance().delete("EQUIPO_NUEVO");
             }
