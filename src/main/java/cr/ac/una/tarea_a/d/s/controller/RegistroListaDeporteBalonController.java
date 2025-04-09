@@ -99,7 +99,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
 
                         // Eliminar el deporte de la lista
                         deportesLista.remove(deporteSeleccionado);
-                        
+
                         // Eliminar el deporte del repositorio
                         try {
                             Deporterepo.deleteById(deporteSeleccionado.getId());
@@ -141,8 +141,16 @@ public class RegistroListaDeporteBalonController extends Controller implements I
             }
         });
 
+//        try {
+//            deportesLista.addAll(Deporterepo.findAll());
+//        } catch (IOException e) {
+//            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar datos", "No se pudieron cargar los deportes.");
+//        }
         try {
-            deportesLista.addAll(Deporterepo.findAll());
+            for (Deporte d : Deporterepo.findAll()) {
+                d.cargarImagenDesdeBase64(); // ← Aquí reconstruimos la imagen
+                deportesLista.add(d);
+            }
         } catch (IOException e) {
             new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar datos", "No se pudieron cargar los deportes.");
         }
@@ -182,6 +190,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
         // Verificar si hay un nuevo deporte creado
         if (AppContext.getInstance().containsItem("DEPORTE_NUEVO")) {
             // Obtener el nuevo deporte desde el AppContext
+
             Deporte nuevo = (Deporte) AppContext.getInstance().get("DEPORTE_NUEVO");
             // Asegúrate de que la lista no se reinicie al agregar
             if (nuevo != null) {
