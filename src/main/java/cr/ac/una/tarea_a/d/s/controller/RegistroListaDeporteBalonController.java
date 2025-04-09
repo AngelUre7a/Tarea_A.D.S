@@ -94,23 +94,26 @@ public class RegistroListaDeporteBalonController extends Controller implements I
                     setGraphic(null);
                 } else {
                     btnEliminar.setOnAction(event -> {
-                        // Obtener el deporte seleccionado
                         Deporte deporteSeleccionado = getTableView().getItems().get(getIndex());
+                        boolean deporteConEquipo = deporteSeleccionado.getNombre().equals("jsjs");
+                        if (!deporteConEquipo) {
+                            // Eliminar el deporte de la lista
+                            deportesLista.remove(deporteSeleccionado);
 
-                        // Eliminar el deporte de la lista
-                        deportesLista.remove(deporteSeleccionado);
-
-                        // Eliminar el deporte del repositorio
-                        try {
-                            Deporterepo.deleteById(deporteSeleccionado.getId());
-                        } catch (IOException e) {
-                            new Mensaje().show(Alert.AlertType.ERROR, "Error al eliminar deporte", "No se pudo eliminar el deporte.");
-                        }
+                            // Eliminar el deporte del repositorio
+                            try {
+                                Deporterepo.deleteById(deporteSeleccionado.getId());
+                            } catch (IOException e) {
+                                new Mensaje().show(Alert.AlertType.ERROR, "Error al eliminar deporte", "No se pudo eliminar el deporte.");
+                            }
 
 //                        // Eliminar el deporte de AppContext si lo estás usando
 //                        AppContext.getInstance().delete("DEPORTE_" + deporteSeleccionado.getId());
-                        // Mostrar un mensaje o notificación de que se ha eliminado
-                        new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "El Deporte se ha eliminado correctamente.");
+                            // Mostrar un mensaje o notificación de que se ha eliminado
+                            new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "El Deporte se ha eliminado correctamente.");
+                        }else{
+                            new Mensaje().show(Alert.AlertType.ERROR, "Error al eliminar deporte", "Tiene equipos asociados.");
+                        }
                     });
                     setGraphic(btnEliminar);
                 }
