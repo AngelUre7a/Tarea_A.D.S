@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.App;
@@ -150,7 +146,7 @@ public class EstadisticasController extends Controller implements Initializable 
 
         boolean coincideNombre = (filtroNombre == null || filtroNombre.isEmpty()) || equipo.getNombre().toLowerCase().contains(filtroNombre.toLowerCase());
 
-        boolean coincideDeporte = (filtroDeporte == null || "Todos".equalsIgnoreCase(filtroDeporte.getNombre())) || equipo.getCategoria().equalsIgnoreCase(filtroDeporte.getNombre());
+        boolean coincideDeporte = (filtroDeporte == null || "Todos".equalsIgnoreCase(filtroDeporte.getNombre())) || equipo.getTipoDeporte().equalsIgnoreCase(filtroDeporte.getNombre());
 
         return coincideNombre && coincideDeporte;
         });

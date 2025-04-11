@@ -108,7 +108,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
 
                         
                         boolean tieneEquiposAsociados = equiposLista.stream()
-                                .anyMatch(equipo -> equipo.getCategoria().equals(nombreDeporte));
+                                .anyMatch(equipo -> equipo.getTipoDeporte().equals(nombreDeporte));
                         
                         if (tieneEquiposAsociados) {
                             new Mensaje().show(Alert.AlertType.ERROR, "Error al eliminar deporte", "No se puede eliminar el deporte porque tiene equipos asociados.");

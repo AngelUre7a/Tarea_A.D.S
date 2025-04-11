@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.model.Deporte;
@@ -168,7 +164,7 @@ public class RankingController extends Controller implements Initializable {
         boolean coincideNombre = (filtroNombre == null || filtroNombre.isEmpty()) || equipo.getNombre().toLowerCase().contains(filtroNombre.toLowerCase());
 
         // Filtro por deporte
-        boolean coincideDeporte = (filtroDeporte == null || "Todos".equalsIgnoreCase(filtroDeporte.getNombre())) || equipo.getCategoria().equalsIgnoreCase(filtroDeporte.getNombre());
+        boolean coincideDeporte = (filtroDeporte == null || "Todos".equalsIgnoreCase(filtroDeporte.getNombre())) || equipo.getTipoDeporte().equalsIgnoreCase(filtroDeporte.getNombre());
         
         return coincideNombre && coincideDeporte;
         });
