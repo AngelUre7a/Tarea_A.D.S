@@ -9,6 +9,7 @@ import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.repositories.EquipoRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
+import cr.ac.una.tarea_a.d.s.util.FlowController;
 import cr.ac.una.tarea_a.d.s.util.Mensaje;
 import cr.ac.una.unaplanilla.util.Formato;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -32,6 +33,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -84,6 +86,18 @@ public class CreacionTorneoController extends Controller implements Initializabl
         });//MANEJO TABLEVIEW
         colAgregar.setCellFactory(column -> new javafx.scene.control.TableCell<Equipo, String>() {
             private final MFXCheckbox btnAgregar = new MFXCheckbox("");
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    btnAgregar.setOnAction(event -> {
+                        
+                    });
+                    setGraphic(btnAgregar);
+                }
+            }
         });
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colEscudo.setCellFactory(column -> new javafx.scene.control.TableCell<>() {
