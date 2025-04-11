@@ -1,6 +1,7 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.model.Deporte;
+import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 import cr.ac.una.tarea_a.d.s.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -53,6 +54,7 @@ public class RegistroDeporteController extends Controller implements Initializab
     @Override
     public void initialize() {
     }
+
     @FXML
     private void onActionBtnRegistrar(ActionEvent event) throws IOException {
         String nombre = txtNombreDeporte.getText();
@@ -66,18 +68,29 @@ public class RegistroDeporteController extends Controller implements Initializab
         // Crear el nuevo deporte o actualizar el existente
         String id = java.util.UUID.randomUUID().toString(); // Genera un ID único si es nuevo
         Deporte deporte;
+        DeporteRepository repo = new DeporteRepository();
 
         if (AppContext.getInstance().containsItem("DEPORTE_EDITAR")) {
-            // Si es un deporte que se está editando, actualiza el objeto
             deporte = (Deporte) AppContext.getInstance().get("DEPORTE_EDITAR");
             deporte.setNombre(nombre);
             deporte.setImagen(imagen);
-            AppContext.getInstance().delete("DEPORTE_EDITAR");  // Limpiar el contexto
+            repo.save(deporte); // ← GUARDAR CAMBIOS EN JSON
+            AppContext.getInstance().delete("DEPORTE_EDITAR");
         } else {
-            // Si es un deporte nuevo, crea un objeto nuevo
             deporte = new Deporte(id, nombre, imagen);
+            repo.save(deporte); // ← GUARDAR NUEVO DEPORTE
         }
 
+//        if (AppContext.getInstance().containsItem("DEPORTE_EDITAR")) {
+//            // Si es un deporte que se está editando, actualiza el objeto
+//            deporte = (Deporte) AppContext.getInstance().get("DEPORTE_EDITAR");
+//            deporte.setNombre(nombre);
+//            deporte.setImagen(imagen);
+//            AppContext.getInstance().delete("DEPORTE_EDITAR");  // Limpiar el contexto
+//        } else {
+//            // Si es un deporte nuevo, crea un objeto nuevo
+//            deporte = new Deporte(id, nombre, imagen);
+//        }
         // Guardar el nuevo deporte en el AppContext
         AppContext.getInstance().set("DEPORTE_NUEVO", deporte);
 
@@ -88,8 +101,12 @@ public class RegistroDeporteController extends Controller implements Initializab
         }
 
         List<Deporte> deportes = (List<Deporte>) AppContext.getInstance().get("LISTA_DEPORTES");
+//        ObservableList<Deporte> listaDeportes = FXCollections.observableArrayList(deportes);
+//        listaDeportes.add(deporte);
         ObservableList<Deporte> listaDeportes = FXCollections.observableArrayList(deportes);
-        listaDeportes.add(deporte);
+        if (!listaDeportes.contains(deporte)) {
+            listaDeportes.add(deporte);
+        }
 
         new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "Deporte guardado correctamente");
 

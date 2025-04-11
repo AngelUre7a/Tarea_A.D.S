@@ -58,7 +58,6 @@ public class RegistroListaDeporteBalonController extends Controller implements I
     private MFXButton btnAgregar;
     @FXML
     private MFXButton btnActualizar;
-    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -106,10 +105,9 @@ public class RegistroListaDeporteBalonController extends Controller implements I
                         Deporte deporteSeleccionado = getTableView().getItems().get(getIndex());
                         String nombreDeporte = deporteSeleccionado.getNombre();
 
-                        
                         boolean tieneEquiposAsociados = equiposLista.stream()
                                 .anyMatch(equipo -> equipo.getTipoDeporte().equals(nombreDeporte));
-                        
+
                         if (tieneEquiposAsociados) {
                             new Mensaje().show(Alert.AlertType.ERROR, "Error al eliminar deporte", "No se puede eliminar el deporte porque tiene equipos asociados.");
                         } else {
@@ -151,6 +149,23 @@ public class RegistroListaDeporteBalonController extends Controller implements I
 
                         // Abre la ventana de registro para editar
                         FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
+                        if (AppContext.getInstance().containsItem("DEPORTE_EDITAR")) {
+                            Deporte actualizado = (Deporte) AppContext.getInstance().get("DEPORTE_EDITAR");
+
+                            try {
+                                Deporterepo.save(actualizado);
+                            } catch (IOException e) {
+                                new Mensaje().show(Alert.AlertType.ERROR, "Error", "No se pudo guardar el deporte editado.");
+                            }
+
+                            int index = deportesLista.indexOf(actualizado);
+                            if (index >= 0) {
+                                deportesLista.set(index, actualizado);
+                            }
+                            AppContext.getInstance().delete("DEPORTE_EDITAR");
+                            tableView.refresh();
+                        }
+
                     });
                     setGraphic(btnEditar);
                 }
