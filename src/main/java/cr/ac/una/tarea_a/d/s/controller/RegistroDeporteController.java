@@ -75,17 +75,7 @@ public class RegistroDeporteController extends Controller implements Initializab
             AppContext.getInstance().delete("DEPORTE_EDITAR");  // Limpiar el contexto
         } else {
             // Si es un deporte nuevo, crea un objeto nuevo
-            deporte = new Deporte(id, nombre, imagen, "balon");
-        }
-
-        // ✅ Convertir imagen a Base64 antes de guardar
-        String imageUrl = imagen.getUrl(); // Ejemplo: file:/C:/imagenes/futbol.png
-        if (imageUrl != null && imageUrl.startsWith("file:/")) {
-            String imagePath = imageUrl.replace("file:/", "").replace("%20", " ");
-            File archivo = new File(imagePath);
-            if (archivo.exists()) {
-                deporte.cargarImagenComoBase64(archivo.getAbsolutePath());
-            }
+            deporte = new Deporte(id, nombre, imagen);
         }
 
         // Guardar el nuevo deporte en el AppContext

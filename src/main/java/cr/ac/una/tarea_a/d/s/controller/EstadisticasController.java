@@ -113,7 +113,7 @@ public class EstadisticasController extends Controller implements Initializable 
         List<Deporte> deportes = deporteRepo.findAll();
 
         if (deportes != null) {
-            Deporte todos = new Deporte("","","","");
+            Deporte todos = new Deporte("Todos");
             todos.setNombre("Todos");
             ComboBoxDeportes.getItems().add(todos);
             ComboBoxDeportes.getItems().addAll(deportes);

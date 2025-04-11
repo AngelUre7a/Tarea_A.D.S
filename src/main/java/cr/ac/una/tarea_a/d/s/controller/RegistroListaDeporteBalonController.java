@@ -80,7 +80,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setGraphic(null);
-                    System.out.println("No se cargo la imagen");
+//                    System.out.println("No se cargo la imagen");
                 } else {
                     imageView.setImage(item);
                     setGraphic(imageView);

@@ -124,7 +124,7 @@ public class RankingController extends Controller implements Initializable {
         }
         
         if (deportes != null) {
-            Deporte todos = new Deporte("","","","");
+            Deporte todos = new Deporte("Todos");
             todos.setNombre("Todos");
 
             ComboBoxDeportes.getItems().add(todos);
