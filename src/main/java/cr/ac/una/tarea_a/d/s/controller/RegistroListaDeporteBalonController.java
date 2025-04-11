@@ -1,7 +1,9 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.model.Deporte;
+import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
+import cr.ac.una.tarea_a.d.s.repositories.EquipoRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 
 import cr.ac.una.tarea_a.d.s.util.FlowController;
@@ -51,6 +53,9 @@ public class RegistroListaDeporteBalonController extends Controller implements I
     private final ObservableList<Deporte> deportesLista = FXCollections.observableArrayList();
     private final DeporteRepository Deporterepo = new DeporteRepository();
 
+    private final ObservableList<Equipo> equiposLista = FXCollections.observableArrayList();
+    private final EquipoRepository Equiporepo = new EquipoRepository();
+
     @FXML
     private MFXButton btnAgregar;
     @FXML
@@ -83,6 +88,11 @@ public class RegistroListaDeporteBalonController extends Controller implements I
                 }
             }
         });
+        try {
+            equiposLista.addAll(Equiporepo.findAll());
+        } catch (IOException e) {
+            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar equipos", "No se pudieron cargar los equipos.");
+        }
         //configuracion boton de eliminar
         colEliminar.setCellFactory(column -> new javafx.scene.control.TableCell<Deporte, String>() {
             private final MFXButton btnEliminar = new MFXButton("Eliminar");
@@ -95,24 +105,28 @@ public class RegistroListaDeporteBalonController extends Controller implements I
                 } else {
                     btnEliminar.setOnAction(event -> {
                         Deporte deporteSeleccionado = getTableView().getItems().get(getIndex());
-                        boolean deporteConEquipo = deporteSeleccionado.getNombre().equals("jsjs");
-                        if (!deporteConEquipo) {
-                            // Eliminar el deporte de la lista
+                        String nombreDeporte = deporteSeleccionado.getNombre();
+
+                        
+                        boolean tieneEquiposAsociados = equiposLista.stream()
+                                .anyMatch(equipo -> equipo.getCategoria().equals(nombreDeporte));
+                        
+                        if (tieneEquiposAsociados) {
+                            new Mensaje().show(Alert.AlertType.ERROR, "Error al eliminar deporte", "No se puede eliminar el deporte porque tiene equipos asociados.");
+                        } else {
+                            // Eliminar de la lista observable (UI)
                             deportesLista.remove(deporteSeleccionado);
 
-                            // Eliminar el deporte del repositorio
+                            // Eliminar del repositorio (persistencia)
                             try {
                                 Deporterepo.deleteById(deporteSeleccionado.getId());
                             } catch (IOException e) {
                                 new Mensaje().show(Alert.AlertType.ERROR, "Error al eliminar deporte", "No se pudo eliminar el deporte.");
+                                return;
                             }
 
-//                        // Eliminar el deporte de AppContext si lo estás usando
-//                        AppContext.getInstance().delete("DEPORTE_" + deporteSeleccionado.getId());
-                            // Mostrar un mensaje o notificación de que se ha eliminado
-                            new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "El Deporte se ha eliminado correctamente.");
-                        }else{
-                            new Mensaje().show(Alert.AlertType.ERROR, "Error al eliminar deporte", "Tiene equipos asociados.");
+                            // Mensaje de éxito
+                            new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "El deporte se ha eliminado correctamente.");
                         }
                     });
                     setGraphic(btnEliminar);
