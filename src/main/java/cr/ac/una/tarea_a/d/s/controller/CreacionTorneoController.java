@@ -162,4 +162,8 @@ public class CreacionTorneoController extends Controller implements Initializabl
         tableView.setItems(equiposLista);
     }
 
+    @FXML
+    private void onActionBtnJugarTorneo(ActionEvent event) {
+    }
+
 }

@@ -28,8 +28,6 @@ public class MenuController extends Controller implements Initializable {
     @FXML
     private MFXButton btnEstadisticas;
     @FXML
-    private MFXButton btnCrearTorneo;
-    @FXML
     private MFXButton btnRegistroDeporte;
     @FXML
     private MFXButton btnRegistroEquipo;
@@ -39,6 +37,10 @@ public class MenuController extends Controller implements Initializable {
     private MFXButton btnRanking;
     @FXML
     private Label title;
+    @FXML
+    private Label title1;
+    @FXML
+    private MFXButton btnTorneos;
 
     /**
      * Initializes the controller class.
@@ -65,8 +67,8 @@ public class MenuController extends Controller implements Initializable {
     }
     
     @FXML
-    private void onActionBtnCrearTorneo(ActionEvent event) {
-        FlowController.getInstance().goView("CreacionTorneo");
+    private void onActionBtnTorneos(ActionEvent event) {
+        FlowController.getInstance().goView("ListaTorneo");
     }
 
     @FXML

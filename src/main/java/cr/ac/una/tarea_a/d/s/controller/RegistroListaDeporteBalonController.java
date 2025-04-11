@@ -58,6 +58,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
     private MFXButton btnAgregar;
     @FXML
     private MFXButton btnActualizar;
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

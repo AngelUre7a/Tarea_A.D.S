@@ -21,7 +21,7 @@
                   <Separator prefWidth="200.0" />
                         <MFXButton fx:id="btnRegistroDeporte" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegistroDeporte" prefHeight="50.0" styleClass="jfx-button-long-text" text="Registro Deporte" />
                         <MFXButton fx:id="btnRegistroEquipo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegistroEquipo" prefHeight="50.0" styleClass="jfx-button-long-text" text="Registro Equipo" />
-                        <MFXButton fx:id="btnCrearTorneo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnCrearTorneo" prefHeight="50.0" styleClass="jfx-button-long-text" text="Crear Torneo" />
+                        <MFXButton fx:id="btnTorneos" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnTorneos" prefHeight="50.0" styleClass="jfx-button-long-text" text="Torneos" />
                   <Separator prefWidth="200.0" />
                         <VBox alignment="BOTTOM_CENTER" minHeight="-Infinity" prefHeight="298.0" prefWidth="122.0" spacing="10.0">
                             <children>
