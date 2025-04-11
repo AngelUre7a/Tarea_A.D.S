@@ -6,6 +6,7 @@ package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
+import cr.ac.una.tarea_a.d.s.model.Torneo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.repositories.EquipoRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
@@ -86,6 +87,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
         });//MANEJO TABLEVIEW
         colAgregar.setCellFactory(column -> new javafx.scene.control.TableCell<Equipo, String>() {
             private final MFXCheckbox btnAgregar = new MFXCheckbox("");
+
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
@@ -93,7 +95,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
                     setGraphic(null);
                 } else {
                     btnAgregar.setOnAction(event -> {
-                        
+
                     });
                     setGraphic(btnAgregar);
                 }
@@ -166,18 +168,62 @@ public class CreacionTorneoController extends Controller implements Initializabl
 
     @FXML
     private void onActionComboBoxDeportes(ActionEvent event) {
-        String deporteSeleccionado = ComboBoxDeportes.getValue().getNombre();
-        ObservableList<Equipo> equiposFiltrados = equiposLista.filtered(equipo -> equipo.getCategoria().equals(deporteSeleccionado));
+        Deporte deporteSeleccionado = ComboBoxDeportes.getValue();
+if (deporteSeleccionado == null) {
+    // Mostrás una alerta o simplemente salís del método
+    Alert alert = new Alert(Alert.AlertType.WARNING);
+    alert.setTitle("Advertencia");
+    alert.setHeaderText("Debe seleccionar un deporte.");
+    alert.setContentText("Por favor, seleccione un deporte antes de guardar el torneo.");
+    alert.showAndWait();
+    return;
+}
+        ObservableList<Equipo> equiposFiltrados = equiposLista.filtered(equipo -> equipo.getCategoria().equals(deporteSeleccionado.getNombre()));
         tableView.setItems(equiposFiltrados);
     }
 
     @FXML
-    private void onActionBtnActTabla(ActionEvent event) {
-        tableView.setItems(equiposLista);
+    private void onActionBtnJugarTorneo(ActionEvent event) {
     }
 
     @FXML
-    private void onActionBtnJugarTorneo(ActionEvent event) {
+    private void onActionBtnActTabla(ActionEvent event) {
+    }
+
+    @FXML
+    private void onActionBtnGuardarTorneo(ActionEvent event) {
+        String deporte = ComboBoxDeportes.getValue() != null ? ComboBoxDeportes.getValue().getNombre() : null;
+        String textCantidadEquipos = txtCantidadEquipos.getText();
+        String textTiempoPorPartida = txtTiempoPartido.getText();
+        if (deporte == null || textCantidadEquipos == null || textCantidadEquipos.isBlank() || textTiempoPorPartida == null || textTiempoPorPartida.isBlank()) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar un tipo de deporte, cantidad de equipos y tiempo de cada partido.");
+            return;
+
+        }
+        int cantidadEquipos = Integer.parseInt(txtCantidadEquipos.getText());
+        int tiempoPorPartida = Integer.parseInt(txtTiempoPartido.getText());
+        String id = java.util.UUID.randomUUID().toString();
+
+        Torneo torneo = new Torneo(id,deporte, cantidadEquipos, tiempoPorPartida);
+
+        AppContext.getInstance().set("TORNEO_NUEVO", torneo);
+        // Añadir el deporte a la lista global de deportes
+        if (!AppContext.getInstance().containsItem("LISTA_TORNEOS")) {
+            ObservableList<Torneo> listaTorneos = FXCollections.observableArrayList();
+            AppContext.getInstance().set("LISTA_TORNEOS", listaTorneos);
+        }
+
+        List<Torneo> torneos = (List<Torneo>) AppContext.getInstance().get("LISTA_TORNEOS");
+        ObservableList<Torneo> listaTorneos = FXCollections.observableArrayList(torneos);
+        listaTorneos.add(torneo);
+
+        new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "Torneo guardado correctamente");
+
+        txtCantidadEquipos.clear();
+        txtTiempoPartido.clear();
+        ComboBoxDeportes.setValue(null);
+        ((Stage) root.getScene().getWindow()).close();
+
     }
 
 }

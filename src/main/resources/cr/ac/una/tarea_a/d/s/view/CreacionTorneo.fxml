@@ -70,7 +70,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <MFXButton fx:id="btnJugarTorneo" alignment="CENTER" contentDisplay="CENTER" text="Guardar Torneo" />
+                  <MFXButton fx:id="btnJugarTorneo" alignment="CENTER" contentDisplay="CENTER" onAction="#onActionBtnGuardarTorneo" text="Guardar Torneo" />
                   <MFXButton fx:id="btnJugarTorneo" onAction="#onActionBtnJugarTorneo" text="Jugar Torneo" />
                </children>
             </HBox>

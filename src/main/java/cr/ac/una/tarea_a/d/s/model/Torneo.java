@@ -1,8 +1,10 @@
 package cr.ac.una.tarea_a.d.s.model;
 
 public class Torneo {
+
     private String id;
     private String tipoDeporte;
+    private String nombre;
     private int cantidadEquipos;
     private int tiempoPorPartida; // en minutos
 
@@ -49,11 +51,11 @@ public class Torneo {
 
     @Override
     public String toString() {
-        return "Torneo{" +
-                "id='" + id + '\'' +
-                ", tipoDeporte='" + tipoDeporte + '\'' +
-                ", cantidadEquipos=" + cantidadEquipos +
-                ", tiempoPorPartida=" + tiempoPorPartida +
-                '}';
+        return "Torneo{"
+                + "id='" + id + '\''
+                + ", tipoDeporte='" + tipoDeporte + '\''
+                + ", cantidadEquipos=" + cantidadEquipos
+                + ", tiempoPorPartida=" + tiempoPorPartida
+                + '}';
     }
 }
