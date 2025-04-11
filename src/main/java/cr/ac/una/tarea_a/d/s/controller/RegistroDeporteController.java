@@ -53,58 +53,6 @@ public class RegistroDeporteController extends Controller implements Initializab
     @Override
     public void initialize() {
     }
-//
-//    @FXML
-//    private void onActionBtnRegistrar(ActionEvent event) throws IOException {
-//           String nombre = txtNombreDeporte.getText();
-//    Image imagen = imageView.getImage();
-//
-//    if (nombre == null || nombre.isBlank() || imagen == null) {
-//        new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar un nombre y una imagen.");
-//        return;
-//    }
-//
-//    // Crear el nuevo deporte o actualizar el existente
-//    String id = java.util.UUID.randomUUID().toString(); // Genera un ID único si es nuevo
-//    Deporte deporte;
-//
-//    if (AppContext.getInstance().containsItem("DEPORTE_EDITAR")) {
-//        // Si es un deporte que se está editando, actualiza el objeto
-//        deporte = (Deporte) AppContext.getInstance().get("DEPORTE_EDITAR");
-//        deporte.setNombre(nombre);
-//        deporte.setImagen(imagen);
-//        AppContext.getInstance().delete("DEPORTE_EDITAR");  // Limpiar el contexto
-//    } else {
-//        // Si es un deporte nuevo, crea un objeto nuevo
-//        deporte = new Deporte(id, nombre, imagen, "balon");
-//    }
-//
-//    // Guardar el nuevo deporte en el AppContext
-//    AppContext.getInstance().set("DEPORTE_NUEVO", deporte);
-//
-//    // Añadir el deporte a la lista global de deportes
-//    if (!AppContext.getInstance().containsItem("LISTA_DEPORTES")) {
-//        // Si la lista no existe, crea una nueva y la guarda en AppContext
-//        ObservableList<Deporte> listaDeportes = FXCollections.observableArrayList();
-//        AppContext.getInstance().set("LISTA_DEPORTES", listaDeportes);
-//    }
-//
-//    // Recupera la lista y agrega el deporte registrado
-//    List<Deporte> deportes = (List<Deporte>) AppContext.getInstance().get("LISTA_DEPORTES");
-//    ObservableList<Deporte> listaDeportes = FXCollections.observableArrayList(deportes);
-//    listaDeportes.add(deporte);
-//
-//    // Mostrar mensaje de éxito
-//    new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "Deporte guardado correctamente");
-//
-//    // Limpiar los campos antes de cerrar la ventana
-//    txtNombreDeporte.clear();
-//    imageView.setImage(null);
-//
-//    // Cerrar la ventana actual
-//    ((Stage) root.getScene().getWindow()).close();
-//    }
-
     @FXML
     private void onActionBtnRegistrar(ActionEvent event) throws IOException {
         String nombre = txtNombreDeporte.getText();

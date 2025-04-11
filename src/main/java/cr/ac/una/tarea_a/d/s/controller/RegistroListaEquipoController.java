@@ -53,10 +53,9 @@ public class RegistroListaEquipoController extends Controller implements Initial
 
     private final ObservableList<Equipo> equiposLista = FXCollections.observableArrayList();
     private final EquipoRepository Equiporepo = new EquipoRepository();
-    
+
     @FXML
     private MFXButton btnActualizar;
-    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -102,7 +101,7 @@ public class RegistroListaEquipoController extends Controller implements Initial
                         try {
                             Equiporepo.deleteById(equipoSeleccionado.getId());
                         } catch (IOException ex) {
-                             new Mensaje().show(Alert.AlertType.ERROR, "Error al eliminar equipo", "No se pudo eliminar el equipo.");
+                            new Mensaje().show(Alert.AlertType.ERROR, "Error al eliminar equipo", "No se pudo eliminar el equipo.");
                         }
 //                        AppContext.getInstance().delete("EQUIPO_" + equipoSeleccionado.getId());
                         new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "El Equipo se ha eliminado correctamente.");
@@ -142,11 +141,15 @@ public class RegistroListaEquipoController extends Controller implements Initial
                 return equipo.getNombre().toLowerCase().contains(lowerCaseFilter);
             });
         });
-        
+
         try {
-            equiposLista.addAll(Equiporepo.findAll());
+            for (Equipo e : Equiporepo.findAll()) {
+                e.cargarImagenDesdeBase64(); // ← reconstruye la imagen en memoria
+                equiposLista.add(e);
+            }
+//            equiposLista.addAll(Equiporepo.findAll());
         } catch (IOException e) {
-            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar datos", "No se pudieron cargar los deportes.");
+            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar datos", "No se pudieron cargar los equipos.");
         }
 
         SortedList<Equipo> sortedData = new SortedList<>(filteredData);
@@ -167,7 +170,7 @@ public class RegistroListaEquipoController extends Controller implements Initial
             Equipo nuevo = (Equipo) AppContext.getInstance().get("EQUIPO_NUEVO");
             if (nuevo != null) {
                 Equiporepo.save(nuevo);
-    
+
                 equiposLista.add(nuevo);
                 AppContext.getInstance().delete("EQUIPO_NUEVO");
             }

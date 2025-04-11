@@ -58,7 +58,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         OpenCV.loadShared();
-        
+
         List<Deporte> deportes = null;
         try {
             DeporteRepository deporteRepo = new DeporteRepository();
@@ -112,6 +112,14 @@ public class RegistroEquipoController extends Controller implements Initializabl
             AppContext.getInstance().delete("EQUIPO_EDITAR");
         } else {
             equipo = new Equipo(id, nombre, imagen, Deporte);
+        }
+        String imageUrl = imagen.getUrl();
+        if (imageUrl != null && imageUrl.startsWith("file:/")) {
+            String imagePath = imageUrl.replace("file:/", "").replace("%20", " ");
+            File archivo = new File(imagePath);
+            if (archivo.exists()) {
+                equipo.cargarImagenComoBase64(archivo.getAbsolutePath());
+            }
         }
 
         AppContext.getInstance().set("EQUIPO_NUEVO", equipo);
