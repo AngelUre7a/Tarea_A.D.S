@@ -103,7 +103,6 @@ private void onActionBtnRegistrar(ActionEvent event) throws IOException {
     }
 
     new Mensaje().show(Alert.AlertType.INFORMATION, "Registro exitoso", "Deporte registrado correctamente.");
-
     AppContext.getInstance().delete("DEPORTE_EDITAR");
     deporte = null;
     esEdicion = false;

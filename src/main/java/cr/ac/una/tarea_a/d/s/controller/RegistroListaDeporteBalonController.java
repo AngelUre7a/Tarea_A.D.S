@@ -154,7 +154,6 @@ public class RegistroListaDeporteBalonController extends Controller implements I
             e.printStackTrace();
         }
     }
-    
 
     private void aplicarFiltro() {
         filterField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -178,42 +177,41 @@ public class RegistroListaDeporteBalonController extends Controller implements I
     }
 
     @Override
-    public void initialize() {}
-
-private void abrirFormularioNuevo() {
-    AppContext.getInstance().delete("DEPORTE_EDITAR");
-
-    FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
-    cargarFormulario();
-
-    if (AppContext.getInstance().containsItem("DEPORTE_EDITAR")) {
-        Deporte nuevo = (Deporte) AppContext.getInstance().get("DEPORTE_EDITAR");
-
-        try {
-            Deporterepo.save(nuevo);
-            nuevo.cargarImagenDesdeBase64();
-            deportesLista.add(nuevo);
-            tableView.refresh();
-            cargarFormulario();
-        } catch (IOException e) {
-            new Mensaje().show(Alert.AlertType.ERROR, "Error al guardar deporte", "No se pudo guardar el nuevo deporte.");
-        }
-
-        AppContext.getInstance().delete("DEPORTE_EDITAR");
+    public void initialize() {
     }
-}
 
+    private void abrirFormularioNuevo() {
+        AppContext.getInstance().delete("DEPORTE_EDITAR");
 
-private void abrirFormularioEditar(Deporte deporte) {
-    AppContext.getInstance().set("DEPORTE_EDITAR", deporte);
+        FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
+        cargarFormulario();
 
-    FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
+        if (AppContext.getInstance().containsItem("DEPORTE_EDITAR")) {
+            Deporte nuevo = (Deporte) AppContext.getInstance().get("DEPORTE_EDITAR");
+
+            try {
+                Deporterepo.save(nuevo);
+                nuevo.cargarImagenDesdeBase64();
+                deportesLista.add(nuevo);
+                tableView.refresh();
+                cargarFormulario();
+            } catch (IOException e) {
+                new Mensaje().show(Alert.AlertType.ERROR, "Error al guardar deporte", "No se pudo guardar el nuevo deporte.");
+            }
+
+            AppContext.getInstance().delete("DEPORTE_EDITAR");
+        }
+    }
+
+    private void abrirFormularioEditar(Deporte deporte) {
+        AppContext.getInstance().set("DEPORTE_EDITAR", deporte);
+
+        FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
         cargarFormulario();
 
         AppContext.getInstance().delete("DEPORTE_EDITAR");
-    
-}
 
+    }
 
     @FXML
     private void onActionBtnActualizar(ActionEvent event) {

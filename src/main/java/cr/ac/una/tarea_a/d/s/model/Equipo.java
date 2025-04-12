@@ -124,7 +124,6 @@ public class Equipo {
     private String imagenBase64;
 
     public Equipo() {
-        // Constructor vacío necesario para frameworks como Gson y JavaFX
     }
 
     // Constructor con imagen

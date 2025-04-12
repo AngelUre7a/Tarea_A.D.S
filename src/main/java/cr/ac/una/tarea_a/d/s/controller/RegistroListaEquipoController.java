@@ -1,6 +1,8 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
+import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
+import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.repositories.EquipoRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 import cr.ac.una.tarea_a.d.s.util.FlowController;
@@ -10,22 +12,21 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.stage.Stage;
 
 public class RegistroListaEquipoController extends Controller implements Initializable {
@@ -47,24 +48,25 @@ public class RegistroListaEquipoController extends Controller implements Initial
     @FXML
     private TableColumn<Equipo, Image> colImagen;
     @FXML
-    private TableColumn<Equipo, String> colEditar;
+    private TableColumn<Equipo, Void> colEditar;
     @FXML
-    private TableColumn<Equipo, String> colEliminar;
-
-    private final ObservableList<Equipo> equiposLista = FXCollections.observableArrayList();
-    private final EquipoRepository Equiporepo = new EquipoRepository();
-
+    private TableColumn<Equipo, Void> colEliminar;
     @FXML
     private MFXButton btnActualizar;
 
+    private final ObservableList<Deporte> deportesLista = FXCollections.observableArrayList();
+    private final DeporteRepository Deporterepo = new DeporteRepository();
+    private final ObservableList<Equipo> equiposLista = FXCollections.observableArrayList();
+    private final EquipoRepository Equiporepo = new EquipoRepository();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colDeporte.setCellValueFactory(new PropertyValueFactory<>("categoria"));
+        colDeporte.setCellValueFactory(new PropertyValueFactory<>("tipoDeporte"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colImagen.setCellValueFactory(new PropertyValueFactory<>("imagen"));
 
-        colImagen.setCellFactory(column -> new javafx.scene.control.TableCell<>() {
+        colImagen.setCellFactory(column -> new TableCell<>() {
             private final ImageView imageView = new ImageView();
 
             {
@@ -78,7 +80,6 @@ public class RegistroListaEquipoController extends Controller implements Initial
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setGraphic(null);
-                    System.out.println("No se cargo la imagen del equipo");
                 } else {
                     imageView.setImage(item);
                     setGraphic(imageView);
@@ -86,95 +87,132 @@ public class RegistroListaEquipoController extends Controller implements Initial
             }
         });
 
-        colEliminar.setCellFactory(column -> new javafx.scene.control.TableCell<Equipo, String>() {
-            private final MFXButton btnEliminar = new MFXButton("Eliminar");
-
-            @Override
-            protected void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    btnEliminar.setOnAction(event -> {
-                        Equipo equipoSeleccionado = getTableView().getItems().get(getIndex());
-                        equiposLista.remove(equipoSeleccionado);
-                        try {
-                            Equiporepo.deleteById(equipoSeleccionado.getId());
-                        } catch (IOException ex) {
-                            new Mensaje().show(Alert.AlertType.ERROR, "Error al eliminar equipo", "No se pudo eliminar el equipo.");
-                        }
-                        AppContext.getInstance().delete("EQUIPO_" + equipoSeleccionado.getId());
-                        new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "El Equipo se ha eliminado correctamente.");
-                    });
-                    setGraphic(btnEliminar);
-                }
-            }
-        });
-
-        colEditar.setCellFactory(column -> new javafx.scene.control.TableCell<Equipo, String>() {
+        colEditar.setCellFactory(param -> new TableCell<>() {
             private final MFXButton btnEditar = new MFXButton("Editar");
 
+            {
+                btnEditar.setOnAction(event -> {
+                    Equipo equipo = getTableView().getItems().get(getIndex());
+                    abrirFormularioEditar(equipo);
+                });
+            }
+
             @Override
-            protected void updateItem(String item, boolean empty) {
+            protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    btnEditar.setOnAction(event -> {
-                        Equipo equipoSeleccionado = getTableView().getItems().get(getIndex());
-                        AppContext.getInstance().set("EQUIPO_EDITAR", equipoSeleccionado);
-                        FlowController.getInstance().goViewInWindowModal("RegistroEquipo", ((Stage) root.getScene().getWindow()), false);
-                    });
                     setGraphic(btnEditar);
                 }
             }
         });
 
-        FilteredList<Equipo> filteredData = new FilteredList<>(equiposLista, b -> true);
+        colEliminar.setCellFactory(param -> new TableCell<>() {
+            private final MFXButton btnEliminar = new MFXButton("Eliminar");
 
-        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(equipo -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
+            {
+                btnEliminar.setOnAction(event -> {
+                    Equipo equipo = getTableView().getItems().get(getIndex());
+
+                    if (new Mensaje().showConfirmation("Confirmación", "¿Está seguro de eliminar el equipo?")) {
+                        try {
+                            Equiporepo.deleteById(equipo.getId());
+                        } catch (IOException ex) {
+                            Logger.getLogger(RegistroListaEquipoController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        equiposLista.remove(equipo);
+                        tableView.refresh();
+                    }
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(btnEliminar);
                 }
-                String lowerCaseFilter = newValue.toLowerCase();
-                return equipo.getNombre().toLowerCase().contains(lowerCaseFilter);
-            });
+            }
         });
 
+        cargarFormulario();
+        aplicarFiltro();
+
+    }
+
+    private void cargarFormulario() {
         try {
+            equiposLista.clear();
             for (Equipo e : Equiporepo.findAll()) {
-                e.cargarImagenDesdeBase64(); // ← reconstruye la imagen en memoria
+                e.cargarImagenDesdeBase64();
                 equiposLista.add(e);
             }
-           equiposLista.addAll(Equiporepo.findAll());
+            tableView.setItems(equiposLista);
+            tableView.refresh();
         } catch (IOException e) {
-            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar datos", "No se pudieron cargar los equipos.");
+            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar equipos", "No se pudo cargar la lista de equipos.");
+            e.printStackTrace();
         }
+    }
 
-        SortedList<Equipo> sortedData = new SortedList<>(filteredData);
-        sortedData.comparatorProperty().bind(tableView.comparatorProperty());
+    private void aplicarFiltro() {
+        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null || newValue.isBlank()) {
+                tableView.setItems(equiposLista);
+            } else {
+                ObservableList<Equipo> filteredList = FXCollections.observableArrayList();
+                for (Equipo equipo : equiposLista) {
+                    if (equipo.getNombre().toLowerCase().contains(newValue.toLowerCase())) {
+                        filteredList.add(equipo);
+                    }
+                }
+                tableView.setItems(filteredList);
+            }
+        });
+    }
 
-        tableView.setItems(sortedData);
+    @FXML
+    private void onActionBtnAgregar(ActionEvent event) {
+        abrirFormularioNuevo();
     }
 
     @Override
     public void initialize() {
     }
 
-    @FXML
-    private void onActionBtnAgregar(ActionEvent event) throws IOException {
+    private void abrirFormularioNuevo() {
+        AppContext.getInstance().delete("EQUIPO_EDITAR");
+
         FlowController.getInstance().goViewInWindowModal("RegistroEquipo", ((Stage) root.getScene().getWindow()), false);
+        cargarFormulario();
 
-        if (AppContext.getInstance().containsItem("EQUIPO_NUEVO")) {
-            Equipo nuevo = (Equipo) AppContext.getInstance().get("EQUIPO_NUEVO");
-            if (nuevo != null) {
+        if (AppContext.getInstance().containsItem("EQUIPO_EDITAR")) {
+            Equipo nuevo = (Equipo) AppContext.getInstance().get("EQUIPO_EDITAR");
+
+            try {
                 Equiporepo.save(nuevo);
-
+                nuevo.cargarImagenDesdeBase64();
                 equiposLista.add(nuevo);
-                AppContext.getInstance().delete("EQUIPO_NUEVO");
+                tableView.refresh();
+                cargarFormulario();
+            } catch (IOException e) {
+                new Mensaje().show(Alert.AlertType.ERROR, "Error al guardar equipo", "No se pudo guardar el nuevo equipo.");
             }
+
+            AppContext.getInstance().delete("EQUIPO_EDITAR");
         }
+    }
+
+    private void abrirFormularioEditar(Equipo equipo) {
+        AppContext.getInstance().set("EQUIPO_EDITAR", equipo);
+
+        FlowController.getInstance().goViewInWindowModal("RegistroEquipo", ((Stage) root.getScene().getWindow()), false);
+        cargarFormulario();
+
+        AppContext.getInstance().delete("EQUIPO_EDITAR");
     }
 
     @FXML

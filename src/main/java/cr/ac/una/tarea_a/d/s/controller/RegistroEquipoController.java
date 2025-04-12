@@ -3,6 +3,7 @@ package cr.ac.una.tarea_a.d.s.controller;
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
+import cr.ac.una.tarea_a.d.s.repositories.EquipoRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 import cr.ac.una.tarea_a.d.s.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -10,7 +11,6 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -44,10 +44,6 @@ public class RegistroEquipoController extends Controller implements Initializabl
     private MFXButton btnCargarImagen;
     @FXML
     private ImageView ImageView;
-
-    private VideoCapture capture;
-    private boolean isCameraRunning = false;
-
     @FXML
     private AnchorPane root;
     @FXML
@@ -55,11 +51,27 @@ public class RegistroEquipoController extends Controller implements Initializabl
     @FXML
     private ComboBox<Deporte> ComboBoxDeportes;
 
+    private VideoCapture capture;
+    private boolean isCameraRunning = false;
+
+    private Equipo equipo;
+    private boolean esEdicion = false;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        limpiarFormulario();
+
         OpenCV.loadShared();
 
         List<Deporte> deportes = null;
+
+        if (AppContext.getInstance().hasValue("EQUIPO_EDITAR")) {
+            equipo = (Equipo) AppContext.getInstance().get("EQUIPO_EDITAR");
+            txtNombreEquipo.setText(equipo.getNombre());
+            ImageView.setImage(equipo.getImagen());
+            esEdicion = true;
+        }
+        
         try {
             DeporteRepository deporteRepo = new DeporteRepository();
             deportes = deporteRepo.findAll(); // carga desde el JSON
@@ -94,35 +106,37 @@ public class RegistroEquipoController extends Controller implements Initializabl
     private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
         String nombre = txtNombreEquipo.getText();
         Image imagen = ImageView.getImage();
-        String Deporte = ComboBoxDeportes.getValue() != null ? ComboBoxDeportes.getValue().getNombre() : null;
+        String deporte = ComboBoxDeportes.getValue() != null ? ComboBoxDeportes.getValue().getNombre() : null;
 
-        if (nombre == null || nombre.isBlank() || imagen == null || Deporte == null) {
+        if (nombre == null || nombre.isBlank() || imagen == null || deporte == null) {
             new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar un nombre, una imagen y un tipo de deporte.");
             return;
         }
 
-        String id = java.util.UUID.randomUUID().toString();
-        Equipo equipo;
+        EquipoRepository equipoRepo = new EquipoRepository();
 
-        if (AppContext.getInstance().containsItem("EQUIPO_EDITAR")) {
+        if (esEdicion && equipo != null) {
             equipo = (Equipo) AppContext.getInstance().get("EQUIPO_EDITAR");
             equipo.setNombre(nombre);
             equipo.setImagen(imagen);
-            equipo.setTipoDeporte(Deporte);
-            AppContext.getInstance().delete("EQUIPO_EDITAR");
+            equipo.setTipoDeporte(deporte);
+            equipoRepo.save(equipo);
         } else {
-            equipo = new Equipo(id, nombre, imagen, Deporte);
+
+            String id = java.util.UUID.randomUUID().toString();
+            equipo = new Equipo(id, nombre, imagen, deporte);
+            equipoRepo.save(equipo);
+            limpiarFormulario();
         }
 
-        AppContext.getInstance().set("EQUIPO_NUEVO", equipo);
-        new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "Equipo guardado correctamente");
-
-        txtNombreEquipo.clear();
-        ImageView.setImage(null);
-        ComboBoxDeportes.setValue(null);
+        new Mensaje().show(Alert.AlertType.INFORMATION, "Registro exitoso", "Equipo registrado correctamente.");
+        AppContext.getInstance().delete("EQUIPO_EDITAR");
+        equipo = null;
+        esEdicion = false;
 
         cerrarCamara(); // cerrar la cámara antes de cerrar la ventana
-        ((Stage) root.getScene().getWindow()).close();
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
@@ -217,5 +231,14 @@ public class RegistroEquipoController extends Controller implements Initializabl
             System.out.println("Cámara cerrada");
         }
     }
+
+    private void limpiarFormulario() {
+        txtNombreEquipo.clear();
+        ImageView.setImage(null);
+        ComboBoxDeportes.setValue(null);
+        equipo = null;
+        esEdicion = false;
+    }
+
 
 }
