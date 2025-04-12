@@ -103,7 +103,7 @@ public class RegistroListaEquipoController extends Controller implements Initial
                         } catch (IOException ex) {
                             new Mensaje().show(Alert.AlertType.ERROR, "Error al eliminar equipo", "No se pudo eliminar el equipo.");
                         }
-//                        AppContext.getInstance().delete("EQUIPO_" + equipoSeleccionado.getId());
+                        AppContext.getInstance().delete("EQUIPO_" + equipoSeleccionado.getId());
                         new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "El Equipo se ha eliminado correctamente.");
                     });
                     setGraphic(btnEliminar);
@@ -147,7 +147,7 @@ public class RegistroListaEquipoController extends Controller implements Initial
                 e.cargarImagenDesdeBase64(); // ← reconstruye la imagen en memoria
                 equiposLista.add(e);
             }
-//            equiposLista.addAll(Equiporepo.findAll());
+           equiposLista.addAll(Equiporepo.findAll());
         } catch (IOException e) {
             new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar datos", "No se pudieron cargar los equipos.");
         }

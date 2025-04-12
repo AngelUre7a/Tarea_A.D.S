@@ -9,10 +9,7 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -36,98 +33,21 @@ public class RegistroDeporteController extends Controller implements Initializab
     @FXML
     private AnchorPane root;
 
+    private Deporte deporte;
+    private boolean esEdicion = false;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Limpiar los campos de texto y la imagen
-        txtNombreDeporte.clear();
-        imageView.setImage(null);
+        limpiarFormulario();
 
-        // Verificar si hay un deporte para editar
-        if (AppContext.getInstance().containsItem("DEPORTE_EDITAR")) {
-            Deporte deporte = (Deporte) AppContext.getInstance().get("DEPORTE_EDITAR");
-            txtNombreDeporte.setText(deporte.getNombre());  // Cargar nombre
-            imageView.setImage(deporte.getImagen());         // Cargar imagen
-        }
-        DragAndDropForImageView();  // Restablecer la funcionalidad de drag-and-drop
-    }
-
-    @Override
-    public void initialize() {
-    }
-
-    @FXML
-    private void onActionBtnRegistrar(ActionEvent event) throws IOException {
-        String nombre = txtNombreDeporte.getText();
-        Image imagen = imageView.getImage();
-
-        if (nombre == null || nombre.isBlank() || imagen == null) {
-            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar un nombre y una imagen.");
-            return;
-        }
-
-        // Crear el nuevo deporte o actualizar el existente
-        String id = java.util.UUID.randomUUID().toString(); // Genera un ID único si es nuevo
-        Deporte deporte;
-        DeporteRepository repo = new DeporteRepository();
-
-        if (AppContext.getInstance().containsItem("DEPORTE_EDITAR")) {
+        if (AppContext.getInstance().hasValue("DEPORTE_EDITAR")) {
             deporte = (Deporte) AppContext.getInstance().get("DEPORTE_EDITAR");
-            deporte.setNombre(nombre);
-            deporte.setImagen(imagen);
-            repo.save(deporte); // ← GUARDAR CAMBIOS EN JSON
-            AppContext.getInstance().delete("DEPORTE_EDITAR");
-        } else {
-            deporte = new Deporte(id, nombre, imagen);
-            repo.save(deporte); // ← GUARDAR NUEVO DEPORTE
+            txtNombreDeporte.setText(deporte.getNombre());
+            imageView.setImage(deporte.getImagen());
+            esEdicion = true;
         }
 
-//        if (AppContext.getInstance().containsItem("DEPORTE_EDITAR")) {
-//            // Si es un deporte que se está editando, actualiza el objeto
-//            deporte = (Deporte) AppContext.getInstance().get("DEPORTE_EDITAR");
-//            deporte.setNombre(nombre);
-//            deporte.setImagen(imagen);
-//            AppContext.getInstance().delete("DEPORTE_EDITAR");  // Limpiar el contexto
-//        } else {
-//            // Si es un deporte nuevo, crea un objeto nuevo
-//            deporte = new Deporte(id, nombre, imagen);
-//        }
-        // Guardar el nuevo deporte en el AppContext
-        AppContext.getInstance().set("DEPORTE_NUEVO", deporte);
-
-        // Añadir el deporte a la lista global de deportes
-        if (!AppContext.getInstance().containsItem("LISTA_DEPORTES")) {
-            ObservableList<Deporte> listaDeportes = FXCollections.observableArrayList();
-            AppContext.getInstance().set("LISTA_DEPORTES", listaDeportes);
-        }
-
-        List<Deporte> deportes = (List<Deporte>) AppContext.getInstance().get("LISTA_DEPORTES");
-//        ObservableList<Deporte> listaDeportes = FXCollections.observableArrayList(deportes);
-//        listaDeportes.add(deporte);
-        ObservableList<Deporte> listaDeportes = FXCollections.observableArrayList(deportes);
-        if (!listaDeportes.contains(deporte)) {
-            listaDeportes.add(deporte);
-        }
-
-        new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "Deporte guardado correctamente");
-
-        txtNombreDeporte.clear();
-        imageView.setImage(null);
-
-        ((Stage) root.getScene().getWindow()).close();
-    }
-
-    @FXML
-    private void onActionBtnCargarImagen(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imagenes", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp"));
-
-        File archivoSeleccionado = fileChooser.showOpenDialog(null);
-
-        if (archivoSeleccionado != null) {
-            Image imagen = new Image(archivoSeleccionado.toURI().toString());
-
-            imageView.setImage(imagen);
-        }
+        DragAndDropForImageView();
     }
 
     private void DragAndDropForImageView() {
@@ -155,9 +75,65 @@ public class RegistroDeporteController extends Controller implements Initializab
             }
             event.setDropCompleted(success);
             event.consume();
-
         });
+    }
+    
+@FXML
+private void onActionBtnRegistrar(ActionEvent event) throws IOException {
+    String nombre = txtNombreDeporte.getText();
+    Image imagen = imageView.getImage();
 
+    if (nombre.isEmpty() || imagen == null) {
+        new Mensaje().show(Alert.AlertType.WARNING, "Campos vacíos", "Por favor, complete todos los campos.");
+        return;
     }
 
+    DeporteRepository deporteRepo = new DeporteRepository();
+
+    if (esEdicion && deporte != null) {
+        deporte.setNombre(nombre);
+        deporte.setImagen(imagen);
+        deporteRepo.save(deporte);
+        limpiarFormulario(); 
+    } else {
+        String id = java.util.UUID.randomUUID().toString();
+        deporte = new Deporte(id, nombre, imagen);
+        deporteRepo.save(deporte);
+        limpiarFormulario();  
+    }
+
+    new Mensaje().show(Alert.AlertType.INFORMATION, "Registro exitoso", "Deporte registrado correctamente.");
+
+    AppContext.getInstance().delete("DEPORTE_EDITAR");
+    deporte = null;
+    esEdicion = false;
+
+    Stage stage = (Stage) root.getScene().getWindow();
+    stage.close();
+}
+
+
+    @FXML
+    private void onActionBtnCargarImagen(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp"));
+
+        File archivoSeleccionado = fileChooser.showOpenDialog(null);
+
+        if (archivoSeleccionado != null) {
+            Image imagen = new Image(archivoSeleccionado.toURI().toString());
+            imageView.setImage(imagen);
+        }
+    }
+
+    @Override
+    public void initialize() {
+    }
+
+    private void limpiarFormulario() {
+        txtNombreDeporte.clear();
+        imageView.setImage(null);
+        deporte = null;
+        esEdicion = false;
+    }
 }

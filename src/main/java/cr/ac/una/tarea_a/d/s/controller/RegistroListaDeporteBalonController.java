@@ -5,7 +5,6 @@ import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.repositories.EquipoRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
-
 import cr.ac.una.tarea_a.d.s.util.FlowController;
 import cr.ac.una.tarea_a.d.s.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -13,10 +12,10 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,15 +23,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.TableCell;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
 
 public class RegistroListaDeporteBalonController extends Controller implements Initializable {
 
-    @FXML
-    private AnchorPane root;
     @FXML
     private MFXTextField filterField;
     @FXML
@@ -44,20 +43,20 @@ public class RegistroListaDeporteBalonController extends Controller implements I
     @FXML
     private TableColumn<Deporte, Image> colImagen;
     @FXML
-    private TableColumn<Deporte, String> colEditar;
+    private TableColumn<Deporte, Void> colEditar;
     @FXML
-    private TableColumn<Deporte, String> colEliminar;
-
-    private final ObservableList<Deporte> deportesLista = FXCollections.observableArrayList();
-    private final DeporteRepository Deporterepo = new DeporteRepository();
-
-    private final ObservableList<Equipo> equiposLista = FXCollections.observableArrayList();
-    private final EquipoRepository Equiporepo = new EquipoRepository();
-
+    private TableColumn<Deporte, Void> colEliminar;
     @FXML
     private MFXButton btnAgregar;
     @FXML
     private MFXButton btnActualizar;
+    @FXML
+    private AnchorPane root;
+
+    private final ObservableList<Deporte> deportesLista = FXCollections.observableArrayList();
+    private final DeporteRepository Deporterepo = new DeporteRepository();
+    private final ObservableList<Equipo> equiposLista = FXCollections.observableArrayList();
+    private final EquipoRepository Equiporepo = new EquipoRepository();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -65,7 +64,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colImagen.setCellValueFactory(new PropertyValueFactory<>("imagen"));
 
-        colImagen.setCellFactory(column -> new javafx.scene.control.TableCell<>() {
+        colImagen.setCellFactory(column -> new TableCell<>() {
             private final ImageView imageView = new ImageView();
 
             {
@@ -79,165 +78,145 @@ public class RegistroListaDeporteBalonController extends Controller implements I
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setGraphic(null);
-//                    System.out.println("No se cargo la imagen");
                 } else {
                     imageView.setImage(item);
                     setGraphic(imageView);
                 }
             }
         });
-        try {
-            equiposLista.addAll(Equiporepo.findAll());
-        } catch (IOException e) {
-            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar equipos", "No se pudieron cargar los equipos.");
-        }
-        //configuracion boton de eliminar
-        colEliminar.setCellFactory(column -> new javafx.scene.control.TableCell<Deporte, String>() {
-            private final MFXButton btnEliminar = new MFXButton("Eliminar");
 
-            @Override
-            protected void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    btnEliminar.setOnAction(event -> {
-                        Deporte deporteSeleccionado = getTableView().getItems().get(getIndex());
-                        String nombreDeporte = deporteSeleccionado.getNombre();
-
-                        boolean tieneEquiposAsociados = equiposLista.stream()
-                                .anyMatch(equipo -> equipo.getTipoDeporte().equals(nombreDeporte));
-
-                        if (tieneEquiposAsociados) {
-                            new Mensaje().show(Alert.AlertType.ERROR, "Error al eliminar deporte", "No se puede eliminar el deporte porque tiene equipos asociados.");
-                        } else {
-                            // Eliminar de la lista observable (UI)
-                            deportesLista.remove(deporteSeleccionado);
-
-                            // Eliminar del repositorio (persistencia)
-                            try {
-                                Deporterepo.deleteById(deporteSeleccionado.getId());
-                            } catch (IOException e) {
-                                new Mensaje().show(Alert.AlertType.ERROR, "Error al eliminar deporte", "No se pudo eliminar el deporte.");
-                                return;
-                            }
-
-                            // Mensaje de éxito
-                            new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "El deporte se ha eliminado correctamente.");
-                        }
-                    });
-                    setGraphic(btnEliminar);
-                }
-            }
-        });
-        // Configuracion del botón de editar para cada fila
-        colEditar.setCellFactory(column -> new javafx.scene.control.TableCell<Deporte, String>() {
+        colEditar.setCellFactory(param -> new TableCell<>() {
             private final MFXButton btnEditar = new MFXButton("Editar");
 
+            {
+                btnEditar.setOnAction(event -> {
+                    Deporte deporte = getTableView().getItems().get(getIndex());
+                    abrirFormularioEditar(deporte);
+                });
+            }
+
             @Override
-            protected void updateItem(String item, boolean empty) {
+            protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    btnEditar.setOnAction(event -> {
-                        // Obtener el deporte seleccionado
-                        Deporte deporteSeleccionado = getTableView().getItems().get(getIndex());
-
-                        // Guardar el deporte seleccionado en el AppContext para cargarlo en el formulario de registro
-                        AppContext.getInstance().set("DEPORTE_EDITAR", deporteSeleccionado);
-
-                        // Abre la ventana de registro para editar
-                        FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
-                        if (AppContext.getInstance().containsItem("DEPORTE_EDITAR")) {
-                            Deporte actualizado = (Deporte) AppContext.getInstance().get("DEPORTE_EDITAR");
-
-                            try {
-                                Deporterepo.save(actualizado);
-                            } catch (IOException e) {
-                                new Mensaje().show(Alert.AlertType.ERROR, "Error", "No se pudo guardar el deporte editado.");
-                            }
-
-                            int index = deportesLista.indexOf(actualizado);
-                            if (index >= 0) {
-                                deportesLista.set(index, actualizado);
-                            }
-                            AppContext.getInstance().delete("DEPORTE_EDITAR");
-                            tableView.refresh();
-                        }
-
-                    });
                     setGraphic(btnEditar);
                 }
             }
         });
 
-//        try {
-//            deportesLista.addAll(Deporterepo.findAll());
-//        } catch (IOException e) {
-//            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar datos", "No se pudieron cargar los deportes.");
-//        }
-        try {
-            for (Deporte d : Deporterepo.findAll()) {
-                d.cargarImagenDesdeBase64(); // ← Aquí reconstruimos la imagen
-                deportesLista.add(d);
+        colEliminar.setCellFactory(param -> new TableCell<>() {
+            private final MFXButton btnEliminar = new MFXButton("Eliminar");
+
+            {
+                btnEliminar.setOnAction(event -> {
+                    Deporte deporte = getTableView().getItems().get(getIndex());
+
+                    if (new Mensaje().showConfirmation("Confirmación", "¿Está seguro de eliminar el deporte?")) {
+                        try {
+                            Deporterepo.deleteById(deporte.getId());
+                        } catch (IOException ex) {
+                            Logger.getLogger(RegistroListaDeporteBalonController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        deportesLista.remove(deporte);
+                        tableView.refresh();
+                    }
+                });
             }
-        } catch (IOException e) {
-            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar datos", "No se pudieron cargar los deportes.");
-        }
 
-        FilteredList<Deporte> filteredData = new FilteredList<>(deportesLista, b -> true);
-
-        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(Deporte -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-
-                String lowerCaseFilter = newValue.toLowerCase();
-
-                if (Deporte.getNombre().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-                    return true;
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
                 } else {
-                    return false;
+                    setGraphic(btnEliminar);
                 }
-            });
+            }
         });
 
-        SortedList<Deporte> sortedData = new SortedList<>(filteredData);
+        cargarFormulario();
+        aplicarFiltro();
+    }
 
-        sortedData.comparatorProperty().bind(tableView.comparatorProperty());
+    private void cargarFormulario() {
+        try {
+            deportesLista.clear();
+            for (Deporte d : Deporterepo.findAll()) {
+                d.cargarImagenDesdeBase64();
+                deportesLista.add(d);
+            }
+            tableView.setItems(deportesLista);
+            tableView.refresh();
+        } catch (IOException e) {
+            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar deportes", "No se pudo cargar la lista de deportes.");
+            e.printStackTrace();
+        }
+    }
+    
 
-        tableView.setItems(deportesLista);
+    private void aplicarFiltro() {
+        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null || newValue.isBlank()) {
+                tableView.setItems(deportesLista);
+            } else {
+                ObservableList<Deporte> filteredList = FXCollections.observableArrayList();
+                for (Deporte deporte : deportesLista) {
+                    if (deporte.getNombre().toLowerCase().contains(newValue.toLowerCase())) {
+                        filteredList.add(deporte);
+                    }
+                }
+                tableView.setItems(filteredList);
+            }
+        });
+    }
+
+    @FXML
+    private void onActionBtnAgregar(ActionEvent event) {
+        abrirFormularioNuevo();
     }
 
     @Override
-    public void initialize() {
-    }
+    public void initialize() {}
 
-    @FXML
-    private void onActionBtnAgregar(ActionEvent event) throws IOException {
-        FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
-        // Verificar si hay un nuevo deporte creado
-        if (AppContext.getInstance().containsItem("DEPORTE_NUEVO")) {
-            // Obtener el nuevo deporte desde el AppContext
+private void abrirFormularioNuevo() {
+    AppContext.getInstance().delete("DEPORTE_EDITAR");
 
-            Deporte nuevo = (Deporte) AppContext.getInstance().get("DEPORTE_NUEVO");
-            // Asegúrate de que la lista no se reinicie al agregar
-            if (nuevo != null) {
-                // Guardar el nuevo deporte en el repositorio
-                Deporterepo.save(nuevo);
+    FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
+    cargarFormulario();
 
-                // Agregar el nuevo deporte a la lista sin eliminar los anteriores
-                deportesLista.add(nuevo);
-                AppContext.getInstance().delete("DEPORTE_NUEVO"); // Limpiar el contexto
-            }
+    if (AppContext.getInstance().containsItem("DEPORTE_EDITAR")) {
+        Deporte nuevo = (Deporte) AppContext.getInstance().get("DEPORTE_EDITAR");
+
+        try {
+            Deporterepo.save(nuevo);
+            nuevo.cargarImagenDesdeBase64();
+            deportesLista.add(nuevo);
+            tableView.refresh();
+            cargarFormulario();
+        } catch (IOException e) {
+            new Mensaje().show(Alert.AlertType.ERROR, "Error al guardar deporte", "No se pudo guardar el nuevo deporte.");
         }
+
+        AppContext.getInstance().delete("DEPORTE_EDITAR");
     }
+}
+
+
+private void abrirFormularioEditar(Deporte deporte) {
+    AppContext.getInstance().set("DEPORTE_EDITAR", deporte);
+
+    FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
+        cargarFormulario();
+
+        AppContext.getInstance().delete("DEPORTE_EDITAR");
+    
+}
+
 
     @FXML
     private void onActionBtnActualizar(ActionEvent event) {
-        tableView.refresh();
+        cargarFormulario();
     }
-
 }

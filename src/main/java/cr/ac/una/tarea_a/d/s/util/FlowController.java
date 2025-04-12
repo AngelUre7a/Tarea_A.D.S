@@ -106,12 +106,12 @@ public class FlowController {
         }
         switch (location) {
             case "Center":
-                
+
                 BorderPane borderPane = (BorderPane) stage.getScene().getRoot();
-                VBox vBox = (VBox)borderPane.getCenter();
+                VBox vBox = (VBox) borderPane.getCenter();
                 vBox.getChildren().clear();
                 vBox.getChildren().add(loader.getRoot());
-                        
+
                 /*VBox vBox = ((VBox) ((BorderPane) stage.getScene().getRoot()).getCenter());
                 vBox.getChildren().clear();
                 vBox.getChildren().add(loader.getRoot());*/
@@ -135,65 +135,74 @@ public class FlowController {
         controller.setStage(stage);
         stage.getScene().setRoot(loader.getRoot());
         MFXThemeManager.addOn(stage.getScene(), Themes.DEFAULT, Themes.LEGACY);
-        
+
     }
 
     public void goViewInWindow(String viewName) {
-        FXMLLoader loader = getLoader(viewName);
-        Controller controller = loader.getController();
-        controller.initialize();
-        Stage stage = new Stage();
-        stage.getIcons().add(new Image("cr/ac/una/tarea_a/d/s/resources/Logo-Principal-View.png"));
-        stage.setTitle(controller.getNombreVista());
-        stage.setOnHidden((WindowEvent event) -> {
-            controller.getStage().getScene().setRoot(new Pane());
-            controller.setStage(null);
-        });
-        controller.setStage(stage);
-        Parent root = loader.getRoot();
-        Scene scene = new Scene(root);
-        MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
-        stage.setScene(scene);
-        stage.centerOnScreen();
-        stage.show();
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("view/" + viewName + ".fxml"), this.idioma);
+            Parent root = loader.load();
+            Controller controller = loader.getController();
+            controller.initialize();
+
+            Stage stage = new Stage();
+            stage.getIcons().add(new Image("cr/ac/una/tarea_a/d/s/resources/Logo-Principal-View.png"));
+            stage.setTitle(controller.getNombreVista());
+            stage.setOnHidden((WindowEvent event) -> {
+                controller.getStage().getScene().setRoot(new Pane());
+                controller.setStage(null);
+            });
+            controller.setStage(stage);
+            Scene scene = new Scene(root);
+            MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Error al abrir la vista en ventana.", ex);
+        }
     }
 
     public void goViewInWindowModal(String viewName, Stage parentStage, Boolean resizable) {
-        FXMLLoader loader = getLoader(viewName);
-        Controller controller = loader.getController();
-        controller.initialize();
-        Stage stage = new Stage();
-        stage.getIcons().add(new Image("cr/ac/una/tarea_a/d/s/resources/Logo-Principal-View.png"));
-        stage.setTitle(controller.getNombreVista());
-        stage.setResizable(resizable);
-        stage.setOnHidden((WindowEvent event) -> {
-            controller.getStage().getScene().setRoot(new Pane());
-            controller.setStage(null);
-        });
-        controller.setStage(stage);
-        Parent root = loader.getRoot();
-        Scene scene = new Scene(root);
-        MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
-        stage.setScene(scene);
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner(parentStage);
-        stage.centerOnScreen();
-        stage.showAndWait();
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("view/" + viewName + ".fxml"), this.idioma);
+            Parent root = loader.load();
+            Controller controller = loader.getController();
+            controller.initialize();
 
+            Stage stage = new Stage();
+            stage.getIcons().add(new Image("cr/ac/una/tarea_a/d/s/resources/Logo-Principal-View.png"));
+            stage.setTitle(controller.getNombreVista());
+            stage.setResizable(resizable);
+            stage.setOnHidden((WindowEvent event) -> {
+                controller.getStage().getScene().setRoot(new Pane());
+                controller.setStage(null);
+            });
+            controller.setStage(stage);
+            Scene scene = new Scene(root);
+            MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
+            stage.setScene(scene);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(parentStage);
+            stage.centerOnScreen();
+            stage.showAndWait();
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Error al abrir la vista modal.", ex);
+        }
     }
 
     public Controller getController(String viewName) {
         return getLoader(viewName).getController();
     }
-    
-    public void limpiarLoader(String view){
+
+    public void limpiarLoader(String view) {
         this.loaders.remove(view);
     }
 
     public static void setIdioma(ResourceBundle idioma) {
         FlowController.idioma = idioma;
     }
-    
+
     public void initialize() {
         this.loaders.clear();
     }

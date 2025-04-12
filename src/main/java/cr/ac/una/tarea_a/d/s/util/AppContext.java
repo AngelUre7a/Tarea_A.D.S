@@ -5,12 +5,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Properties;
 
-
 public class AppContext {
 
     private static AppContext INSTANCE = null;
-    private static HashMap<String, Object> context = new HashMap<>();
-     
+    private final HashMap<String, Object> context = new HashMap<>();
+
     private AppContext() {
         //cargarPropiedades();
     }
@@ -31,20 +30,19 @@ public class AppContext {
         }
         return INSTANCE;
     }
-    
-    private void cargarPropiedades(){
+
+    private void cargarPropiedades() {
         try {
-            FileInputStream configFile;
-            configFile = new FileInputStream("config/properties.ini");
+            FileInputStream configFile = new FileInputStream("config/properties.ini");
             Properties appProperties = new Properties();
             appProperties.load(configFile);
             configFile.close();
-//            if (appProperties.getProperty("propiedades.rutalog") != null) {
-//                this.set("rutalog",appProperties.getProperty("propiedades.rutalog"));
-//            }
-//            if (appProperties.getProperty("propiedades.resturl") != null) {
-//                this.set("resturl",appProperties.getProperty("propiedades.resturl"));
-  //          }
+
+            // Ejemplo para cargar propiedades si fueran necesarias
+            // if (appProperties.getProperty("propiedades.rutalog") != null) {
+            //     this.set("rutalog", appProperties.getProperty("propiedades.rutalog"));
+            // }
+
         } catch (IOException io) {
             System.out.println("Archivo de configuración no encontrado.");
         }
@@ -55,7 +53,7 @@ public class AppContext {
         throw new CloneNotSupportedException();
     }
 
-    public Object get(String parameter){    
+    public Object get(String parameter) {
         return context.get(parameter);
     }
 
@@ -64,10 +62,20 @@ public class AppContext {
     }
 
     public void delete(String parameter) {
-        context.put(parameter, null);
+        context.remove(parameter);
     }
-    //
+
     public boolean containsItem(String name) {
         return context.containsKey(name);
+    }
+
+    public boolean hasValue(String key) {
+        return context.containsKey(key) && context.get(key) != null;
+    }
+
+
+
+    public HashMap<String, Object> getData() {
+        return context;
     }
 }
