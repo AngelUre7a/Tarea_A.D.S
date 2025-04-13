@@ -112,15 +112,30 @@ public class RegistroListaDeporteBalonController extends Controller implements I
             {
                 btnEliminar.setOnAction(event -> {
                     Deporte deporte = getTableView().getItems().get(getIndex());
+                    String nombreDeporte = deporte.getNombre();
+                    System.out.println("Nombre del deporte a eliminar: " + nombreDeporte);
+                    
+                    try {
+                        equiposLista.clear();
+                        equiposLista.addAll(Equiporepo.findAll());
+                    } catch (IOException e) {
+                        new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar equipos", "No se pudo cargar la lista de equipos.");
+                        e.printStackTrace();
+                    }
+                    boolean siTieneEquiposAsociados = equiposLista.stream().anyMatch(equipo -> equipo.getTipoDeporte().equals(nombreDeporte));
 
-                    if (new Mensaje().showConfirmation("Confirmación", "¿Está seguro de eliminar el deporte?")) {
-                        try {
-                            Deporterepo.deleteById(deporte.getId());
-                        } catch (IOException ex) {
-                            Logger.getLogger(RegistroListaDeporteBalonController.class.getName()).log(Level.SEVERE, null, ex);
+                    if (siTieneEquiposAsociados) {
+                        new Mensaje().show(Alert.AlertType.ERROR, "Error al eliminar deporte", "No se puede eliminar el deporte porque tiene equipos asociados.");
+                    } else {
+                        if (new Mensaje().showConfirmation("Confirmación", "¿Está seguro de eliminar el deporte?")) {
+                            try {
+                                Deporterepo.deleteById(deporte.getId());
+                            } catch (IOException ex) {
+                                Logger.getLogger(RegistroListaDeporteBalonController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            deportesLista.remove(deporte);
+                            tableView.refresh();
                         }
-                        deportesLista.remove(deporte);
-                        tableView.refresh();
                     }
                 });
             }
