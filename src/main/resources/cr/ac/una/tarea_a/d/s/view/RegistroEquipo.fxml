@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RegistroEquipoController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" styleClass="anchor-pane" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RegistroEquipoController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="4.0" prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -30,7 +30,7 @@
                      <children>
                         <MFXButton fx:id="btnCargarImagen" onAction="#onActionBtnCargarImagen" prefHeight="70.0" prefWidth="150.0" text="Cargar Imagen">
                            <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0">
+                              <ImageView fitHeight="25.0" fitWidth="25.0">
                                  <image>
                                     <Image url="@../resources/agregar%20(1).png" />
                                  </image>
@@ -38,7 +38,7 @@
                            </graphic></MFXButton>
                         <MFXButton fx:id="btnAbrirCamera" onAction="#OnActionBtnAbrirCamera" prefHeight="70.0" prefWidth="150.0" text="Abrir Camara">
                            <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0">
+                              <ImageView fitHeight="25.0" fitWidth="25.0">
                                  <image>
                                     <Image url="@../resources/camara.png" />
                                  </image>

@@ -27,7 +27,7 @@
                     <children>
                         <MFXButton fx:id="btnCargarImagen" contentDisplay="BOTTOM" onAction="#onActionBtnCargarImagen" prefHeight="68.0" prefWidth="158.0" styleClass="jfx-button-long-text" text="Cargar imagen del balon">
                      <graphic>
-                        <ImageView fitHeight="70.0" fitWidth="70.0">
+                        <ImageView fitHeight="60.0" fitWidth="60.0">
                            <image>
                               <Image url="@../resources/agregar%20(1).png" />
                            </image>
