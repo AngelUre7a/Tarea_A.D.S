@@ -68,6 +68,7 @@ public class ListaTorneoController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colCategoria.setCellValueFactory(new PropertyValueFactory<>("tipoDeporte"));
         colEquiposRegistrados.setCellValueFactory(new PropertyValueFactory<>("cantidadEquipos"));
         colTiempo.setCellValueFactory(new PropertyValueFactory<>("tiempoPorPartida"));
@@ -112,7 +113,6 @@ public class ListaTorneoController extends Controller implements Initializable {
         sortedData.comparatorProperty().bind(tableView.comparatorProperty());
 
         tableView.setItems(sortedData);
-        
 
     }
 
@@ -143,15 +143,15 @@ public class ListaTorneoController extends Controller implements Initializable {
     public void initialize() {
     }
 
-    private void cargarFormulario(){
-        try{
+    private void cargarFormulario() {
+        try {
             torneoLista.clear();
-            for(Torneo t:Torneorepo.findAll()){
+            for (Torneo t : Torneorepo.findAll()) {
                 torneoLista.add(t);
             }
             tableView.setItems(torneoLista);
             tableView.refresh();
-        }catch(IOException e){
+        } catch (IOException e) {
             new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar torneos", "No se pudo cargar la lista de torneos.");
             e.printStackTrace();
 

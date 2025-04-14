@@ -3,13 +3,15 @@ package cr.ac.una.tarea_a.d.s.model;
 public class Torneo {
 
     private String id;
+    private String nombre;
     private String tipoDeporte;
     private int cantidadEquipos;
     private int tiempoPorPartida; // en minutos
 
     // Constructor
-    public Torneo(String id, String tipoDeporte, int cantidadEquipos, int tiempoPorPartida) {
+    public Torneo(String id, String nombre, String tipoDeporte, int cantidadEquipos, int tiempoPorPartida) {
         this.id = id;
+        this.nombre = nombre;
         this.tipoDeporte = tipoDeporte;
         this.cantidadEquipos = cantidadEquipos;
         this.tiempoPorPartida = tiempoPorPartida;
@@ -22,6 +24,12 @@ public class Torneo {
 
     public void setId(String id) {
         this.id = id;
+    }
+    public String getNombre(){
+        return nombre;
+    }
+    public void setNombre(String nombre){
+        this.nombre=nombre;
     }
 
     public String getTipoDeporte() {

@@ -160,7 +160,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
     @FXML
     private void onActionComboBoxDeportes(ActionEvent event) {
         Deporte deporteSeleccionado = ComboBoxDeportes.getValue();
-        
+
         ObservableList<Equipo> equiposFiltrados = equiposLista.filtered(equipo -> equipo.getTipoDeporte().equals(deporteSeleccionado.getNombre()));
         tableView.setItems(equiposFiltrados);
     }
@@ -171,22 +171,24 @@ public class CreacionTorneoController extends Controller implements Initializabl
 
     @FXML
     private void onActionBtnGuardarTorneo(ActionEvent event) {
+
         Deporte deporte = ComboBoxDeportes.getValue();
         if (deporte == null) {
             new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe seleccionar un tipo de deporte.");
             return;
         }
+        String nombre = txtNombreTorneo.getText();
         String textCantidadEquipos = txtCantidadEquipos.getText();
         String textTiempoPorPartida = txtTiempoPartido.getText();
-        if (textCantidadEquipos == null || textCantidadEquipos.isBlank() || textTiempoPorPartida == null || textTiempoPorPartida.isBlank()) {
-            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar cantidad de equipos y tiempo de cada partido.");
+        if (nombre == null || nombre.isBlank() || textCantidadEquipos == null || textCantidadEquipos.isBlank() || textTiempoPorPartida == null || textTiempoPorPartida.isBlank()) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar el nombre, cantidad de equipos y tiempo de cada partido.");
             return;
         }
         int cantidadEquipos = Integer.parseInt(txtCantidadEquipos.getText());
         int tiempoPorPartida = Integer.parseInt(txtTiempoPartido.getText());
         String id = java.util.UUID.randomUUID().toString();
 
-        Torneo torneo = new Torneo(null, deporte.getNombre(), cantidadEquipos, tiempoPorPartida);
+        Torneo torneo = new Torneo(null, nombre, deporte.getNombre(), cantidadEquipos, tiempoPorPartida);
 
         AppContext.getInstance().set("TORNEO_NUEVO", torneo);
         // Añadir el torneo a la lista global de torneos
