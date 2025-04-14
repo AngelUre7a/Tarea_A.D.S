@@ -4,12 +4,13 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" styleClass="anchor-pane" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RegistroEquipoController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RegistroEquipoController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="4.0" prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -27,8 +28,22 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0" spacing="20.0">
                      <children>
-                        <MFXButton fx:id="btnCargarImagen" onAction="#onActionBtnCargarImagen" prefHeight="70.0" prefWidth="150.0" text="Cargar Imagen" />
-                        <MFXButton fx:id="btnAbrirCamera" onAction="#OnActionBtnAbrirCamera" prefHeight="70.0" prefWidth="150.0" text="Abrir Camara" />
+                        <MFXButton fx:id="btnCargarImagen" onAction="#onActionBtnCargarImagen" prefHeight="70.0" prefWidth="150.0" text="Cargar Imagen">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0">
+                                 <image>
+                                    <Image url="@../resources/agregar%20(1).png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></MFXButton>
+                        <MFXButton fx:id="btnAbrirCamera" onAction="#OnActionBtnAbrirCamera" prefHeight="70.0" prefWidth="150.0" text="Abrir Camara">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0">
+                                 <image>
+                                    <Image url="@../resources/camara.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></MFXButton>
                         <MFXButton fx:id="btnTomarFoto" onAction="#onActionBtnTomarFoto" prefHeight="70.0" prefWidth="150.0" text="Tomar Foto" />
                      </children>
                   </VBox>

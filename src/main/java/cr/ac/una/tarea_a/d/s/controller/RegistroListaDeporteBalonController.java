@@ -19,6 +19,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -86,9 +87,16 @@ public class RegistroListaDeporteBalonController extends Controller implements I
         });
 
         colEditar.setCellFactory(param -> new TableCell<>() {
-            private final MFXButton btnEditar = new MFXButton("Editar");
+            private final MFXButton btnEditar = new MFXButton();
 
             {
+                btnEditar.setText(""); // Por si acaso, eliminar texto
+                ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/editar.png").toExternalForm()));
+                icono.setFitWidth(40);
+                icono.setFitHeight(40);
+                btnEditar.setGraphic(icono);
+                btnEditar.setStyle("-fx-background-color: transparent;");
+
                 btnEditar.setOnAction(event -> {
                     Deporte deporte = getTableView().getItems().get(getIndex());
                     abrirFormularioEditar(deporte);
@@ -98,23 +106,33 @@ public class RegistroListaDeporteBalonController extends Controller implements I
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
+
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    setGraphic(btnEditar);
+                    HBox hbox = new HBox(btnEditar);
+                    hbox.setAlignment(Pos.CENTER); // <- centra el botón
+                    hbox.setPrefWidth(Double.MAX_VALUE); // opcional para forzar ancho
+                    setGraphic(hbox);
                 }
             }
         });
-
         colEliminar.setCellFactory(param -> new TableCell<>() {
-            private final MFXButton btnEliminar = new MFXButton("Eliminar");
+            private final MFXButton btnEliminar = new MFXButton();
 
             {
+                btnEliminar.setText(""); // Elimina texto por defecto
+                ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/borrar.png").toExternalForm()));
+                icono.setFitWidth(40);
+                icono.setFitHeight(40);
+                btnEliminar.setGraphic(icono);
+                btnEliminar.setStyle("-fx-background-color: transparent;");
+
                 btnEliminar.setOnAction(event -> {
                     Deporte deporte = getTableView().getItems().get(getIndex());
                     String nombreDeporte = deporte.getNombre();
                     System.out.println("Nombre del deporte a eliminar: " + nombreDeporte);
-                    
+
                     try {
                         equiposLista.clear();
                         equiposLista.addAll(Equiporepo.findAll());
@@ -122,6 +140,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
                         new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar equipos", "No se pudo cargar la lista de equipos.");
                         e.printStackTrace();
                     }
+
                     boolean siTieneEquiposAsociados = equiposLista.stream().anyMatch(equipo -> equipo.getTipoDeporte().equals(nombreDeporte));
 
                     if (siTieneEquiposAsociados) {
@@ -146,7 +165,10 @@ public class RegistroListaDeporteBalonController extends Controller implements I
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    setGraphic(btnEliminar);
+                    HBox hbox = new HBox(btnEliminar);
+                    hbox.setAlignment(Pos.CENTER);
+                    hbox.setPrefWidth(Double.MAX_VALUE);
+                    setGraphic(hbox);
                 }
             }
         });

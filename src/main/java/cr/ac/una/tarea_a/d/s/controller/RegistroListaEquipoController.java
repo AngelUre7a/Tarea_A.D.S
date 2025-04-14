@@ -27,6 +27,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.geometry.Pos;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class RegistroListaEquipoController extends Controller implements Initializable {
@@ -58,7 +60,7 @@ public class RegistroListaEquipoController extends Controller implements Initial
     private final DeporteRepository Deporterepo = new DeporteRepository();
     private final ObservableList<Equipo> equiposLista = FXCollections.observableArrayList();
     private final EquipoRepository Equiporepo = new EquipoRepository();
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -88,9 +90,16 @@ public class RegistroListaEquipoController extends Controller implements Initial
         });
 
         colEditar.setCellFactory(param -> new TableCell<>() {
-            private final MFXButton btnEditar = new MFXButton("Editar");
+            private final MFXButton btnEditar = new MFXButton();
 
             {
+                btnEditar.setText(""); // Elimina texto por defecto
+                ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/editar.png").toExternalForm()));
+                icono.setFitWidth(40);
+                icono.setFitHeight(40);
+                btnEditar.setGraphic(icono);
+                btnEditar.setStyle("-fx-background-color: transparent;");
+
                 btnEditar.setOnAction(event -> {
                     Equipo equipo = getTableView().getItems().get(getIndex());
                     abrirFormularioEditar(equipo);
@@ -103,15 +112,25 @@ public class RegistroListaEquipoController extends Controller implements Initial
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    setGraphic(btnEditar);
+                    HBox hbox = new HBox(btnEditar);
+                    hbox.setAlignment(Pos.CENTER);
+                    hbox.setPrefWidth(Double.MAX_VALUE);
+                    setGraphic(hbox);
                 }
             }
         });
 
         colEliminar.setCellFactory(param -> new TableCell<>() {
-            private final MFXButton btnEliminar = new MFXButton("Eliminar");
+            private final MFXButton btnEliminar = new MFXButton();
 
             {
+                btnEliminar.setText("");
+                ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/borrar.png").toExternalForm()));
+                icono.setFitWidth(40);
+                icono.setFitHeight(40);
+                btnEliminar.setGraphic(icono);
+                btnEliminar.setStyle("-fx-background-color: transparent;");
+
                 btnEliminar.setOnAction(event -> {
                     Equipo equipo = getTableView().getItems().get(getIndex());
 
@@ -133,7 +152,10 @@ public class RegistroListaEquipoController extends Controller implements Initial
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    setGraphic(btnEliminar);
+                    HBox hbox = new HBox(btnEliminar);
+                    hbox.setAlignment(Pos.CENTER);
+                    hbox.setPrefWidth(Double.MAX_VALUE);
+                    setGraphic(hbox);
                 }
             }
         });

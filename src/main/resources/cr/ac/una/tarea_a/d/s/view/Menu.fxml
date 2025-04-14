@@ -3,6 +3,8 @@
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -28,7 +30,14 @@
                         <Separator prefWidth="200.0" />
                                 <MFXButton fx:id="btnEstadisticas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnEstadisticas" prefHeight="50.0" text="Estadisticas" />
                                 <MFXButton fx:id="btnRanking" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRanking" prefHeight="50.0" text="Ranking" />
-                                <MFXButton fx:id="btnVolver" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnVolver" prefHeight="50.0" prefWidth="122.0" text="Volver" />
+                                <MFXButton fx:id="btnVolver" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnVolver" prefHeight="50.0" prefWidth="122.0" text="Volver">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0">
+                                 <image>
+                                    <Image url="@../resources/volver-flecha.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></MFXButton>
                             </children>
                         </VBox>
                     </children>
