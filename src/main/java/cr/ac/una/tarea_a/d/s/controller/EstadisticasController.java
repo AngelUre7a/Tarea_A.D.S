@@ -67,7 +67,6 @@ public class EstadisticasController extends Controller implements Initializable 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
       
-    // --- Configuración de columnas ---
     colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
     colImagen.setCellValueFactory(new PropertyValueFactory<>("imagen"));
     colDeporte.setCellValueFactory(new PropertyValueFactory<>("tipoDeporte"));
@@ -137,7 +136,6 @@ public class EstadisticasController extends Controller implements Initializable 
         e.printStackTrace();
     }
 
-    // --- Mostrar nombres en ComboBox ---
     ComboBoxDeportes.setCellFactory(param -> new javafx.scene.control.ListCell<>() {
         @Override
         protected void updateItem(Deporte item, boolean empty) {
@@ -166,9 +164,8 @@ public class EstadisticasController extends Controller implements Initializable 
         Deporte filtroDeporte = ComboBoxDeportes.getSelectionModel().getSelectedItem();
 
         boolean coincideNombre = (filtroNombre == null || filtroNombre.isEmpty()) || equipo.getNombre().toLowerCase().contains(filtroNombre.toLowerCase());
-
         boolean coincideDeporte = (filtroDeporte == null || "Todos".equalsIgnoreCase(filtroDeporte.getNombre())) || equipo.getTipoDeporte().equalsIgnoreCase(filtroDeporte.getNombre());
-
+        
         return coincideNombre && coincideDeporte;
         });
     }
@@ -181,7 +178,6 @@ public class EstadisticasController extends Controller implements Initializable 
         {
             btnVer.setOnAction(event -> {
                 Equipo equipo = getTableView().getItems().get(getIndex());
-                // Aquí va la lógica para ver estadísticas
                 System.out.println("Ver estadísticas de: " + equipo.getNombre());
 
                 

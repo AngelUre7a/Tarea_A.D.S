@@ -91,7 +91,7 @@ public class RankingController extends Controller implements Initializable {
         });
         
         cargarJson();
-        Filtros();
+        Filtrar();
     }   
     
     private void cargarJson(){ 
@@ -109,7 +109,7 @@ public class RankingController extends Controller implements Initializable {
         }
     }
     
-    private void Filtros(){
+    private void Filtrar(){
         FilteredList<Equipo> filteredData = new FilteredList<>(equiposLista, b -> true);
 
         filterField.textProperty().addListener((obs, oldVal, newVal) -> {
@@ -137,7 +137,6 @@ public class RankingController extends Controller implements Initializable {
             e.printStackTrace();
             }
 
-        // Configura cómo mostrar los nombres
         ComboBoxDeportes.setCellFactory(param -> new javafx.scene.control.ListCell<>() {
             @Override
             protected void updateItem(Deporte item, boolean empty) {
@@ -174,10 +173,7 @@ public class RankingController extends Controller implements Initializable {
         String filtroNombre = filterField.getText();
         Deporte filtroDeporte = ComboBoxDeportes.getSelectionModel().getSelectedItem();
 
-        // Filtro por nombre
         boolean coincideNombre = (filtroNombre == null || filtroNombre.isEmpty()) || equipo.getNombre().toLowerCase().contains(filtroNombre.toLowerCase());
-
-        // Filtro por deporte
         boolean coincideDeporte = (filtroDeporte == null || "Todos".equalsIgnoreCase(filtroDeporte.getNombre())) || equipo.getTipoDeporte().equalsIgnoreCase(filtroDeporte.getNombre());
         
         return coincideNombre && coincideDeporte;
