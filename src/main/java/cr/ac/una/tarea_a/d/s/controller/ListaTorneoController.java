@@ -5,6 +5,7 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.model.Deporte;
+import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.model.Torneo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.repositories.TorneoRepository;
@@ -24,11 +25,15 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
@@ -73,7 +78,19 @@ public class ListaTorneoController extends Controller implements Initializable {
         colEquiposRegistrados.setCellValueFactory(new PropertyValueFactory<>("cantidadEquipos"));
         colTiempo.setCellValueFactory(new PropertyValueFactory<>("tiempoPorPartida"));
         colIniciar.setCellFactory(column -> new javafx.scene.control.TableCell<Torneo, String>() {
-            private final MFXButton btnIniciar = new MFXButton("Iniciar");
+            private final MFXButton btnIniciar = new MFXButton("");
+
+            {
+                btnIniciar.setText(""); // Por si acaso, eliminar texto
+                ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/iniciar.png").toExternalForm()));
+                icono.setFitWidth(40);
+                icono.setFitHeight(40);
+                btnIniciar.setGraphic(icono);
+                btnIniciar.setStyle("-fx-background-color: transparent;");
+
+                btnIniciar.setOnAction(event -> {
+                });
+            }
 
             @Override
             protected void updateItem(String item, boolean empty) {
@@ -81,10 +98,10 @@ public class ListaTorneoController extends Controller implements Initializable {
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    btnIniciar.setOnAction(event -> {
-
-                    });
-                    setGraphic(btnIniciar);
+                    HBox hbox = new HBox(btnIniciar);
+                    hbox.setAlignment(Pos.CENTER); // <- centra el botón
+                    hbox.setPrefWidth(Double.MAX_VALUE); // opcional para forzar ancho
+                    setGraphic(hbox);
                 }
             }
         });
