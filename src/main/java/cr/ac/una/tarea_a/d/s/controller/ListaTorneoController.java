@@ -15,6 +15,7 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -80,12 +81,14 @@ public class ListaTorneoController extends Controller implements Initializable {
                     setGraphic(null);
                 } else {
                     btnIniciar.setOnAction(event -> {
-                        
+
                     });
                     setGraphic(btnIniciar);
                 }
             }
         });
+        cargarFormulario();
+
         FilteredList<Torneo> filteredData = new FilteredList<>(torneoLista, b -> true);
 
         filterField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -109,6 +112,7 @@ public class ListaTorneoController extends Controller implements Initializable {
         sortedData.comparatorProperty().bind(tableView.comparatorProperty());
 
         tableView.setItems(sortedData);
+        
 
     }
 
@@ -123,9 +127,13 @@ public class ListaTorneoController extends Controller implements Initializable {
             if (nuevo != null) {
                 // Guardar el nuevo deporte en el repositorio
                 Torneorepo.save(nuevo);
+                List<Torneo> torneos = (List<Torneo>) AppContext.getInstance().get("LISTA_TORNEOS");
 
                 // Agregar el nuevo deporte a la lista sin eliminar los anteriores
                 torneoLista.add(nuevo);
+                torneoLista.clear();
+                torneoLista.addAll(torneos);
+                cargarFormulario();
                 AppContext.getInstance().delete("TORNEO_NUEVO"); // Limpiar el contexto
             }
         }
@@ -133,6 +141,21 @@ public class ListaTorneoController extends Controller implements Initializable {
 
     @Override
     public void initialize() {
+    }
+
+    private void cargarFormulario(){
+        try{
+            torneoLista.clear();
+            for(Torneo t:Torneorepo.findAll()){
+                torneoLista.add(t);
+            }
+            tableView.setItems(torneoLista);
+            tableView.refresh();
+        }catch(IOException e){
+            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar torneos", "No se pudo cargar la lista de torneos.");
+            e.printStackTrace();
+
+        }
     }
 
 }

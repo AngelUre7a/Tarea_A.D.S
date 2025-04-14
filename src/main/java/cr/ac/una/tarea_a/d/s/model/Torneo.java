@@ -4,7 +4,6 @@ public class Torneo {
 
     private String id;
     private String tipoDeporte;
-    private String nombre;
     private int cantidadEquipos;
     private int tiempoPorPartida; // en minutos
 

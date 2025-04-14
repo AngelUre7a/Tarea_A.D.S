@@ -33,7 +33,6 @@
                <children>
                   <VBox prefHeight="223.0" prefWidth="435.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <MFXButton fx:id="btnActTabla" onAction="#onActionBtnActTabla" text="Actualizar Tabla" />
                         <TableView fx:id="tableView" prefHeight="268.0" prefWidth="517.0" VBox.vgrow="ALWAYS">
                           <columns>
                               <TableColumn fx:id="colAgregar" prefWidth="65.0" text="Agregar" />

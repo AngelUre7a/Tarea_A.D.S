@@ -1,4 +1,3 @@
-
 package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.model.Deporte;
@@ -32,7 +31,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 
 public class CreacionTorneoController extends Controller implements Initializable {
 
@@ -162,15 +160,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
     @FXML
     private void onActionComboBoxDeportes(ActionEvent event) {
         Deporte deporteSeleccionado = ComboBoxDeportes.getValue();
-if (deporteSeleccionado == null) {
-    // Mostrás una alerta o simplemente salís del método
-    Alert alert = new Alert(Alert.AlertType.WARNING);
-    alert.setTitle("Advertencia");
-    alert.setHeaderText("Debe seleccionar un deporte.");
-    alert.setContentText("Por favor, seleccione un deporte antes de guardar el torneo.");
-    alert.showAndWait();
-    return;
-}
+        
         ObservableList<Equipo> equiposFiltrados = equiposLista.filtered(equipo -> equipo.getTipoDeporte().equals(deporteSeleccionado.getNombre()));
         tableView.setItems(equiposFiltrados);
     }
@@ -180,27 +170,26 @@ if (deporteSeleccionado == null) {
     }
 
     @FXML
-    private void onActionBtnActTabla(ActionEvent event) {
-    }
-
-    @FXML
     private void onActionBtnGuardarTorneo(ActionEvent event) {
-        String deporte = ComboBoxDeportes.getValue() != null ? ComboBoxDeportes.getValue().getNombre() : null;
+        Deporte deporte = ComboBoxDeportes.getValue();
+        if (deporte == null) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe seleccionar un tipo de deporte.");
+            return;
+        }
         String textCantidadEquipos = txtCantidadEquipos.getText();
         String textTiempoPorPartida = txtTiempoPartido.getText();
-        if (deporte == null || textCantidadEquipos == null || textCantidadEquipos.isBlank() || textTiempoPorPartida == null || textTiempoPorPartida.isBlank()) {
-            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar un tipo de deporte, cantidad de equipos y tiempo de cada partido.");
+        if (textCantidadEquipos == null || textCantidadEquipos.isBlank() || textTiempoPorPartida == null || textTiempoPorPartida.isBlank()) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar cantidad de equipos y tiempo de cada partido.");
             return;
-
         }
         int cantidadEquipos = Integer.parseInt(txtCantidadEquipos.getText());
         int tiempoPorPartida = Integer.parseInt(txtTiempoPartido.getText());
         String id = java.util.UUID.randomUUID().toString();
 
-        Torneo torneo = new Torneo(id,deporte, cantidadEquipos, tiempoPorPartida);
+        Torneo torneo = new Torneo(null, deporte.getNombre(), cantidadEquipos, tiempoPorPartida);
 
         AppContext.getInstance().set("TORNEO_NUEVO", torneo);
-        // Añadir el deporte a la lista global de deportes
+        // Añadir el torneo a la lista global de torneos
         if (!AppContext.getInstance().containsItem("LISTA_TORNEOS")) {
             ObservableList<Torneo> listaTorneos = FXCollections.observableArrayList();
             AppContext.getInstance().set("LISTA_TORNEOS", listaTorneos);
@@ -214,7 +203,7 @@ if (deporteSeleccionado == null) {
 
         txtCantidadEquipos.clear();
         txtTiempoPartido.clear();
-        ComboBoxDeportes.setValue(null);
+        //ComboBoxDeportes.setValue(null);
         ((Stage) root.getScene().getWindow()).close();
 
     }

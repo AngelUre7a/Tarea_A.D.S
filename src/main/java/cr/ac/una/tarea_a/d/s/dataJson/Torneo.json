@@ -1,1 +1,68 @@
-
+[
+  {
+    "id": "37358bfa-2ebc-42e8-a2d9-d30279ac87ee",
+    "tipoDeporte": "Futbol",
+    "cantidadEquipos": 5,
+    "tiempoPorPartida": 5
+  },
+  {
+    "id": "02e8b152-4219-4603-99a7-94475d9fc609",
+    "tipoDeporte": "Futbol",
+    "cantidadEquipos": 4,
+    "tiempoPorPartida": 4
+  },
+  {
+    "id": "381d16a1-0b6e-4251-9400-ffe4250bab71",
+    "tipoDeporte": "Futbol",
+    "cantidadEquipos": 65,
+    "tiempoPorPartida": 56
+  },
+  {
+    "id": "4a3b08b3-1b83-4bc0-b94c-62bcdacbd22f",
+    "tipoDeporte": "Futbol",
+    "cantidadEquipos": 5,
+    "tiempoPorPartida": 5
+  },
+  {
+    "id": "c1ad9682-06d3-4626-996c-e10d459b898a",
+    "tipoDeporte": "Futbol",
+    "cantidadEquipos": 8,
+    "tiempoPorPartida": 6
+  },
+  {
+    "id": "765405ad-38cc-4ddf-9dc3-e9b5be7c33e5",
+    "tipoDeporte": "hola",
+    "cantidadEquipos": 4,
+    "tiempoPorPartida": 4
+  },
+  {
+    "id": "c9a0212b-844a-49a2-9db0-d1002d6e87f6",
+    "tipoDeporte": "Futbol",
+    "cantidadEquipos": 6,
+    "tiempoPorPartida": 6
+  },
+  {
+    "id": "66a17297-1996-4e3b-b801-d2f0d4337133",
+    "tipoDeporte": "Futbol",
+    "cantidadEquipos": 6,
+    "tiempoPorPartida": 6
+  },
+  {
+    "id": "4f7953ce-9226-4c09-9c3f-b465da1b5227",
+    "tipoDeporte": "Futbol",
+    "cantidadEquipos": 5,
+    "tiempoPorPartida": 5
+  },
+  {
+    "id": "5990b701-d159-4f79-a51b-b81f9c4f4796",
+    "tipoDeporte": "Pepe",
+    "cantidadEquipos": 4,
+    "tiempoPorPartida": 4
+  },
+  {
+    "id": "38c7de4b-4e29-4325-9760-b61c14a026f3",
+    "tipoDeporte": "hola",
+    "cantidadEquipos": 2222,
+    "tiempoPorPartida": 222
+  }
+]
