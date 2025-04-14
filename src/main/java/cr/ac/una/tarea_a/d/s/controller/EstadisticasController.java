@@ -6,6 +6,7 @@ import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.repositories.EquipoRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
+import cr.ac.una.tarea_a.d.s.util.FlowController;
 import cr.ac.una.tarea_a.d.s.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -27,6 +28,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -48,12 +51,15 @@ public class EstadisticasController extends Controller implements Initializable 
     @FXML
     private TableColumn<Equipo, String> colDeporte;
     @FXML
-    private TableColumn<Equipo, Integer> colPuntos;
-    @FXML
-    private TableColumn<Equipo, Integer> colGoles;
+    private TableColumn<Equipo, Void> colVerStats;
 
     private final ObservableList<Equipo> equiposLista = FXCollections.observableArrayList();
-    private final EquipoRepository Equiporepo = new EquipoRepository();
+    private final EquipoRepository equipoRepo = new EquipoRepository();
+    private final ObservableList<Deporte> deportesLista = FXCollections.observableArrayList();
+    private final DeporteRepository deporteRepo = new DeporteRepository();
+    @FXML
+    private AnchorPane root;
+    
 
     /**
      * Initializes the controller class.
@@ -64,7 +70,7 @@ public class EstadisticasController extends Controller implements Initializable 
     // --- Configuración de columnas ---
     colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
     colImagen.setCellValueFactory(new PropertyValueFactory<>("imagen"));
-    colDeporte.setCellValueFactory(new PropertyValueFactory<>("categoria"));
+    colDeporte.setCellValueFactory(new PropertyValueFactory<>("tipoDeporte"));
 
     colImagen.setCellFactory(column -> new javafx.scene.control.TableCell<>() {
         private final ImageView imageView = new ImageView();
@@ -81,15 +87,30 @@ public class EstadisticasController extends Controller implements Initializable 
         }
     });
 
-    // --- Lista observable y carga de equipos ---
-    try {
-        equiposLista.addAll(Equiporepo.findAll());
-    } catch (IOException e) {
-        new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar datos", "No se pudieron cargar los deportes.");
-    }
+       agregarBotonVerStats();
+       cargarJson();
+       Filtrar();
 
-    // --- Filtro combinado (nombre + deporte) ---
-    FilteredList<Equipo> filteredData = new FilteredList<>(equiposLista, p -> true);
+    
+    }    
+    
+    private void cargarJson(){
+        try {
+            equiposLista.clear();
+            for (Equipo e : equipoRepo.findAll()) {
+                e.cargarImagenDesdeBase64();
+                equiposLista.add(e);
+            }
+            tableView.setItems(equiposLista);
+            tableView.refresh();
+        } catch (IOException e) {
+            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar deportes", "No se pudo cargar la lista de deportes.");
+            e.printStackTrace();
+        }
+    }
+    
+    private void Filtrar(){
+        FilteredList<Equipo> filteredData = new FilteredList<>(equiposLista, p -> true);
 
     filterField.textProperty().addListener((obs, oldVal, newVal) -> {
         aplicarFiltro(filteredData);
@@ -99,11 +120,6 @@ public class EstadisticasController extends Controller implements Initializable 
         aplicarFiltro(filteredData);
     });
 
-    SortedList<Equipo> sortedData = new SortedList<>(filteredData);
-    sortedData.comparatorProperty().bind(tableView.comparatorProperty());
-    tableView.setItems(sortedData);
-
-    // --- Cargar deportes con opción "Todos" ---
     try {
         DeporteRepository deporteRepo = new DeporteRepository();
         List<Deporte> deportes = deporteRepo.findAll();
@@ -137,7 +153,12 @@ public class EstadisticasController extends Controller implements Initializable 
             setText(item == null || empty ? null : item.getNombre());
         }
     }); 
-    }    
+    
+        SortedList<Equipo> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tableView.comparatorProperty());
+        tableView.setItems(sortedData);
+    
+    }
 
     private void aplicarFiltro(FilteredList<Equipo> filteredData) {
         filteredData.setPredicate(equipo -> {
@@ -151,6 +172,37 @@ public class EstadisticasController extends Controller implements Initializable 
         return coincideNombre && coincideDeporte;
         });
     }
+    
+    private void agregarBotonVerStats() {
+    colVerStats.setCellFactory(param -> new javafx.scene.control.TableCell<Equipo, Void>() {
+
+        private final MFXButton btnVer = new MFXButton("Ver");
+
+        {
+            btnVer.setOnAction(event -> {
+                Equipo equipo = getTableView().getItems().get(getIndex());
+                // Aquí va la lógica para ver estadísticas
+                System.out.println("Ver estadísticas de: " + equipo.getNombre());
+
+                
+                AppContext.getInstance().set("EQUIPO_SELECCIONADO", equipo);
+                FlowController.getInstance().goViewInWindowModal("EstadisticasEquipo", ((Stage) root.getScene().getWindow()), false);
+            });
+
+            
+        }
+
+        @Override
+        protected void updateItem(Void item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty) {
+                setGraphic(null);
+            } else {
+                setGraphic(btnVer);
+            }
+        }
+    });
+}
     
     @Override
     public void initialize() {

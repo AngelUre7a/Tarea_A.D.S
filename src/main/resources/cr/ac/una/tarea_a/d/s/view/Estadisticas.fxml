@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.EstadisticasController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.EstadisticasController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -32,11 +32,10 @@
       </VBox>
       <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="34.0" layoutY="146.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="464.0" prefWidth="731.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="146.0">
          <columns>
-            <TableColumn fx:id="colImagen" prefWidth="112.0" text="Imagen" />
-            <TableColumn fx:id="colNombre" prefWidth="252.0" text="Nombre" />
-            <TableColumn fx:id="colDeporte" prefWidth="158.0" text="Deporte" />
-            <TableColumn fx:id="colPuntos" prefWidth="129.0" text="Puntos" />
-            <TableColumn fx:id="colGoles" prefWidth="129.0" text="Goles a favor" />
+            <TableColumn fx:id="colImagen" prefWidth="124.0" text="Imagen" />
+            <TableColumn fx:id="colNombre" prefWidth="325.0" text="Nombre" />
+            <TableColumn fx:id="colDeporte" prefWidth="165.0" text="Deporte" />
+            <TableColumn fx:id="colVerStats" prefWidth="109.0" text="VerEstadisticas" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

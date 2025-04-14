@@ -52,7 +52,10 @@ public class RankingController extends Controller implements Initializable {
     private TableColumn<Equipo, String> colDeporte;
 
     private final ObservableList<Equipo> equiposLista = FXCollections.observableArrayList();
-    private final EquipoRepository Equiporepo = new EquipoRepository();
+    private final EquipoRepository equipoRepo = new EquipoRepository();
+    private final ObservableList<Deporte> deportesLista = FXCollections.observableArrayList();
+    private final DeporteRepository deporteRepo = new DeporteRepository();
+    
     @FXML
     private MFXButton btnActualizar;
     
@@ -61,10 +64,10 @@ public class RankingController extends Controller implements Initializable {
     
 
         
-//        colRango.setCellValueFactory(new PropertyValueFactory<>("rango"));
+//      colRango.setCellValueFactory(new PropertyValueFactory<>("rango"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colImagen.setCellValueFactory(new PropertyValueFactory<>("imagen"));
-        colDeporte.setCellValueFactory(new PropertyValueFactory<>("categoria"));
+        colDeporte.setCellValueFactory(new PropertyValueFactory<>("tipoDeporte"));
         
         colImagen.setCellFactory(column -> new javafx.scene.control.TableCell<>() {
             private final ImageView imageView = new ImageView();
@@ -80,7 +83,6 @@ public class RankingController extends Controller implements Initializable {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setGraphic(null);
-                    System.out.println("No se cargo la imagen del equipo");
                 } else {
                     imageView.setImage(item);
                     setGraphic(imageView);
@@ -88,6 +90,26 @@ public class RankingController extends Controller implements Initializable {
             }
         });
         
+        cargarJson();
+        Filtros();
+    }   
+    
+    private void cargarJson(){ 
+        try {
+            equiposLista.clear();
+            for (Equipo e : equipoRepo.findAll()) {
+                e.cargarImagenDesdeBase64();
+                equiposLista.add(e);
+            }
+            tableView.setItems(equiposLista);
+            tableView.refresh();
+        } catch (IOException e) {
+            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar deportes", "No se pudo cargar la lista de deportes.");
+            e.printStackTrace();
+        }
+    }
+    
+    private void Filtros(){
         FilteredList<Equipo> filteredData = new FilteredList<>(equiposLista, b -> true);
 
         filterField.textProperty().addListener((obs, oldVal, newVal) -> {
@@ -99,34 +121,21 @@ public class RankingController extends Controller implements Initializable {
         });
         
         try {
-            equiposLista.addAll(Equiporepo.findAll());
-        } catch (IOException e) {
-            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar datos", "No se pudieron cargar los deportes.");
-        }
+        DeporteRepository deporteRepo = new DeporteRepository();
+        List<Deporte> deportes = deporteRepo.findAll();
 
-        SortedList<Equipo> sortedData = new SortedList<>(filteredData);
-        sortedData.comparatorProperty().bind(tableView.comparatorProperty());
-
-        tableView.setItems(sortedData);
-        
-                List<Deporte> deportes = null;
-        try {
-            DeporteRepository deporteRepo = new DeporteRepository();
-            deportes = deporteRepo.findAll();
-            AppContext.getInstance().set("LISTA_DEPORTES", deportes);
-        } catch (IOException e) {
-            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar deportes", "No se pudo cargar la lista de deportes.");
-            e.printStackTrace();
-        }
-        
         if (deportes != null) {
             Deporte todos = new Deporte("Todos");
             todos.setNombre("Todos");
-
             ComboBoxDeportes.getItems().add(todos);
             ComboBoxDeportes.getItems().addAll(deportes);
-            ComboBoxDeportes.getSelectionModel().select(todos);
+            ComboBoxDeportes.getSelectionModel().select(todos); // seleccionar por defecto
+            AppContext.getInstance().set("LISTA_DEPORTES", deportes);
         }
+        } catch (IOException e) {
+            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar deportes", "No se pudo cargar la lista de deportes.");
+            e.printStackTrace();
+            }
 
         // Configura cómo mostrar los nombres
         ComboBoxDeportes.setCellFactory(param -> new javafx.scene.control.ListCell<>() {
@@ -144,7 +153,12 @@ public class RankingController extends Controller implements Initializable {
                 setText(item == null || empty ? null : item.getNombre());
             }
         });
-    }    
+        
+        SortedList<Equipo> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tableView.comparatorProperty());
+        tableView.setItems(sortedData);
+
+    }
 
     @Override
     public void initialize() {
