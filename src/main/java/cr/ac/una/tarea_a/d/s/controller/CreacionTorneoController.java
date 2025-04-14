@@ -14,6 +14,7 @@ import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -59,6 +60,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
 
     private final ObservableList<Equipo> equiposLista = FXCollections.observableArrayList();
     private final EquipoRepository Equiporepo = new EquipoRepository();
+    private final ObservableList<Equipo> equiposInscritos = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
@@ -76,22 +78,66 @@ public class CreacionTorneoController extends Controller implements Initializabl
                 keyEvent.consume();
             }
         });//MANEJO TABLEVIEW
+//        colAgregar.setCellFactory(column -> new javafx.scene.control.TableCell<Equipo, String>() {
+//            private final MFXCheckbox btnAgregar = new MFXCheckbox("");
+//
+//            @Override
+//            protected void updateItem(String item, boolean empty) {
+//                super.updateItem(item, empty);
+//                if (empty) {
+//                    setGraphic(null);
+//                } else {
+//                    btnAgregar.setOnAction(event -> {
+//
+//                    });
+//                    setGraphic(btnAgregar);
+//                }
+//            }
+//        });
         colAgregar.setCellFactory(column -> new javafx.scene.control.TableCell<Equipo, String>() {
-            private final MFXCheckbox btnAgregar = new MFXCheckbox("");
+            private final MFXCheckbox checkbox = new MFXCheckbox("");
+
+            {
+                checkbox.setOnAction(event -> {
+                    Equipo equipo = getTableView().getItems().get(getIndex());
+
+                    if (checkbox.isSelected()) {
+                        if (!equiposInscritos.contains(equipo)) {
+                            equiposInscritos.add(equipo);
+                        }
+                    } else {
+                        equiposInscritos.remove(equipo);
+                    }
+
+                    // Limita la cantidad si se supera el máximo
+                    if (!txtCantidadEquipos.getText().isBlank()) {
+                        int max = Integer.parseInt(txtCantidadEquipos.getText());
+                        tableView.refresh(); // esto desactiva los checkboxes cuando se alcanza el límite
+                    }
+                });
+            }
 
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
+
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    btnAgregar.setOnAction(event -> {
+                    Equipo equipo = getTableView().getItems().get(getIndex());
+                    checkbox.setSelected(equiposInscritos.contains(equipo));
 
-                    });
-                    setGraphic(btnAgregar);
+                    // Desactiva si ya se alcanzó el máximo y este equipo no está seleccionado
+                    if (!txtCantidadEquipos.getText().isBlank()) {
+                        int max = Integer.parseInt(txtCantidadEquipos.getText());
+                        checkbox.setDisable(!checkbox.isSelected() && equiposInscritos.size() >= max);
+                    }
+
+                    setGraphic(checkbox);
                 }
             }
         });
+
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colEscudo.setCellFactory(column -> new javafx.scene.control.TableCell<>() {
             private final ImageView imageView = new ImageView();
@@ -150,6 +196,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
                 setText(item == null || empty ? null : item.getNombre());
             }
         });
+        txtCantidadEquipos.textProperty().addListener((obs, oldVal, newVal) -> tableView.refresh());
 
     }
 
@@ -187,8 +234,9 @@ public class CreacionTorneoController extends Controller implements Initializabl
         int cantidadEquipos = Integer.parseInt(txtCantidadEquipos.getText());
         int tiempoPorPartida = Integer.parseInt(txtTiempoPartido.getText());
         String id = java.util.UUID.randomUUID().toString();
-
-        Torneo torneo = new Torneo(null, nombre, deporte.getNombre(), cantidadEquipos, tiempoPorPartida);
+//LA LISTA ESTA VACIA POR AHORA
+//        Torneo torneo = new Torneo(null, nombre, deporte.getNombre(), cantidadEquipos, tiempoPorPartida, List.of());
+        Torneo torneo = new Torneo(id, nombre, deporte.getNombre(), cantidadEquipos, tiempoPorPartida, new ArrayList<>(equiposInscritos));
 
         AppContext.getInstance().set("TORNEO_NUEVO", torneo);
         // Añadir el torneo a la lista global de torneos

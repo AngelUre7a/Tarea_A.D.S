@@ -1,5 +1,7 @@
 package cr.ac.una.tarea_a.d.s.model;
 
+import java.util.List;
+
 public class Torneo {
 
     private String id;
@@ -7,14 +9,17 @@ public class Torneo {
     private String tipoDeporte;
     private int cantidadEquipos;
     private int tiempoPorPartida; // en minutos
+    private List<Equipo> equiposInscritos; // 👈 Aquí la lista
 
     // Constructor
-    public Torneo(String id, String nombre, String tipoDeporte, int cantidadEquipos, int tiempoPorPartida) {
+    public Torneo(String id, String nombre, String tipoDeporte, int cantidadEquipos, int tiempoPorPartida, List<Equipo> equiposInscritos) {
         this.id = id;
         this.nombre = nombre;
         this.tipoDeporte = tipoDeporte;
         this.cantidadEquipos = cantidadEquipos;
         this.tiempoPorPartida = tiempoPorPartida;
+        this.equiposInscritos = equiposInscritos;
+
     }
 
     // Getters y Setters
@@ -25,11 +30,13 @@ public class Torneo {
     public void setId(String id) {
         this.id = id;
     }
-    public String getNombre(){
+
+    public String getNombre() {
         return nombre;
     }
-    public void setNombre(String nombre){
-        this.nombre=nombre;
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getTipoDeporte() {
@@ -54,6 +61,14 @@ public class Torneo {
 
     public void setTiempoPorPartida(int tiempoPorPartida) {
         this.tiempoPorPartida = tiempoPorPartida;
+    }
+
+    public List<Equipo> getEquiposInscritos() {
+        return equiposInscritos;
+    }
+
+    public void setEquiposInscritos(List<Equipo> equiposInscritos) {
+        this.equiposInscritos = equiposInscritos;
     }
 
     @Override

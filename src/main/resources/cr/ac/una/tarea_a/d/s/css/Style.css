@@ -38,7 +38,7 @@ BorderPane {
 /* ============================= */
 /* Botones */
 /* ============================= */
-.button {
+/*.button {
     -fx-background-color: -fx-color-azul_oscuro;
     -fx-padding: 5;
     -fx-text-fill: white;
@@ -50,6 +50,38 @@ BorderPane {
 
 .button:hover {
     -fx-background-color: -fx-color-rich_black;
+}*/
+.button {
+    -fx-background-color: -fx-color-rich_black;
+    -fx-padding: 5;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -mfx-button-type: RAISED;
+    -fx-alignment: CENTER;
+    -fx-font-weight: bold;
+
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+
+    /* Transición suave */
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 5, 0.2, 2, 2);
+}
+
+.button:hover {
+
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-background-color: -fx-color-rich_black;
+    -fx-border-color: white;
+
+    /* Agrandamiento suave */
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.3, 4, 4);
 }
 
 .button:focused {
