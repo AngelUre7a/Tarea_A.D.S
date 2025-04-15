@@ -84,12 +84,12 @@ BorderPane {
 .label {
     -fx-text-fill: black;
     -fx-font-weight: bold;
-    font-family: "algerian";
+/*    font-family: "algerian";*/
 }
 
 .jfx-title-label-menu {
     -fx-font-size: 24px;
-    -fx-text-fill: -fx-color-rich_black;
+    -fx-text-fill: white;
 }
 
 .jfx-title-A {
