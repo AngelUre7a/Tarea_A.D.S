@@ -13,6 +13,8 @@
     -fx-color-rich_black: #0c0c16;
     -fx-color-verde_agua: #4ADEDE;
     -fx-color-medium_slate_blue: #6666ff;
+    -fx-color-azulOscuro:#1e3c72 ;
+    -fx-color-balliverse: #004A67
 }
 
 /* ============================= */
@@ -32,25 +34,9 @@
 }
 
 BorderPane {
-    -fx-background-color: -fx-color-periwinkle;
+    -fx-background-color: -fx-color-balliverse;
 }
 
-/* ============================= */
-/* Botones */
-/* ============================= */
-/*.button {
-    -fx-background-color: -fx-color-azul_oscuro;
-    -fx-padding: 5;
-    -fx-text-fill: white;
-    -fx-font-size: 18px;
-    -mfx-button-type: RAISED;
-    -fx-alignment: CENTER;
-    -fx-font-weight: bold;
-}
-
-.button:hover {
-    -fx-background-color: -fx-color-rich_black;
-}*/
 .button {
     -fx-background-color: -fx-color-rich_black;
     -fx-padding: 5;
@@ -85,7 +71,7 @@ BorderPane {
 }
 
 .button:focused {
-    -fx-background-color: -fx-color-rich_black;
+    -fx-background-color: -fx-color-azulOscuro;
 }
 
 .jfx-button-long-text {

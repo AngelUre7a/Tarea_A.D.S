@@ -9,7 +9,7 @@ public class Torneo {
     private String tipoDeporte;
     private int cantidadEquipos;
     private int tiempoPorPartida; // en minutos
-    private List<Equipo> equiposInscritos; // 👈 Aquí la lista
+    private List<Equipo> equiposInscritos; //lista
 
     // Constructor
     public Torneo(String id, String nombre, String tipoDeporte, int cantidadEquipos, int tiempoPorPartida, List<Equipo> equiposInscritos) {

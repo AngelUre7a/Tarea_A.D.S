@@ -2,6 +2,8 @@ package cr.ac.una.tarea_a.d.s.model;
 
 public class EstadisticaGeneral {
 
+    
+    //torneos ganados, goles por torneo, 
     private String idEquipo;
     private int partidosJugados;
     private int partidosGanados;
@@ -14,7 +16,7 @@ public class EstadisticaGeneral {
     }
 
     public EstadisticaGeneral(String idEquipo, int partidosJugados, int partidosGanados, int partidosPerdidos,
-            int golesAFavor, int golesEnContra, int puntos) {
+        int golesAFavor, int golesEnContra, int puntos) {
         this.idEquipo = idEquipo;
         this.partidosJugados = partidosJugados;
         this.partidosGanados = partidosGanados;

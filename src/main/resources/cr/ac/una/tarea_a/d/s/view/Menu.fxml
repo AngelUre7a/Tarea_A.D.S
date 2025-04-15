@@ -27,6 +27,11 @@
                   <Separator prefWidth="200.0" />
                         <VBox alignment="BOTTOM_CENTER" minHeight="-Infinity" prefHeight="298.0" prefWidth="122.0" spacing="10.0">
                             <children>
+                        <ImageView fitHeight="112.0" fitWidth="113.0">
+                           <image>
+                              <Image url="@../resources/balliverse_logo.png" />
+                           </image>
+                        </ImageView>
                         <Separator prefWidth="200.0" />
                                 <MFXButton fx:id="btnEstadisticas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnEstadisticas" prefHeight="50.0" text="Estadisticas" />
                                 <MFXButton fx:id="btnRanking" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRanking" prefHeight="50.0" text="Ranking" />
