@@ -88,6 +88,10 @@ public class ListaTorneoController extends Controller implements Initializable {
                     Torneo torneo = getTableView().getItems().get(getIndex());
                     AppContext.getInstance().set("TORNEO", torneo);
                     FlowController.getInstance().goView("Llaves");
+                    LlavesController controller = (LlavesController) FlowController.getInstance().getController("Llaves");
+                    if (controller != null) {
+                        controller.onShow();
+                    }
                 });
             }
 

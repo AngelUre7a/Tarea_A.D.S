@@ -151,6 +151,24 @@ public class LlavesController extends Controller implements Initializable {
         }
     }
 
+    
+    public void onShow() {
+        limpiarVista();
+        torneo1 = (Torneo) AppContext.getInstance().get("TORNEO");
+        if (torneo1 != null) {
+            txfNombreTorneo.setText(torneo1.getNombre());
+            generarEstructuraLlaves();
+            llenarPrimerRonda();
+        } else {
+            System.out.println("Torneo null en LlavesController");
+        }
+    }
+    
+    private void limpiarVista() {
+        txfNombreTorneo.setText("");
+        hboxLlaves.getChildren().clear();
+    }
+    
     @Override
     public void initialize() {
     }
