@@ -165,7 +165,8 @@ public class RankingController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnActualizar(ActionEvent event) {
-        tableView.refresh();
+        cargarJson();
+        Filtrar();
     }
     
     private void aplicarFiltro(FilteredList<Equipo> filteredData) {

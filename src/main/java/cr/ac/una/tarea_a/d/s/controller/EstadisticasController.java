@@ -61,6 +61,8 @@ public class EstadisticasController extends Controller implements Initializable 
     private final DeporteRepository deporteRepo = new DeporteRepository();
     @FXML
     private AnchorPane root;
+    @FXML
+    private MFXButton btnActualizar;
 
     /**
      * Initializes the controller class.
@@ -130,6 +132,7 @@ public class EstadisticasController extends Controller implements Initializable 
             if (deportes != null) {
                 Deporte todos = new Deporte("Todos");
                 todos.setNombre("Todos");
+                ComboBoxDeportes.getItems().clear();
                 ComboBoxDeportes.getItems().add(todos);
                 ComboBoxDeportes.getItems().addAll(deportes);
                 ComboBoxDeportes.getSelectionModel().select(todos); // seleccionar por defecto
@@ -216,6 +219,12 @@ public class EstadisticasController extends Controller implements Initializable 
 
     @Override
     public void initialize() {
+    }
+
+    @FXML
+    private void onActionBtnActualizar(ActionEvent event) {
+        cargarJson();
+        Filtrar();
     }
 
 }

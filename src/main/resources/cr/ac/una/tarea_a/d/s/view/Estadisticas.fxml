@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
@@ -21,8 +22,9 @@
             </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="23.0" prefWidth="778.0" spacing="10.0">
                <children>
-                  <MFXTextField fx:id="filterField" floatMode="BORDER" floatingText="Buscador" floatingTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="475.0" />
-                  <ComboBox fx:id="ComboBoxDeportes" maxWidth="200.0" prefHeight="35.0" prefWidth="150.0" />
+                  <MFXTextField fx:id="filterField" floatMode="BORDER" floatingText="Buscador" floatingTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="434.0" />
+                  <ComboBox fx:id="ComboBoxDeportes" maxWidth="200.0" prefHeight="35.0" prefWidth="168.0" />
+                  <MFXButton fx:id="btnActualizar" minHeight="-Infinity" minWidth="-Infinity" onAction="#onActionBtnActualizar" prefHeight="35.0" prefWidth="100.0" text="Actualizar" />
                </children>
                <padding>
                   <Insets left="10.0" right="10.0" />
