@@ -127,6 +127,7 @@ public class RankingController extends Controller implements Initializable {
         if (deportes != null) {
             Deporte todos = new Deporte("Todos");
             todos.setNombre("Todos");
+            ComboBoxDeportes.getItems().clear();
             ComboBoxDeportes.getItems().add(todos);
             ComboBoxDeportes.getItems().addAll(deportes);
             ComboBoxDeportes.getSelectionModel().select(todos); // seleccionar por defecto
