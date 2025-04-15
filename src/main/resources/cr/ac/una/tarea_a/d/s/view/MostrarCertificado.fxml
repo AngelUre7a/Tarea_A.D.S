@@ -1,11 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.MostrarCertificadoController">
-    
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.MostrarCertificadoController">
+   <children>
+      <VBox layoutX="192.0" layoutY="115.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <ImageView fitHeight="55.0" fitWidth="122.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="lblNombreEquipo" alignment="CENTER" prefHeight="38.0" prefWidth="87.0" text="&quot;nombre&quot;" />
+                              <Label prefHeight="31.0" prefWidth="283.0" text="Estadisticas:" />
+                              <HBox prefHeight="36.0" prefWidth="280.0">
+                                 <children>
+                                    <Label prefHeight="38.0" prefWidth="50.0" text="Puntos:" />
+                                    <Label fx:id="lblPuntos" prefHeight="36.0" prefWidth="208.0" text="Label" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="36.0" prefWidth="280.0">
+                                 <children>
+                                    <Label prefHeight="36.0" prefWidth="136.0" text="Partidos Ganados:" />
+                                    <Label fx:id="lblPartidosGanados" prefHeight="36.0" prefWidth="208.0" text="Label" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="36.0" prefWidth="280.0">
+                                 <children>
+                                    <Label prefHeight="36.0" prefWidth="125.0" text="Deporte Jugado:" />
+                                    <Label fx:id="lblDeporteJugado" prefHeight="36.0" prefWidth="208.0" text="Label" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <ImageView fx:id="imgEscudo" fitHeight="266.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Label alignment="CENTER" prefHeight="34.0" prefWidth="600.0" text="¡Felicidades equipo por su increíble victoria en el torneo, demostraron talento, esfuerzo y gran trabajo!" />
+               </children>
+            </VBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="560.0" spacing="200.0">
+               <children>
+                  <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" prefHeight="50.0" prefWidth="140.0" text="Volver" />
+                  <MFXButton fx:id="btnImprimirCert" onAction="#onActionBtnImprimirCert" prefHeight="50.0" prefWidth="140.0" text="Imprimir certificado" />
+               </children>
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>

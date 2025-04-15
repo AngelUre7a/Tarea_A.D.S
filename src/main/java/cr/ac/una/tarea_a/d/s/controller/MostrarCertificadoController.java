@@ -4,9 +4,14 @@
  */
 package cr.ac.una.tarea_a.d.s.controller;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -14,6 +19,21 @@ import javafx.fxml.Initializable;
  * @author Usuario
  */
 public class MostrarCertificadoController extends Controller implements Initializable {
+
+    @FXML
+    private Label lblNombreEquipo;
+    @FXML
+    private Label lblPuntos;
+    @FXML
+    private Label lblPartidosGanados;
+    @FXML
+    private Label lblDeporteJugado;
+    @FXML
+    private ImageView imgEscudo;
+    @FXML
+    private MFXButton btnVolver;
+    @FXML
+    private MFXButton btnImprimirCert;
 
     /**
      * Initializes the controller class.
@@ -25,6 +45,14 @@ public class MostrarCertificadoController extends Controller implements Initiali
 
     @Override
     public void initialize() {
+    }
+
+    @FXML
+    private void onActionBtnVolver(ActionEvent event) {
+    }
+
+    @FXML
+    private void onActionBtnImprimirCert(ActionEvent event) {
     }
     
 }
