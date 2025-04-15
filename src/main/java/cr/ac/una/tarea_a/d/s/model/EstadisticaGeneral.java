@@ -1,54 +1,28 @@
 package cr.ac.una.tarea_a.d.s.model;
 
 public class EstadisticaGeneral {
+
     private String idEquipo;
+    private int partidosJugados;
     private int partidosGanados;
     private int partidosPerdidos;
     private int golesAFavor;
     private int golesEnContra;
     private int puntos;
 
-    public EstadisticaGeneral(String idEquipo) {
+    public EstadisticaGeneral() {
+    }
+
+    public EstadisticaGeneral(String idEquipo, int partidosJugados, int partidosGanados, int partidosPerdidos,
+            int golesAFavor, int golesEnContra, int puntos) {
         this.idEquipo = idEquipo;
-        this.partidosGanados = 0;
-        this.partidosPerdidos = 0;
-        this.golesAFavor = 0;
-        this.golesEnContra = 0;
-        this.puntos = 0;
+        this.partidosJugados = partidosJugados;
+        this.partidosGanados = partidosGanados;
+        this.partidosPerdidos = partidosPerdidos;
+        this.golesAFavor = golesAFavor;
+        this.golesEnContra = golesEnContra;
+        this.puntos = puntos;
     }
-
-    public void actualizarDesdePartida(Partida partida) {
-        boolean esEquipo1 = partida.getEquipo1Id().toString().equals(idEquipo);
-        boolean esEquipo2 = partida.getEquipo2Id().toString().equals(idEquipo);
-
-        if (esEquipo1 || esEquipo2) {
-            int puntosPropios = esEquipo1 ? partida.getPuntosPrimerEquipo() : partida.getPuntosSegundoEquipo();
-            int puntosRival = esEquipo1 ? partida.getPuntosSegundoEquipo() : partida.getPuntosPrimerEquipo();
-
-            golesAFavor += puntosPropios;
-            golesEnContra += puntosRival;
-
-            boolean fueEmpate = partida.getPuntosPrimerEquipo() == partida.getPuntosSegundoEquipo();
-            boolean gano = partida.getGanadorId() != null && partida.getGanadorId().toString().equals(idEquipo);
-
-            if (gano) {
-                partidosGanados++;
-                puntos += fueEmpate ? 2 : 3;  // 2 si fue por desempate, 3 si ganó directo
-            } else {
-                partidosPerdidos++;
-            }
-        }
-    }
-
-    public void reiniciar() {
-        partidosGanados = 0;
-        partidosPerdidos = 0;
-        golesAFavor = 0;
-        golesEnContra = 0;
-        puntos = 0;
-    }
-
-    // Getters y Setters
 
     public String getIdEquipo() {
         return idEquipo;
@@ -56,6 +30,14 @@ public class EstadisticaGeneral {
 
     public void setIdEquipo(String idEquipo) {
         this.idEquipo = idEquipo;
+    }
+
+    public int getPartidosJugados() {
+        return partidosJugados;
+    }
+
+    public void setPartidosJugados(int partidosJugados) {
+        this.partidosJugados = partidosJugados;
     }
 
     public int getPartidosGanados() {
