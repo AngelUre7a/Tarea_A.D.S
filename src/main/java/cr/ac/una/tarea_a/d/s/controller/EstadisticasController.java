@@ -193,8 +193,6 @@ public class EstadisticasController extends Controller implements Initializable 
                 
                 btnVer.setOnAction(event -> {
                     Equipo equipo = getTableView().getItems().get(getIndex());
-                    System.out.println("Ver estadísticas de: " + equipo.getNombre());
-
                     AppContext.getInstance().set("EQUIPO_SELECCIONADO", equipo);
                     FlowController.getInstance().goViewInWindowModal("EstadisticasEquipo", ((Stage) root.getScene().getWindow()), false);
                 });
