@@ -85,6 +85,9 @@ public class ListaTorneoController extends Controller implements Initializable {
                 btnIniciar.setStyle("-fx-background-color: transparent;");
 
                 btnIniciar.setOnAction(event -> {
+                    Torneo torneo = getTableView().getItems().get(getIndex());
+                    AppContext.getInstance().set("TORNEO", torneo);
+                    FlowController.getInstance().goView("Llaves");
                 });
             }
 

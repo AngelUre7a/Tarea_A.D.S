@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="25.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.LlavesController">
+    <children>
+        <Label fx:id="txfNombreTorneo" alignment="CENTER" prefHeight="45.0" prefWidth="600.0" text="NOMBRE DEL TONREO" />
+        <HBox fx:id="hboxLlaves" alignment="CENTER" prefHeight="390.0" prefWidth="600.0" spacing="30.0" />
+    </children>
+</VBox>
