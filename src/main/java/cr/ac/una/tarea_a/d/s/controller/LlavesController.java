@@ -7,6 +7,7 @@ package cr.ac.una.tarea_a.d.s.controller;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.model.Torneo;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
+import cr.ac.una.tarea_a.d.s.util.FlowController;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -96,6 +98,9 @@ public class LlavesController extends Controller implements Initializable {
                 marcadorVBox.setAlignment(Pos.CENTER);
                 Button btnIniciar = new Button("Iniciar");
                 btnIniciar.setDisable(true);
+                btnIniciar.setOnAction(e->{
+                    FlowController.getInstance().goViewInWindowModal("IniciarPartido", ((Stage) root.getScene().getWindow()), false);
+                });
                 marcadorVBox.getChildren().add(btnIniciar);
 
                 partidoVBox.getChildren().addAll(equipoHBox1, marcadorVBox, equipoHBox2);
