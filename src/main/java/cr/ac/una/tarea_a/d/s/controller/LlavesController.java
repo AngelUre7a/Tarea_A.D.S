@@ -99,7 +99,7 @@ public class LlavesController extends Controller implements Initializable {
                 Button btnIniciar = new Button("Iniciar");
                 btnIniciar.setDisable(true);
                 btnIniciar.setOnAction(e->{
-                    FlowController.getInstance().goViewInWindowModal("IniciarPartido", ((Stage) root.getScene().getWindow()), false);
+                    FlowController.getInstance().goViewInWindowModal("Partido", ((Stage) root.getScene().getWindow()), false);
                 });
                 marcadorVBox.getChildren().add(btnIniciar);
 

@@ -21,7 +21,7 @@ import javafx.stage.Stage;
  *
  * @author Usuario
  */
-public class IniciarPartidoController extends Controller implements Initializable {
+public class PartidoController extends Controller implements Initializable {
 
     @FXML
     private AnchorPane root;
