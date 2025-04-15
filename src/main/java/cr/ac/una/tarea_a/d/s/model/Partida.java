@@ -4,58 +4,94 @@ package cr.ac.una.tarea_a.d.s.model;
  *
  * @author dasly
  */
+
+
 public class Partida {
-    private Long id;
-    private Long torneoId;
-    private Long equipo1Id;
-    private Long equipo2Id;
-    private int puntosPrimerEquipo;
-    private int puntosSegundoEquipo;
-    private String duracionPartida;
-    
-    private Long ganadorId;  // Reemplaza lógica de Enfrentamiento
-    private String fase;     // Ej: "Cuartos", "Semifinal", "Final"
 
-    public Partida() {}
+    private String id;
+    private String idTorneo;
+    private String idEquipoA;
+    private String idEquipoB;
+    private int golesEquipoA;
+    private int golesEquipoB;
+    private String estado; // "pendiente", "enJuego", "finalizado"
+    private String ganadorId;
 
-    public Partida(Long id, Long torneoId, Long equipo1Id, Long equipo2Id,
-                   int puntosPrimerEquipo, int puntosSegundoEquipo,
-                   String duracionPartida, Long ganadorId, String fase) {
-        this.id = id;
-        this.torneoId = torneoId;
-        this.equipo1Id = equipo1Id;
-        this.equipo2Id = equipo2Id;
-        this.puntosPrimerEquipo = puntosPrimerEquipo;
-        this.puntosSegundoEquipo = puntosSegundoEquipo;
-        this.duracionPartida = duracionPartida;
-        this.ganadorId = ganadorId;
-        this.fase = fase;
+    public Partida() {
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Partida(String id, String idTorneo, String idEquipoA, String idEquipoB, int golesEquipoA, int golesEquipoB, String estado, String ganadorId) {
+        this.id = id;
+        this.idTorneo = idTorneo;
+        this.idEquipoA = idEquipoA;
+        this.idEquipoB = idEquipoB;
+        this.golesEquipoA = golesEquipoA;
+        this.golesEquipoB = golesEquipoB;
+        this.estado = estado;
+        this.ganadorId = ganadorId;
+    }
 
-    public Long getTorneoId() { return torneoId; }
-    public void setTorneoId(Long torneoId) { this.torneoId = torneoId; }
+    public String getId() {
+        return id;
+    }
 
-    public Long getEquipo1Id() { return equipo1Id; }
-    public void setEquipo1Id(Long equipo1Id) { this.equipo1Id = equipo1Id; }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public Long getEquipo2Id() { return equipo2Id; }
-    public void setEquipo2Id(Long equipo2Id) { this.equipo2Id = equipo2Id; }
+    public String getIdTorneo() {
+        return idTorneo;
+    }
 
-    public int getPuntosPrimerEquipo() { return puntosPrimerEquipo; }
-    public void setPuntosPrimerEquipo(int puntosPrimerEquipo) { this.puntosPrimerEquipo = puntosPrimerEquipo; }
+    public void setIdTorneo(String idTorneo) {
+        this.idTorneo = idTorneo;
+    }
 
-    public int getPuntosSegundoEquipo() { return puntosSegundoEquipo; }
-    public void setPuntosSegundoEquipo(int puntosSegundoEquipo) { this.puntosSegundoEquipo = puntosSegundoEquipo; }
+    public String getIdEquipoA() {
+        return idEquipoA;
+    }
 
-    public String getDuracionPartida() { return duracionPartida; }
-    public void setDuracionPartida(String duracionPartida) { this.duracionPartida = duracionPartida; }
+    public void setIdEquipoA(String idEquipoA) {
+        this.idEquipoA = idEquipoA;
+    }
 
-    public Long getGanadorId() { return ganadorId; }
-    public void setGanadorId(Long ganadorId) { this.ganadorId = ganadorId; }
+    public String getIdEquipoB() {
+        return idEquipoB;
+    }
 
-    public String getFase() { return fase; }
-    public void setFase(String fase) { this.fase = fase; }
+    public void setIdEquipoB(String idEquipoB) {
+        this.idEquipoB = idEquipoB;
+    }
+
+    public int getGolesEquipoA() {
+        return golesEquipoA;
+    }
+
+    public void setGolesEquipoA(int golesEquipoA) {
+        this.golesEquipoA = golesEquipoA;
+    }
+
+    public int getGolesEquipoB() {
+        return golesEquipoB;
+    }
+
+    public void setGolesEquipoB(int golesEquipoB) {
+        this.golesEquipoB = golesEquipoB;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getGanadorId() {
+        return ganadorId;
+    }
+
+    public void setGanadorId(String ganadorId) {
+        this.ganadorId = ganadorId;
+    }
 }
