@@ -6,33 +6,27 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.PartidoController">
-   <children>
-      <ImageView fitHeight="400.0" fitWidth="600.0">
-         <image>
-            <Image url="@../resources/CanchaFutbol.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="iVEquipo1" fitHeight="66.0" fitWidth="60.0" layoutX="64.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="iVEquipo2" fitHeight="66.0" fitWidth="67.0" layoutX="465.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="iVBalon" fitHeight="66.0" fitWidth="67.0" layoutX="263.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true" />
-      <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="600.0">
+<BorderPane fx:id="root" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.PartidoController">
+   <top>
+      <HBox alignment="CENTER" prefHeight="42.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" prefHeight="42.0" prefWidth="40.0">
                <children>
                   <Label fx:id="lbTiempo" prefHeight="17.0" prefWidth="46.0" text="00:00" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="331.0" spacing="10.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="401.0" spacing="10.0">
                <children>
                   <ImageView fx:id="ivEscudo1" fitHeight="30.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="lbEquipo1" alignment="CENTER" prefHeight="42.0" prefWidth="74.0" text="equipo1" />
+                  <Label fx:id="lbEquipo1" alignment="CENTER" prefHeight="45.0" prefWidth="87.0" text="equipo1" />
                   <Label fx:id="lbMarcador1" text="0" />
                   <Label text="-" />
                   <Label fx:id="lbMarcador2" text="0" />
-                  <Label fx:id="lbEquipo2" prefHeight="47.0" prefWidth="75.0" text="equipo2" />
+                  <Label fx:id="lbEquipo2" alignment="CENTER" prefHeight="45.0" prefWidth="79.0" text="equipo2" />
                   <ImageView fx:id="ivEscudo2" fitHeight="34.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </HBox>
@@ -41,6 +35,30 @@
             <Insets left="65.0" />
          </padding>
       </HBox>
-      <MFXButton fx:id="btnFinalizar" layoutX="410.0" layoutY="359.0" onAction="#onActionBtnFinalizar" text="FINALIZAR PARTIDO" />
-   </children>
-</AnchorPane>
+   </top>
+   <center>
+      <VBox fx:id="fondoImgCancha" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="imgCancha" fitHeight="400.0" fitWidth="700.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../resources/CanchaFutbol.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imgEquipo2" fitHeight="66.0" fitWidth="67.0" layoutX="540.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imgBalon" fitHeight="66.0" fitWidth="67.0" layoutX="317.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imgEquipo1" fitHeight="66.0" fitWidth="67.0" layoutX="87.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <MFXButton fx:id="btnFinalizar" onAction="#onActionBtnFinalizar" prefHeight="45.0" text="FINALIZAR PARTIDO" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

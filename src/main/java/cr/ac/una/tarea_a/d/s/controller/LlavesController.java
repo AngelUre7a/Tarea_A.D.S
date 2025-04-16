@@ -67,50 +67,82 @@ public class LlavesController extends Controller implements Initializable {
 //    }
 
     private void generarEstructuraLlaves() {
-        int cantidadEquipos = torneo1.getCantidadEquipos();
-        int totalEquipos = siguientePotencia(cantidadEquipos);
-        int rondas = (int) (Math.log(totalEquipos) / Math.log(2));
-        hboxLlaves.getChildren().clear();
+    int cantidadEquipos = torneo1.getCantidadEquipos();
+    int totalEquipos = siguientePotencia(cantidadEquipos);
+    int rondas = (int) (Math.log(totalEquipos) / Math.log(2));
+    hboxLlaves.getChildren().clear();
 
-        int partidosEnLaRonda = totalEquipos / 2;
+    List<Equipo> equipos = new ArrayList<>(torneo1.getEquiposInscritos()); // Asegurate de tener esta lista
 
-        for (int r = 0; r < rondas; r++) {//Vbox para cada ronda
-            VBox rondaVBox = new VBox();
-            rondaVBox.setSpacing((r * 100) + 20);//espacio entre cada partido
-            rondaVBox.setAlignment(Pos.CENTER);
+    int partidosEnLaRonda = totalEquipos / 2;
+    int indiceEquipo = 0;
 
-            for (int p = 0; p < partidosEnLaRonda; p++) {//VBOX PARA CADA PARTIDO
-                VBox partidoVBox = new VBox();
-                partidoVBox.setSpacing(10);//distancia entre botones y label
-                partidoVBox.setAlignment(Pos.CENTER);
+    for (int r = 0; r < rondas; r++) {
+        VBox rondaVBox = new VBox();
+        rondaVBox.setSpacing((r * 100) + 20);
+        rondaVBox.setAlignment(Pos.CENTER);
 
-                Label labelEquipo1 = new Label("POR DEFINIR");
-                labelEquipo1.setStyle("-fx-text-fill: white;");
-                HBox equipoHBox1 = new HBox(labelEquipo1);
-                equipoHBox1.setAlignment(Pos.CENTER);
+        for (int p = 0; p < partidosEnLaRonda; p++) {
+            VBox partidoVBox = new VBox();
+            partidoVBox.setSpacing(10);
+            partidoVBox.setAlignment(Pos.CENTER);
 
-                Label labelEquipo2 = new Label("POR DEFINIR");
-                labelEquipo2.setStyle("-fx-text-fill: white;");
-                HBox equipoHBox2 = new HBox(labelEquipo2);
-                equipoHBox2.setAlignment(Pos.CENTER);
+            Label labelEquipo1 = new Label("POR DEFINIR");
+            Label labelEquipo2 = new Label("POR DEFINIR");
 
-                VBox marcadorVBox = new VBox();
-                marcadorVBox.setAlignment(Pos.CENTER);
-                Button btnIniciar = new Button("Iniciar");
-                btnIniciar.setDisable(true);
-                btnIniciar.setOnAction(e->{
-                    FlowController.getInstance().goViewInWindowModal("Partido", ((Stage) root.getScene().getWindow()), false);
-                });
-                marcadorVBox.getChildren().add(btnIniciar);
+            Equipo equipo1 = null;
+            Equipo equipo2 = null;
 
-                partidoVBox.getChildren().addAll(equipoHBox1, marcadorVBox, equipoHBox2);
-                rondaVBox.getChildren().add(partidoVBox);
+            if (indiceEquipo < equipos.size()) {
+                equipo1 = equipos.get(indiceEquipo++);
+                labelEquipo1.setText(equipo1.getNombre());
             }
-            hboxLlaves.getChildren().add(rondaVBox);
-            partidosEnLaRonda /= 2;
+            if (indiceEquipo < equipos.size()) {
+                equipo2 = equipos.get(indiceEquipo++);
+                labelEquipo2.setText(equipo2.getNombre());
+            }
 
+            labelEquipo1.setStyle("-fx-text-fill: white;");
+            labelEquipo2.setStyle("-fx-text-fill: white;");
+
+            HBox equipoHBox1 = new HBox(labelEquipo1);
+            equipoHBox1.setAlignment(Pos.CENTER);
+
+            HBox equipoHBox2 = new HBox(labelEquipo2);
+            equipoHBox2.setAlignment(Pos.CENTER);
+
+            VBox marcadorVBox = new VBox();
+            marcadorVBox.setAlignment(Pos.CENTER);
+
+            Button btnIniciar = new Button("Iniciar");
+            btnIniciar.setDisable(equipo1 == null || equipo2 == null); // Solo habilitado si hay dos equipos
+
+            // Guardar los equipos en el botón
+            Equipo finalEquipo1 = equipo1;
+            Equipo finalEquipo2 = equipo2;
+
+            btnIniciar.setUserData(new Equipo[]{finalEquipo1, finalEquipo2});
+            btnIniciar.setOnAction(e -> {
+                Equipo[] datos = (Equipo[]) ((Button) e.getSource()).getUserData();
+
+                if (datos[0] != null && datos[1] != null) {
+                    AppContext.getInstance().set("EQUIPO1", datos[0]);
+                    AppContext.getInstance().set("EQUIPO2", datos[1]);
+                    AppContext.getInstance().set("DEPORTE", torneo1.getTipoDeporte());
+
+                    FlowController.getInstance().goViewInWindowModal("Partido", ((Stage) root.getScene().getWindow()), false);
+                }
+            });
+
+            marcadorVBox.getChildren().add(btnIniciar);
+            partidoVBox.getChildren().addAll(equipoHBox1, marcadorVBox, equipoHBox2);
+            rondaVBox.getChildren().add(partidoVBox);
         }
+
+        hboxLlaves.getChildren().add(rondaVBox);
+        partidosEnLaRonda /= 2;
     }
+}
 
     private void llenarPrimerRonda() {
         List<Equipo> equipos = new ArrayList<>(torneo1.getEquiposInscritos());
