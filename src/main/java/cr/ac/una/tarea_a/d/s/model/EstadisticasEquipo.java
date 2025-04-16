@@ -12,7 +12,16 @@ public class EstadisticasEquipo {
     private int puntosPT;
     private boolean esGanadorDT;
 
-    public EstadisticasEquipo() {
+    public EstadisticasEquipo(String idEquipo) {
+        this.idEquipo = null;
+        this.torneosGanados = 0;
+        this.partidosGanados = 0;
+        this.golesAFavor = 0;
+        this.puntos = 0;
+        this.partidosGanadosPT = 0;
+        this.golesAFavorPT = 0;
+        this.puntosPT = 0;
+        this.esGanadorDT = false;
     }
 
     public EstadisticasEquipo(String idEquipo, int torneosGanados, int partidosGanados,
@@ -100,5 +109,12 @@ public class EstadisticasEquipo {
         this.esGanadorDT = esGanadorDT;
     }
 
+    public void incrementarPartidosGanados(){
+        this.partidosGanadosPT++;
+    }
+    
+    public void incrementarPuntosGaneDirecto(){
+        this.puntosPT = this.puntosPT + 3;
+    }
     
 }

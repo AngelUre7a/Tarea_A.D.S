@@ -2,34 +2,39 @@ package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
+import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipo;
+import cr.ac.una.tarea_a.d.s.model.Torneo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 import cr.ac.una.tarea_a.d.s.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
 import java.util.Base64;
 import java.util.ResourceBundle;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 
 public class PartidoController extends Controller implements Initializable {
@@ -55,7 +60,7 @@ public class PartidoController extends Controller implements Initializable {
     @FXML
     private ImageView imgCancha;
     @FXML
-    private VBox fondoImgCancha;
+    private AnchorPane fondoImgCancha;
     @FXML
     private Label lblTiempo;
     @FXML
@@ -64,9 +69,23 @@ public class PartidoController extends Controller implements Initializable {
     private ImageView imgEscudo2;
 
     
+    
+    private Timeline timeline;
+    private int tiempoRestante;
+    private double offsetX;
+    private double offsetY;
+
+    
+    Equipo equipo1 = (Equipo) AppContext.getInstance().get("EQUIPO1");
+    Equipo equipo2 = (Equipo) AppContext.getInstance().get("EQUIPO2");
+    String nombreDeporte = (String) AppContext.getInstance().get("DEPORTE");
     private final ObservableList<Deporte> deportesLista = FXCollections.observableArrayList();
     private final DeporteRepository deporteRepo = new DeporteRepository();
-    String nombreDeporte = (String) AppContext.getInstance().get("DEPORTE");
+    EstadisticasEquipo estadisticasEquipo;
+    
+    int marcadorEquipo1;
+    int marcadorEquipo2;
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -74,58 +93,64 @@ public class PartidoController extends Controller implements Initializable {
         imgCancha.fitWidthProperty().bind(fondoImgCancha.widthProperty());
         cargarJson();
         cargarDatosPartido();
+        configurarMovimientoBalon();
+        iniciarCuentaAtras();
     }
 
     @Override
     public void initialize() {
     }
-    /*//////////////////////////////////////////////////////////////////*/
-    private void mostrarAnimacionDesdeRecursos() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/AnimacionFinal.fxml"));
-            Parent root = loader.load();
-            AnimacionFinalController controller = loader.getController();
 
-            // Cargar imágenes desde /resources/images/
-            Image escudo = new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/escudo.png").toExternalForm());
-            Image balon = new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/balon-de-futbol.png").toExternalForm());
-
-            // Convertir a Base64 para usar el mismo método
-            String escudoBase64 = convertirImageABase64(escudo);
-            String balonBase64 = convertirImageABase64(balon);
-
-            controller.mostrarAnimacion(escudoBase64, balonBase64, "¡Real Java FC!");
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("🏆 Campeón");
-            stage.show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String convertirImageABase64(Image image) throws Exception {
-        File file = new File(new java.net.URI(image.getUrl()));
-        byte[] bytes = Files.readAllBytes(file.toPath());
-        return Base64.getEncoder().encodeToString(bytes);
-    }
     @FXML
     private void onActionBtnFinalizar(ActionEvent event) {
         
-    mostrarAnimacionDesdeRecursos(); // 🏆 Probá la animación
-    
+        EstadisticasEquipo estadisticasEquipo1 = (EstadisticasEquipo) AppContext.getInstance().get("ESTADISTICAS_" + equipo1.getNombre());
+        EstadisticasEquipo estadisticasEquipo2 = (EstadisticasEquipo) AppContext.getInstance().get("ESTADISTICAS_" + equipo2.getNombre());
+        
+        if(estadisticasEquipo1 == null){
+        estadisticasEquipo1 = new EstadisticasEquipo(equipo1.getId());
+        }
+        
+        if(estadisticasEquipo2 == null){
+        estadisticasEquipo2 = new EstadisticasEquipo(equipo2.getId());
+        }
+        
+        estadisticasEquipo1.setGolesAFavorPT(estadisticasEquipo1.getGolesAFavorPT() + marcadorEquipo1);
+        estadisticasEquipo2.setGolesAFavorPT(estadisticasEquipo2.getGolesAFavorPT() + marcadorEquipo2);
+        if (marcadorEquipo1 > marcadorEquipo2){
+            estadisticasEquipo1.incrementarPartidosGanados();
+            estadisticasEquipo1.incrementarPuntosGaneDirecto();
+            
+            agregarEstadisticasPTAGlobal(estadisticasEquipo2);
+        }
+        if (marcadorEquipo1 < marcadorEquipo2){
+            estadisticasEquipo2.incrementarPartidosGanados();
+            estadisticasEquipo2.incrementarPuntosGaneDirecto();
+            
+            agregarEstadisticasPTAGlobal(estadisticasEquipo1);
+        }
+        if (marcadorEquipo1 == marcadorEquipo2){
+            //INNOVACION
+        }
+        
+        System.out.println("Estadisticas del equipo 1, goles: " + estadisticasEquipo1.getGolesAFavorPT() + " puntos: " + estadisticasEquipo1.getPuntosPT() + " partidos ganados: " + estadisticasEquipo1.getPartidosGanadosPT());
+        System.out.println("Estadisticas del equipo 2, goles: " + estadisticasEquipo2.getGolesAFavorPT() + " puntos: " + estadisticasEquipo2.getPuntosPT() + " partidos ganados: " + estadisticasEquipo2.getPartidosGanadosPT());
+        System.out.println("Estadisticas globales del equipo 1, goles: " + estadisticasEquipo1.getGolesAFavor() + " puntos: " + estadisticasEquipo1.getPuntos() + " partidos ganados: " + estadisticasEquipo1.getPartidosGanados());
+        System.out.println("Estadisticas globales del equipo 2, goles: " + estadisticasEquipo2.getGolesAFavor() + " puntos: " + estadisticasEquipo2.getPuntos() + " partidos ganados: " + estadisticasEquipo2.getPartidosGanados());
+        
+        AppContext.getInstance().set("ESTADISTICAS_" + equipo1.getNombre(), estadisticasEquipo1);
+        AppContext.getInstance().set("ESTADISTICAS_" + equipo2.getNombre(), estadisticasEquipo2);
+        
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.close();
+        
     }
     
-    
-   
-//    
-//    @FXML
-//    private void onActionBtnFinalizar(ActionEvent event) {
-//        Stage stage = (Stage) root.getScene().getWindow();
-//        stage.close();
-//    }
+    private void agregarEstadisticasPTAGlobal(EstadisticasEquipo est) {
+        est.setGolesAFavor(est.getGolesAFavor() + est.getGolesAFavorPT());
+        est.setPuntos(est.getPuntos() + est.getPuntosPT());
+        est.setPartidosGanados(est.getPartidosGanados() + est.getPartidosGanadosPT());
+    }
     
     private void cargarJson() {
     try {
@@ -151,9 +176,6 @@ public class PartidoController extends Controller implements Initializable {
     }
     
     public void cargarDatosPartido() {
-        Equipo equipo1 = (Equipo) AppContext.getInstance().get("EQUIPO1");
-        Equipo equipo2 = (Equipo) AppContext.getInstance().get("EQUIPO2");
-        String nombreDeporte = (String) AppContext.getInstance().get("DEPORTE");
         Deporte deporte = buscarDeportePorNombre(nombreDeporte);
         if (deporte != null) {
             deporte.cargarImagenDesdeBase64();
@@ -182,4 +204,81 @@ public class PartidoController extends Controller implements Initializable {
             }
         }
     }
+    
+    
+    public void iniciarCuentaAtras() {
+        Torneo torneo = (Torneo) AppContext.getInstance().get("TORNEO");
+        if (torneo != null) {
+            tiempoRestante = torneo.getTiempoPorPartida() * 60;  // Convertir a segundos
+        } else {
+            System.out.println("Torneo no encontrado");
+            return;
+        }
+
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            int minutos = tiempoRestante / 60;
+            int segundos = tiempoRestante % 60;
+            lblTiempo.setText(String.format("%02d:%02d", minutos, segundos));
+            tiempoRestante--;
+
+            if (tiempoRestante < 0) {
+                timeline.stop();
+                lblTiempo.setText("¡Tiempo finalizado!");
+                // Aquí puedes hacer algo más, como bloquear botones o mostrar una alerta
+            }
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);  // Corre hasta que lo detengas
+        timeline.play();  // Iniciar
+    }
+
+    
+    private void configurarMovimientoBalon() {
+        imgBalon.setOnMousePressed(event -> {
+            offsetX = event.getSceneX() - imgBalon.getLayoutX();
+            offsetY = event.getSceneY() - imgBalon.getLayoutY();
+        });
+
+        imgBalon.setOnMouseDragged(event -> {
+            double nuevaX = event.getSceneX() - offsetX;
+            double nuevaY = event.getSceneY() - offsetY;
+
+            // Limitar movimiento dentro del área de juego
+            if (nuevaX >= 0 && nuevaX <= fondoImgCancha.getWidth() - imgBalon.getFitWidth()) {
+                imgBalon.setLayoutX(nuevaX);
+            }
+            if (nuevaY >= 0 && nuevaY <= fondoImgCancha.getHeight() - imgBalon.getFitHeight()) {
+                imgBalon.setLayoutY(nuevaY);
+            }
+        });
+
+        imgBalon.setOnMouseReleased(event -> {
+            verificarGol();
+        });
+    }
+
+    private void verificarGol() {
+        double x = imgBalon.getLayoutX();
+        double y = imgBalon.getLayoutY();
+
+        if (x < 50 && y > 150 && y < 250) {
+            marcadorEquipo2++;
+            lblMarcador2.setText(String.valueOf(marcadorEquipo2));
+            System.out.println("⚽ ¡GOL para el equipo 2!");
+            resetearBalon();
+        }
+
+        if (x + imgBalon.getFitWidth() > fondoImgCancha.getWidth() - 50 && y > 150 && y < 250) {
+            marcadorEquipo1++;
+            lblMarcador1.setText(String.valueOf(marcadorEquipo1));
+            System.out.println("⚽ ¡GOL para el equipo 1!");
+            resetearBalon();
+        }
+    }
+
+    private void resetearBalon() {
+        // Reposiciona el balón al centro
+        imgBalon.setLayoutX(fondoImgCancha.getWidth() / 2 - imgBalon.getFitWidth() / 2);
+        imgBalon.setLayoutY(fondoImgCancha.getHeight() / 2 - imgBalon.getFitHeight() / 2);
+    }
+
 }
