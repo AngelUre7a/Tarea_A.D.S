@@ -8,6 +8,8 @@ import cr.ac.una.tarea_a.d.s.util.AppContext;
 import cr.ac.una.tarea_a.d.s.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.utils.SwingFXUtils;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +27,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 import nu.pattern.OpenCV;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
@@ -71,7 +74,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
             ImageView.setImage(equipo.getImagen());
             esEdicion = true;
         }
-        
+
         try {
             DeporteRepository deporteRepo = new DeporteRepository();
             deportes = deporteRepo.findAll(); // carga desde el JSON
@@ -104,10 +107,17 @@ public class RegistroEquipoController extends Controller implements Initializabl
 
     @FXML
     private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
+        String rutaImagen = (String) AppContext.getInstance().get("IMAGEN_TOMADA");
         String nombre = txtNombreEquipo.getText();
-        Image imagen = ImageView.getImage();
+        Image imagen;
         String deporte = ComboBoxDeportes.getValue() != null ? ComboBoxDeportes.getValue().getNombre() : null;
 
+        if (rutaImagen != null) {
+            imagen = new Image(new File(rutaImagen).toURI().toString());
+            AppContext.getInstance().delete("IMAGEN_TOMADA");
+        } else {
+            imagen = ImageView.getImage();
+        }
         if (nombre == null || nombre.isBlank() || imagen == null || deporte == null) {
             new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar un nombre, una imagen y un tipo de deporte.");
             return;
@@ -176,9 +186,27 @@ public class RegistroEquipoController extends Controller implements Initializabl
             if (capture.read(Frame)) {
                 Imgproc.cvtColor(Frame, Frame, Imgproc.COLOR_BGR2RGB);
                 javafx.scene.image.Image image = matToImage(Frame);
-                ImageView.setImage(image);
+                try {
+                    BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+                    File carpeta = new File("imagenes");
+                    if (!carpeta.exists()) {
+                        carpeta.mkdirs();
+                    }
+                    File outputFile = new File(carpeta, "equipo_" + System.currentTimeMillis() + ".png");
+                    ImageIO.write(bufferedImage, "png", outputFile);
+
+                    Image imageFromFile = new Image(outputFile.toURI().toString());
+                    ImageView.setImage(imageFromFile);
+
+                    AppContext.getInstance().set("IMAGEN_TOMADA", outputFile.getAbsolutePath());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    new Mensaje().show(Alert.AlertType.ERROR, "Error", "No se pudo guardar la imagen tomada.");
+                }
             }
         }
+        cerrarCamara();
     }
 
     @FXML
@@ -239,6 +267,5 @@ public class RegistroEquipoController extends Controller implements Initializabl
         equipo = null;
         esEdicion = false;
     }
-
 
 }
