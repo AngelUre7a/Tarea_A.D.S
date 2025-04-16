@@ -35,9 +35,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
+import cr.ac.una.tarea_a.d.s.model.Partida;
+import cr.ac.una.tarea_a.d.s.repositories.PartidaRepository;
 
 public class PartidoController extends Controller implements Initializable {
+
+    private final PartidaRepository partidaRepository = new PartidaRepository();
 
     @FXML
     private BorderPane root;
@@ -68,24 +71,20 @@ public class PartidoController extends Controller implements Initializable {
     @FXML
     private ImageView imgEscudo2;
 
-    
-    
     private Timeline timeline;
     private int tiempoRestante;
     private double offsetX;
     private double offsetY;
 
-    
     Equipo equipo1 = (Equipo) AppContext.getInstance().get("EQUIPO1");
     Equipo equipo2 = (Equipo) AppContext.getInstance().get("EQUIPO2");
     String nombreDeporte = (String) AppContext.getInstance().get("DEPORTE");
     private final ObservableList<Deporte> deportesLista = FXCollections.observableArrayList();
     private final DeporteRepository deporteRepo = new DeporteRepository();
     EstadisticasEquipo estadisticasEquipo;
-    
+
     int marcadorEquipo1;
     int marcadorEquipo2;
-    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -103,78 +102,138 @@ public class PartidoController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnFinalizar(ActionEvent event) {
-        
         EstadisticasEquipo estadisticasEquipo1 = (EstadisticasEquipo) AppContext.getInstance().get("ESTADISTICAS_" + equipo1.getNombre());
         EstadisticasEquipo estadisticasEquipo2 = (EstadisticasEquipo) AppContext.getInstance().get("ESTADISTICAS_" + equipo2.getNombre());
-        
-        if(estadisticasEquipo1 == null){
-        estadisticasEquipo1 = new EstadisticasEquipo(equipo1.getId());
+
+        if (estadisticasEquipo1 == null) {
+            estadisticasEquipo1 = new EstadisticasEquipo(equipo1.getId());
         }
-        
-        if(estadisticasEquipo2 == null){
-        estadisticasEquipo2 = new EstadisticasEquipo(equipo2.getId());
+
+        if (estadisticasEquipo2 == null) {
+            estadisticasEquipo2 = new EstadisticasEquipo(equipo2.getId());
         }
-        
+
         estadisticasEquipo1.setGolesAFavorPT(estadisticasEquipo1.getGolesAFavorPT() + marcadorEquipo1);
         estadisticasEquipo2.setGolesAFavorPT(estadisticasEquipo2.getGolesAFavorPT() + marcadorEquipo2);
-        if (marcadorEquipo1 > marcadorEquipo2){
+
+        String ganadorId = null;
+        if (marcadorEquipo1 > marcadorEquipo2) {
+            ganadorId = equipo1.getId();
             estadisticasEquipo1.incrementarPartidosGanados();
             estadisticasEquipo1.incrementarPuntosGaneDirecto();
-            
             agregarEstadisticasPTAGlobal(estadisticasEquipo2);
-        }
-        if (marcadorEquipo1 < marcadorEquipo2){
+        } else if (marcadorEquipo2 > marcadorEquipo1) {
+            ganadorId = equipo2.getId();
             estadisticasEquipo2.incrementarPartidosGanados();
             estadisticasEquipo2.incrementarPuntosGaneDirecto();
-            
             agregarEstadisticasPTAGlobal(estadisticasEquipo1);
+        } else {
+            // Empate (si querés implementar algo más aquí)
         }
-        if (marcadorEquipo1 == marcadorEquipo2){
-            //INNOVACION
+
+        // ✅ Crear y guardar partida
+        Torneo torneo = (Torneo) AppContext.getInstance().get("TORNEO");
+        if (torneo != null) {
+            Partida partida = new Partida(
+                    null, // id será generado por el repositorio
+                    torneo.getId(),
+                    equipo1.getId(),
+                    equipo2.getId(),
+                    marcadorEquipo1,
+                    marcadorEquipo2,
+                    "finalizado",
+                    ganadorId,
+                    tiempoRestante < 0 ? 0 : tiempoRestante
+            );
+
+            try {
+                partidaRepository.save(partida);
+                System.out.println("✅ Partida guardada exitosamente en JSON.");
+            } catch (IOException e) {
+                System.err.println("❌ Error al guardar la partida: " + e.getMessage());
+            }
         }
-        
-        System.out.println("Estadisticas del equipo 1, goles: " + estadisticasEquipo1.getGolesAFavorPT() + " puntos: " + estadisticasEquipo1.getPuntosPT() + " partidos ganados: " + estadisticasEquipo1.getPartidosGanadosPT());
-        System.out.println("Estadisticas del equipo 2, goles: " + estadisticasEquipo2.getGolesAFavorPT() + " puntos: " + estadisticasEquipo2.getPuntosPT() + " partidos ganados: " + estadisticasEquipo2.getPartidosGanadosPT());
-        System.out.println("Estadisticas globales del equipo 1, goles: " + estadisticasEquipo1.getGolesAFavor() + " puntos: " + estadisticasEquipo1.getPuntos() + " partidos ganados: " + estadisticasEquipo1.getPartidosGanados());
-        System.out.println("Estadisticas globales del equipo 2, goles: " + estadisticasEquipo2.getGolesAFavor() + " puntos: " + estadisticasEquipo2.getPuntos() + " partidos ganados: " + estadisticasEquipo2.getPartidosGanados());
-        
+
         AppContext.getInstance().set("ESTADISTICAS_" + equipo1.getNombre(), estadisticasEquipo1);
         AppContext.getInstance().set("ESTADISTICAS_" + equipo2.getNombre(), estadisticasEquipo2);
-        
+
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
-        
     }
-    
+
+//    @FXML
+//    private void onActionBtnFinalizar(ActionEvent event) {
+//
+//        EstadisticasEquipo estadisticasEquipo1 = (EstadisticasEquipo) AppContext.getInstance().get("ESTADISTICAS_" + equipo1.getNombre());
+//        EstadisticasEquipo estadisticasEquipo2 = (EstadisticasEquipo) AppContext.getInstance().get("ESTADISTICAS_" + equipo2.getNombre());
+//
+//        if (estadisticasEquipo1 == null) {
+//            estadisticasEquipo1 = new EstadisticasEquipo(equipo1.getId());
+//        }
+//
+//        if (estadisticasEquipo2 == null) {
+//            estadisticasEquipo2 = new EstadisticasEquipo(equipo2.getId());
+//        }
+//
+//        estadisticasEquipo1.setGolesAFavorPT(estadisticasEquipo1.getGolesAFavorPT() + marcadorEquipo1);
+//        estadisticasEquipo2.setGolesAFavorPT(estadisticasEquipo2.getGolesAFavorPT() + marcadorEquipo2);
+//        if (marcadorEquipo1 > marcadorEquipo2) {
+//            estadisticasEquipo1.incrementarPartidosGanados();
+//            estadisticasEquipo1.incrementarPuntosGaneDirecto();
+//
+//            agregarEstadisticasPTAGlobal(estadisticasEquipo2);
+//        }
+//        if (marcadorEquipo1 < marcadorEquipo2) {
+//            estadisticasEquipo2.incrementarPartidosGanados();
+//            estadisticasEquipo2.incrementarPuntosGaneDirecto();
+//
+//            agregarEstadisticasPTAGlobal(estadisticasEquipo1);
+//        }
+//        if (marcadorEquipo1 == marcadorEquipo2) {
+//            //INNOVACION
+//        }
+//
+//        System.out.println("Estadisticas del equipo 1, goles: " + estadisticasEquipo1.getGolesAFavorPT() + " puntos: " + estadisticasEquipo1.getPuntosPT() + " partidos ganados: " + estadisticasEquipo1.getPartidosGanadosPT());
+//        System.out.println("Estadisticas del equipo 2, goles: " + estadisticasEquipo2.getGolesAFavorPT() + " puntos: " + estadisticasEquipo2.getPuntosPT() + " partidos ganados: " + estadisticasEquipo2.getPartidosGanadosPT());
+//        System.out.println("Estadisticas globales del equipo 1, goles: " + estadisticasEquipo1.getGolesAFavor() + " puntos: " + estadisticasEquipo1.getPuntos() + " partidos ganados: " + estadisticasEquipo1.getPartidosGanados());
+//        System.out.println("Estadisticas globales del equipo 2, goles: " + estadisticasEquipo2.getGolesAFavor() + " puntos: " + estadisticasEquipo2.getPuntos() + " partidos ganados: " + estadisticasEquipo2.getPartidosGanados());
+//
+//        AppContext.getInstance().set("ESTADISTICAS_" + equipo1.getNombre(), estadisticasEquipo1);
+//        AppContext.getInstance().set("ESTADISTICAS_" + equipo2.getNombre(), estadisticasEquipo2);
+//
+//        Stage stage = (Stage) root.getScene().getWindow();
+//        stage.close();
+//
+//    }
     private void agregarEstadisticasPTAGlobal(EstadisticasEquipo est) {
         est.setGolesAFavor(est.getGolesAFavor() + est.getGolesAFavorPT());
         est.setPuntos(est.getPuntos() + est.getPuntosPT());
         est.setPartidosGanados(est.getPartidosGanados() + est.getPartidosGanadosPT());
     }
-    
+
     private void cargarJson() {
-    try {
-        deportesLista.clear();  
-        for (Deporte d : deporteRepo.findAll()) {
-            d.cargarImagenDesdeBase64();  
-            deportesLista.add(d);  
+        try {
+            deportesLista.clear();
+            for (Deporte d : deporteRepo.findAll()) {
+                d.cargarImagenDesdeBase64();
+                deportesLista.add(d);
+            }
+
+        } catch (IOException e) {
+            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar deportes", "No se pudo cargar la lista de deportes.");
+            e.printStackTrace();
         }
-       
-    } catch (IOException e) {
-        new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar deportes", "No se pudo cargar la lista de deportes.");
-        e.printStackTrace();
     }
-}
 
     public Deporte buscarDeportePorNombre(String nombreDeporte) {
         for (Deporte d : deportesLista) {
             if (d.getNombre().equalsIgnoreCase(nombreDeporte)) {
-            return d;
+                return d;
             }
         }
         return null;
     }
-    
+
     public void cargarDatosPartido() {
         Deporte deporte = buscarDeportePorNombre(nombreDeporte);
         if (deporte != null) {
@@ -204,8 +263,7 @@ public class PartidoController extends Controller implements Initializable {
             }
         }
     }
-    
-    
+
     public void iniciarCuentaAtras() {
         Torneo torneo = (Torneo) AppContext.getInstance().get("TORNEO");
         if (torneo != null) {
@@ -231,7 +289,6 @@ public class PartidoController extends Controller implements Initializable {
         timeline.play();  // Iniciar
     }
 
-    
     private void configurarMovimientoBalon() {
         imgBalon.setOnMousePressed(event -> {
             offsetX = event.getSceneX() - imgBalon.getLayoutX();

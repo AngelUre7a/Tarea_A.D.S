@@ -77,23 +77,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
             if (!keyEvent.getCharacter().matches("\\d")) {
                 keyEvent.consume();
             }
-        });//MANEJO TABLEVIEW
-//        colAgregar.setCellFactory(column -> new javafx.scene.control.TableCell<Equipo, String>() {
-//            private final MFXCheckbox btnAgregar = new MFXCheckbox("");
-//
-//            @Override
-//            protected void updateItem(String item, boolean empty) {
-//                super.updateItem(item, empty);
-//                if (empty) {
-//                    setGraphic(null);
-//                } else {
-//                    btnAgregar.setOnAction(event -> {
-//
-//                    });
-//                    setGraphic(btnAgregar);
-//                }
-//            }
-//        });
+        });
         colAgregar.setCellFactory(column -> new javafx.scene.control.TableCell<Equipo, String>() {
             private final MFXCheckbox checkbox = new MFXCheckbox("");
 
@@ -234,8 +218,6 @@ public class CreacionTorneoController extends Controller implements Initializabl
         int cantidadEquipos = Integer.parseInt(txtCantidadEquipos.getText());
         int tiempoPorPartida = Integer.parseInt(txtTiempoPartido.getText());
         String id = java.util.UUID.randomUUID().toString();
-//LA LISTA ESTA VACIA POR AHORA
-//        Torneo torneo = new Torneo(null, nombre, deporte.getNombre(), cantidadEquipos, tiempoPorPartida, List.of());
         Torneo torneo = new Torneo(id, nombre, deporte.getNombre(), cantidadEquipos, tiempoPorPartida, new ArrayList<>(equiposInscritos));
 
         AppContext.getInstance().set("TORNEO_NUEVO", torneo);
@@ -250,6 +232,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
         listaTorneos.add(torneo);
 
         new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "Torneo guardado correctamente");
+        torneo.setEstado("pendiente");
 
         txtCantidadEquipos.clear();
         txtTiempoPartido.clear();

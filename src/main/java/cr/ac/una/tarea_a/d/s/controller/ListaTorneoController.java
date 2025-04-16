@@ -76,16 +76,23 @@ public class ListaTorneoController extends Controller implements Initializable {
         colIniciar.setCellFactory(column -> new javafx.scene.control.TableCell<Torneo, String>() {
             private final MFXButton btnIniciar = new MFXButton("");
 
-            {
-                btnIniciar.setText(""); // Por si acaso, eliminar texto
+            {// Configuración visual del botón
+                btnIniciar.setText(""); // Eliminar texto
                 ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/iniciar.png").toExternalForm()));
                 icono.setFitWidth(40);
                 icono.setFitHeight(40);
                 btnIniciar.setGraphic(icono);
                 btnIniciar.setStyle("-fx-background-color: transparent;");
 
+                 // Acción del botón
                 btnIniciar.setOnAction(event -> {
                     Torneo torneo = getTableView().getItems().get(getIndex());
+
+                    if ("finalizado".equalsIgnoreCase(torneo.getEstado())) {
+                        new Mensaje().show(Alert.AlertType.INFORMATION, "Torneo finalizado", "Este torneo ya terminó y no se puede volver a jugar.");
+                        return;
+                    }
+
                     AppContext.getInstance().set("TORNEO", torneo);
                     FlowController.getInstance().goView("Llaves");
                     LlavesController controller = (LlavesController) FlowController.getInstance().getController("Llaves");
@@ -93,6 +100,7 @@ public class ListaTorneoController extends Controller implements Initializable {
                         controller.onShow();
                     }
                 });
+
             }
 
             @Override
@@ -101,12 +109,20 @@ public class ListaTorneoController extends Controller implements Initializable {
                 if (empty) {
                     setGraphic(null);
                 } else {
+                    Torneo torneo = getTableView().getItems().get(getIndex());
+                    if ("finalizado".equalsIgnoreCase(torneo.getEstado())) {
+                        btnIniciar.setDisable(true); // bloquear botón si ya terminó
+                    } else {
+                        btnIniciar.setDisable(false); // habilitar si está pendiente o en curso
+                    }
+
                     HBox hbox = new HBox(btnIniciar);
-                    hbox.setAlignment(Pos.CENTER); // <- centra el botón
-                    hbox.setPrefWidth(Double.MAX_VALUE); // opcional para forzar ancho
+                    hbox.setAlignment(Pos.CENTER);
+                    hbox.setPrefWidth(Double.MAX_VALUE);
                     setGraphic(hbox);
                 }
             }
+
         });
         cargarFormulario();
 

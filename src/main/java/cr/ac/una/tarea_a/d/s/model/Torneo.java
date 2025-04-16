@@ -10,6 +10,7 @@ public class Torneo {
     private int cantidadEquipos;
     private int tiempoPorPartida; // en minutos
     private List<Equipo> equiposInscritos; //lista
+    private String estado; // Puede ser: "pendiente", "enCurso", "finalizado"
 
     // Constructor
     public Torneo(String id, String nombre, String tipoDeporte, int cantidadEquipos, int tiempoPorPartida, List<Equipo> equiposInscritos) {
@@ -69,6 +70,14 @@ public class Torneo {
 
     public void setEquiposInscritos(List<Equipo> equiposInscritos) {
         this.equiposInscritos = equiposInscritos;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     @Override

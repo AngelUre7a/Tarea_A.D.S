@@ -48,13 +48,6 @@ public class AnimacionFinalController {
         animarConfeti();
     }
 
-//    private void animarEscudo() {
-//        TranslateTransition slideUp = new TranslateTransition(Duration.seconds(1.5), imgEquipo);
-//        slideUp.setFromY(200);
-//        slideUp.setToY(0);
-//        slideUp.setInterpolator(Interpolator.EASE_OUT);
-//        slideUp.play();
-//    }
     private void animarEquipo() {
         TranslateTransition slideUp = new TranslateTransition(Duration.seconds(1.5), imgEquipo);
         slideUp.setFromY(400);
@@ -80,12 +73,6 @@ public class AnimacionFinalController {
         rotar.play();
     }
 
-//    private void animarTexto() {
-//        FadeTransition fadeIn = new FadeTransition(Duration.seconds(2), lblCampeon);
-//        fadeIn.setFromValue(0);
-//        fadeIn.setToValue(1);
-//        fadeIn.play();
-//    }
     private void animarTexto() {
         // Fade in
         FadeTransition fadeIn = new FadeTransition(Duration.seconds(2), lblCampeon);
