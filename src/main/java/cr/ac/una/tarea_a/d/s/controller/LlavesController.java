@@ -334,6 +334,16 @@ public class LlavesController extends Controller implements Initializable {
                 FlowController.getInstance().goViewInWindowModal("Partido", ((Stage) root.getScene().getWindow()), false);
                 procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
             });
+            // Crear Partida y agregarla al torneo
+            Partida partida = new Partida();
+            partida.setId(java.util.UUID.randomUUID().toString());
+            partida.setIdTorneo(torneo1.getId());
+            partida.setIdEquipoA(eq1.getId());
+            partida.setIdEquipoB(eq2.getId());
+            partida.setEstado("pendiente");
+            partida.setGolesEquipoA(0);
+            partida.setGolesEquipoB(0);
+            partida.setTiempoRestante(torneo1.getTiempoPorPartida());
             index++;
         }
     }
@@ -408,21 +418,25 @@ public class LlavesController extends Controller implements Initializable {
                 FlowController.getInstance().goViewInWindowModal("Partido", ((Stage) root.getScene().getWindow()), false);
                 procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
             });
+
             index++;
         }
         llavesPorRonda.add(ganadores);
     }
 
     public void onShow() {
-        limpiarVista(); // ¡Esto es lo que te está faltando!
-
+        limpiarVista();
         torneo1 = (Torneo) AppContext.getInstance().get("TORNEO");
+
         if (torneo1 != null) {
             txfNombreTorneo.setText(torneo1.getNombre());
-            generarEstructuraLlaves();
-            llenarPrimerRonda();
+            generarEstructuraLlaves(); // esto arma la estructura base visual
 
-            if (!"enCurso".equalsIgnoreCase(torneo1.getEstado())) {
+            // ⚠️ Si el torneo está en curso o finalizado, recuperar estado
+            if ("enCurso".equalsIgnoreCase(torneo1.getEstado()) || "finalizado".equalsIgnoreCase(torneo1.getEstado())) {
+                reconstruirDesdePartidas();
+            } else {
+                llenarPrimerRonda(); // solo si es nuevo
                 torneo1.setEstado("enCurso");
                 try {
                     new TorneoRepository().save(torneo1);
@@ -432,6 +446,96 @@ public class LlavesController extends Controller implements Initializable {
             }
         } else {
             System.out.println("Torneo null en LlavesController");
+        }
+    }
+
+    private void reconstruirDesdePartidas() {
+        try {
+            PartidaRepository repo = new PartidaRepository();
+            List<Partida> partidasGuardadas = repo.findAll();
+
+            // filtrar solo las del torneo actual
+            List<Partida> partidasTorneo = partidasGuardadas.stream()
+                    .filter(p -> p.getIdTorneo().equals(torneo1.getId()))
+                    .toList();
+
+            // ordenar por ronda lógica: en tu caso es por orden de creación, así que no se ocupa mucho
+            List<Equipo> rondaActual = new ArrayList<>(torneo1.getEquiposInscritos());
+            while (rondaActual.size() % 2 != 0) {
+                rondaActual.add(new Equipo("BYE"));
+            }
+
+            int rondaIndex = 0;
+            while (rondaActual.size() > 1) {
+                VBox rondaVBox = (VBox) hboxLlaves.getChildren().get(rondaIndex);
+                List<Equipo> ganadores = new ArrayList<>();
+
+                for (int i = 0; i < rondaActual.size(); i += 2) {
+                    Equipo eq1 = rondaActual.get(i);
+                    Equipo eq2 = rondaActual.get(i + 1);
+                    VBox partidoVBox = (VBox) rondaVBox.getChildren().get(i / 2);
+
+                    HBox hbox1 = (HBox) partidoVBox.getChildren().get(0);
+                    HBox hbox2 = (HBox) partidoVBox.getChildren().get(2);
+                    Label label1 = (Label) hbox1.getChildren().get(0);
+                    Label label2 = (Label) hbox2.getChildren().get(0);
+
+                    label1.setText(eq1.getNombre());
+                    label2.setText(eq2.getNombre());
+
+                    VBox marcadorVBox = (VBox) partidoVBox.getChildren().get(1);
+                    Button btn = (Button) marcadorVBox.getChildren().get(0);
+
+                    // buscar partida de este par
+                    Partida partida = partidasTorneo.stream()
+                            .filter(p -> (p.getIdEquipoA().equals(eq1.getId()) && p.getIdEquipoB().equals(eq2.getId()))
+                            || (p.getIdEquipoA().equals(eq2.getId()) && p.getIdEquipoB().equals(eq1.getId())))
+                            .findFirst().orElse(null);
+
+                    if (partida != null && "finalizado".equals(partida.getEstado())) {
+                        btn.setDisable(true);
+                        Equipo ganador = torneo1.getEquiposInscritos().stream()
+                                .filter(e -> e.getId().equals(partida.getGanadorId()))
+                                .findFirst().orElse(null);
+                        if (ganador != null) {
+                            ganadores.add(ganador);
+                        }
+                    } else if (!eq1.getNombre().equals("BYE") && !eq2.getNombre().equals("BYE")) {
+                        btn.setDisable(false);
+                        btn.setUserData(new Object[]{eq1, eq2, rondaIndex, i / 2});
+                        btn.setOnAction(e -> {
+                            Object[] data = (Object[]) btn.getUserData();
+                            AppContext.getInstance().set("EQUIPO1", data[0]);
+                            AppContext.getInstance().set("EQUIPO2", data[1]);
+                            AppContext.getInstance().set("DEPORTE", torneo1.getTipoDeporte());
+                            FlowController.getInstance().goViewInWindowModal("Partido", ((Stage) root.getScene().getWindow()), false);
+                            procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
+                        });
+                    }                  
+                    else {
+                        btn.setDisable(true);
+
+                        // Solo agregamos un ganador por BYE si no existe partida pendiente entre ellos
+                        if (partida == null) {
+                            ganadores.add(!eq1.getNombre().equals("BYE") ? eq1 : eq2);
+                        }
+                    }
+
+                }
+
+                llavesPorRonda.add(ganadores);
+                rondaActual = ganadores;
+                rondaIndex++;
+            }
+            boolean torneoCompleto = torneo1.getPartidas().stream()
+                    .filter(p -> p.getEstado().equalsIgnoreCase("finalizado"))
+                    .count() >= torneo1.getCantidadEquipos() - 1;
+
+            if (torneoCompleto && rondaActual.size() == 1) {
+                mostrarCampeon(rondaActual.get(0));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

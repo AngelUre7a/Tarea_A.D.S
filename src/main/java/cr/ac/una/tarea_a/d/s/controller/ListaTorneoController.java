@@ -59,6 +59,8 @@ public class ListaTorneoController extends Controller implements Initializable {
     private TableColumn<Torneo, Integer> colTiempo;
     @FXML
     private TableColumn<Torneo, String> colIniciar;
+@FXML
+private TableColumn<Torneo, String> colEstado;
 
     private final ObservableList<Torneo> torneoLista = FXCollections.observableArrayList();
     private final TorneoRepository Torneorepo = new TorneoRepository();
@@ -73,6 +75,8 @@ public class ListaTorneoController extends Controller implements Initializable {
         colCategoria.setCellValueFactory(new PropertyValueFactory<>("tipoDeporte"));
         colEquiposRegistrados.setCellValueFactory(new PropertyValueFactory<>("cantidadEquipos"));
         colTiempo.setCellValueFactory(new PropertyValueFactory<>("tiempoPorPartida"));
+        colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
+        
         colIniciar.setCellFactory(column -> new javafx.scene.control.TableCell<Torneo, String>() {
             private final MFXButton btnIniciar = new MFXButton("");
 

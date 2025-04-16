@@ -37,6 +37,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import cr.ac.una.tarea_a.d.s.model.Partida;
 import cr.ac.una.tarea_a.d.s.repositories.PartidaRepository;
+import cr.ac.una.tarea_a.d.s.repositories.TorneoRepository;
+import java.util.List;
 
 public class PartidoController extends Controller implements Initializable {
 
@@ -148,6 +150,29 @@ public class PartidoController extends Controller implements Initializable {
 
             try {
                 partidaRepository.save(partida);
+                // Agregar la partida al torneo
+                List<Partida> partidasDelTorneo = torneo.getPartidas();
+
+// Verificar si ya estaba esa partida (por si reanudaste)
+                Partida existente = partidasDelTorneo.stream()
+                        .filter(p -> (p.getIdEquipoA().equals(partida.getIdEquipoA()) && p.getIdEquipoB().equals(partida.getIdEquipoB()))
+                        || (p.getIdEquipoA().equals(partida.getIdEquipoB()) && p.getIdEquipoB().equals(partida.getIdEquipoA())))
+                        .findFirst().orElse(null);
+
+                if (existente != null) {
+                    partidasDelTorneo.remove(existente); // reemplazamos
+                }
+
+                partidasDelTorneo.add(partida);
+
+// Guardar el torneo actualizado
+                try {
+                    new TorneoRepository().save(torneo);
+                    System.out.println("✅ Torneo actualizado con nuevas partidas.");
+                } catch (IOException e) {
+                    System.err.println("❌ No se pudo guardar el torneo actualizado: " + e.getMessage());
+                }
+
                 System.out.println("✅ Partida guardada exitosamente en JSON.");
             } catch (IOException e) {
                 System.err.println("❌ Error al guardar la partida: " + e.getMessage());
@@ -161,50 +186,6 @@ public class PartidoController extends Controller implements Initializable {
         stage.close();
     }
 
-//    @FXML
-//    private void onActionBtnFinalizar(ActionEvent event) {
-//
-//        EstadisticasEquipo estadisticasEquipo1 = (EstadisticasEquipo) AppContext.getInstance().get("ESTADISTICAS_" + equipo1.getNombre());
-//        EstadisticasEquipo estadisticasEquipo2 = (EstadisticasEquipo) AppContext.getInstance().get("ESTADISTICAS_" + equipo2.getNombre());
-//
-//        if (estadisticasEquipo1 == null) {
-//            estadisticasEquipo1 = new EstadisticasEquipo(equipo1.getId());
-//        }
-//
-//        if (estadisticasEquipo2 == null) {
-//            estadisticasEquipo2 = new EstadisticasEquipo(equipo2.getId());
-//        }
-//
-//        estadisticasEquipo1.setGolesAFavorPT(estadisticasEquipo1.getGolesAFavorPT() + marcadorEquipo1);
-//        estadisticasEquipo2.setGolesAFavorPT(estadisticasEquipo2.getGolesAFavorPT() + marcadorEquipo2);
-//        if (marcadorEquipo1 > marcadorEquipo2) {
-//            estadisticasEquipo1.incrementarPartidosGanados();
-//            estadisticasEquipo1.incrementarPuntosGaneDirecto();
-//
-//            agregarEstadisticasPTAGlobal(estadisticasEquipo2);
-//        }
-//        if (marcadorEquipo1 < marcadorEquipo2) {
-//            estadisticasEquipo2.incrementarPartidosGanados();
-//            estadisticasEquipo2.incrementarPuntosGaneDirecto();
-//
-//            agregarEstadisticasPTAGlobal(estadisticasEquipo1);
-//        }
-//        if (marcadorEquipo1 == marcadorEquipo2) {
-//            //INNOVACION
-//        }
-//
-//        System.out.println("Estadisticas del equipo 1, goles: " + estadisticasEquipo1.getGolesAFavorPT() + " puntos: " + estadisticasEquipo1.getPuntosPT() + " partidos ganados: " + estadisticasEquipo1.getPartidosGanadosPT());
-//        System.out.println("Estadisticas del equipo 2, goles: " + estadisticasEquipo2.getGolesAFavorPT() + " puntos: " + estadisticasEquipo2.getPuntosPT() + " partidos ganados: " + estadisticasEquipo2.getPartidosGanadosPT());
-//        System.out.println("Estadisticas globales del equipo 1, goles: " + estadisticasEquipo1.getGolesAFavor() + " puntos: " + estadisticasEquipo1.getPuntos() + " partidos ganados: " + estadisticasEquipo1.getPartidosGanados());
-//        System.out.println("Estadisticas globales del equipo 2, goles: " + estadisticasEquipo2.getGolesAFavor() + " puntos: " + estadisticasEquipo2.getPuntos() + " partidos ganados: " + estadisticasEquipo2.getPartidosGanados());
-//
-//        AppContext.getInstance().set("ESTADISTICAS_" + equipo1.getNombre(), estadisticasEquipo1);
-//        AppContext.getInstance().set("ESTADISTICAS_" + equipo2.getNombre(), estadisticasEquipo2);
-//
-//        Stage stage = (Stage) root.getScene().getWindow();
-//        stage.close();
-//
-//    }
     private void agregarEstadisticasPTAGlobal(EstadisticasEquipo est) {
         est.setGolesAFavor(est.getGolesAFavor() + est.getGolesAFavorPT());
         est.setPuntos(est.getPuntos() + est.getPuntosPT());
