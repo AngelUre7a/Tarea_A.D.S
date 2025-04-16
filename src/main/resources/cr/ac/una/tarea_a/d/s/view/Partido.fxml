@@ -16,18 +16,18 @@
          <children>
             <HBox alignment="CENTER" prefHeight="42.0" prefWidth="40.0">
                <children>
-                  <Label fx:id="lbTiempo" prefHeight="17.0" prefWidth="46.0" text="00:00" />
+                  <Label fx:id="lblTiempo" prefHeight="17.0" prefWidth="46.0" text="00:00" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="401.0" spacing="10.0">
                <children>
-                  <ImageView fx:id="ivEscudo1" fitHeight="30.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="lbEquipo1" alignment="CENTER" prefHeight="45.0" prefWidth="87.0" text="equipo1" />
-                  <Label fx:id="lbMarcador1" text="0" />
+                  <ImageView fx:id="imgEscudo1" fitHeight="30.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="lblEquipo1" alignment="CENTER" prefHeight="45.0" prefWidth="87.0" text="equipo1" />
+                  <Label fx:id="lblMarcador1" text="0" />
                   <Label text="-" />
-                  <Label fx:id="lbMarcador2" text="0" />
-                  <Label fx:id="lbEquipo2" alignment="CENTER" prefHeight="45.0" prefWidth="79.0" text="equipo2" />
-                  <ImageView fx:id="ivEscudo2" fitHeight="34.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="lblMarcador2" text="0" />
+                  <Label fx:id="lblEquipo2" alignment="CENTER" prefHeight="45.0" prefWidth="79.0" text="equipo2" />
+                  <ImageView fx:id="imgEscudo2" fitHeight="34.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </HBox>
          </children>

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.model.Deporte;
@@ -30,25 +26,19 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Usuario
- */
+
 public class PartidoController extends Controller implements Initializable {
 
     @FXML
     private BorderPane root;
     @FXML
-    private Label lbTiempo;
+    private Label lblEquipo1;
     @FXML
-    private Label lbEquipo1;
+    private Label lblMarcador1;
     @FXML
-    private Label lbMarcador1;
+    private Label lblMarcador2;
     @FXML
-    private Label lbMarcador2;
-    @FXML
-    private Label lbEquipo2;
+    private Label lblEquipo2;
     @FXML
     private MFXButton btnFinalizar;
     @FXML
@@ -61,14 +51,17 @@ public class PartidoController extends Controller implements Initializable {
     private ImageView imgCancha;
     @FXML
     private VBox fondoImgCancha;
+    @FXML
+    private Label lblTiempo;
+    @FXML
+    private ImageView imgEscudo1;
+    @FXML
+    private ImageView imgEscudo2;
+
     
     private final ObservableList<Deporte> deportesLista = FXCollections.observableArrayList();
     private final DeporteRepository deporteRepo = new DeporteRepository();
     String nombreDeporte = (String) AppContext.getInstance().get("DEPORTE");
-    @FXML
-    private ImageView ivEscudo1;
-    @FXML
-    private ImageView ivEscudo2;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -90,12 +83,12 @@ public class PartidoController extends Controller implements Initializable {
     
     private void cargarJson() {
     try {
-        deportesLista.clear();  // Limpiar la lista antes de agregar nuevos datos
+        deportesLista.clear();  
         for (Deporte d : deporteRepo.findAll()) {
-            d.cargarImagenDesdeBase64();  // Asumiendo que cada deporte tiene su imagen en Base64
-            deportesLista.add(d);  // Agregar el deporte a la lista observable
+            d.cargarImagenDesdeBase64();  
+            deportesLista.add(d);  
         }
-        // Ahora deportesLista tiene todos los deportes cargados desde el JSON
+       
     } catch (IOException e) {
         new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar deportes", "No se pudo cargar la lista de deportes.");
         e.printStackTrace();
@@ -127,17 +120,18 @@ public class PartidoController extends Controller implements Initializable {
             System.out.println("No se encontró el deporte con nombre: " + nombreDeporte);
         }
 
-    // Mostrar datos de los equipos
         equipo1.cargarImagenDesdeBase64();
         equipo2.cargarImagenDesdeBase64();
-         if (equipo1 != null && equipo2 != null) {
-            lbEquipo1.setText(equipo1.getNombre());
-            lbEquipo2.setText(equipo2.getNombre());
+        if (equipo1 != null && equipo2 != null) {
+            lblEquipo1.setText(equipo1.getNombre());
+            lblEquipo2.setText(equipo2.getNombre());
 
-             if (equipo1.getImagen() != null) {
+            if (equipo1.getImagen() != null) {
+                imgEscudo1.setImage(equipo1.getImagen());
                 imgEquipo1.setImage(equipo1.getImagen());
             }
             if (equipo2.getImagen() != null) {
+                imgEscudo2.setImage(equipo2.getImagen());
                 imgEquipo2.setImage(equipo2.getImagen());
             }
         }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.model.Equipo;
@@ -23,11 +19,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Usuario
- */
 public class LlavesController extends Controller implements Initializable {
 
     private Torneo torneo1;
@@ -39,9 +30,6 @@ public class LlavesController extends Controller implements Initializable {
     @FXML
     private HBox hboxLlaves;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         torneo1 = (Torneo) AppContext.getInstance().get("TORNEO");
@@ -72,7 +60,7 @@ public class LlavesController extends Controller implements Initializable {
     int rondas = (int) (Math.log(totalEquipos) / Math.log(2));
     hboxLlaves.getChildren().clear();
 
-    List<Equipo> equipos = new ArrayList<>(torneo1.getEquiposInscritos()); // Asegurate de tener esta lista
+    List<Equipo> equipos = new ArrayList<>(torneo1.getEquiposInscritos());
 
     int partidosEnLaRonda = totalEquipos / 2;
     int indiceEquipo = 0;
@@ -115,9 +103,8 @@ public class LlavesController extends Controller implements Initializable {
             marcadorVBox.setAlignment(Pos.CENTER);
 
             Button btnIniciar = new Button("Iniciar");
-            btnIniciar.setDisable(equipo1 == null || equipo2 == null); // Solo habilitado si hay dos equipos
+            btnIniciar.setDisable(equipo1 == null || equipo2 == null);
 
-            // Guardar los equipos en el botón
             Equipo finalEquipo1 = equipo1;
             Equipo finalEquipo2 = equipo2;
 
