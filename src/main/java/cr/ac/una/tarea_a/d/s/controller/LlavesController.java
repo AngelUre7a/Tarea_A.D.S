@@ -46,7 +46,7 @@
 //
 //    }
 //
-////    private List<Equipo> generarGanadores(List<Equipo> equiposConBye) {
+ ////    private List<Equipo> generarGanadores(List<Equipo> equiposConBye) {
 ////        List<Equipo> ganadores = new ArrayList<>();
 ////        for (int i = 0; i < equiposConBye.size(); i += 2) {
 ////            ganadores.add(equiposConBye.get(i));
@@ -414,13 +414,24 @@ public class LlavesController extends Controller implements Initializable {
     }
 
     public void onShow() {
-        if (!"enCurso".equalsIgnoreCase(torneo1.getEstado())) {
-            torneo1.setEstado("enCurso");
-            try {
-                new TorneoRepository().save(torneo1);
-            } catch (IOException e) {
-                e.printStackTrace();
+        limpiarVista(); // ¡Esto es lo que te está faltando!
+
+        torneo1 = (Torneo) AppContext.getInstance().get("TORNEO");
+        if (torneo1 != null) {
+            txfNombreTorneo.setText(torneo1.getNombre());
+            generarEstructuraLlaves();
+            llenarPrimerRonda();
+
+            if (!"enCurso".equalsIgnoreCase(torneo1.getEstado())) {
+                torneo1.setEstado("enCurso");
+                try {
+                    new TorneoRepository().save(torneo1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+        } else {
+            System.out.println("Torneo null en LlavesController");
         }
     }
 
