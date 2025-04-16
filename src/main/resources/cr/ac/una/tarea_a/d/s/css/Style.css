@@ -32,7 +32,11 @@
     -fx-background-repeat: no-repeat;
     -fx-background-color: -fx-color-celadon;
 }
-
+.anchor-pane2 {
+    -fx-background-image: url("../resources/ganador.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+}
 BorderPane {
     -fx-background-color: -fx-color-balliverse;
 }
@@ -160,4 +164,30 @@ BorderPane {
 
 .borderSombr {
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.3, 5, 5);
+}
+/*/////////////////////////////////*/
+
+/* Fondo general */
+.root {
+    -fx-background-color: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+}
+
+/* Imagen del equipo (escudo) */
+#imgEquipo {
+    -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 20, 0.5, 0, 0);
+    -fx-border-radius: 10px;
+}
+
+/* Imagen del balón */
+#imgBalon {
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.4), 10, 0.3, 0, 0);
+}
+
+/* Texto del campeón */
+#lblCampeon {
+    -fx-font-family: "Arial Black";
+    -fx-text-fill: #ffe600;
+    -fx-font-size: 36px;
+    -fx-effect: dropshadow(one-pass-box, #000000, 4, 0.3, 2, 2);
+    -fx-alignment: center;
 }

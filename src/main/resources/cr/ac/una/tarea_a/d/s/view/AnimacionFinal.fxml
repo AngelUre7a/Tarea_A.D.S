@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.AnimacionFinalController">
-    
+<AnchorPane fx:id="root" prefHeight="400" prefWidth="600" styleClass="anchor-pane2" stylesheets="@../css/Style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="cr.ac.una.tarea_a.d.s.controller.AnimacionFinalController">
+
+    <!-- Escudo / Imagen del equipo -->
+    <ImageView fx:id="imgEquipo" fitHeight="120" fitWidth="120" layoutX="240" layoutY="250" preserveRatio="true" />
+
+    <!-- Balón girando -->
+    <ImageView fx:id="imgBalon" fitHeight="60" fitWidth="60" layoutX="270" layoutY="90" preserveRatio="true" />
+
+    <!-- Texto del campeón -->
+    <Label fx:id="lblCampeon" layoutX="90" layoutY="200" styleClass="lblCampeon" text="¡CAMPEÓN!" />
+
+    <!-- Confeti animado -->
+    <Label fx:id="lblConfeti" layoutX="250" layoutY="20" style="-fx-font-size: 30px;" text="🎊🎉🎊🎉🎊" />
+
 </AnchorPane>

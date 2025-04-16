@@ -4,8 +4,6 @@ package cr.ac.una.tarea_a.d.s.model;
  *
  * @author dasly
  */
-
-
 public class Partida {
 
     private String id;
@@ -16,11 +14,12 @@ public class Partida {
     private int golesEquipoB;
     private String estado; // "pendiente", "enJuego", "finalizado"
     private String ganadorId;
+    private int tiempoRestante;
 
     public Partida() {
     }
 
-    public Partida(String id, String idTorneo, String idEquipoA, String idEquipoB, int golesEquipoA, int golesEquipoB, String estado, String ganadorId) {
+    public Partida(String id, String idTorneo, String idEquipoA, String idEquipoB, int golesEquipoA, int golesEquipoB, String estado, String ganadorId, int tiempoRestante) {
         this.id = id;
         this.idTorneo = idTorneo;
         this.idEquipoA = idEquipoA;
@@ -29,6 +28,7 @@ public class Partida {
         this.golesEquipoB = golesEquipoB;
         this.estado = estado;
         this.ganadorId = ganadorId;
+        this.tiempoRestante = tiempoRestante;
     }
 
     public String getId() {
@@ -93,5 +93,13 @@ public class Partida {
 
     public void setGanadorId(String ganadorId) {
         this.ganadorId = ganadorId;
+    }
+    
+    public int getTiempoRestante() {
+        return tiempoRestante;
+    }
+
+    public void setTiempoRestante(int tiempoRestante) {
+        this.tiempoRestante = tiempoRestante;
     }
 }

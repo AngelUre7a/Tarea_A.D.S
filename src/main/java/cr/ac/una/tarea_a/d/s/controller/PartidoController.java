@@ -8,15 +8,20 @@ import cr.ac.una.tarea_a.d.s.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.Base64;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -74,12 +79,53 @@ public class PartidoController extends Controller implements Initializable {
     @Override
     public void initialize() {
     }
+    /*//////////////////////////////////////////////////////////////////*/
+    private void mostrarAnimacionDesdeRecursos() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/AnimacionFinal.fxml"));
+            Parent root = loader.load();
+            AnimacionFinalController controller = loader.getController();
 
+            // Cargar imágenes desde /resources/images/
+            Image escudo = new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/escudo.png").toExternalForm());
+            Image balon = new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/balon-de-futbol.png").toExternalForm());
+
+            // Convertir a Base64 para usar el mismo método
+            String escudoBase64 = convertirImageABase64(escudo);
+            String balonBase64 = convertirImageABase64(balon);
+
+            controller.mostrarAnimacion(escudoBase64, balonBase64, "¡Real Java FC!");
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("🏆 Campeón");
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String convertirImageABase64(Image image) throws Exception {
+        File file = new File(new java.net.URI(image.getUrl()));
+        byte[] bytes = Files.readAllBytes(file.toPath());
+        return Base64.getEncoder().encodeToString(bytes);
+    }
     @FXML
     private void onActionBtnFinalizar(ActionEvent event) {
-        Stage stage = (Stage) root.getScene().getWindow();
-        stage.close();
+        
+    mostrarAnimacionDesdeRecursos(); // 🏆 Probá la animación
+    
     }
+    
+    
+   
+//    
+//    @FXML
+//    private void onActionBtnFinalizar(ActionEvent event) {
+//        Stage stage = (Stage) root.getScene().getWindow();
+//        stage.close();
+//    }
     
     private void cargarJson() {
     try {
