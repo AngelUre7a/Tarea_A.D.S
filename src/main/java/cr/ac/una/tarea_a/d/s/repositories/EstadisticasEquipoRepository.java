@@ -12,13 +12,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
-/**
- *
- * @author dasly
- */
 public class EstadisticasEquipoRepository implements IEstadisticasEquipoRepository {
+
     private static final String DEFAULT_FILE_NAME = "EstadisticasEquipo.json";
     private final String filePath;
     private final Gson gson;
@@ -47,7 +43,7 @@ public class EstadisticasEquipoRepository implements IEstadisticasEquipoReposito
                     writer.write(gson.toJson(new ArrayList<EstadisticasEquipo>()));
                 }
             } catch (IOException e) {
-                throw new RuntimeException("Could not create file: " + filePath, e);
+                throw new RuntimeException("No se pudo crear el archivo: " + filePath, e);
             }
         }
     }
@@ -56,12 +52,8 @@ public class EstadisticasEquipoRepository implements IEstadisticasEquipoReposito
     public EstadisticasEquipo save(EstadisticasEquipo estadistica) throws IOException {
         List<EstadisticasEquipo> estadisticas = findAll();
 
-        if (estadistica.getId() == null) {
-            estadistica.setId(UUID.randomUUID().toString());
-        } else {
-            estadisticas.removeIf(p -> p.getId().equals(estadistica.getId()));
-        }
-
+        // Reemplaza si ya existe una con ese idEquipo
+        estadisticas.removeIf(e -> e.getIdEquipo().equals(estadistica.getIdEquipo()));
         estadisticas.add(estadistica);
 
         try (FileWriter writer = new FileWriter(filePath)) {
@@ -79,24 +71,23 @@ public class EstadisticasEquipoRepository implements IEstadisticasEquipoReposito
         }
 
         try (FileReader reader = new FileReader(file)) {
-            Type type = new TypeToken<List<EstadisticasEquipo>>() {
-            }.getType();
+            Type type = new TypeToken<List<EstadisticasEquipo>>() {}.getType();
             return gson.fromJson(reader, type);
         }
     }
 
     @Override
-    public Optional<EstadisticasEquipo> findById(String id) throws IOException {
+    public Optional<EstadisticasEquipo> findById(String idEquipo) throws IOException {
         List<EstadisticasEquipo> estadisticas = findAll();
         return estadisticas.stream()
-                .filter(e -> e.getId().equals(id))
+                .filter(e -> e.getIdEquipo().equals(idEquipo))
                 .findFirst();
     }
 
     @Override
-    public boolean deleteById(String id) throws IOException {
+    public boolean deleteById(String idEquipo) throws IOException {
         List<EstadisticasEquipo> estadisticas = findAll();
-        boolean removed = estadisticas.removeIf(e -> e.getId().equals(id));
+        boolean removed = estadisticas.removeIf(e -> e.getIdEquipo().equals(idEquipo));
 
         if (removed) {
             try (FileWriter writer = new FileWriter(filePath)) {

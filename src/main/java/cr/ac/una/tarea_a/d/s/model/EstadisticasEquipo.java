@@ -2,7 +2,6 @@ package cr.ac.una.tarea_a.d.s.model;
 
 public class EstadisticasEquipo {
 
-    private String id;
     private String idEquipo;
     private int torneosGanados;
     private int partidosGanados;
@@ -25,9 +24,9 @@ public class EstadisticasEquipo {
         this.esGanadorDT = false;
     }
 
-    public EstadisticasEquipo(String id, String idEquipo, int torneosGanados, int partidosGanados,
+    public EstadisticasEquipo( String idEquipo, int torneosGanados, int partidosGanados,
         int golesAFavor, int puntos, int partidosGanadosPT, int golesAFavorPT, int puntosPT, boolean esGanadorDT) {
-        this.id = id;
+   
         this.idEquipo = idEquipo;
         this.torneosGanados = torneosGanados;
         this.partidosGanados = partidosGanados;
@@ -39,13 +38,7 @@ public class EstadisticasEquipo {
         this.esGanadorDT = esGanadorDT;
     }
  // Getters y Setters
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
     public String getIdEquipo() {
         return idEquipo;
     }
