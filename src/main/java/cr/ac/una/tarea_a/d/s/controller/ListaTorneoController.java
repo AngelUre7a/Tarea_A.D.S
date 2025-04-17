@@ -100,6 +100,7 @@ private TableColumn<Torneo, String> colEstado;
                     AppContext.getInstance().set("TORNEO", torneo);
                     FlowController.getInstance().goView("Llaves");
                     LlavesController controller = (LlavesController) FlowController.getInstance().getController("Llaves");
+               
                     if (controller != null) {
                         controller.onShow();
                     }
@@ -181,9 +182,11 @@ private TableColumn<Torneo, String> colEstado;
 
     @Override
     public void initialize() {
+        cargarFormulario() ;
     }
 
     private void cargarFormulario() {
+        
         try {
             torneoLista.clear();
             for (Torneo t : Torneorepo.findAll()) {
@@ -197,5 +200,6 @@ private TableColumn<Torneo, String> colEstado;
 
         }
     }
+    
 
 }
