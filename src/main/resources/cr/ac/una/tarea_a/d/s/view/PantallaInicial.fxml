@@ -55,7 +55,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="80.0" spacing="5.0">
                      <children>
-                        <MFXButton buttonType="RAISED" prefHeight="80.0" prefWidth="250.0" styleClass="jfx-button-main-text" text="Acerca de">
+                        <MFXButton fx:id="btnAcercaDe" buttonType="RAISED" onAction="#OnActionBtnAcercaDe" prefHeight="80.0" prefWidth="250.0" styleClass="jfx-button-main-text" text="Acerca de">
                            <font>
                               <Font size="25.0" />
                            </font>

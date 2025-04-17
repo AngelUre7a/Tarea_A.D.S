@@ -1,5 +1,6 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
+import cr.ac.una.Tarea_A.D.S.util.Sonidos;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -41,7 +42,7 @@ public class AnimacionFinalController {
         }
 
         lblCampeon.setText("¡" + nombreEquipo + " CAMPEÓN!");
-
+        Sonidos.aplausos();
         animarEquipo();
         animarBalon();
         animarTexto();

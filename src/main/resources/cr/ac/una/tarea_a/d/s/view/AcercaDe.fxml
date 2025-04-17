@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.AcercaDeController">
-    
+<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="900.0" styleClass="vBox" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.AcercaDeController">
+
+    <VBox alignment="CENTER" layoutX="50.0" layoutY="50.0" prefHeight="300" prefWidth="500" spacing="15" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+        
+        <ImageView fx:id="imgLogo" fitHeight="100" fitWidth="100" />
+        
+        <Label fx:id="lblTitulo" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+        
+        <Label fx:id="lblDescripcion" style="-fx-font-size: 14px; -fx-text-alignment: center;" wrapText="true" />
+        
+        <Label fx:id="lblVersion" style="-fx-font-size: 12px;" />
+        
+        <Label fx:id="lblAutores" style="-fx-font-size: 12px;" />
+      <MFXButton fx:id="btnVolver" onAction="#OnActionBtnVolver" text="Volver" />
+    </VBox>
 </AnchorPane>
