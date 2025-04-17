@@ -14,6 +14,7 @@ public class Equipo {
     private transient Image imagen; // No se serializa
     private String tipoDeporte;
     private String imagenBase64;
+    private Boolean enTorneo = false;
 
     public Equipo() {
     }
@@ -98,13 +99,22 @@ public class Equipo {
         }
     }
 
+    public boolean isEnTorneo() {
+        return enTorneo;
+    }
+
+    public void setEnTorneo(Boolean enTorneo) {
+        this.enTorneo = enTorneo;
+    }
+
     @Override
     public String toString() {
         return "Equipo{"
                 + "id='" + id + '\''
                 + ", nombre='" + nombre + '\''
                 + ", tipoDeporte='" + tipoDeporte + '\''
-                + ", imagenCargada=" + (imagen != null)
+                + ", imagenCargada=" + (imagen != null) + '\''
+                + ", en torneo?: " + enTorneo
                 + '}';
     }
 }

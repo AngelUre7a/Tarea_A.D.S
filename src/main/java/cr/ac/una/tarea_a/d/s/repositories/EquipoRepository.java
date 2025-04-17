@@ -13,12 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
 /**
  *
  * @author dasly
  */
-public class EquipoRepository implements IEquipoRepository{
-     private static final String DEFAULT_FILE_NAME = "Equipo.json";
+public class EquipoRepository implements IEquipoRepository {
+
+    private static final String DEFAULT_FILE_NAME = "Equipo.json";
     private final String filePath;
     private final Gson gson;
 
@@ -97,14 +99,41 @@ public class EquipoRepository implements IEquipoRepository{
     @Override
     public boolean deleteById(String id) throws IOException {
         List<Equipo> equipos = findAll();
-        boolean removed = equipos.removeIf(equipo -> equipo.getId().equals(id));
 
-        if (removed) {
-            try (FileWriter writer = new FileWriter(filePath)) {
-                gson.toJson(equipos, writer);
+        // Verificar si el equipo existe
+        Optional<Equipo> equipoOptional = equipos.stream()
+                .filter(equipo -> equipo.getId().equals(id))
+                .findFirst();
+
+        if (equipoOptional.isPresent()) {
+            Equipo equipo = equipoOptional.get();
+
+            // Verificar si el equipo está en un torneo
+            if (equipo.isEnTorneo()) {
+                throw new IllegalArgumentException("El equipo no puede ser eliminado porque está participando en un torneo.");
             }
-        }
 
-        return removed;
+            boolean removed = equipos.removeIf(e -> e.getId().equals(id));
+
+            if (removed) {
+                try (FileWriter writer = new FileWriter(filePath)) {
+                    gson.toJson(equipos, writer);
+                }
+            }
+
+            return removed;
+        } else {
+            throw new IllegalArgumentException("Equipo no encontrado.");
+        }
+    }
+
+    public void update(Equipo equipo) throws IOException {
+        List<Equipo> equipos = findAll();
+        equipos.removeIf(e -> e.getId().equals(equipo.getId())); // Eliminar el equipo anterior
+        equipos.add(equipo); // Agregar el equipo actualizado
+
+        try (FileWriter writer = new FileWriter(filePath)) {
+            gson.toJson(equipos, writer);
+        }
     }
 }

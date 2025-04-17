@@ -218,8 +218,9 @@ public class CreacionTorneoController extends Controller implements Initializabl
         int cantidadEquipos = Integer.parseInt(txtCantidadEquipos.getText());
         int tiempoPorPartida = Integer.parseInt(txtTiempoPartido.getText());
         String id = java.util.UUID.randomUUID().toString();
-        Torneo torneo = new Torneo(id, nombre, deporte.getNombre(), cantidadEquipos, tiempoPorPartida, new ArrayList<>(equiposInscritos));
 
+        Torneo torneo = new Torneo(id, nombre, deporte.getNombre(), cantidadEquipos, tiempoPorPartida, new ArrayList<>(equiposInscritos));
+        equiposEnTorneo(equiposInscritos);
         AppContext.getInstance().set("TORNEO_NUEVO", torneo);
         // Añadir el torneo a la lista global de torneos
         if (!AppContext.getInstance().containsItem("LISTA_TORNEOS")) {
@@ -239,6 +240,18 @@ public class CreacionTorneoController extends Controller implements Initializabl
         //ComboBoxDeportes.setValue(null);
         ((Stage) root.getScene().getWindow()).close();
 
+    }
+
+    private void equiposEnTorneo(List<Equipo> equipos) {
+        for (Equipo equipo : equipos) {
+            equipo.setEnTorneo(true);
+            try {
+                Equiporepo.update(equipo);
+            } catch (IOException e) {
+                new Mensaje().show(Alert.AlertType.ERROR, "Error al actualizar equipo", "No se pudo actualizar el estado del equipo: " + equipo.getNombre());
+                e.printStackTrace();
+            }
+        }
     }
 
 }

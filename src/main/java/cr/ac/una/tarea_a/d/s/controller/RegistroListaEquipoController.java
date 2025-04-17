@@ -102,7 +102,11 @@ public class RegistroListaEquipoController extends Controller implements Initial
 
                 btnEditar.setOnAction(event -> {
                     Equipo equipo = getTableView().getItems().get(getIndex());
+                    //if (equipo.getEnTorneo().get()) {
+                    System.out.println("no se puede editar, ya que esta compitiedo un torneo actualmente");
+                    // } else {
                     abrirFormularioEditar(equipo);
+                    //}
                 });
             }
 
@@ -137,16 +141,21 @@ public class RegistroListaEquipoController extends Controller implements Initial
                     if (new Mensaje().showConfirmation("Confirmación", "¿Está seguro de eliminar el equipo?")) {
                         try {
                             Equiporepo.deleteById(equipo.getId());
+                            equiposLista.remove(equipo);
+                            tableView.refresh();
+                        } catch (IllegalArgumentException ex) {
+                            new Mensaje().show(Alert.AlertType.WARNING, "No se pudo eliminar", ex.getMessage());
                         } catch (IOException ex) {
                             Logger.getLogger(RegistroListaEquipoController.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        equiposLista.remove(equipo);
-                        tableView.refresh();
+
                     }
+
                 });
             }
 
             @Override
+
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty) {
