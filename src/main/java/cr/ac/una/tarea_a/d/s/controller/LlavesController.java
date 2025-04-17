@@ -219,6 +219,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -226,6 +227,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class LlavesController extends Controller implements Initializable {
+
+    private final PartidaRepository partidaRepository = new PartidaRepository();
 
     private Torneo torneo1;
     private List<List<Equipo>> llavesPorRonda = new ArrayList<>();
@@ -240,6 +243,7 @@ public class LlavesController extends Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        txfNombreTorneo.setFocusTraversable(true);
         torneo1 = (Torneo) AppContext.getInstance().get("TORNEO");
         if (torneo1 != null) {
             generarEstructuraLlaves();
@@ -262,7 +266,7 @@ public class LlavesController extends Controller implements Initializable {
         int rondas = (int) (Math.log(totalEquipos) / Math.log(2));
 
         while (equipos.size() < totalEquipos) {
-            equipos.add(new Equipo("BYE"));
+            equipos.add(new Equipo(java.util.UUID.randomUUID().toString(), "BYE", torneo1.getTipoDeporte()));
         }
         llavesPorRonda.add(new ArrayList<>(equipos));
 
@@ -307,6 +311,7 @@ public class LlavesController extends Controller implements Initializable {
 
         int index = 0;
         for (int i = 0; i < equipos.size(); i += 2) {
+
             Equipo eq1 = equipos.get(i);
             Equipo eq2 = equipos.get(i + 1);
 
@@ -322,15 +327,104 @@ public class LlavesController extends Controller implements Initializable {
             VBox marcadorVBox = (VBox) partidoVBox.getChildren().get(1);
             Button btn = (Button) marcadorVBox.getChildren().get(0);
 
-            if (!eq1.getNombre().equals("BYE") && !eq2.getNombre().equals("BYE")) {
+            if (!eq1.getNombre().equals("POR DEFINIR") && !eq2.getNombre().equals("POR DEFINIR")) {
                 btn.setDisable(false);
             }
+
             btn.setUserData(new Object[]{eq1, eq2, 0, index});
             btn.setOnAction(e -> {
+
                 Object[] data = (Object[]) btn.getUserData();
+
+                // Obtener los objetos Equipo de los datos
+                Equipo equipo1 = (Equipo) data[0];
+                Equipo equipo2 = (Equipo) data[1];
+
+                // Depuración para verificar los valores de los equipos
+                System.out.println("Equipo 1: " + equipo1);
+                System.out.println("Equipo 2: " + equipo2);
+
                 AppContext.getInstance().set("EQUIPO1", data[0]);
                 AppContext.getInstance().set("EQUIPO2", data[1]);
                 AppContext.getInstance().set("DEPORTE", torneo1.getTipoDeporte());
+
+                Boolean partidoBye = false;
+
+//                System.out.println("equipo1: " + AppContext.getInstance().get("EQUIPO1"));
+//                System.out.println("equipo2: " + AppContext.getInstance().get("EQUIPO2"));
+                // Verificar si alguno de los equipos tiene el nombre "BYE"
+                if ("BYE".equalsIgnoreCase(equipo2.getNombre())) {
+                    partidoBye = true;
+                }
+                if (partidoBye) {
+                    Equipo ganador;
+                    // Verificar cuál equipo tiene el nombre "BYE" y establecer el ganador
+                    if ("BYE".equalsIgnoreCase(equipo2.getNombre())) {
+                        ganador = equipo1;
+                        System.out.println("EQUIPO 1 AVANZA POR BYE");
+                    } else {
+                        ganador = equipo1;
+                        System.out.println("EQUIPO 2 AVANZA POR BYE");
+                    }
+                    AppContext.getInstance().set("EQUIPO_GANADOR_BYE", ganador);
+                    Torneo torneo = (Torneo) AppContext.getInstance().get("TORNEO");
+                    if (torneo != null) {
+                        Partida partida = new Partida(
+                                null, // id será generado por el repositorio
+                                torneo.getId(),
+                                equipo1.getId(),
+                                equipo2.getId(),
+                                0,
+                                0,
+                                "finalizado",
+                                ganador.getId(),
+                                0
+                        );
+
+                        try {
+                            partidaRepository.save(partida);
+                            // Agregar la partida al torneo
+                            List<Partida> partidasDelTorneo = torneo.getPartidas();
+
+// Verificar si ya estaba esa partida (por si reanudaste)
+                            Partida existente = partidasDelTorneo.stream()
+                                    .filter(p -> (p.getIdEquipoA().equals(partida.getIdEquipoA()) && p.getIdEquipoB().equals(partida.getIdEquipoB()))
+                                    || (p.getIdEquipoA().equals(partida.getIdEquipoB()) && p.getIdEquipoB().equals(partida.getIdEquipoA())))
+                                    .findFirst().orElse(null);
+
+                            if (existente != null) {
+                                partidasDelTorneo.remove(existente); // reemplazamos
+                            }
+
+                            partidasDelTorneo.add(partida);
+
+// Guardar el torneo actualizado
+                            try {
+                                new TorneoRepository().save(torneo);
+                                System.out.println("✅ Torneo actualizado con nuevas partidas.");
+                            } catch (IOException j) {
+                                System.err.println("❌ No se pudo guardar el torneo actualizado: " + j.getMessage());
+                            }
+
+                            System.out.println("✅ Partida guardada exitosamente en JSON.");
+                        } catch (IOException em) {
+                            System.err.println("❌ Error al guardar la partida: " + em.getMessage());
+                        }
+                    }
+
+                    // Mostrar alerta informando que no se jugará el partido
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Partido no jugado");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Este partido no se jugó porque uno de los equipos tiene 'BYE'.\n\n"
+                            + "¡" + ganador.getNombre() + " avanza automáticamente!");
+                    alert.showAndWait();
+
+                    // Procesar avance directamente
+                    procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
+                    return; // No continúa a la vista de partido
+
+                }
                 FlowController.getInstance().goViewInWindowModal("Partido", ((Stage) root.getScene().getWindow()), false);
                 procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
             });
@@ -392,7 +486,7 @@ public class LlavesController extends Controller implements Initializable {
         int index = 0;
         for (int i = 0; i < ganadores.size(); i += 2) {
             Equipo eq1 = ganadores.get(i);
-            Equipo eq2 = i + 1 < ganadores.size() ? ganadores.get(i + 1) : new Equipo("BYE");
+            Equipo eq2 = i + 1 < ganadores.size() ? ganadores.get(i + 1) : new Equipo(java.util.UUID.randomUUID().toString(), "BYE", torneo1.getTipoDeporte());
 
             VBox partidoVBox = (VBox) rondaVBox.getChildren().get(index);
             HBox hbox1 = (HBox) partidoVBox.getChildren().get(0);
@@ -462,11 +556,14 @@ public class LlavesController extends Controller implements Initializable {
             // ordenar por ronda lógica: en tu caso es por orden de creación, así que no se ocupa mucho
             List<Equipo> rondaActual = new ArrayList<>(torneo1.getEquiposInscritos());
             while (rondaActual.size() % 2 != 0) {
-                rondaActual.add(new Equipo("BYE"));
+                rondaActual.add(new Equipo(java.util.UUID.randomUUID().toString(), "BYE", torneo1.getTipoDeporte()));
             }
 
             int rondaIndex = 0;
             while (rondaActual.size() > 1) {
+                if (rondaActual.size() % 2 != 0) {
+                    rondaActual.add(new Equipo(java.util.UUID.randomUUID().toString(), "BYE", torneo1.getTipoDeporte()));
+                }
                 VBox rondaVBox = (VBox) hboxLlaves.getChildren().get(rondaIndex);
                 List<Equipo> ganadores = new ArrayList<>();
 
@@ -511,8 +608,7 @@ public class LlavesController extends Controller implements Initializable {
                             FlowController.getInstance().goViewInWindowModal("Partido", ((Stage) root.getScene().getWindow()), false);
                             procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
                         });
-                    }                  
-                    else {
+                    } else {
                         btn.setDisable(true);
 
                         // Solo agregamos un ganador por BYE si no existe partida pendiente entre ellos

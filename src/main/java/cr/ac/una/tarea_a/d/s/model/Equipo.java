@@ -27,8 +27,10 @@ public class Equipo {
     }
 
     // Constructor solo con nombre, útil para combos o búsqueda
-    public Equipo(String nombre) {
+    public Equipo(String id, String nombre, String tipoDeporte) {
+        this.id = id;
         this.nombre = nombre;
+        this.tipoDeporte = tipoDeporte;
     }
 
     // Getters y Setters
