@@ -222,3 +222,7 @@ BorderPane {
     -fx-padding: 15px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0.2, 4, 4);
 }
+.jfx-title-label-AcercaDe {
+    -fx-font-size: 24px;
+    -fx-text-fill: white;
+}
