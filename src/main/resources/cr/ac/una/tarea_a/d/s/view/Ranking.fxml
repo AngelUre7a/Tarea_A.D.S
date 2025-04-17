@@ -11,19 +11,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RankingController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RankingController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" prefHeight="130.0" prefWidth="760.0" spacing="20.0" AnchorPane.bottomAnchor="470.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0">
-               <children>
-                  <Label text="Ranking" />
-               </children>
-            </HBox>
+            <Label text="Ranking" />
             <HBox alignment="TOP_CENTER" prefHeight="23.0" prefWidth="778.0" spacing="10.0">
                <children>
-                  <MFXTextField fx:id="filterField" floatMode="BORDER" floatingText="Buscador" floatingTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="475.0" />
-                  <ComboBox fx:id="ComboBoxDeportes" maxWidth="200.0" prefHeight="35.0" prefWidth="150.0" />
+                  <MFXTextField fx:id="filterField" floatMode="BORDER" floatingText="Buscador" floatingTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="450.0" />
+                  <ComboBox fx:id="ComboBoxDeportes" maxWidth="200.0" prefHeight="35.0" prefWidth="170.0" />
                   <MFXButton fx:id="btnActualizar" minHeight="-Infinity" minWidth="-Infinity" onAction="#onActionBtnActualizar" prefHeight="35.0" prefWidth="100.0" text="Actualizar" />
                </children>
                <padding>
@@ -32,7 +28,7 @@
             </HBox>
          </children>
       </VBox>
-      <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="34.0" layoutY="146.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="464.0" prefWidth="731.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="146.0">
+      <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="34.0" layoutY="146.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="730.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="136.0">
          <columns>
             <TableColumn fx:id="colRango" prefWidth="69.0" text="Rango" />
             <TableColumn fx:id="colImagen" prefWidth="112.0" text="Imagen" />

@@ -18,22 +18,18 @@
 }
 
 /* ========================================================= */
-/* 🖼️ Fondos por tipo de vista */
+/* 🖼️ Fondos por Vista */
 /* ========================================================= */
-
-/* Fondo general de aplicación */
 .root {
     -fx-background-color: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
 }
 
-/* Fondo para vistas principales */
 .anchor-pane {
     -fx-background-image: url("../resources/FondoPrincipal.png");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
 }
 
-/* Fondo de VBox en modales */
 .vBox {
     -fx-background-image: url("../resources/FondoMenu.png");
     -fx-background-size: cover;
@@ -41,14 +37,12 @@
     -fx-background-color: -fx-color-celadon;
 }
 
-/* Fondo especial para vista del campeón */
 .anchor-pane2 {
     -fx-background-image: url("../resources/ganador.png");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
 }
 
-/* Fondo de menús con BorderPane */
 BorderPane {
     -fx-background-color: -fx-color-balliverse;
 }
@@ -56,8 +50,7 @@ BorderPane {
 /* ========================================================= */
 /* 🧩 Botones */
 /* ========================================================= */
-
-.button {
+/*.button {
     -fx-background-color: -fx-color-rich_black;
     -fx-padding: 5;
     -fx-text-fill: white;
@@ -78,73 +71,115 @@ BorderPane {
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.3, 4, 4);
-    -fx-background-radius: 20px;
-    -fx-border-radius: 20px;
     -fx-background-color: -fx-color-rich_black;
     -fx-border-color: white;
 }
 
 .button:focused {
     -fx-background-color: -fx-color-azulOscuro;
+}*/
+.button {
+    -fx-background-color: -fx-color-rich_black;
+    -fx-padding: 5;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -mfx-button-type: RAISED;
+    -fx-alignment: CENTER;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 5, 0.2, 2, 2);
 }
 
-/* Botones con texto largo */
+.button:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-background-radius: 21px;  /* Radio ajustado al escalado */
+    -fx-border-radius: 21px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.3, 4, 4);
+    -fx-background-color: -fx-color-rich_black;
+    -fx-border-color: white;
+}
+
+.button:focused {
+    -fx-background-color: -fx-color-azulOscuro;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+}
+/* 🔇 Quita el efecto de "ripple" blanco del clic */
+.mfx-ripple-generator {
+    -mfx-ripple-color: transparent;
+}
+
 .jfx-button-long-text {
     -fx-font-size: 12px;
 }
 
 /* ========================================================= */
+/* ✍️ TextFields y ComboBox */
+/* ========================================================= */
+.mfx-combo-box {
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-color: black;
+}
+
+/* ========================================================= */
 /* 🏷️ Labels y Títulos */
 /* ========================================================= */
-
 .label {
     -fx-text-fill: black;
     -fx-font-weight: bold;
 }
 
-.jfx-title-label-menu {
+.jfx-title-label-menu,
+.jfx-title-label-AcercaDe {
     -fx-font-size: 24px;
     -fx-text-fill: white;
 }
 
-/* Títulos personalizados con colores únicos */
-.jfx-title-A {
+/* Títulos personalizados */
+.jfx-title-A   {
     -fx-text-fill: #b8baff;
     -fx-font-size: 65px;
 }
-.jfx-title-B {
+.jfx-title-B   {
     -fx-text-fill: chartreuse;
     -fx-font-size: 65px;
 }
-.jfx-title-E {
+.jfx-title-E   {
     -fx-text-fill: brown;
     -fx-font-size: 65px;
 }
-.jfx-title-EE {
+.jfx-title-EE  {
     -fx-text-fill: hotpink;
     -fx-font-size: 65px;
 }
-.jfx-title-I {
+.jfx-title-I   {
     -fx-text-fill: #6666ff;
     -fx-font-size: 65px;
 }
-.jfx-title-L {
+.jfx-title-L   {
     -fx-text-fill: #1CA7EC;
     -fx-font-size: 65px;
 }
-.jfx-title-LL {
+.jfx-title-LL  {
     -fx-text-fill: cadetblue;
     -fx-font-size: 65px;
 }
-.jfx-title-R {
+.jfx-title-R   {
     -fx-text-fill: darkorchid;
     -fx-font-size: 65px;
 }
-.jfx-title-S {
+.jfx-title-S   {
     -fx-text-fill: #FFD091;
     -fx-font-size: 65px;
 }
-.jfx-title-V {
+.jfx-title-V   {
     -fx-text-fill: #c9e8ff;
     -fx-font-size: 65px;
 }
@@ -161,7 +196,6 @@ BorderPane {
 /* ========================================================= */
 /* 🖼️ Imágenes */
 /* ========================================================= */
-
 #imgEquipo {
     -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 20, 0.5, 0, 0);
     -fx-border-radius: 10px;
@@ -172,27 +206,8 @@ BorderPane {
 }
 
 /* ========================================================= */
-/* 🧱 Separadores y Bordes */
+/* 📊 TableViews */
 /* ========================================================= */
-
-.separator {
-    -fx-background-color: black;
-}
-
-.borderViews {
-    -fx-border-color: black;
-    -fx-border-width: 3px;
-    -fx-border-style: solid;
-    -fx-border-radius: 5px;
-    -fx-padding: 10px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.3, 5, 5);
-}
-
-.borderSombr {
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.3, 5, 5);
-}
-
-
 .table-view {
     -fx-background-color: transparent;
     -fx-border-color: black;
@@ -210,19 +225,32 @@ BorderPane {
     -fx-text-fill: black;
 }
 
-.mfx-combo-box{
-    -fx-background-radius: 20px;
-    -fx-border-radius:20px;
+/* ========================================================= */
+/* 🧱 Bordes y Sombras */
+/* ========================================================= */
+.separator {
+    -fx-background-color: black;
 }
 
+.borderViews {
+    -fx-border-color: black;
+    -fx-border-width: 3px;
+    -fx-border-style: solid;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.3, 5, 5);
+}
 
+.borderSombr {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.3, 5, 5);
+}
+
+/* ========================================================= */
+/* 📦 Contenedores Especiales */
+/* ========================================================= */
 .contenedor-redondeado {
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
     -fx-padding: 15px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0.2, 4, 4);
-}
-.jfx-title-label-AcercaDe {
-    -fx-font-size: 24px;
-    -fx-text-fill: white;
 }

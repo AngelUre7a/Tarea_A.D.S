@@ -20,7 +20,7 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="270.0">
                     <children>
-                        <MFXTextField fx:id="txtNombreDeporte" floatMode="BORDER" floatingText="Inserte el nombre del deporte" prefHeight="30.0" prefWidth="270.0" />
+                        <MFXTextField fx:id="txtNombreDeporte" floatMode="BORDER" floatingText="Inserte el nombre del deporte" prefHeight="30.0" prefWidth="270.0" styleClass="mfx-combo-box" stylesheets="@../css/Style.css" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="200.0" prefWidth="600.0" spacing="100.0">

@@ -59,12 +59,14 @@ public class ListaTorneoController extends Controller implements Initializable {
     private TableColumn<Torneo, Integer> colTiempo;
     @FXML
     private TableColumn<Torneo, String> colIniciar;
-@FXML
-private TableColumn<Torneo, String> colEstado;
+    @FXML
+    private TableColumn<Torneo, String> colEstado;
+    @FXML
+    private MFXButton btnActualizar;
 
     private final ObservableList<Torneo> torneoLista = FXCollections.observableArrayList();
     private final TorneoRepository Torneorepo = new TorneoRepository();
-
+  
     /**
      * Initializes the controller class.
      */
@@ -76,7 +78,7 @@ private TableColumn<Torneo, String> colEstado;
         colEquiposRegistrados.setCellValueFactory(new PropertyValueFactory<>("cantidadEquipos"));
         colTiempo.setCellValueFactory(new PropertyValueFactory<>("tiempoPorPartida"));
         colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
-        
+
         colIniciar.setCellFactory(column -> new javafx.scene.control.TableCell<Torneo, String>() {
             private final MFXButton btnIniciar = new MFXButton("");
 
@@ -88,7 +90,7 @@ private TableColumn<Torneo, String> colEstado;
                 btnIniciar.setGraphic(icono);
                 btnIniciar.setStyle("-fx-background-color: transparent;");
 
-                 // Acción del botón
+                // Acción del botón
                 btnIniciar.setOnAction(event -> {
                     Torneo torneo = getTableView().getItems().get(getIndex());
 
@@ -100,7 +102,7 @@ private TableColumn<Torneo, String> colEstado;
                     AppContext.getInstance().set("TORNEO", torneo);
                     FlowController.getInstance().goView("Llaves");
                     LlavesController controller = (LlavesController) FlowController.getInstance().getController("Llaves");
-               
+
                     if (controller != null) {
                         controller.onShow();
                     }
@@ -182,11 +184,11 @@ private TableColumn<Torneo, String> colEstado;
 
     @Override
     public void initialize() {
-        cargarFormulario() ;
+        cargarFormulario();
     }
 
     private void cargarFormulario() {
-        
+
         try {
             torneoLista.clear();
             for (Torneo t : Torneorepo.findAll()) {
@@ -200,6 +202,9 @@ private TableColumn<Torneo, String> colEstado;
 
         }
     }
-    
+
+    @FXML
+    private void onActionBtnActualizar(ActionEvent event) {
+    }
 
 }

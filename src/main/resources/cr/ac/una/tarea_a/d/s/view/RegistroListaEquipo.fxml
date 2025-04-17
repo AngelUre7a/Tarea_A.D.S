@@ -17,7 +17,7 @@
             <Label alignment="TOP_CENTER" text="Lista de Equipos " />
             <HBox alignment="TOP_CENTER" prefHeight="23.0" prefWidth="778.0" spacing="10.0">
                <children>
-                  <MFXTextField fx:id="filterField" floatMode="BORDER" floatingText="Buscador" floatingTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="563.0" />
+                  <MFXTextField fx:id="filterField" floatMode="BORDER" floatingText="Buscador" floatingTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="570.0" />
                   <MFXButton fx:id="btnAgregar" buttonType="RAISED" onAction="#onActionBtnAgregar" pickOnBounds="false" prefHeight="35.0" prefWidth="90.0" styleClass="jfx-button-long-text" text="Agregar" />
                   <MFXButton fx:id="btnActualizar" buttonType="RAISED" onAction="#onActionBtnActualizar" pickOnBounds="false" prefHeight="35.0" prefWidth="90.0" styleClass="jfx-button-long-text" text="Actualizar" />
                </children>
@@ -27,7 +27,7 @@
             </HBox>
          </children>
       </VBox>
-      <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="24.0" layoutY="136.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="464.0" prefWidth="731.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="136.0">
+      <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" layoutX="24.0" layoutY="136.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="450.0" prefWidth="730.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="136.0">
          <columns>
             <TableColumn fx:id="colID" prefWidth="69.0" text="ID" />
             <TableColumn fx:id="colDeporte" prefWidth="107.0" text="Deporte" />
