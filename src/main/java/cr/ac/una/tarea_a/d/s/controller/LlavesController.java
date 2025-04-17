@@ -211,6 +211,7 @@ import cr.ac.una.tarea_a.d.s.util.FlowController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -264,12 +265,14 @@ public class LlavesController extends Controller implements Initializable {
         List<Equipo> equipos = new ArrayList<>(torneo1.getEquiposInscritos());
         int totalEquipos = siguientePotencia(equipos.size());
         int rondas = (int) (Math.log(totalEquipos) / Math.log(2));
-
-        while (equipos.size() < totalEquipos) {
-            equipos.add(new Equipo(java.util.UUID.randomUUID().toString(), "BYE", torneo1.getTipoDeporte()));
+        int numByes = totalEquipos - equipos.size();
+        // Crear una lista de equipos BYE
+        List<Equipo> equiposBye = new ArrayList<>();
+        for (int i = 0; i < numByes; i++) {
+            equiposBye.add(new Equipo(java.util.UUID.randomUUID().toString(), "BYE", torneo1.getTipoDeporte()));
         }
+        equipos = intercalarEquipos(equipos, equiposBye);
         llavesPorRonda.add(new ArrayList<>(equipos));
-
         int partidosEnLaRonda = totalEquipos / 2;
         for (int r = 0; r < rondas; r++) {
             VBox rondaVBox = new VBox();
@@ -305,6 +308,23 @@ public class LlavesController extends Controller implements Initializable {
         }
     }
 
+    private List<Equipo> intercalarEquipos(List<Equipo> equipos, List<Equipo> equiposBye) {
+        List<Equipo> listaIntercalada = new ArrayList<>();
+        int i = 0, j = 0;
+
+        // Alternar entre equipos reales y BYEs
+        while (i < equipos.size() || j < equiposBye.size()) {
+            if (i < equipos.size()) {
+                listaIntercalada.add(equipos.get(i++));
+            }
+            if (j < equiposBye.size()) {
+                listaIntercalada.add(equiposBye.get(j++));
+            }
+        }
+        Collections.reverse(listaIntercalada);
+        return listaIntercalada;
+    }
+
     private void llenarPrimerRonda() {
         List<Equipo> equipos = llavesPorRonda.get(0);
         VBox primeraRondaVBox = (VBox) hboxLlaves.getChildren().get(0);
@@ -312,8 +332,8 @@ public class LlavesController extends Controller implements Initializable {
         int index = 0;
         for (int i = 0; i < equipos.size(); i += 2) {
 
-            Equipo eq1 = equipos.get(i);
-            Equipo eq2 = equipos.get(i + 1);
+            Equipo eq2 = equipos.get(i);
+            Equipo eq1 = equipos.get(i + 1);
 
             VBox partidoVBox = (VBox) primeraRondaVBox.getChildren().get(index);
             HBox hbox1 = (HBox) partidoVBox.getChildren().get(0);
@@ -703,4 +723,5 @@ public class LlavesController extends Controller implements Initializable {
     @Override
     public void initialize() {
     }
+
 }
