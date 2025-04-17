@@ -1,6 +1,6 @@
-/* ============================= */
-/* Colores Globales */
-/* ============================= */
+/* ========================================================= */
+/* 🎨 Colores Globales */
+/* ========================================================= */
 * {
     -fx-color-azul: #1CA7EC;
     -fx-color-azul_oscuro: #1F2F98;
@@ -13,82 +13,93 @@
     -fx-color-rich_black: #0c0c16;
     -fx-color-verde_agua: #4ADEDE;
     -fx-color-medium_slate_blue: #6666ff;
-    -fx-color-azulOscuro:#1e3c72 ;
-    -fx-color-balliverse: #004A67
+    -fx-color-azulOscuro: #1e3c72;
+    -fx-color-balliverse: #004A67;
 }
 
-/* ============================= */
-/*  Contenedores */
-/* ============================= */
+/* ========================================================= */
+/* 🖼️ Fondos por tipo de vista */
+/* ========================================================= */
+
+/* Fondo general de aplicación */
+.root {
+    -fx-background-color: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+}
+
+/* Fondo para vistas principales */
 .anchor-pane {
-    -fx-background-image: url("../resources/FOND.png");
+    -fx-background-image: url("../resources/FondoPrincipal.png");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
 }
 
+/* Fondo de VBox en modales */
 .vBox {
-    -fx-background-image: url("../resources/fondoPp.png");
+    -fx-background-image: url("../resources/FondoMenu.png");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
     -fx-background-color: -fx-color-celadon;
 }
+
+/* Fondo especial para vista del campeón */
 .anchor-pane2 {
     -fx-background-image: url("../resources/ganador.png");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
 }
+
+/* Fondo de menús con BorderPane */
 BorderPane {
     -fx-background-color: -fx-color-balliverse;
 }
+
+/* ========================================================= */
+/* 🧩 Botones */
+/* ========================================================= */
 
 .button {
     -fx-background-color: -fx-color-rich_black;
     -fx-padding: 5;
     -fx-text-fill: white;
     -fx-font-size: 18px;
+    -fx-font-weight: bold;
     -mfx-button-type: RAISED;
     -fx-alignment: CENTER;
-    -fx-font-weight: bold;
-
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
     -fx-border-color: white;
     -fx-border-width: 2px;
-
-    /* Transición suave */
     -fx-scale-x: 1;
     -fx-scale-y: 1;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 5, 0.2, 2, 2);
 }
 
 .button:hover {
-
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.3, 4, 4);
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
     -fx-background-color: -fx-color-rich_black;
     -fx-border-color: white;
-
-    /* Agrandamiento suave */
-    -fx-scale-x: 1.05;
-    -fx-scale-y: 1.05;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.3, 4, 4);
 }
 
 .button:focused {
     -fx-background-color: -fx-color-azulOscuro;
 }
 
+/* Botones con texto largo */
 .jfx-button-long-text {
     -fx-font-size: 12px;
 }
 
-/* ============================= */
-/* ️ Labels y Títulos */
-/* ============================= */
+/* ========================================================= */
+/* 🏷️ Labels y Títulos */
+/* ========================================================= */
+
 .label {
     -fx-text-fill: black;
     -fx-font-weight: bold;
-/*    font-family: "algerian";*/
 }
 
 .jfx-title-label-menu {
@@ -96,59 +107,44 @@ BorderPane {
     -fx-text-fill: white;
 }
 
-.jfx-title-A {
-    -fx-text-fill: #b8baff;
-    -fx-font-size: 65px;
+/* Títulos personalizados con colores únicos */
+.jfx-title-A { -fx-text-fill: #b8baff; -fx-font-size: 65px; }
+.jfx-title-B { -fx-text-fill: chartreuse; -fx-font-size: 65px; }
+.jfx-title-E { -fx-text-fill: brown; -fx-font-size: 65px; }
+.jfx-title-EE { -fx-text-fill: hotpink; -fx-font-size: 65px; }
+.jfx-title-I { -fx-text-fill: #6666ff; -fx-font-size: 65px; }
+.jfx-title-L { -fx-text-fill: #1CA7EC; -fx-font-size: 65px; }
+.jfx-title-LL { -fx-text-fill: cadetblue; -fx-font-size: 65px; }
+.jfx-title-R { -fx-text-fill: darkorchid; -fx-font-size: 65px; }
+.jfx-title-S { -fx-text-fill: #FFD091; -fx-font-size: 65px; }
+.jfx-title-V { -fx-text-fill: #c9e8ff; -fx-font-size: 65px; }
+
+/* Texto especial para campeón */
+#lblCampeon {
+    -fx-font-family: "Arial Black";
+    -fx-text-fill: #ffe600;
+    -fx-font-size: 36px;
+    -fx-effect: dropshadow(one-pass-box, #000000, 4, 0.3, 2, 2);
+    -fx-alignment: center;
 }
 
-.jfx-title-B {
-    -fx-text-fill: chartreuse;
-    -fx-font-size: 65px;
+/* ========================================================= */
+/* 🖼️ Imágenes */
+/* ========================================================= */
+
+#imgEquipo {
+    -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 20, 0.5, 0, 0);
+    -fx-border-radius: 10px;
 }
 
-.jfx-title-E {
-    -fx-text-fill: brown;
-    -fx-font-size: 65px;
+#imgBalon {
+    -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.4), 10, 0.3, 0, 0);
 }
 
-.jfx-title-EE {
-    -fx-text-fill: hotpink;
-    -fx-font-size: 65px;
-}
+/* ========================================================= */
+/* 🧱 Separadores y Bordes */
+/* ========================================================= */
 
-.jfx-title-I {
-    -fx-text-fill: #6666ff;
-    -fx-font-size: 65px;
-}
-
-.jfx-title-L {
-    -fx-text-fill: #1CA7EC;
-    -fx-font-size: 65px;
-}
-
-.jfx-title-LL {
-    -fx-text-fill: cadetblue;
-    -fx-font-size: 65px;
-}
-
-.jfx-title-R {
-    -fx-text-fill: darkorchid;
-    -fx-font-size: 65px;
-}
-
-.jfx-title-S {
-    -fx-text-fill: #FFD091;
-    -fx-font-size: 65px;
-}
-
-.jfx-title-V {
-    -fx-text-fill: #c9e8ff;
-    -fx-font-size: 65px;
-}
-
-/* ============================= */
-/* Separadores y Bordes */
-/* ============================= */
 .separator {
     -fx-background-color: black;
 }
@@ -165,29 +161,40 @@ BorderPane {
 .borderSombr {
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.3, 5, 5);
 }
-/*/////////////////////////////////*/
 
-/* Fondo general */
-.root {
-    -fx-background-color: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-font-size: 12px;
 }
 
-/* Imagen del equipo (escudo) */
-#imgEquipo {
-    -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 20, 0.5, 0, 0);
+.table-view .column-header {
+    -fx-background-color: -fx-color-balliverse;
+    -fx-text-fill: white;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: -fx-color-celeste;
+    -fx-text-fill: black;
+}
+/*
+
+.text-field, .combo-box {
+    -fx-background-color: white;
+    -fx-border-color: -fx-color-azul;
     -fx-border-radius: 10px;
+    -fx-padding: 5px;
 }
 
-/* Imagen del balón */
-#imgBalon {
-    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.4), 10, 0.3, 0, 0);
+.text-field:focused, .combo-box:focused {
+    -fx-border-color: -fx-color-azul_oscuro;
 }
 
-/* Texto del campeón */
-#lblCampeon {
-    -fx-font-family: "Arial Black";
-    -fx-text-fill: #ffe600;
-    -fx-font-size: 36px;
-    -fx-effect: dropshadow(one-pass-box, #000000, 4, 0.3, 2, 2);
-    -fx-alignment: center;
-}
+.contenedor-redondeado {
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-padding: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0.2, 4, 4);
+}*/
