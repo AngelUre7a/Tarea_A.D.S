@@ -3,8 +3,10 @@ package cr.ac.una.tarea_a.d.s.controller;
 import cr.ac.una.tarea_a.d.s.App;
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
+import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.repositories.EquipoRepository;
+import cr.ac.una.tarea_a.d.s.repositories.EstadisticasEquipoRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 import cr.ac.una.tarea_a.d.s.util.FlowController;
 import cr.ac.una.tarea_a.d.s.util.Mensaje;
@@ -14,6 +16,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -59,6 +63,8 @@ public class EstadisticasController extends Controller implements Initializable 
     private final EquipoRepository equipoRepo = new EquipoRepository();
     private final ObservableList<Deporte> deportesLista = FXCollections.observableArrayList();
     private final DeporteRepository deporteRepo = new DeporteRepository();
+    Equipo equipo;
+    
     @FXML
     private AnchorPane root;
     @FXML
@@ -69,7 +75,7 @@ public class EstadisticasController extends Controller implements Initializable 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colImagen.setCellValueFactory(new PropertyValueFactory<>("imagen"));
         colDeporte.setCellValueFactory(new PropertyValueFactory<>("tipoDeporte"));
@@ -192,7 +198,7 @@ public class EstadisticasController extends Controller implements Initializable 
                 btnVer.setStyle("-fx-background-color: transparent;");
                 
                 btnVer.setOnAction(event -> {
-                    Equipo equipo = getTableView().getItems().get(getIndex());
+                    equipo = getTableView().getItems().get(getIndex());
                     AppContext.getInstance().set("EQUIPO_SELECCIONADO", equipo);
                     FlowController.getInstance().goViewInWindowModal("EstadisticasEquipo", ((Stage) root.getScene().getWindow()), false);
                 });

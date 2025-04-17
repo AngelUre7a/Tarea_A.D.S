@@ -2,6 +2,7 @@ package cr.ac.una.tarea_a.d.s.model;
 
 public class EstadisticasEquipo {
 
+    private String idTorneo;
     private String idEquipo;
     private int torneosGanados;
     private int partidosGanados;
@@ -12,8 +13,9 @@ public class EstadisticasEquipo {
     private int puntosPT;
     private boolean esGanadorDT;
 
-    public EstadisticasEquipo(String idEquipo) {
-        this.idEquipo = null;
+    public EstadisticasEquipo(String idEquipo, String idTorneo) {
+        this.idEquipo = idEquipo;
+        this.idTorneo = idTorneo;
         this.torneosGanados = 0;
         this.partidosGanados = 0;
         this.golesAFavor = 0;
@@ -117,6 +119,14 @@ public class EstadisticasEquipo {
     
     public void incrementarPuntosGaneDirecto(){
         this.puntosPT = this.puntosPT + 3;
+    }
+
+    public String getIdTorneo() {
+        return idTorneo;
+    }
+
+    public void setIdTorneo(String idTorneo) {
+        this.idTorneo = idTorneo;
     }
     
 }

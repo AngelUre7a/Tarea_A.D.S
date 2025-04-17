@@ -52,8 +52,12 @@ public class EstadisticasEquipoRepository implements IEstadisticasEquipoReposito
     public EstadisticasEquipo save(EstadisticasEquipo estadistica) throws IOException {
         List<EstadisticasEquipo> estadisticas = findAll();
 
-        // Reemplaza si ya existe una con ese idEquipo
-        estadisticas.removeIf(e -> e.getIdEquipo().equals(estadistica.getIdEquipo()));
+        // Eliminar solo si coincide equipo y torneo
+        estadisticas.removeIf(e -> 
+            e.getIdEquipo().equals(estadistica.getIdEquipo()) &&
+            e.getIdTorneo().equals(estadistica.getIdTorneo())
+        );
+
         estadisticas.add(estadistica);
 
         try (FileWriter writer = new FileWriter(filePath)) {
@@ -61,7 +65,7 @@ public class EstadisticasEquipoRepository implements IEstadisticasEquipoReposito
         }
 
         return estadistica;
-    }
+}
 
     @Override
     public List<EstadisticasEquipo> findAll() throws IOException {

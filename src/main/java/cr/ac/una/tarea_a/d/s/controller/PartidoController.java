@@ -36,6 +36,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import cr.ac.una.tarea_a.d.s.model.Partida;
+import cr.ac.una.tarea_a.d.s.repositories.EstadisticasEquipoRepository;
 import cr.ac.una.tarea_a.d.s.repositories.PartidaRepository;
 import cr.ac.una.tarea_a.d.s.repositories.TorneoRepository;
 import java.util.List;
@@ -81,6 +82,7 @@ public class PartidoController extends Controller implements Initializable {
     Equipo equipo1 = (Equipo) AppContext.getInstance().get("EQUIPO1");
     Equipo equipo2 = (Equipo) AppContext.getInstance().get("EQUIPO2");
     String nombreDeporte = (String) AppContext.getInstance().get("DEPORTE");
+    Torneo torneo = (Torneo) AppContext.getInstance().get("TORNEO");
     private final ObservableList<Deporte> deportesLista = FXCollections.observableArrayList();
     private final DeporteRepository deporteRepo = new DeporteRepository();
     EstadisticasEquipo estadisticasEquipo;
@@ -104,15 +106,15 @@ public class PartidoController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnFinalizar(ActionEvent event) {
-        EstadisticasEquipo estadisticasEquipo1 = (EstadisticasEquipo) AppContext.getInstance().get("ESTADISTICAS_" + equipo1.getNombre());
-        EstadisticasEquipo estadisticasEquipo2 = (EstadisticasEquipo) AppContext.getInstance().get("ESTADISTICAS_" + equipo2.getNombre());
+        EstadisticasEquipo estadisticasEquipo1 = (EstadisticasEquipo) AppContext.getInstance().get("ESTADISTICAS_" + equipo1.getNombre() + "_" + torneo.getId());
+        EstadisticasEquipo estadisticasEquipo2 = (EstadisticasEquipo) AppContext.getInstance().get("ESTADISTICAS_" + equipo2.getNombre() + "_" + torneo.getId());
 
         if (estadisticasEquipo1 == null) {
-            estadisticasEquipo1 = new EstadisticasEquipo(equipo1.getId());
+            estadisticasEquipo1 = new EstadisticasEquipo(equipo1.getId(), torneo.getId());
         }
 
         if (estadisticasEquipo2 == null) {
-            estadisticasEquipo2 = new EstadisticasEquipo(equipo2.getId());
+            estadisticasEquipo2 = new EstadisticasEquipo(equipo2.getId(), torneo.getId());
         }
 
         estadisticasEquipo1.setGolesAFavorPT(estadisticasEquipo1.getGolesAFavorPT() + marcadorEquipo1);
@@ -134,7 +136,7 @@ public class PartidoController extends Controller implements Initializable {
         }
 
         // ✅ Crear y guardar partida
-        Torneo torneo = (Torneo) AppContext.getInstance().get("TORNEO");
+        
         if (torneo != null) {
             Partida partida = new Partida(
                     null, // id será generado por el repositorio
@@ -179,8 +181,19 @@ public class PartidoController extends Controller implements Initializable {
             }
         }
 
-        AppContext.getInstance().set("ESTADISTICAS_" + equipo1.getNombre(), estadisticasEquipo1);
-        AppContext.getInstance().set("ESTADISTICAS_" + equipo2.getNombre(), estadisticasEquipo2);
+        AppContext.getInstance().set("ESTADISTICAS_" + equipo1.getNombre() + "_" + torneo.getId(), estadisticasEquipo1);
+        AppContext.getInstance().set("ESTADISTICAS_" + equipo2.getNombre() + "_" + torneo.getId(), estadisticasEquipo2);
+        
+        EstadisticasEquipoRepository estadisticasEquipo1Repo = new EstadisticasEquipoRepository();
+        EstadisticasEquipoRepository estadisticasEquipo2Repo = new EstadisticasEquipoRepository();
+        
+        try {
+            estadisticasEquipo1Repo.save(estadisticasEquipo1);
+            estadisticasEquipo2Repo.save(estadisticasEquipo2);
+            
+        } catch (IOException e) {
+            System.err.println("Error al guardar las estadísticas: " + e.getMessage());
+        }
 
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
