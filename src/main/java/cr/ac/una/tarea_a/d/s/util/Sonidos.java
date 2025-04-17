@@ -14,4 +14,8 @@ public class Sonidos {
     public static void aplausos(){
         playSound("aplausos.mp3");
     }
+     
+    public static void acercaDe(){
+        playSound("acercaDe.mp3");
+    }
 }

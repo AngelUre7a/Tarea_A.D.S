@@ -9,30 +9,28 @@
 
 <AnchorPane fx:id="root" prefHeight="600.0" prefWidth="900.0" styleClass="vBox" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.AcercaDeController">
 
-    <VBox alignment="CENTER" layoutX="50.0" layoutY="50.0" prefHeight="300" prefWidth="500" spacing="15" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
-        
+    <!-- VBox con créditos que se animan -->
+    <VBox fx:id="vboxCreditos" alignment="CENTER" layoutX="50.0" layoutY="400.0" prefWidth="800.0" spacing="15">
         <ImageView fx:id="imgLogo" fitHeight="100" fitWidth="100" />
         
-        <Label fx:id="lblTitulo" style="-fx-font-size: 20px; -fx-font-weight: bold;" styleClass="jfx-title-label-AcercaDe" stylesheets="@../css/Style.css" />
+        <Label fx:id="lblTitulo" style="-fx-font-size: 20px; -fx-font-weight: bold;" styleClass="jfx-title-label-AcercaDe" />
         
-        <Label fx:id="lblDescripcion" style="-fx-font-size: 14px; -fx-text-alignment: center;" styleClass="jfx-title-label-AcercaDe" stylesheets="@../css/Style.css" wrapText="true" />
+        <Label fx:id="lblDescripcion" style="-fx-font-size: 14px; -fx-text-alignment: center;" styleClass="jfx-title-label-AcercaDe" wrapText="true" />
         
-        <Label fx:id="lblVersion" style="-fx-font-size: 12px;" styleClass="jfx-title-label-AcercaDe" stylesheets="@../css/Style.css" />
+        <Label fx:id="lblVersion" style="-fx-font-size: 12px;" styleClass="jfx-title-label-AcercaDe" />
         
-        <Label fx:id="lblAutores" style="-fx-font-size: 12px;" styleClass="jfx-title-label-AcercaDe" stylesheets="@../css/Style.css" />
-      <VBox prefHeight="171.0" prefWidth="800.0" />
-      <VBox prefHeight="200.0" prefWidth="100.0">
-         <children>
-            <MFXButton fx:id="btnVolver" onAction="#OnActionBtnVolver" text="Volver">
-               <graphic>
-                  <ImageView fitHeight="59.0" fitWidth="64.0">
-                     <image>
-                        <Image url="@../resources/volver-flecha.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </MFXButton>
-         </children>
-      </VBox>
+        <Label fx:id="lblAutores" style="-fx-font-size: 12px;" styleClass="jfx-title-label-AcercaDe" />
     </VBox>
+
+    <!-- Botón volver (NO animado) -->
+    <MFXButton fx:id="btnVolver" layoutX="20.0" layoutY="20.0" onAction="#OnActionBtnVolver" text="Volver">
+        <graphic>
+            <ImageView fitHeight="59.0" fitWidth="64.0">
+                <image>
+                    <Image url="@../resources/volver-flecha.png" />
+                </image>
+            </ImageView>
+        </graphic>
+    </MFXButton>
+
 </AnchorPane>

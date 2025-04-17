@@ -8,6 +8,7 @@ import javafx.util.Duration;
 
 import java.io.ByteArrayInputStream;
 import java.util.Base64;
+import javafx.scene.Node;
 
 public class Animaciones {
 
@@ -66,10 +67,25 @@ public class Animaciones {
         new ParallelTransition(caer, girar).play();
     }
 
+   
+    public static void animarCreditos(Node nodo, double fromY, double toY, double duracionSegundos) {
+        TranslateTransition subir = new TranslateTransition(Duration.seconds(duracionSegundos), nodo);
+        subir.setFromY(fromY);
+        subir.setToY(toY);
+        subir.setCycleCount(TranslateTransition.INDEFINITE); // o 1 si querés solo una vez
+        subir.setAutoReverse(false);
+        subir.play();
+    }
+
+
     public static Image convertirBase64AImage(String base64) {
         try {
-            if (base64 == null || base64.isEmpty()) return null;
-            if (base64.contains(",")) base64 = base64.split(",")[1];
+            if (base64 == null || base64.isEmpty()) {
+                return null;
+            }
+            if (base64.contains(",")) {
+                base64 = base64.split(",")[1];
+            }
             byte[] bytes = Base64.getDecoder().decode(base64);
             return new Image(new ByteArrayInputStream(bytes));
         } catch (Exception e) {
