@@ -4,6 +4,7 @@ import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.model.Torneo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
+import cr.ac.una.tarea_a.d.s.repositories.EquipoRepository;
 import cr.ac.una.tarea_a.d.s.repositories.TorneoRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 import cr.ac.una.tarea_a.d.s.util.FlowController;
@@ -66,7 +67,8 @@ public class ListaTorneoController extends Controller implements Initializable {
 
     private final ObservableList<Torneo> torneoLista = FXCollections.observableArrayList();
     private final TorneoRepository Torneorepo = new TorneoRepository();
-  
+    private final EquipoRepository Equiporepo = new EquipoRepository();
+
     /**
      * Initializes the controller class.
      */
@@ -207,4 +209,5 @@ public class ListaTorneoController extends Controller implements Initializable {
     private void onActionBtnActualizar(ActionEvent event) {
     }
 
+    
 }

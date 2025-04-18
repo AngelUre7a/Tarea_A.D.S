@@ -5,10 +5,12 @@ import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.model.Partida;
 import cr.ac.una.tarea_a.d.s.model.Torneo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
+import cr.ac.una.tarea_a.d.s.repositories.EquipoRepository;
 import cr.ac.una.tarea_a.d.s.repositories.PartidaRepository;
 import cr.ac.una.tarea_a.d.s.repositories.TorneoRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 import cr.ac.una.tarea_a.d.s.util.FlowController;
+import cr.ac.una.tarea_a.d.s.util.Mensaje;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ import javafx.stage.Stage;
 public class LlavesController extends Controller implements Initializable {
 
     private final PartidaRepository partidaRepository = new PartidaRepository();
+     private final EquipoRepository Equiporepo = new EquipoRepository();
 
     private Torneo torneo1;
     private List<List<Equipo>> llavesPorRonda = new ArrayList<>();
@@ -496,6 +499,7 @@ public class LlavesController extends Controller implements Initializable {
         mostrarAnimacionDelCampeon(campeon, deporte);
 
         torneo1.setEstado("finalizado");
+        equiposSinTorneo(torneo1.getEquiposInscritos());
 
         try {
             TorneoRepository torneoRepo = new TorneoRepository();
@@ -519,6 +523,17 @@ public class LlavesController extends Controller implements Initializable {
             e.printStackTrace();
         }
         return null;
+    }
+    private void equiposSinTorneo(List<Equipo> equipos) {
+        for (Equipo equipo : equipos) {
+            equipo.setEnTorneo(false);
+            try {
+                Equiporepo.update(equipo);
+            } catch (IOException e) {
+                new Mensaje().show(Alert.AlertType.ERROR, "Error al actualizar equipo", "No se pudo actualizar el estado del equipo: " + equipo.getNombre());
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
