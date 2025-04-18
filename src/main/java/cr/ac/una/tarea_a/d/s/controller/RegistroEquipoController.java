@@ -64,7 +64,8 @@ public class RegistroEquipoController extends Controller implements Initializabl
     public void initialize(URL url, ResourceBundle rb) {
         limpiarFormulario();
 
-        OpenCV.loadShared();
+//        OpenCV.loadShared();
+        OpenCV.loadLocally();
 
         List<Deporte> deportes = null;
 
