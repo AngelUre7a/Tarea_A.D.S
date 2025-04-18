@@ -1,145 +1,17 @@
 [
   {
-    "idTorneo": "f1061a88-42e3-487c-8a55-8dae1abd7043",
-    "idEquipo": "f78268b1-e00c-4246-8bcf-06be7311b151",
-    "partidosGanadosPT": 1,
-    "golesAFavorPT": 3,
-    "puntosPT": 3,
-    "esGanadorDT": false
-  },
-  {
-    "idTorneo": "f1061a88-42e3-487c-8a55-8dae1abd7043",
-    "idEquipo": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "idTorneo": "f03cf7f6-e608-4409-83cd-fa3c677d02c3",
+    "idEquipo": "e9f57a2b-f351-4309-a1ad-b82b6f6d3a20",
     "partidosGanadosPT": 0,
-    "golesAFavorPT": 1,
-    "puntosPT": 0,
-    "esGanadorDT": false
-  },
-  {
-    "idTorneo": "b53090cc-6f65-471a-aac9-94bcf8b0f7c0",
-    "idEquipo": "f78268b1-e00c-4246-8bcf-06be7311b151",
-    "partidosGanadosPT": 1,
     "golesAFavorPT": 4,
-    "puntosPT": 3,
-    "esGanadorDT": false
-  },
-  {
-    "idTorneo": "b53090cc-6f65-471a-aac9-94bcf8b0f7c0",
-    "idEquipo": "6572afcc-e0b4-4d0d-8002-2b165a435494",
-    "partidosGanadosPT": 0,
-    "golesAFavorPT": 3,
     "puntosPT": 0,
     "esGanadorDT": false
   },
   {
-    "idTorneo": "160f8f5b-e858-4833-b7e6-bcaefe11c979",
-    "idEquipo": "f78268b1-e00c-4246-8bcf-06be7311b151",
-    "partidosGanadosPT": 1,
-    "golesAFavorPT": 6,
-    "puntosPT": 3,
-    "esGanadorDT": false
-  },
-  {
-    "idTorneo": "160f8f5b-e858-4833-b7e6-bcaefe11c979",
-    "idEquipo": "6572afcc-e0b4-4d0d-8002-2b165a435494",
-    "partidosGanadosPT": 0,
-    "golesAFavorPT": 5,
-    "puntosPT": 0,
-    "esGanadorDT": false
-  },
-  {
-    "idTorneo": "fc8c902f-41eb-4c60-9f4b-843ae8f6d2cd",
-    "idEquipo": "f78268b1-e00c-4246-8bcf-06be7311b151",
-    "partidosGanadosPT": 1,
-    "golesAFavorPT": 12,
-    "puntosPT": 3,
-    "esGanadorDT": false
-  },
-  {
-    "idTorneo": "fc8c902f-41eb-4c60-9f4b-843ae8f6d2cd",
-    "idEquipo": "6572afcc-e0b4-4d0d-8002-2b165a435494",
-    "partidosGanadosPT": 0,
-    "golesAFavorPT": 10,
-    "puntosPT": 0,
-    "esGanadorDT": false
-  },
-  {
-    "idTorneo": "f15987ec-af5a-4059-8088-b9917dac96ab",
-    "idEquipo": "f78268b1-e00c-4246-8bcf-06be7311b151",
-    "partidosGanadosPT": 0,
-    "golesAFavorPT": 8,
-    "puntosPT": 0,
-    "esGanadorDT": false
-  },
-  {
-    "idTorneo": "f15987ec-af5a-4059-8088-b9917dac96ab",
-    "idEquipo": "6572afcc-e0b4-4d0d-8002-2b165a435494",
-    "partidosGanadosPT": 1,
-    "golesAFavorPT": 15,
-    "puntosPT": 3,
-    "esGanadorDT": false
-  },
-  {
-    "idTorneo": "dd9d4219-e695-413a-b3e5-f6abd808d11f",
-    "idEquipo": "f78268b1-e00c-4246-8bcf-06be7311b151",
-    "partidosGanadosPT": 1,
-    "golesAFavorPT": 2,
-    "puntosPT": 3,
-    "esGanadorDT": false
-  },
-  {
-    "idTorneo": "dd9d4219-e695-413a-b3e5-f6abd808d11f",
-    "idEquipo": "6572afcc-e0b4-4d0d-8002-2b165a435494",
-    "partidosGanadosPT": 0,
-    "golesAFavorPT": 1,
-    "puntosPT": 0,
-    "esGanadorDT": false
-  },
-  {
-    "idTorneo": "c8d92b4b-f89a-4e6b-9b19-055b7f500f15",
-    "idEquipo": "6572afcc-e0b4-4d0d-8002-2b165a435494",
-    "partidosGanadosPT": 0,
-    "golesAFavorPT": 0,
-    "puntosPT": 0,
-    "esGanadorDT": false
-  },
-  {
-    "idTorneo": "c8d92b4b-f89a-4e6b-9b19-055b7f500f15",
-    "idEquipo": "04085ed7-0341-4840-b98a-d500aa63d328",
-    "partidosGanadosPT": 0,
-    "golesAFavorPT": 2,
-    "puntosPT": 0,
-    "esGanadorDT": false
-  },
-  {
-    "idTorneo": "c8d92b4b-f89a-4e6b-9b19-055b7f500f15",
-    "idEquipo": "e5488f9e-af3a-48d8-bcbd-61a8cc5c3ffe",
-    "partidosGanadosPT": 0,
-    "golesAFavorPT": 0,
-    "puntosPT": 0,
-    "esGanadorDT": false
-  },
-  {
-    "idTorneo": "c8d92b4b-f89a-4e6b-9b19-055b7f500f15",
-    "idEquipo": "ef91be2f-b36f-4933-a1c7-4f642f88e5c1",
+    "idTorneo": "f03cf7f6-e608-4409-83cd-fa3c677d02c3",
+    "idEquipo": "f6d7548b-4185-4348-9b81-1805503fcd48",
     "partidosGanadosPT": 2,
-    "golesAFavorPT": 4,
-    "puntosPT": 6,
-    "esGanadorDT": false
-  },
-  {
-    "idTorneo": "c8d92b4b-f89a-4e6b-9b19-055b7f500f15",
-    "idEquipo": "f78268b1-e00c-4246-8bcf-06be7311b151",
-    "partidosGanadosPT": 6,
     "golesAFavorPT": 6,
-    "puntosPT": 18,
-    "esGanadorDT": false
-  },
-  {
-    "idTorneo": "c8d92b4b-f89a-4e6b-9b19-055b7f500f15",
-    "idEquipo": "2031bcdb-f95a-42ad-8619-5776e8fca679",
-    "partidosGanadosPT": 2,
-    "golesAFavorPT": 2,
     "puntosPT": 6,
     "esGanadorDT": false
   }

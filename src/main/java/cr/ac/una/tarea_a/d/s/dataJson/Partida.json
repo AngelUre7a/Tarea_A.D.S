@@ -174,5 +174,169 @@
     "estado": "finalizado",
     "ganadorId": "f78268b1-e00c-4246-8bcf-06be7311b151",
     "tiempoRestante": 0
+  },
+  {
+    "id": "6b0ef1dd-8e97-4c02-b897-70fcb74237bb",
+    "idTorneo": "e166d6ae-a259-4c57-9d98-4f09c81ff61c",
+    "idEquipoA": "04085ed7-0341-4840-b98a-d500aa63d328",
+    "idEquipoB": "e5488f9e-af3a-48d8-bcbd-61a8cc5c3ffe",
+    "golesEquipoA": 1,
+    "golesEquipoB": 0,
+    "estado": "finalizado",
+    "ganadorId": "04085ed7-0341-4840-b98a-d500aa63d328",
+    "tiempoRestante": 53
+  },
+  {
+    "id": "be986e43-abcc-40dd-8c84-9e2716847e93",
+    "idTorneo": "e166d6ae-a259-4c57-9d98-4f09c81ff61c",
+    "idEquipoA": "ef91be2f-b36f-4933-a1c7-4f642f88e5c1",
+    "idEquipoB": "2031bcdb-f95a-42ad-8619-5776e8fca679",
+    "golesEquipoA": 2,
+    "golesEquipoB": 1,
+    "estado": "finalizado",
+    "ganadorId": "ef91be2f-b36f-4933-a1c7-4f642f88e5c1",
+    "tiempoRestante": 51
+  },
+  {
+    "id": "4df05094-a7a8-44a3-9639-6a8d7dbfc3eb",
+    "idTorneo": "e166d6ae-a259-4c57-9d98-4f09c81ff61c",
+    "idEquipoA": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "idEquipoB": "b2aadf4a-bf32-4bda-9272-e36fa4c1b2b6",
+    "golesEquipoA": 0,
+    "golesEquipoB": 0,
+    "estado": "finalizado",
+    "ganadorId": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "tiempoRestante": 0
+  },
+  {
+    "id": "07516a40-ab18-46e3-807a-c46100e2c499",
+    "idTorneo": "e166d6ae-a259-4c57-9d98-4f09c81ff61c",
+    "idEquipoA": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "idEquipoB": "065d67c0-29ba-44bd-8f00-ed98c3a869b5",
+    "golesEquipoA": 0,
+    "golesEquipoB": 0,
+    "estado": "finalizado",
+    "ganadorId": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "tiempoRestante": 0
+  },
+  {
+    "id": "88dd35a9-5cb3-4733-84bd-39630f34e823",
+    "idTorneo": "e166d6ae-a259-4c57-9d98-4f09c81ff61c",
+    "idEquipoA": "04085ed7-0341-4840-b98a-d500aa63d328",
+    "idEquipoB": "ef91be2f-b36f-4933-a1c7-4f642f88e5c1",
+    "golesEquipoA": 1,
+    "golesEquipoB": 0,
+    "estado": "finalizado",
+    "ganadorId": "04085ed7-0341-4840-b98a-d500aa63d328",
+    "tiempoRestante": 58
+  },
+  {
+    "id": "5e97d15c-1bf5-4901-9847-c7755f28dbf5",
+    "idTorneo": "e166d6ae-a259-4c57-9d98-4f09c81ff61c",
+    "idEquipoA": "04085ed7-0341-4840-b98a-d500aa63d328",
+    "idEquipoB": "e5488f9e-af3a-48d8-bcbd-61a8cc5c3ffe",
+    "golesEquipoA": 1,
+    "golesEquipoB": 0,
+    "estado": "finalizado",
+    "ganadorId": "04085ed7-0341-4840-b98a-d500aa63d328",
+    "tiempoRestante": 0
+  },
+  {
+    "id": "2c01775c-05e7-4584-bde0-5a29a5878724",
+    "idTorneo": "e166d6ae-a259-4c57-9d98-4f09c81ff61c",
+    "idEquipoA": "ef91be2f-b36f-4933-a1c7-4f642f88e5c1",
+    "idEquipoB": "2031bcdb-f95a-42ad-8619-5776e8fca679",
+    "golesEquipoA": 2,
+    "golesEquipoB": 1,
+    "estado": "finalizado",
+    "ganadorId": "ef91be2f-b36f-4933-a1c7-4f642f88e5c1",
+    "tiempoRestante": 0
+  },
+  {
+    "id": "b0eea114-1d5a-444c-aca1-ba61f95e7e93",
+    "idTorneo": "e166d6ae-a259-4c57-9d98-4f09c81ff61c",
+    "idEquipoA": "04085ed7-0341-4840-b98a-d500aa63d328",
+    "idEquipoB": "ef91be2f-b36f-4933-a1c7-4f642f88e5c1",
+    "golesEquipoA": 1,
+    "golesEquipoB": 0,
+    "estado": "finalizado",
+    "ganadorId": "04085ed7-0341-4840-b98a-d500aa63d328",
+    "tiempoRestante": 0
+  },
+  {
+    "id": "dcfd8677-c487-4fd0-bdd2-a0527f6af7ce",
+    "idTorneo": "e166d6ae-a259-4c57-9d98-4f09c81ff61c",
+    "idEquipoA": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "idEquipoB": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "golesEquipoA": 0,
+    "golesEquipoB": 0,
+    "estado": "finalizado",
+    "tiempoRestante": 0
+  },
+  {
+    "id": "5db21a61-2678-4b80-8cc9-314044e58464",
+    "idTorneo": "e166d6ae-a259-4c57-9d98-4f09c81ff61c",
+    "idEquipoA": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "idEquipoB": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "golesEquipoA": 1,
+    "golesEquipoB": 0,
+    "estado": "finalizado",
+    "ganadorId": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "tiempoRestante": 55
+  },
+  {
+    "id": "fa460a41-4ef9-4352-be93-144662ad79ed",
+    "idTorneo": "e166d6ae-a259-4c57-9d98-4f09c81ff61c",
+    "idEquipoA": "04085ed7-0341-4840-b98a-d500aa63d328",
+    "idEquipoB": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "golesEquipoA": 1,
+    "golesEquipoB": 0,
+    "estado": "finalizado",
+    "ganadorId": "04085ed7-0341-4840-b98a-d500aa63d328",
+    "tiempoRestante": 57
+  },
+  {
+    "id": "b11d4e29-9656-467f-8afe-31fd3116fbaf",
+    "idTorneo": "e166d6ae-a259-4c57-9d98-4f09c81ff61c",
+    "idEquipoA": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "idEquipoB": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "golesEquipoA": 1,
+    "golesEquipoB": 0,
+    "estado": "finalizado",
+    "ganadorId": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "tiempoRestante": 0
+  },
+  {
+    "id": "41f871e4-ca58-4ae6-bbdd-0916591fda60",
+    "idTorneo": "e166d6ae-a259-4c57-9d98-4f09c81ff61c",
+    "idEquipoA": "04085ed7-0341-4840-b98a-d500aa63d328",
+    "idEquipoB": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "golesEquipoA": 1,
+    "golesEquipoB": 0,
+    "estado": "finalizado",
+    "ganadorId": "04085ed7-0341-4840-b98a-d500aa63d328",
+    "tiempoRestante": 0
+  },
+  {
+    "id": "4dd2aa2e-a763-4601-b16e-4ce0dff5595c",
+    "idTorneo": "f03cf7f6-e608-4409-83cd-fa3c677d02c3",
+    "idEquipoA": "e9f57a2b-f351-4309-a1ad-b82b6f6d3a20",
+    "idEquipoB": "f6d7548b-4185-4348-9b81-1805503fcd48",
+    "golesEquipoA": 2,
+    "golesEquipoB": 3,
+    "estado": "finalizado",
+    "ganadorId": "f6d7548b-4185-4348-9b81-1805503fcd48",
+    "tiempoRestante": 55
+  },
+  {
+    "id": "08159ed7-5721-4d1f-a7a2-21b1c869b3b7",
+    "idTorneo": "f03cf7f6-e608-4409-83cd-fa3c677d02c3",
+    "idEquipoA": "e9f57a2b-f351-4309-a1ad-b82b6f6d3a20",
+    "idEquipoB": "f6d7548b-4185-4348-9b81-1805503fcd48",
+    "golesEquipoA": 2,
+    "golesEquipoB": 3,
+    "estado": "finalizado",
+    "ganadorId": "f6d7548b-4185-4348-9b81-1805503fcd48",
+    "tiempoRestante": 0
   }
 ]
