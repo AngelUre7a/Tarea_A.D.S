@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.MostrarCertificadoController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.MostrarCertificadoController">
    <children>
-      <VBox layoutX="192.0" layoutY="115.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="192.0" layoutY="115.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" stylesheets="@../css/Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
@@ -51,13 +51,13 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <Label alignment="CENTER" prefHeight="34.0" prefWidth="600.0" text="¡Felicidades equipo por su increíble victoria en el torneo, demostraron talento, esfuerzo y gran trabajo!" />
+                  <Label alignment="CENTER" prefHeight="34.0" prefWidth="600.0" styleClass="jfx-title-label-menu" stylesheets="@../css/Style.css" text="¡Felicidades equipo por su increíble victoria en el torneo, demostraron talento, esfuerzo y gran trabajo!" />
                </children>
             </VBox>
             <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="560.0" spacing="200.0">
                <children>
-                  <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" prefHeight="50.0" prefWidth="140.0" text="Volver" />
-                  <MFXButton fx:id="btnImprimirCert" onAction="#onActionBtnImprimirCert" prefHeight="50.0" prefWidth="140.0" text="Imprimir certificado" />
+                  <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" prefHeight="50.0" prefWidth="140.0" styleClass="mfx-button" stylesheets="@../css/Style.css" text="Volver" />
+                  <MFXButton fx:id="btnImprimirCert" onAction="#onActionBtnImprimirCert" prefHeight="50.0" prefWidth="140.0" styleClass="mfx-button" stylesheets="@../css/Style.css" text="Imprimir certificado" />
                </children>
                <padding>
                   <Insets left="35.0" />

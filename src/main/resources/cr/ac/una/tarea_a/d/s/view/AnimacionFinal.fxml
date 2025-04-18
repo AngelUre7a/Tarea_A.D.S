@@ -19,5 +19,6 @@
     <!-- Confeti animado -->
     <Label fx:id="lblConfeti" layoutX="250" layoutY="20" style="-fx-font-size: 30px;" text="🎊🎉🎊🎉🎊" />
    <MFXButton fx:id="btnSalit" layoutX="545.0" layoutY="370.0" onAction="#onActionBtnSalir" text="SALIR" />
+   <MFXButton fx:id="btnCertificado" layoutX="337.0" layoutY="335.0" onAction="#OnActionBtnCertificado" text="Certificado" />
 
 </AnchorPane>

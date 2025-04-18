@@ -6,6 +6,7 @@ import cr.ac.una.tarea_a.d.s.util.FlowController;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,6 +27,8 @@ public class AnimacionFinalController {
     private AnchorPane root;
     @FXML
     private MFXButton btnSalit;
+    @FXML
+    private MFXButton btnCertificado;
 
     public void mostrarAnimacion(String base64Escudo, String base64Balon, String nombreEquipo) {
         Image imagenEscudo = Animaciones.convertirBase64AImage(base64Escudo);
@@ -49,4 +52,17 @@ public class AnimacionFinalController {
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
     }
+
+@FXML
+private void OnActionBtnCertificado(ActionEvent event) {
+    Stage stageActual = (Stage) root.getScene().getWindow(); // guardás el stage actual
+
+    // Cerrás la ventana de animación
+    stageActual.close();
+
+    // Y luego abrís la modal con ese stage como padre
+    FlowController.getInstance().goViewInWindowModal("MostrarCertificado", stageActual, Boolean.FALSE);
+}
+
+
 }
