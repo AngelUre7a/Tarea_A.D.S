@@ -87,37 +87,38 @@ public class Animaciones {
         rebote.setInterpolator(Interpolator.EASE_OUT);
         rebote.play();
     }
-public static void mostrarGolAnimado(Label lblGol) {
-    lblGol.setVisible(true);
-    lblGol.setScaleX(0.5);
-    lblGol.setScaleY(0.5);
-    lblGol.setOpacity(0);
 
-    ScaleTransition zoom = new ScaleTransition(Duration.seconds(0.6), lblGol);
-    zoom.setFromX(0.5);
-    zoom.setFromY(0.5);
-    zoom.setToX(1.2);
-    zoom.setToY(1.2);
+    public static void mostrarGolAnimado(Label lblGol) {
+        lblGol.setVisible(true);
+        lblGol.setScaleX(0.5);
+        lblGol.setScaleY(0.5);
+        lblGol.setOpacity(0);
 
-    FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.6), lblGol);
-    fadeIn.setFromValue(0);
-    fadeIn.setToValue(1);
+        ScaleTransition zoom = new ScaleTransition(Duration.seconds(0.6), lblGol);
+        zoom.setFromX(0.5);
+        zoom.setFromY(0.5);
+        zoom.setToX(1.2);
+        zoom.setToY(1.2);
 
-    PauseTransition pausa = new PauseTransition(Duration.seconds(1.5));
+        FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.6), lblGol);
+        fadeIn.setFromValue(0);
+        fadeIn.setToValue(1);
 
-    FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.8), lblGol);
-    fadeOut.setFromValue(1);
-    fadeOut.setToValue(0);
+        PauseTransition pausa = new PauseTransition(Duration.seconds(1.5));
 
-    fadeOut.setOnFinished(e -> lblGol.setVisible(false));
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.8), lblGol);
+        fadeOut.setFromValue(1);
+        fadeOut.setToValue(0);
 
-    SequentialTransition secuencia = new SequentialTransition(
-            new ParallelTransition(zoom, fadeIn),
-            pausa,
-            fadeOut
-    );
-    secuencia.play();
-}
+        fadeOut.setOnFinished(e -> lblGol.setVisible(false));
+
+        SequentialTransition secuencia = new SequentialTransition(
+                new ParallelTransition(zoom, fadeIn),
+                pausa,
+                fadeOut
+        );
+        secuencia.play();
+    }
 
     public static Image convertirBase64AImage(String base64) {
         try {
