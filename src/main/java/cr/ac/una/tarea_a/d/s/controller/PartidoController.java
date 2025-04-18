@@ -2,7 +2,8 @@ package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
-import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipo;
+import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipoGenerales;
+import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipoPT;
 import cr.ac.una.tarea_a.d.s.model.Torneo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
@@ -36,7 +37,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import cr.ac.una.tarea_a.d.s.model.Partida;
-import cr.ac.una.tarea_a.d.s.repositories.EstadisticasEquipoRepository;
+import cr.ac.una.tarea_a.d.s.repositories.EstadisticasEquipoGeneralesRepository;
+import cr.ac.una.tarea_a.d.s.repositories.EstadisticasEquipoPTRepository;
 import cr.ac.una.tarea_a.d.s.repositories.PartidaRepository;
 import cr.ac.una.tarea_a.d.s.repositories.TorneoRepository;
 import java.util.List;
@@ -85,7 +87,7 @@ public class PartidoController extends Controller implements Initializable {
     Torneo torneo = (Torneo) AppContext.getInstance().get("TORNEO");
     private final ObservableList<Deporte> deportesLista = FXCollections.observableArrayList();
     private final DeporteRepository deporteRepo = new DeporteRepository();
-    EstadisticasEquipo estadisticasEquipo;
+    EstadisticasEquipoGeneralesRepository repoGen = new EstadisticasEquipoGeneralesRepository();
 
     int marcadorEquipo1;
     int marcadorEquipo2;
@@ -106,16 +108,45 @@ public class PartidoController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnFinalizar(ActionEvent event) {
-        EstadisticasEquipo estadisticasEquipo1 = (EstadisticasEquipo) AppContext.getInstance().get("ESTADISTICAS_" + equipo1.getNombre() + "_" + torneo.getId());
-        EstadisticasEquipo estadisticasEquipo2 = (EstadisticasEquipo) AppContext.getInstance().get("ESTADISTICAS_" + equipo2.getNombre() + "_" + torneo.getId());
+        Finalizar();
+    }
+    
+    private void Finalizar(){
+        EstadisticasEquipoPT estadisticasEquipo1 = (EstadisticasEquipoPT) AppContext.getInstance().get("ESTADISTICAS_" + equipo1.getNombre() + "_" + torneo.getId());
+        EstadisticasEquipoPT estadisticasEquipo2 = (EstadisticasEquipoPT) AppContext.getInstance().get("ESTADISTICAS_" + equipo2.getNombre() + "_" + torneo.getId());
+        EstadisticasEquipoGenerales estadisticasGenEquipo1;
+        EstadisticasEquipoGenerales estadisticasGenEquipo2;
 
+        try {
+            estadisticasGenEquipo1 = repoGen.findById(equipo1.getId()).orElse(null);
+            if (estadisticasGenEquipo1 == null) {
+                estadisticasGenEquipo1 = new EstadisticasEquipoGenerales(equipo1.getId());
+            }
+            estadisticasGenEquipo2 = repoGen.findById(equipo2.getId()).orElse(null);
+            if (estadisticasGenEquipo2 == null) {
+                estadisticasGenEquipo2 = new EstadisticasEquipoGenerales(equipo2.getId());
+            }
+        } catch (IOException e) {
+            System.err.println("❌ Error cargando estadísticas generales: " + e.getMessage());
+            estadisticasGenEquipo1 = new EstadisticasEquipoGenerales(equipo1.getId());
+            estadisticasGenEquipo2 = new EstadisticasEquipoGenerales(equipo2.getId());
+        }
+        
         if (estadisticasEquipo1 == null) {
-            estadisticasEquipo1 = new EstadisticasEquipo(equipo1.getId(), torneo.getId());
+            estadisticasEquipo1 = new EstadisticasEquipoPT(equipo1.getId(), torneo.getId());
         }
 
         if (estadisticasEquipo2 == null) {
-            estadisticasEquipo2 = new EstadisticasEquipo(equipo2.getId(), torneo.getId());
+            estadisticasEquipo2 = new EstadisticasEquipoPT(equipo2.getId(), torneo.getId());
         }
+        
+        if (estadisticasGenEquipo1 == null) {
+            estadisticasGenEquipo1 = new EstadisticasEquipoGenerales(equipo1.getId());
+        }
+        if (estadisticasGenEquipo2 == null) {
+            estadisticasGenEquipo2 = new EstadisticasEquipoGenerales(equipo2.getId());
+        }
+
 
         estadisticasEquipo1.setGolesAFavorPT(estadisticasEquipo1.getGolesAFavorPT() + marcadorEquipo1);
         estadisticasEquipo2.setGolesAFavorPT(estadisticasEquipo2.getGolesAFavorPT() + marcadorEquipo2);
@@ -125,14 +156,14 @@ public class PartidoController extends Controller implements Initializable {
             ganadorId = equipo1.getId();
             estadisticasEquipo1.incrementarPartidosGanados();
             estadisticasEquipo1.incrementarPuntosGaneDirecto();
-            agregarEstadisticasPTAGlobal(estadisticasEquipo2);
+            agregarEstadisticasPTAGeneral(estadisticasGenEquipo2, estadisticasEquipo2);
         } else if (marcadorEquipo2 > marcadorEquipo1) {
             ganadorId = equipo2.getId();
             estadisticasEquipo2.incrementarPartidosGanados();
             estadisticasEquipo2.incrementarPuntosGaneDirecto();
-            agregarEstadisticasPTAGlobal(estadisticasEquipo1);
+            agregarEstadisticasPTAGeneral(estadisticasGenEquipo1, estadisticasEquipo1);
         } else {
-            // Empate (si querés implementar algo más aquí)
+            // Empate INNOVACION
         }
 
         // ✅ Crear y guardar partida
@@ -183,13 +214,19 @@ public class PartidoController extends Controller implements Initializable {
 
         AppContext.getInstance().set("ESTADISTICAS_" + equipo1.getNombre() + "_" + torneo.getId(), estadisticasEquipo1);
         AppContext.getInstance().set("ESTADISTICAS_" + equipo2.getNombre() + "_" + torneo.getId(), estadisticasEquipo2);
+        AppContext.getInstance().set("ESTADISTICAS_" + equipo1.getNombre(), estadisticasGenEquipo1);
+        AppContext.getInstance().set("ESTADISTICAS_" + equipo2.getNombre(), estadisticasGenEquipo2);
         
-        EstadisticasEquipoRepository estadisticasEquipo1Repo = new EstadisticasEquipoRepository();
-        EstadisticasEquipoRepository estadisticasEquipo2Repo = new EstadisticasEquipoRepository();
+        EstadisticasEquipoPTRepository estadisticasEquipo1Repo = new EstadisticasEquipoPTRepository();
+        EstadisticasEquipoPTRepository estadisticasEquipo2Repo = new EstadisticasEquipoPTRepository();
+        EstadisticasEquipoGeneralesRepository estadisticasGenEquipo1Repo = new EstadisticasEquipoGeneralesRepository();
+        EstadisticasEquipoGeneralesRepository estadisticasGenEquipo2Repo = new EstadisticasEquipoGeneralesRepository();
         
         try {
             estadisticasEquipo1Repo.save(estadisticasEquipo1);
             estadisticasEquipo2Repo.save(estadisticasEquipo2);
+            estadisticasGenEquipo1Repo.save(estadisticasGenEquipo1);
+            estadisticasGenEquipo2Repo.save(estadisticasGenEquipo2);
             
         } catch (IOException e) {
             System.err.println("Error al guardar las estadísticas: " + e.getMessage());
@@ -198,11 +235,10 @@ public class PartidoController extends Controller implements Initializable {
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
     }
-
-    private void agregarEstadisticasPTAGlobal(EstadisticasEquipo est) {
-        est.setGolesAFavor(est.getGolesAFavor() + est.getGolesAFavorPT());
-        est.setPuntos(est.getPuntos() + est.getPuntosPT());
-        est.setPartidosGanados(est.getPartidosGanados() + est.getPartidosGanadosPT());
+    private void agregarEstadisticasPTAGeneral(EstadisticasEquipoGenerales generales, EstadisticasEquipoPT parciales) {
+        generales.setGolesAFavor(generales.getGolesAFavor() + parciales.getGolesAFavorPT());
+        generales.setPuntos(generales.getPuntos() + parciales.getPuntosPT());
+        generales.setPartidosGanados(generales.getPartidosGanados() + parciales.getPartidosGanadosPT());
     }
 
     private void cargarJson() {
@@ -276,7 +312,7 @@ public class PartidoController extends Controller implements Initializable {
             if (tiempoRestante < 0) {
                 timeline.stop();
                 lblTiempo.setText("¡Tiempo finalizado!");
-                // Aquí puedes hacer algo más, como bloquear botones o mostrar una alerta
+                Finalizar();
             }
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);  // Corre hasta que lo detengas

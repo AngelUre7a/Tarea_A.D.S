@@ -1,0 +1,68 @@
+[
+  {
+    "id": "fe8b5665-50df-4fd7-a296-d13a367d4e8e",
+    "idTorneo": "f1061a88-42e3-487c-8a55-8dae1abd7043",
+    "idEquipoA": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "idEquipoB": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "golesEquipoA": 3,
+    "golesEquipoB": 1,
+    "estado": "finalizado",
+    "ganadorId": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "tiempoRestante": 115
+  },
+  {
+    "id": "0efbb429-5f40-45a2-b2d2-bd92684163df",
+    "idTorneo": "b53090cc-6f65-471a-aac9-94bcf8b0f7c0",
+    "idEquipoA": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "idEquipoB": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "golesEquipoA": 4,
+    "golesEquipoB": 3,
+    "estado": "finalizado",
+    "ganadorId": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "tiempoRestante": 111
+  },
+  {
+    "id": "037689c9-86e9-411c-813a-f1c78c54591d",
+    "idTorneo": "160f8f5b-e858-4833-b7e6-bcaefe11c979",
+    "idEquipoA": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "idEquipoB": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "golesEquipoA": 6,
+    "golesEquipoB": 5,
+    "estado": "finalizado",
+    "ganadorId": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "tiempoRestante": 38
+  },
+  {
+    "id": "bdf7f554-ead9-4c00-8adb-b24566749e73",
+    "idTorneo": "fc8c902f-41eb-4c60-9f4b-843ae8f6d2cd",
+    "idEquipoA": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "idEquipoB": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "golesEquipoA": 12,
+    "golesEquipoB": 10,
+    "estado": "finalizado",
+    "ganadorId": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "tiempoRestante": 28
+  },
+  {
+    "id": "1eeab95f-9bb9-4be1-a31d-4ea64fbdb933",
+    "idTorneo": "f15987ec-af5a-4059-8088-b9917dac96ab",
+    "idEquipoA": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "idEquipoB": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "golesEquipoA": 8,
+    "golesEquipoB": 15,
+    "estado": "finalizado",
+    "ganadorId": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "tiempoRestante": 32
+  },
+  {
+    "id": "4b0880c1-2190-448b-b3f7-8d953c94066a",
+    "idTorneo": "dd9d4219-e695-413a-b3e5-f6abd808d11f",
+    "idEquipoA": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "idEquipoB": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "golesEquipoA": 2,
+    "golesEquipoB": 1,
+    "estado": "finalizado",
+    "ganadorId": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "tiempoRestante": 0
+  }
+]

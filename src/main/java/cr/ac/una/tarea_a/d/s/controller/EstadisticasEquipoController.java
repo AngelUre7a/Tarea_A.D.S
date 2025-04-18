@@ -1,10 +1,12 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.model.Equipo;
-import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipo;
+import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipoGenerales;
+import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipoPT;
 import cr.ac.una.tarea_a.d.s.model.Torneo;
 import cr.ac.una.tarea_a.d.s.repositories.EquipoRepository;
-import cr.ac.una.tarea_a.d.s.repositories.EstadisticasEquipoRepository;
+import cr.ac.una.tarea_a.d.s.repositories.EstadisticasEquipoGeneralesRepository;
+import cr.ac.una.tarea_a.d.s.repositories.EstadisticasEquipoPTRepository;
 import cr.ac.una.tarea_a.d.s.repositories.TorneoRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 import java.io.IOException;
@@ -54,14 +56,18 @@ public class EstadisticasEquipoController extends Controller implements Initiali
     private Label lblEsGanador;
     
     private Equipo equipoSeleccionado;
-    private EstadisticasEquipo equipoStats;
+    private EstadisticasEquipoPT equipoStats;
+    private EstadisticasEquipoGenerales equipoGenStats;
     
     private final ObservableList<Torneo> torneoLista = FXCollections.observableArrayList();
     private final TorneoRepository Torneorepo = new TorneoRepository();
     private final ObservableList<Equipo> equiposLista = FXCollections.observableArrayList();
     private final EquipoRepository Equiporepo = new EquipoRepository();
-    private final ObservableList<EstadisticasEquipo> estadisticasLista = FXCollections.observableArrayList();
-    private final EstadisticasEquipoRepository EstadisticasRepo = new EstadisticasEquipoRepository();
+    private final ObservableList<EstadisticasEquipoPT> estadisticasLista = FXCollections.observableArrayList();
+    private final EstadisticasEquipoPTRepository EstadisticasRepo = new EstadisticasEquipoPTRepository();
+    private final ObservableList<EstadisticasEquipoGenerales> estadisticasGeneralesLista = FXCollections.observableArrayList();
+    private final EstadisticasEquipoGeneralesRepository estadisticasGenRepo = new EstadisticasEquipoGeneralesRepository();
+
     
     
     
@@ -69,54 +75,57 @@ public class EstadisticasEquipoController extends Controller implements Initiali
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        List<EstadisticasEquipo> lista;
+        List<EstadisticasEquipoPT> lista;
         try {
             lista = EstadisticasRepo.findAll();
             estadisticasLista.setAll(lista);
         } catch (IOException ex) {
             Logger.getLogger(EstadisticasEquipoController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        try {
+            List<EstadisticasEquipoGenerales> listaGenerales = estadisticasGenRepo.findAll();
+            estadisticasGeneralesLista.setAll(listaGenerales);
+        } catch (IOException ex) {
+            Logger.getLogger(EstadisticasEquipoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         equipoSeleccionado = (Equipo) AppContext.getInstance().get("EQUIPO_SELECCIONADO");
-        equipoStats = (EstadisticasEquipo) AppContext.getInstance().get("ESTADISTICAS_" + equipoSeleccionado.getNombre());
         
-        if (equipoStats == null && equipoSeleccionado != null) {
-            for (EstadisticasEquipo est : estadisticasLista) {
+        if (equipoSeleccionado != null) {
+            for (EstadisticasEquipoPT est : estadisticasLista) {
                 if (est.getIdEquipo().equals(equipoSeleccionado.getId())) {
                     equipoStats = est;
                     break;
                 }
             }
+            
         }
-        
+
         if (equipoStats != null) {
             AppContext.getInstance().set("ESTADISTICAS_" + equipoSeleccionado.getNombre(), equipoStats);
         }
-        
-        if (equipoSeleccionado != null) {
-        if (equipoStats == null) {
-            // Buscar en la lista de estadísticas
-            for (EstadisticasEquipo est : estadisticasLista) {
-                if (est.getIdEquipo().equals(equipoSeleccionado.getId())) {
-                    equipoStats = est;
+
+        for (EstadisticasEquipoGenerales estGen : estadisticasGeneralesLista) {
+                if (estGen.getIdEquipo().equals(equipoSeleccionado.getId())) {
+                    equipoGenStats = estGen;
                     break;
                 }
             }
-        }
         
-        if (equipoStats == null) {
-            lblNombreEquipo.setText(equipoSeleccionado.getNombre());
+        lblNombreEquipo.setText(equipoSeleccionado.getNombre());
+        
+        if (equipoGenStats != null) {
+            lblTorneosGanados.setText(String.valueOf(equipoGenStats.getTorneosGanados()));
+            lblGolesTotales.setText(String.valueOf(equipoGenStats.getGolesAFavor()));
+            lblPuntosTotales.setText(String.valueOf(equipoGenStats.getPuntos()));
+            lblPartidosGanados.setText(String.valueOf(equipoGenStats.getPartidosGanados()));
+        } else {
             lblTorneosGanados.setText("0");
             lblGolesTotales.setText("0");
             lblPuntosTotales.setText("0");
             lblPartidosGanados.setText("0");
-        } else{
-            lblNombreEquipo.setText(equipoSeleccionado.getNombre());
-            lblTorneosGanados.setText(String.valueOf(equipoStats.getTorneosGanados()));
-            lblGolesTotales.setText(String.valueOf(equipoStats.getGolesAFavor()));
-            lblPuntosTotales.setText(String.valueOf(equipoStats.getPuntos()));
-            lblPartidosGanados.setText(String.valueOf(equipoStats.getPartidosGanados()));
-            } 
+        }
+        
         try {
             cargarTorneosPorDeporte(equipoSeleccionado.getTipoDeporte());
         } catch (IOException ex) {
@@ -124,7 +133,7 @@ public class EstadisticasEquipoController extends Controller implements Initiali
         }
 
         cmbTorneos.setOnAction(this::onActionCmbTorneos);
-        }    
+            
     }
     
     @Override
@@ -163,9 +172,9 @@ public class EstadisticasEquipoController extends Controller implements Initiali
     private void onActionCmbTorneos(ActionEvent event) {
         Torneo torneo = cmbTorneos.getValue();
         if (torneo != null && equipoSeleccionado != null) {
-            EstadisticasEquipo estadisticaPorTorneo = null;
+            EstadisticasEquipoPT estadisticaPorTorneo = null;
 
-            for (EstadisticasEquipo est : estadisticasLista) {
+            for (EstadisticasEquipoPT est : estadisticasLista) {
                 if (est.getIdEquipo().equals(equipoSeleccionado.getId()) &&
                     est.getIdTorneo().equals(torneo.getId())) {
                     estadisticaPorTorneo = est;
