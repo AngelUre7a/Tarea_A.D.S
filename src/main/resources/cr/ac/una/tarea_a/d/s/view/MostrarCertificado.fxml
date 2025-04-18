@@ -15,7 +15,7 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+            <VBox fx:id="ContainerSinBotones" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" stylesheets="@../css/Style.css" VBox.vgrow="ALWAYS">
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                      <children>
@@ -51,7 +51,7 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <Label alignment="CENTER" prefHeight="34.0" prefWidth="600.0" styleClass="jfx-title-label-menu" stylesheets="@../css/Style.css" text="¡Felicidades equipo por su increíble victoria en el torneo, demostraron talento, esfuerzo y gran trabajo!" />
+                  <Label alignment="CENTER" prefHeight="34.0" prefWidth="600.0" styleClass="jfx-button-long-text" stylesheets="@../css/Style.css" text="¡Felicidades equipo por su increíble victoria en el torneo, demostraron talento, esfuerzo y gran trabajo!" />
                </children>
             </VBox>
             <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="560.0" spacing="200.0">
