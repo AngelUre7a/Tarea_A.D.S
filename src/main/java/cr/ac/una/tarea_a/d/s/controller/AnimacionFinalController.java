@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class AnimacionFinalController {
+public class AnimacionFinalController extends Controller {
 
     @FXML
     private Label lblConfeti;
@@ -34,8 +34,12 @@ public class AnimacionFinalController {
         Image imagenEscudo = Animaciones.convertirBase64AImage(base64Escudo);
         Image imagenBalon = Animaciones.convertirBase64AImage(base64Balon);
 
-        if (imagenEscudo != null) imgEquipo.setImage(imagenEscudo);
-        if (imagenBalon != null) imgBalon.setImage(imagenBalon);
+        if (imagenEscudo != null) {
+            imgEquipo.setImage(imagenEscudo);
+        }
+        if (imagenBalon != null) {
+            imgBalon.setImage(imagenBalon);
+        }
 
         lblCampeon.setText("¡" + nombreEquipo + " CAMPEÓN!");
         Sonidos.ganador();
@@ -53,16 +57,18 @@ public class AnimacionFinalController {
         stage.close();
     }
 
-@FXML
-private void OnActionBtnCertificado(ActionEvent event) {
-    Stage stageActual = (Stage) root.getScene().getWindow(); // guardás el stage actual
+    @FXML
+    private void OnActionBtnCertificado(ActionEvent event) {
+        Stage stageActual = (Stage) root.getScene().getWindow(); // guardás el stage actual
 
-    // Cerrás la ventana de animación
-    stageActual.close();
+        // Cerrás la ventana de animación
+        stageActual.close();
 
-    // Y luego abrís la modal con ese stage como padre
-    FlowController.getInstance().goViewInWindowModal("MostrarCertificado", stageActual, Boolean.FALSE);
-}
-
+        // Y luego abrís la modal con ese stage como padre
+        FlowController.getInstance().goViewInWindowModal("MostrarCertificado", stageActual, Boolean.FALSE);
+    }
+      @Override
+    public void initialize() {
+    }
 
 }

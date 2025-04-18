@@ -3,6 +3,7 @@ package cr.ac.una.tarea_a.d.s.controller;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import cr.ac.una.tarea_a.d.s.util.FlowController;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.utils.SwingFXUtils;
 import java.awt.image.BufferedImage;
@@ -21,6 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 /**
@@ -43,29 +45,27 @@ public class MostrarCertificadoController extends Controller implements Initiali
     @FXML
     private ImageView imgEscudo;
     @FXML
-    private MFXButton btnVolver;
-    @FXML
     private MFXButton btnImprimirCert;
     @FXML
     private VBox ContainerSinBotones;
-    
+    @FXML
+    private MFXButton btnVolver;
+    @FXML
+    private MFXButton btnSalir;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @Override
     public void initialize() {
     }
 
     @FXML
-    private void onActionBtnVolver(ActionEvent event) {
-    }
-
-    @FXML
     private void onActionBtnImprimirCert(ActionEvent event) {
         try {
-        // 1. Tomamos snapshot del panel completo
+            // 1. Tomamos snapshot del panel completo
             WritableImage snapshot = ContainerSinBotones.snapshot(new SnapshotParameters(), null);
             BufferedImage bufferedImage = SwingFXUtils.fromFXImage(snapshot, null);
 
@@ -83,7 +83,7 @@ public class MostrarCertificadoController extends Controller implements Initiali
             Document document = new Document(pdf);
 
             com.itextpdf.layout.element.Image pdfImage = new com.itextpdf.layout.element.Image(
-              com.itextpdf.io.image.ImageDataFactory.create(imageInBytes)
+                    com.itextpdf.io.image.ImageDataFactory.create(imageInBytes)
             );
             document.add(pdfImage);
 
@@ -91,7 +91,23 @@ public class MostrarCertificadoController extends Controller implements Initiali
             System.out.println("✅ Certificado exportado exitosamente a: " + file.getAbsolutePath());
         } catch (Exception e) {
             e.printStackTrace();
-          }
+        }
     }
-    
+
+    @FXML
+    private void onActionBtnVolver(ActionEvent event) {
+        // Cerrás la ventana actual del certificado
+        Stage stageActual = (Stage) root.getScene().getWindow();
+        stageActual.close();
+
+        // Y abrís la vista de la animación final como modal
+        FlowController.getInstance().goViewInWindowModal("AnimacionFinal", stageActual, Boolean.FALSE);
+    }
+
+    @FXML
+    private void OnActionBtnSalir(ActionEvent event) {
+         Stage stage = (Stage) root.getScene().getWindow();
+        stage.close();
+    }
+
 }

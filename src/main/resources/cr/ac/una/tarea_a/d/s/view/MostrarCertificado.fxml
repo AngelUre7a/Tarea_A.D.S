@@ -21,25 +21,25 @@
                      <children>
                         <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <ImageView fitHeight="55.0" fitWidth="122.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label fx:id="lblNombreEquipo" alignment="CENTER" prefHeight="38.0" prefWidth="87.0" text="&quot;nombre&quot;" />
-                              <Label prefHeight="31.0" prefWidth="283.0" text="Estadisticas:" />
+                              <ImageView fitHeight="55.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="lblNombreEquipo" alignment="CENTER" prefHeight="38.0" prefWidth="87.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="&quot;nombre&quot;" />
+                              <Label prefHeight="31.0" prefWidth="283.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Estadisticas:" />
                               <HBox prefHeight="36.0" prefWidth="280.0">
                                  <children>
-                                    <Label prefHeight="38.0" prefWidth="50.0" text="Puntos:" />
-                                    <Label fx:id="lblPuntos" prefHeight="36.0" prefWidth="208.0" text="Label" />
+                                    <Label prefHeight="38.0" prefWidth="50.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Puntos:" />
+                                    <Label fx:id="lblPuntos" prefHeight="36.0" prefWidth="208.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Label" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="36.0" prefWidth="280.0">
                                  <children>
-                                    <Label prefHeight="36.0" prefWidth="136.0" text="Partidos Ganados:" />
-                                    <Label fx:id="lblPartidosGanados" prefHeight="36.0" prefWidth="208.0" text="Label" />
+                                    <Label prefHeight="36.0" prefWidth="136.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Partidos Ganados:" />
+                                    <Label fx:id="lblPartidosGanados" prefHeight="36.0" prefWidth="208.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Label" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="36.0" prefWidth="280.0">
                                  <children>
-                                    <Label prefHeight="36.0" prefWidth="125.0" text="Deporte Jugado:" />
-                                    <Label fx:id="lblDeporteJugado" prefHeight="36.0" prefWidth="208.0" text="Label" />
+                                    <Label prefHeight="36.0" prefWidth="125.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Deporte Jugado:" />
+                                    <Label fx:id="lblDeporteJugado" prefHeight="36.0" prefWidth="208.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Label" />
                                  </children>
                               </HBox>
                            </children>
@@ -51,13 +51,14 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <Label alignment="CENTER" prefHeight="34.0" prefWidth="600.0" styleClass="jfx-button-long-text" stylesheets="@../css/Style.css" text="¡Felicidades equipo por su increíble victoria en el torneo, demostraron talento, esfuerzo y gran trabajo!" />
+                  <Label alignment="CENTER" prefHeight="47.0" prefWidth="560.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="¡Felicidades equipo por su increible victoria en el torneo!" />
                </children>
             </VBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="560.0" spacing="200.0" stylesheets="@../css/Style.css">
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="560.0" spacing="50.0" stylesheets="@../css/Style.css">
                <children>
-                  <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" prefHeight="50.0" prefWidth="140.0" styleClass="mfx-button" stylesheets="@../css/Style.css" text="Volver" />
-                  <MFXButton fx:id="btnImprimirCert" onAction="#onActionBtnImprimirCert" prefHeight="50.0" prefWidth="140.0" styleClass="mfx-button" stylesheets="@../css/Style.css" text="Imprimir certificado" />
+                  <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" prefHeight="35.0" prefWidth="100.0" stylesheets="@../css/Style.css" text="Volver" />
+                  <MFXButton fx:id="btnImprimirCert" onAction="#onActionBtnImprimirCert" prefHeight="35.0" prefWidth="200.0" stylesheets="@../css/Style.css" text="Imprimir certificado" />
+                  <MFXButton fx:id="btnSalir" onAction="#OnActionBtnSalir" prefHeight="35.0" prefWidth="100.0" text="Salir" />
                </children>
                <padding>
                   <Insets left="35.0" />
