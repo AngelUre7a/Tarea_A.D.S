@@ -216,9 +216,13 @@ public class CreacionTorneoController extends Controller implements Initializabl
             return;
         }
         int cantidadEquipos = Integer.parseInt(txtCantidadEquipos.getText());
+        
         int tiempoPorPartida = Integer.parseInt(txtTiempoPartido.getText());
         String id = java.util.UUID.randomUUID().toString();
-
+        if(equiposInscritos.size()==1){
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede crear un torneo con un solo Equipo, Agrega mas equipos para crearlo.");
+            return;
+        }
         Torneo torneo = new Torneo(id, nombre, deporte.getNombre(), cantidadEquipos, tiempoPorPartida, new ArrayList<>(equiposInscritos));
         equiposEnTorneo(equiposInscritos);
         AppContext.getInstance().set("TORNEO_NUEVO", torneo);
