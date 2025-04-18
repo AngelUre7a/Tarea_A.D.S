@@ -68,11 +68,7 @@ public class EstadisticasEquipoController extends Controller implements Initiali
     private final ObservableList<EstadisticasEquipoGenerales> estadisticasGeneralesLista = FXCollections.observableArrayList();
     private final EstadisticasEquipoGeneralesRepository estadisticasGenRepo = new EstadisticasEquipoGeneralesRepository();
 
-    
-    
-    
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         List<EstadisticasEquipoPT> lista;

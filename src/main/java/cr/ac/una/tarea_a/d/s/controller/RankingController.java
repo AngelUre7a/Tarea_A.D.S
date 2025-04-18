@@ -2,8 +2,10 @@ package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
+import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipoGenerales;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.repositories.EquipoRepository;
+import cr.ac.una.tarea_a.d.s.repositories.EstadisticasEquipoGeneralesRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 import cr.ac.una.tarea_a.d.s.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -12,6 +14,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -55,6 +59,8 @@ public class RankingController extends Controller implements Initializable {
     private final EquipoRepository equipoRepo = new EquipoRepository();
     private final ObservableList<Deporte> deportesLista = FXCollections.observableArrayList();
     private final DeporteRepository deporteRepo = new DeporteRepository();
+    private final ObservableList<EstadisticasEquipoGenerales> estadisticasLista = FXCollections.observableArrayList();
+    private final EstadisticasEquipoGeneralesRepository estadisticasRepo = new EstadisticasEquipoGeneralesRepository();
     
     @FXML
     private MFXButton btnActualizar;
@@ -62,9 +68,18 @@ public class RankingController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     
-
+        try {
+            List<EstadisticasEquipoGenerales> listaGenerales = estadisticasRepo.findAll();
+            estadisticasLista.setAll(listaGenerales);
+        } catch (IOException ex) {
+            Logger.getLogger(RankingController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-//      colRango.setCellValueFactory(new PropertyValueFactory<>("rango"));
+        colRango.setCellValueFactory(cellData -> {
+            // Calcula el rango como el índice + 1 en la lista ordenada
+            int rango = equiposLista.indexOf(cellData.getValue()) + 1;
+            return new javafx.beans.property.SimpleIntegerProperty(rango).asObject();
+        });
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colImagen.setCellValueFactory(new PropertyValueFactory<>("imagen"));
         colDeporte.setCellValueFactory(new PropertyValueFactory<>("tipoDeporte"));
@@ -89,6 +104,15 @@ public class RankingController extends Controller implements Initializable {
                 }
             }
         });
+        colPuntos.setCellValueFactory(cellData -> {
+        Equipo equipo = cellData.getValue();
+        Integer puntos = estadisticasLista.stream()
+                .filter(e -> e.getIdEquipo().equals(equipo.getId()))
+                .map(EstadisticasEquipoGenerales::getPuntos)
+                .findFirst()
+                .orElse(0);
+        return new javafx.beans.property.SimpleIntegerProperty(puntos).asObject();
+});
         
         cargarJson();
         Filtrar();
@@ -119,24 +143,21 @@ public class RankingController extends Controller implements Initializable {
         ComboBoxDeportes.valueProperty().addListener((obs, oldVal, newVal) -> {
             aplicarFiltro(filteredData);
         });
-        
-        try {
-        DeporteRepository deporteRepo = new DeporteRepository();
-        List<Deporte> deportes = deporteRepo.findAll();
 
-        if (deportes != null) {
+        try {
             Deporte todos = new Deporte("Todos");
             todos.setNombre("Todos");
+            List<Deporte> deportes = deporteRepo.findAll();
+
             ComboBoxDeportes.getItems().clear();
             ComboBoxDeportes.getItems().add(todos);
             ComboBoxDeportes.getItems().addAll(deportes);
-            ComboBoxDeportes.getSelectionModel().select(todos); // seleccionar por defecto
+            ComboBoxDeportes.getSelectionModel().select(todos);
             AppContext.getInstance().set("LISTA_DEPORTES", deportes);
-        }
         } catch (IOException e) {
             new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar deportes", "No se pudo cargar la lista de deportes.");
             e.printStackTrace();
-            }
+        }
 
         ComboBoxDeportes.setCellFactory(param -> new javafx.scene.control.ListCell<>() {
             @Override
@@ -153,11 +174,30 @@ public class RankingController extends Controller implements Initializable {
                 setText(item == null || empty ? null : item.getNombre());
             }
         });
-        
-        SortedList<Equipo> sortedData = new SortedList<>(filteredData);
-        sortedData.comparatorProperty().bind(tableView.comparatorProperty());
+
+        SortedList<Equipo> sortedData = new SortedList<>(filteredData, (e1, e2) -> {
+            int puntos1 = estadisticasLista.stream()
+                    .filter(e -> e.getIdEquipo().equals(e1.getId()))
+                    .map(EstadisticasEquipoGenerales::getPuntos)
+                    .findFirst()
+                    .orElse(0);
+
+            int puntos2 = estadisticasLista.stream()
+                    .filter(e -> e.getIdEquipo().equals(e2.getId()))
+                    .map(EstadisticasEquipoGenerales::getPuntos)
+                    .findFirst()
+                    .orElse(0);
+
+            return Integer.compare(puntos2, puntos1); // Descendente
+        });
+
         tableView.setItems(sortedData);
 
+        // Ajusta colRango para que funcione con la tabla real y su orden
+        colRango.setCellValueFactory(cellData -> {
+            int rango = tableView.getItems().indexOf(cellData.getValue()) + 1;
+            return new javafx.beans.property.SimpleIntegerProperty(rango).asObject();
+        });
     }
 
     @Override
@@ -181,4 +221,5 @@ public class RankingController extends Controller implements Initializable {
         return coincideNombre && coincideDeporte;
         });
     }
+
 }
