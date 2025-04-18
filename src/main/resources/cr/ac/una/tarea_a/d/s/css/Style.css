@@ -43,7 +43,11 @@
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
 }
-
+.anchor-paneModal {
+    -fx-background-image: url("../resources/fondoModal.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+}
 BorderPane {
     -fx-background-color: -fx-color-balliverse;
 }
