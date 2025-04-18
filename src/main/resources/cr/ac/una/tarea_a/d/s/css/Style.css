@@ -129,7 +129,7 @@ BorderPane {
 /* 🏷️ Labels y Títulos */
 /* ========================================================= */
 .label {
-    -fx-text-fill: black;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
 }
 

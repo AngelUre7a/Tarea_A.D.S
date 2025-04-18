@@ -29,7 +29,7 @@
       </VBox>
       <TableView fx:id="tableView" editable="true" fixedCellSize="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="450.0" prefWidth="730.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="136.0">
         <columns>
-          <TableColumn fx:id="colID" prefWidth="69.0" text="ID" />
+          <TableColumn fx:id="colID" prefWidth="70.0" text="ID" />
             <TableColumn fx:id="colNombre" prefWidth="150.0" text="Nombre" />
             <TableColumn fx:id="colImagen" prefWidth="139.0" text="Imagen" />
             <TableColumn fx:id="colEditar" prefWidth="126.0" resizable="false" text="Editar" />
