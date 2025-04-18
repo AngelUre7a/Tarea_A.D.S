@@ -198,6 +198,52 @@ public class CreacionTorneoController extends Controller implements Initializabl
 
     @FXML
     private void onActionBtnJugarTorneo(ActionEvent event) {
+        Deporte deporte = ComboBoxDeportes.getValue();
+        if (deporte == null) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe seleccionar un tipo de deporte.");
+            return;
+        }
+        String nombre = txtNombreTorneo.getText();
+        String textCantidadEquipos = txtCantidadEquipos.getText();
+        String textTiempoPorPartida = txtTiempoPartido.getText();
+        if (nombre == null || nombre.isBlank() || textCantidadEquipos == null || textCantidadEquipos.isBlank() || textTiempoPorPartida == null || textTiempoPorPartida.isBlank()) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar el nombre, cantidad de equipos y tiempo de cada partido.");
+            return;
+        }
+        int cantidadEquipos = Integer.parseInt(txtCantidadEquipos.getText());
+
+        int tiempoPorPartida = Integer.parseInt(txtTiempoPartido.getText());
+        String id = java.util.UUID.randomUUID().toString();
+        if (equiposInscritos.size() == 1) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede crear un torneo con un solo Equipo, Agrega mas equipos para crearlo.");
+            return;
+        }
+        Torneo torneo = new Torneo(id, nombre, deporte.getNombre(), cantidadEquipos, tiempoPorPartida, new ArrayList<>(equiposInscritos));
+        equiposEnTorneo(equiposInscritos);
+        AppContext.getInstance().set("TORNEO_NUEVO", torneo);
+        // Añadir el torneo a la lista global de torneos
+        if (!AppContext.getInstance().containsItem("LISTA_TORNEOS")) {
+            ObservableList<Torneo> listaTorneos = FXCollections.observableArrayList();
+            AppContext.getInstance().set("LISTA_TORNEOS", listaTorneos);
+        }
+
+        List<Torneo> torneos = (List<Torneo>) AppContext.getInstance().get("LISTA_TORNEOS");
+        ObservableList<Torneo> listaTorneos = FXCollections.observableArrayList(torneos);
+        listaTorneos.add(torneo);
+
+        torneo.setEstado("enCurso");
+
+        txtCantidadEquipos.clear();
+        txtTiempoPartido.clear();
+        //ComboBoxDeportes.setValue(null);
+        AppContext.getInstance().set("TORNEO", torneo);
+        FlowController.getInstance().goView("Llaves");
+        LlavesController controller = (LlavesController) FlowController.getInstance().getController("Llaves");
+
+        if (controller != null) {
+            controller.onShow();
+        }
+        ((Stage) root.getScene().getWindow()).close();
     }
 
     @FXML
@@ -216,10 +262,10 @@ public class CreacionTorneoController extends Controller implements Initializabl
             return;
         }
         int cantidadEquipos = Integer.parseInt(txtCantidadEquipos.getText());
-        
+
         int tiempoPorPartida = Integer.parseInt(txtTiempoPartido.getText());
         String id = java.util.UUID.randomUUID().toString();
-        if(equiposInscritos.size()==1){
+        if (equiposInscritos.size() == 1) {
             new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede crear un torneo con un solo Equipo, Agrega mas equipos para crearlo.");
             return;
         }
