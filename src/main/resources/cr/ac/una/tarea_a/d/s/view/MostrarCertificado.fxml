@@ -54,7 +54,7 @@
                   <Label alignment="CENTER" prefHeight="34.0" prefWidth="600.0" styleClass="jfx-button-long-text" stylesheets="@../css/Style.css" text="¡Felicidades equipo por su increíble victoria en el torneo, demostraron talento, esfuerzo y gran trabajo!" />
                </children>
             </VBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="560.0" spacing="200.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="560.0" spacing="200.0" stylesheets="@../css/Style.css">
                <children>
                   <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" prefHeight="50.0" prefWidth="140.0" styleClass="mfx-button" stylesheets="@../css/Style.css" text="Volver" />
                   <MFXButton fx:id="btnImprimirCert" onAction="#onActionBtnImprimirCert" prefHeight="50.0" prefWidth="140.0" styleClass="mfx-button" stylesheets="@../css/Style.css" text="Imprimir certificado" />

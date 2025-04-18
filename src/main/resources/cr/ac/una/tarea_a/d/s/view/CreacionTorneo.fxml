@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="650.0" styleClass="anchor-pane" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.CreacionTorneoController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="650.0" styleClass="anchor-paneModal" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.CreacionTorneoController">
    <children>
       <VBox prefHeight="600.0" prefWidth="760.0" spacing="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -59,7 +59,7 @@
                   </VBox>
                   <VBox alignment="TOP_CENTER" prefHeight="223.0" prefWidth="344.0">
                      <children>
-                        <ComboBox fx:id="ComboBoxDeportes" onAction="#onActionComboBoxDeportes" prefHeight="25.0" prefWidth="167.0" promptText="Deportes Disponibles" VBox.vgrow="ALWAYS" />
+                        <ComboBox fx:id="ComboBoxDeportes" onAction="#onActionComboBoxDeportes" prefHeight="25.0" prefWidth="167.0" promptText="Deportes Disponibles" styleClass="mfx-combo-box" stylesheets="@../css/Style.css" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                </children>
