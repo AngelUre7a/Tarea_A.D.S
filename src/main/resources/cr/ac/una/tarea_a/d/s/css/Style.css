@@ -113,14 +113,14 @@ BorderPane {
 
 }
 
-.mfx-checkbox{
+/*.mfx-checkbox{
     -mfx-main: -fx-base-color-focus;
     -fx-font-size:14px;
     -fx-min-height:26px;
     -fx-pref-height:26px;
     -fx-max-height:26px;
     -fx-text-fill:-fx-base-color-etiquetas;
-}
+}*/
 /* ========================================================= */
 /* 🏷️ Labels y Títulos */
 /* ========================================================= */

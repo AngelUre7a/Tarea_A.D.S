@@ -64,5 +64,115 @@
     "estado": "finalizado",
     "ganadorId": "f78268b1-e00c-4246-8bcf-06be7311b151",
     "tiempoRestante": 0
+  },
+  {
+    "id": "22e74496-aebf-472e-9442-3a21f0efc215",
+    "idTorneo": "c8d92b4b-f89a-4e6b-9b19-055b7f500f15",
+    "idEquipoA": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "idEquipoB": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "golesEquipoA": 1,
+    "golesEquipoB": 0,
+    "estado": "finalizado",
+    "ganadorId": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "tiempoRestante": 104
+  },
+  {
+    "id": "0166e9ed-9f6e-4282-992f-ac8c4382c032",
+    "idTorneo": "c8d92b4b-f89a-4e6b-9b19-055b7f500f15",
+    "idEquipoA": "ef91be2f-b36f-4933-a1c7-4f642f88e5c1",
+    "idEquipoB": "04085ed7-0341-4840-b98a-d500aa63d328",
+    "golesEquipoA": 2,
+    "golesEquipoB": 1,
+    "estado": "finalizado",
+    "ganadorId": "ef91be2f-b36f-4933-a1c7-4f642f88e5c1",
+    "tiempoRestante": 110
+  },
+  {
+    "id": "cdfab477-7d26-4f48-9188-6ff43f1318d2",
+    "idTorneo": "c8d92b4b-f89a-4e6b-9b19-055b7f500f15",
+    "idEquipoA": "2031bcdb-f95a-42ad-8619-5776e8fca679",
+    "idEquipoB": "e5488f9e-af3a-48d8-bcbd-61a8cc5c3ffe",
+    "golesEquipoA": 1,
+    "golesEquipoB": 0,
+    "estado": "finalizado",
+    "ganadorId": "2031bcdb-f95a-42ad-8619-5776e8fca679",
+    "tiempoRestante": 118
+  },
+  {
+    "id": "b0ee7238-c21f-4ad8-9cda-144f49f92575",
+    "idTorneo": "c8d92b4b-f89a-4e6b-9b19-055b7f500f15",
+    "idEquipoA": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "idEquipoB": "ef91be2f-b36f-4933-a1c7-4f642f88e5c1",
+    "golesEquipoA": 1,
+    "golesEquipoB": 0,
+    "estado": "finalizado",
+    "ganadorId": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "tiempoRestante": 118
+  },
+  {
+    "id": "01cbde9b-bb76-4052-a43a-0556f0ed9106",
+    "idTorneo": "c8d92b4b-f89a-4e6b-9b19-055b7f500f15",
+    "idEquipoA": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "idEquipoB": "2031bcdb-f95a-42ad-8619-5776e8fca679",
+    "golesEquipoA": 1,
+    "golesEquipoB": 0,
+    "estado": "finalizado",
+    "ganadorId": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "tiempoRestante": 116
+  },
+  {
+    "id": "09269fa6-3d67-4cd4-827d-548cf71fdca8",
+    "idTorneo": "c8d92b4b-f89a-4e6b-9b19-055b7f500f15",
+    "idEquipoA": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "idEquipoB": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "golesEquipoA": 1,
+    "golesEquipoB": 0,
+    "estado": "finalizado",
+    "ganadorId": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "tiempoRestante": 0
+  },
+  {
+    "id": "e0823d60-9409-4c00-9612-a17faf8c2337",
+    "idTorneo": "c8d92b4b-f89a-4e6b-9b19-055b7f500f15",
+    "idEquipoA": "ef91be2f-b36f-4933-a1c7-4f642f88e5c1",
+    "idEquipoB": "04085ed7-0341-4840-b98a-d500aa63d328",
+    "golesEquipoA": 2,
+    "golesEquipoB": 1,
+    "estado": "finalizado",
+    "ganadorId": "ef91be2f-b36f-4933-a1c7-4f642f88e5c1",
+    "tiempoRestante": 0
+  },
+  {
+    "id": "d7d70d71-3cea-407e-a9da-66d6ddb40ef5",
+    "idTorneo": "c8d92b4b-f89a-4e6b-9b19-055b7f500f15",
+    "idEquipoA": "2031bcdb-f95a-42ad-8619-5776e8fca679",
+    "idEquipoB": "e5488f9e-af3a-48d8-bcbd-61a8cc5c3ffe",
+    "golesEquipoA": 1,
+    "golesEquipoB": 0,
+    "estado": "finalizado",
+    "ganadorId": "2031bcdb-f95a-42ad-8619-5776e8fca679",
+    "tiempoRestante": 0
+  },
+  {
+    "id": "0c35c1ef-0890-46c5-8880-9b765d5396d5",
+    "idTorneo": "c8d92b4b-f89a-4e6b-9b19-055b7f500f15",
+    "idEquipoA": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "idEquipoB": "ef91be2f-b36f-4933-a1c7-4f642f88e5c1",
+    "golesEquipoA": 1,
+    "golesEquipoB": 0,
+    "estado": "finalizado",
+    "ganadorId": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "tiempoRestante": 0
+  },
+  {
+    "id": "d6858a8a-ff90-4318-bfd5-3902bd31276f",
+    "idTorneo": "c8d92b4b-f89a-4e6b-9b19-055b7f500f15",
+    "idEquipoA": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "idEquipoB": "2031bcdb-f95a-42ad-8619-5776e8fca679",
+    "golesEquipoA": 1,
+    "golesEquipoB": 0,
+    "estado": "finalizado",
+    "ganadorId": "f78268b1-e00c-4246-8bcf-06be7311b151",
+    "tiempoRestante": 0
   }
 ]

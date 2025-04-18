@@ -1,5 +1,33 @@
 [
   {
+    "idEquipo": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "torneosGanados": 0,
+    "partidosGanados": 0,
+    "golesAFavor": 19,
+    "puntos": 0
+  },
+  {
+    "idEquipo": "04085ed7-0341-4840-b98a-d500aa63d328",
+    "torneosGanados": 0,
+    "partidosGanados": 0,
+    "golesAFavor": 3,
+    "puntos": 0
+  },
+  {
+    "idEquipo": "e5488f9e-af3a-48d8-bcbd-61a8cc5c3ffe",
+    "torneosGanados": 0,
+    "partidosGanados": 0,
+    "golesAFavor": 0,
+    "puntos": 0
+  },
+  {
+    "idEquipo": "ef91be2f-b36f-4933-a1c7-4f642f88e5c1",
+    "torneosGanados": 0,
+    "partidosGanados": 3,
+    "golesAFavor": 6,
+    "puntos": 9
+  },
+  {
     "idEquipo": "f78268b1-e00c-4246-8bcf-06be7311b151",
     "torneosGanados": 0,
     "partidosGanados": 0,
@@ -7,10 +35,10 @@
     "puntos": 0
   },
   {
-    "idEquipo": "6572afcc-e0b4-4d0d-8002-2b165a435494",
+    "idEquipo": "2031bcdb-f95a-42ad-8619-5776e8fca679",
     "torneosGanados": 0,
-    "partidosGanados": 0,
-    "golesAFavor": 19,
-    "puntos": 0
+    "partidosGanados": 3,
+    "golesAFavor": 3,
+    "puntos": 9
   }
 ]
