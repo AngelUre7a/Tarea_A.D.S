@@ -123,7 +123,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
         });
 
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        colEscudo.setCellFactory(column -> new javafx.scene.control.TableCell<>() {
+        colEscudo.setCellFactory(column -> new javafx.scene.control.TableCell<Equipo, Image>() {
             private final ImageView imageView = new ImageView();
 
             {
@@ -135,12 +135,27 @@ public class CreacionTorneoController extends Controller implements Initializabl
             @Override
             protected void updateItem(Image item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty || item == null) {
+
+                if (empty) {
                     setGraphic(null);
-                    System.out.println("No se cargo la imagen");
+                    return;
+                }
+
+                Equipo equipo = getTableView().getItems().get(getIndex());
+                String base64 = equipo.getImagenBase64(); // suponiendo que ese es el getter
+
+                if (base64 != null && !base64.isBlank()) {
+                    try {
+                        byte[] imageBytes = java.util.Base64.getDecoder().decode(base64);
+                        Image image = new Image(new java.io.ByteArrayInputStream(imageBytes));
+                        imageView.setImage(image);
+                        setGraphic(imageView);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Error decodificando imagen Base64: " + e.getMessage());
+                        setGraphic(null);
+                    }
                 } else {
-                    imageView.setImage(item);
-                    setGraphic(imageView);
+                    setGraphic(null);
                 }
             }
         });
