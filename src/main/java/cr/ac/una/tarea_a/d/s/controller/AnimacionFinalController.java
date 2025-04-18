@@ -38,7 +38,7 @@ public class AnimacionFinalController {
         if (imagenBalon != null) imgBalon.setImage(imagenBalon);
 
         lblCampeon.setText("¡" + nombreEquipo + " CAMPEÓN!");
-        Sonidos.aplausos();
+        Sonidos.ganador();
 
         Animaciones.animarEquipo(imgEquipo);
         Animaciones.animarBalon(imgBalon);

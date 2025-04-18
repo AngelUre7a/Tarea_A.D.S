@@ -49,6 +49,10 @@
                   <ImageView fx:id="imgEquipo2" fitHeight="66.0" fitWidth="67.0" layoutX="619.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="imgBalon" fitHeight="66.0" fitWidth="67.0" layoutX="317.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="imgEquipo1" fitHeight="66.0" fitWidth="67.0" layoutX="14.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
+             <Label fx:id="lblGol" text="¡GOOOOL!" visible="false"
+       layoutX="230.0" layoutY="100.0"
+       style="-fx-font-size: 64px; -fx-text-fill: gold; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, black, 10, 0.5, 2, 2);" />
+
                </children>
             </AnchorPane>
          </children>

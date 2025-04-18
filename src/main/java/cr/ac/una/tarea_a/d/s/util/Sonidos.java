@@ -10,7 +10,10 @@ public class Sonidos {
         MediaPlayer player = new MediaPlayer(sound);
         player.play();
     }
-    
+    public static void ganador(){
+        playSound("ganador.mp3");
+    }
+     
     public static void aplausos(){
         playSound("aplausos.mp3");
     }
@@ -18,4 +21,9 @@ public class Sonidos {
     public static void acercaDe(){
         playSound("acercaDe.mp3");
     }
+    
+    public static void silbato(){
+        playSound("silbato.mp3");
+    }
+     
 }

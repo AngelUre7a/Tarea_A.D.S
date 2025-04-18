@@ -1,5 +1,6 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
+import cr.ac.una.Tarea_A.D.S.util.Sonidos;
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipoGenerales;
@@ -41,6 +42,7 @@ import cr.ac.una.tarea_a.d.s.repositories.EstadisticasEquipoGeneralesRepository;
 import cr.ac.una.tarea_a.d.s.repositories.EstadisticasEquipoPTRepository;
 import cr.ac.una.tarea_a.d.s.repositories.PartidaRepository;
 import cr.ac.una.tarea_a.d.s.repositories.TorneoRepository;
+import cr.ac.una.tarea_a.d.s.util.Animaciones;
 import java.util.List;
 
 public class PartidoController extends Controller implements Initializable {
@@ -75,6 +77,8 @@ public class PartidoController extends Controller implements Initializable {
     private ImageView imgEscudo1;
     @FXML
     private ImageView imgEscudo2;
+@FXML
+private Label lblGol;
 
     private Timeline timeline;
     private int tiempoRestante;
@@ -110,8 +114,8 @@ public class PartidoController extends Controller implements Initializable {
     private void onActionBtnFinalizar(ActionEvent event) {
         Finalizar();
     }
-    
-    private void Finalizar(){
+
+    private void Finalizar() {
         EstadisticasEquipoPT estadisticasEquipo1 = (EstadisticasEquipoPT) AppContext.getInstance().get("ESTADISTICAS_" + equipo1.getNombre() + "_" + torneo.getId());
         EstadisticasEquipoPT estadisticasEquipo2 = (EstadisticasEquipoPT) AppContext.getInstance().get("ESTADISTICAS_" + equipo2.getNombre() + "_" + torneo.getId());
         EstadisticasEquipoGenerales estadisticasGenEquipo1;
@@ -131,7 +135,7 @@ public class PartidoController extends Controller implements Initializable {
             estadisticasGenEquipo1 = new EstadisticasEquipoGenerales(equipo1.getId());
             estadisticasGenEquipo2 = new EstadisticasEquipoGenerales(equipo2.getId());
         }
-        
+
         if (estadisticasEquipo1 == null) {
             estadisticasEquipo1 = new EstadisticasEquipoPT(equipo1.getId(), torneo.getId());
         }
@@ -139,14 +143,13 @@ public class PartidoController extends Controller implements Initializable {
         if (estadisticasEquipo2 == null) {
             estadisticasEquipo2 = new EstadisticasEquipoPT(equipo2.getId(), torneo.getId());
         }
-        
+
         if (estadisticasGenEquipo1 == null) {
             estadisticasGenEquipo1 = new EstadisticasEquipoGenerales(equipo1.getId());
         }
         if (estadisticasGenEquipo2 == null) {
             estadisticasGenEquipo2 = new EstadisticasEquipoGenerales(equipo2.getId());
         }
-
 
         estadisticasEquipo1.setGolesAFavorPT(estadisticasEquipo1.getGolesAFavorPT() + marcadorEquipo1);
         estadisticasEquipo2.setGolesAFavorPT(estadisticasEquipo2.getGolesAFavorPT() + marcadorEquipo2);
@@ -167,7 +170,6 @@ public class PartidoController extends Controller implements Initializable {
         }
 
         // ✅ Crear y guardar partida
-        
         if (torneo != null) {
             Partida partida = new Partida(
                     null, // id será generado por el repositorio
@@ -216,18 +218,18 @@ public class PartidoController extends Controller implements Initializable {
         AppContext.getInstance().set("ESTADISTICAS_" + equipo2.getNombre() + "_" + torneo.getId(), estadisticasEquipo2);
         AppContext.getInstance().set("ESTADISTICAS_" + equipo1.getNombre(), estadisticasGenEquipo1);
         AppContext.getInstance().set("ESTADISTICAS_" + equipo2.getNombre(), estadisticasGenEquipo2);
-        
+
         EstadisticasEquipoPTRepository estadisticasEquipo1Repo = new EstadisticasEquipoPTRepository();
         EstadisticasEquipoPTRepository estadisticasEquipo2Repo = new EstadisticasEquipoPTRepository();
         EstadisticasEquipoGeneralesRepository estadisticasGenEquipo1Repo = new EstadisticasEquipoGeneralesRepository();
         EstadisticasEquipoGeneralesRepository estadisticasGenEquipo2Repo = new EstadisticasEquipoGeneralesRepository();
-        
+
         try {
             estadisticasEquipo1Repo.save(estadisticasEquipo1);
             estadisticasEquipo2Repo.save(estadisticasEquipo2);
             estadisticasGenEquipo1Repo.save(estadisticasGenEquipo1);
             estadisticasGenEquipo2Repo.save(estadisticasGenEquipo2);
-            
+
         } catch (IOException e) {
             System.err.println("Error al guardar las estadísticas: " + e.getMessage());
         }
@@ -235,6 +237,7 @@ public class PartidoController extends Controller implements Initializable {
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
     }
+
     private void agregarEstadisticasPTAGeneral(EstadisticasEquipoGenerales generales, EstadisticasEquipoPT parciales) {
         generales.setGolesAFavor(generales.getGolesAFavor() + parciales.getGolesAFavorPT());
         generales.setPuntos(generales.getPuntos() + parciales.getPuntosPT());
@@ -317,6 +320,8 @@ public class PartidoController extends Controller implements Initializable {
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);  // Corre hasta que lo detengas
         timeline.play();  // Iniciar
+        Sonidos.silbato();
+
     }
 
     private void configurarMovimientoBalon() {
@@ -351,6 +356,11 @@ public class PartidoController extends Controller implements Initializable {
             marcadorEquipo2++;
             lblMarcador2.setText(String.valueOf(marcadorEquipo2));
             System.out.println("⚽ ¡GOL para el equipo 2!");
+            // 🔊 Sonido de aplausos
+            Sonidos.aplausos();
+            Animaciones.mostrarGolAnimado(lblGol);
+            Animaciones.animarBalonGol(imgBalon); // 🎞️ Nuevo rebote del balón
+
             resetearBalon();
         }
 
@@ -358,6 +368,11 @@ public class PartidoController extends Controller implements Initializable {
             marcadorEquipo1++;
             lblMarcador1.setText(String.valueOf(marcadorEquipo1));
             System.out.println("⚽ ¡GOL para el equipo 1!");
+            // 🔊 Sonido de aplausos
+            Sonidos.aplausos();
+            Animaciones.mostrarGolAnimado(lblGol);
+            Animaciones.animarBalonGol(imgBalon); // 🎞️ Nuevo rebote del balón
+
             resetearBalon();
         }
     }

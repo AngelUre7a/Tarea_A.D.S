@@ -67,7 +67,6 @@ public class Animaciones {
         new ParallelTransition(caer, girar).play();
     }
 
-   
     public static void animarCreditos(Node nodo, double fromY, double toY, double duracionSegundos) {
         TranslateTransition subir = new TranslateTransition(Duration.seconds(duracionSegundos), nodo);
         subir.setFromY(fromY);
@@ -77,6 +76,48 @@ public class Animaciones {
         subir.play();
     }
 
+    public static void animarBalonGol(ImageView balon) {
+        ScaleTransition rebote = new ScaleTransition(Duration.seconds(0.3), balon);
+        rebote.setFromX(1.0);
+        rebote.setFromY(1.0);
+        rebote.setToX(1.3);
+        rebote.setToY(1.3);
+        rebote.setAutoReverse(true);
+        rebote.setCycleCount(2);
+        rebote.setInterpolator(Interpolator.EASE_OUT);
+        rebote.play();
+    }
+public static void mostrarGolAnimado(Label lblGol) {
+    lblGol.setVisible(true);
+    lblGol.setScaleX(0.5);
+    lblGol.setScaleY(0.5);
+    lblGol.setOpacity(0);
+
+    ScaleTransition zoom = new ScaleTransition(Duration.seconds(0.6), lblGol);
+    zoom.setFromX(0.5);
+    zoom.setFromY(0.5);
+    zoom.setToX(1.2);
+    zoom.setToY(1.2);
+
+    FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.6), lblGol);
+    fadeIn.setFromValue(0);
+    fadeIn.setToValue(1);
+
+    PauseTransition pausa = new PauseTransition(Duration.seconds(1.5));
+
+    FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.8), lblGol);
+    fadeOut.setFromValue(1);
+    fadeOut.setToValue(0);
+
+    fadeOut.setOnFinished(e -> lblGol.setVisible(false));
+
+    SequentialTransition secuencia = new SequentialTransition(
+            new ParallelTransition(zoom, fadeIn),
+            pausa,
+            fadeOut
+    );
+    secuencia.play();
+}
 
     public static Image convertirBase64AImage(String base64) {
         try {
