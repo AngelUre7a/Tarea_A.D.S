@@ -95,6 +95,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
                 icono.setFitWidth(40);
                 icono.setFitHeight(40);
                 btnEditar.setGraphic(icono);
+                btnEditar.getStyleClass().add("boton-tabla-icono");
                 btnEditar.setStyle("-fx-background-color: transparent;");
 
                 btnEditar.setOnAction(event -> {
@@ -126,6 +127,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
                 icono.setFitWidth(40);
                 icono.setFitHeight(40);
                 btnEliminar.setGraphic(icono);
+                btnEliminar.getStyleClass().add("boton-tabla-icono");
                 btnEliminar.setStyle("-fx-background-color: transparent;");
 
                 btnEliminar.setOnAction(event -> {

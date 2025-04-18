@@ -90,6 +90,7 @@ public class ListaTorneoController extends Controller implements Initializable {
                 icono.setFitWidth(40);
                 icono.setFitHeight(40);
                 btnIniciar.setGraphic(icono);
+                btnIniciar.getStyleClass().add("boton-tabla-icono");
                 btnIniciar.setStyle("-fx-background-color: transparent;");
 
                 // Acción del botón

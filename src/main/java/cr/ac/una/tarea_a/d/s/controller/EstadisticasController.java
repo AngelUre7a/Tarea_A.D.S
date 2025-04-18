@@ -195,6 +195,7 @@ public class EstadisticasController extends Controller implements Initializable 
                 icono.setFitWidth(40);
                 icono.setFitHeight(40);
                 btnVer.setGraphic(icono);
+                btnVer.getStyleClass().add("boton-tabla-icono");
                 btnVer.setStyle("-fx-background-color: transparent;");
                 
                 btnVer.setOnAction(event -> {

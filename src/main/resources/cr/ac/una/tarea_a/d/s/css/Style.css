@@ -15,6 +15,7 @@
     -fx-color-medium_slate_blue: #6666ff;
     -fx-color-azulOscuro: #1e3c72;
     -fx-color-balliverse: #004A67;
+    -fx-base-color-focus:#09b6bc;
 }
 
 /* ========================================================= */
@@ -49,37 +50,9 @@ BorderPane {
 
 /* ========================================================= */
 /* 🧩 Botones */
-/* ========================================================= */
-/*.button {
-    -fx-background-color: -fx-color-rich_black;
-    -fx-padding: 5;
-    -fx-text-fill: white;
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
-    -mfx-button-type: RAISED;
-    -fx-alignment: CENTER;
-    -fx-background-radius: 20px;
-    -fx-border-radius: 20px;
-    -fx-border-color: white;
-    -fx-border-width: 2px;
-    -fx-scale-x: 1;
-    -fx-scale-y: 1;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 5, 0.2, 2, 2);
-}
 
-.button:hover {
-    -fx-scale-x: 1.05;
-    -fx-scale-y: 1.05;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.3, 4, 4);
-    -fx-background-color: -fx-color-rich_black;
-    -fx-border-color: white;
-}
-
-.button:focused {
-    -fx-background-color: -fx-color-azulOscuro;
-}*/
 .button {
-    -fx-background-color: -fx-color-rich_black;
+    -fx-background-color: -fx-color-balliverse;
     -fx-padding: 5;
     -fx-text-fill: white;
     -fx-font-size: 18px;
@@ -106,7 +79,7 @@ BorderPane {
 }
 
 .button:focused {
-    -fx-background-color: -fx-color-azulOscuro;
+    -fx-background-color: -fx-color-rich_black;
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
 }
@@ -127,7 +100,27 @@ BorderPane {
     -fx-border-radius: 20px;
     -fx-border-color: black;
 }
+.mfx-text-field{
+    -mfx-main:  -fx-color-balliverse;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-color: -fx-color-balliverse;
+    -fx-prompt-text-fill:-fx-color-balliverse;
+    -mfx-float-mode:BORDER;
+    -fx-font-size:12px;
+    -fx-text-fill:black;
+    -fx-alignment:TOP_LEFT;
 
+}
+
+.mfx-checkbox{
+    -mfx-main: -fx-base-color-focus;
+    -fx-font-size:14px;
+    -fx-min-height:26px;
+    -fx-pref-height:26px;
+    -fx-max-height:26px;
+    -fx-text-fill:-fx-base-color-etiquetas;
+}
 /* ========================================================= */
 /* 🏷️ Labels y Títulos */
 /* ========================================================= */
@@ -253,4 +246,18 @@ BorderPane {
     -fx-border-radius: 20px;
     -fx-padding: 15px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0.2, 4, 4);
+}
+.boton-tabla-icono {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+    -mfx-ripple-color: transparent;
+}
+
+.boton-tabla-icono:hover {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
 }

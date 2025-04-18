@@ -50,7 +50,7 @@
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Label alignment="CENTER" prefHeight="33.0" prefWidth="94.0" text="Por torneo:" />
-                        <ComboBox fx:id="cmbTorneos" onAction="#onActionCmbTorneos" prefHeight="50.0" prefWidth="253.0" />
+                        <ComboBox fx:id="cmbTorneos" onAction="#onActionCmbTorneos" prefHeight="50.0" prefWidth="253.0" styleClass="mfx-combo-box" stylesheets="@../css/Style.css" />
                         <HBox prefHeight="60.0" prefWidth="200.0">
                            <children>
                               <Label prefHeight="99.0" prefWidth="42.0" text="Goles:" />
