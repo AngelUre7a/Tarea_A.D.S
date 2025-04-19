@@ -74,6 +74,10 @@ public class EstadisticasEquipoPT {
     public void incrementarPuntosGaneDirecto(){
         this.puntosPT = this.puntosPT + 3;
     }
+    
+    public void incrementarPuntosDesempate(){
+        this.puntosPT = this.puntosPT + 2;
+    }
 
     public String getIdTorneo() {
         return idTorneo;

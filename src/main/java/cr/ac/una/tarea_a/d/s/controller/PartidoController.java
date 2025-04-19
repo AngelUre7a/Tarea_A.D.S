@@ -164,12 +164,20 @@ public class PartidoController extends Controller implements Initializable {
         if (marcadorEquipo1 > marcadorEquipo2) {
             ganadorId = equipo1.getId();
             estadisticasEquipo1.incrementarPartidosGanados();
-            estadisticasEquipo1.incrementarPuntosGaneDirecto();
+            if(enGolDeOro == true){
+                estadisticasEquipo1.incrementarPuntosDesempate();
+            }else{
+                estadisticasEquipo1.incrementarPuntosGaneDirecto();
+            }
             agregarEstadisticasPTAGeneral(estadisticasGenEquipo2, estadisticasEquipo2);
         } else if (marcadorEquipo2 > marcadorEquipo1) {
             ganadorId = equipo2.getId();
             estadisticasEquipo2.incrementarPartidosGanados();
-            estadisticasEquipo2.incrementarPuntosGaneDirecto();
+            if(enGolDeOro == true){
+                estadisticasEquipo2.incrementarPuntosDesempate();
+            }else{
+                estadisticasEquipo2.incrementarPuntosGaneDirecto();
+            }
             agregarEstadisticasPTAGeneral(estadisticasGenEquipo1, estadisticasEquipo1);
         } else {
             iniciarGolDeOro();
