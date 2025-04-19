@@ -33,6 +33,23 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.geometry.Bounds;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Line;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 
 public class LlavesController extends Controller implements Initializable {
 
@@ -49,6 +66,10 @@ public class LlavesController extends Controller implements Initializable {
     private VBox root;
     @FXML
     private HBox hboxLlaves;
+    @FXML
+    private StackPane stackPaneLlaves;
+    @FXML
+    private Pane linePane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -64,6 +85,56 @@ public class LlavesController extends Controller implements Initializable {
 
     private int siguientePotencia(int cantidadEquipos) {
         return (int) Math.pow(2, Math.ceil(Math.log(cantidadEquipos) / Math.log(2)));
+    }
+
+    private void dibujarLineaEnL(Button origen, Button destino) {
+        Bounds boundsOrigenScene = origen.localToScene(origen.getBoundsInLocal());
+        Bounds boundsDestinoScene = destino.localToScene(destino.getBoundsInLocal());
+
+        Bounds origenLocal = linePane.sceneToLocal(boundsOrigenScene);
+        Bounds destinoLocal = linePane.sceneToLocal(boundsDestinoScene);
+
+        double startX = origenLocal.getMinX() + origenLocal.getWidth();
+        double startY = origenLocal.getMinY() + origenLocal.getHeight() / 2;
+        double endX = destinoLocal.getMinX();
+        double endY = destinoLocal.getMinY() + destinoLocal.getHeight() / 2;
+
+        double midX = (startX + endX) / 2;
+
+        Line lineaH1 = new Line(startX, startY, midX, startY);
+        Line lineaV = new Line(midX, startY, midX, endY);
+        Line lineaH2 = new Line(midX, endY, endX, endY);
+
+        for (Line l : List.of(lineaH1, lineaV, lineaH2)) {
+            l.setStrokeWidth(3);
+            l.setStyle("-fx-stroke: black;");
+            linePane.getChildren().add(l);
+        }
+    }
+
+    private void conectarPartidosConLineas() {
+        Platform.runLater(() -> {
+            linePane.getChildren().clear(); // Limpia líneas previas
+
+            for (int ronda = 0; ronda < hboxLlaves.getChildren().size() - 1; ronda++) {
+                VBox rondaActual = (VBox) hboxLlaves.getChildren().get(ronda);
+                VBox siguienteRonda = (VBox) hboxLlaves.getChildren().get(ronda + 1);
+
+                for (int i = 0; i < siguienteRonda.getChildren().size(); i++) {
+                    VBox partidaSiguiente = (VBox) siguienteRonda.getChildren().get(i);
+                    VBox partida1 = (VBox) rondaActual.getChildren().get(i * 2);
+                    VBox partida2 = (VBox) rondaActual.getChildren().get(i * 2 + 1);
+
+                    Button btn1 = (Button) ((VBox) partida1.getChildren().get(1)).getChildren().get(0);
+                    Button btn2 = (Button) ((VBox) partida2.getChildren().get(1)).getChildren().get(0);
+                    Button btnDestino = (Button) ((VBox) partidaSiguiente.getChildren().get(1)).getChildren().get(0);
+
+                    dibujarLineaEnL(btn1, btnDestino);
+                    dibujarLineaEnL(btn2, btnDestino);
+
+                }
+            }
+        });
     }
 
     private void generarEstructuraLlaves() {
@@ -350,8 +421,10 @@ public class LlavesController extends Controller implements Initializable {
             // ⚠️ Si el torneo está en curso o finalizado, recuperar estado
             if ("enCurso".equalsIgnoreCase(torneo1.getEstado()) || "finalizado".equalsIgnoreCase(torneo1.getEstado())) {
                 reconstruirDesdePartidas();
+                 conectarPartidosConLineas();
             } else {
                 llenarPrimerRonda(); // solo si es nuevo
+                conectarPartidosConLineas();
                 torneo1.setEstado("enCurso");
                 try {
                     new TorneoRepository().save(torneo1);
@@ -461,6 +534,11 @@ public class LlavesController extends Controller implements Initializable {
         hboxLlaves.getChildren().clear();
         llavesPorRonda.clear();
         ganadoresTemporales.clear();
+        
+        if (linePane != null) {
+            linePane.getChildren().clear(); // 💥 limpia las líneas entre partidos
+        }
+
     }
 
     private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
