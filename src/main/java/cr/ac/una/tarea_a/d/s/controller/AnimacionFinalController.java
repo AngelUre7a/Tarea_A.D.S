@@ -44,6 +44,7 @@ public class AnimacionFinalController extends Controller {
         }
 
         lblCampeon.setText("¡" + nombreEquipo + " CAMPEÓN!");
+        Sonidos.detener(); // Detenemos tensión
         Sonidos.ganador();
 
         Animaciones.animarEquipo(imgEquipo);

@@ -5,25 +5,38 @@ import javafx.scene.media.MediaPlayer;
 
 public class Sonidos {
 
+    private static MediaPlayer player;
+
     private static void playSound(String filename) {
+        detener(); // Detenemos cualquier sonido anterior
         Media sound = new Media(Sonidos.class.getResource("/cr/ac/una/tarea_a/d/s/resources/sonidos/" + filename).toExternalForm());
-        MediaPlayer player = new MediaPlayer(sound);
+        player = new MediaPlayer(sound);
         player.play();
     }
-    public static void ganador(){
+
+    public static void detener() {
+        if (player != null) {
+            player.stop();
+        }
+    }
+
+    public static void ganador() {
         playSound("ganador.mp3");
     }
-     
-    public static void aplausos(){
+
+    public static void aplausos() {
         playSound("aplausos.mp3");
     }
-     
-    public static void acercaDe(){
+
+    public static void acercaDe() {
         playSound("acercaDe.mp3");
     }
-    
-    public static void silbato(){
+
+    public static void silbato() {
         playSound("silbato.mp3");
     }
-     
+
+    public static void golDeOroTension() {
+        playSound("tension.mp3");
+    }
 }

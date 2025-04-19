@@ -177,20 +177,6 @@ public class Animaciones {
         brillo.setAutoReverse(true);
         brillo.play();
     }
-
-//    public static void animarCanchaDorada(ImageView cancha) {
-//        ColorAdjust tonoDorado = new ColorAdjust();
-//        tonoDorado.setHue(0.1); // tono cálido
-//        tonoDorado.setBrightness(0.2); // brillo extra
-//
-//        Glow resplandor = new Glow(0.3);
-//
-//        cancha.setEffect(new Blend(
-//                BlendMode.ADD,
-//                tonoDorado,
-//                resplandor
-//        ));
-//    }
     public static void animarCanchaDorada(ImageView cancha) {
         DropShadow resplandorDorado = new DropShadow();
         resplandorDorado.setColor(Color.web("#FFD700")); // Dorado puro

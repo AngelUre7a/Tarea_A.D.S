@@ -406,6 +406,7 @@ public class PartidoController extends Controller implements Initializable {
             timeline.stop(); // 🔥 Detiene el temporizador
         }
         Animaciones.mostrarGolDeOro(lblGolDeOro);
+        Sonidos.golDeOroTension();
         Animaciones.parpadeoGolDeOro(lblTiempo);
         Animaciones.animarBalonDorado(imgBalon);
         Animaciones.animarCanchaDorada(imgCancha);
