@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="900.0" styleClass="vBox" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.AcercaDeController">
+<AnchorPane fx:id="root" minHeight="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="vBox" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.AcercaDeController">
 
     <!-- VBox con créditos que se animan -->
     <VBox fx:id="vboxCreditos" alignment="CENTER" layoutX="136.0" layoutY="362.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="628.0" spacing="10" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
