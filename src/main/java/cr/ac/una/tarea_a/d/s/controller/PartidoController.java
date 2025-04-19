@@ -44,6 +44,7 @@ import cr.ac.una.tarea_a.d.s.repositories.PartidaRepository;
 import cr.ac.una.tarea_a.d.s.repositories.TorneoRepository;
 import cr.ac.una.tarea_a.d.s.util.Animaciones;
 import java.util.List;
+import javafx.animation.Animation;
 
 public class PartidoController extends Controller implements Initializable {
 
@@ -96,6 +97,7 @@ public class PartidoController extends Controller implements Initializable {
     int marcadorEquipo1;
     int marcadorEquipo2;
     String estadoPartida = "pendiente";
+    private boolean enGolDeOro = false;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -170,7 +172,8 @@ public class PartidoController extends Controller implements Initializable {
             estadisticasEquipo2.incrementarPuntosGaneDirecto();
             agregarEstadisticasPTAGeneral(estadisticasGenEquipo1, estadisticasEquipo1);
         } else {
-            // Empate INNOVACION
+            iniciarGolDeOro();
+            return;
         }
         // ✅ Crear y guardar partida
         if (torneo != null) {
@@ -364,7 +367,7 @@ public class PartidoController extends Controller implements Initializable {
             Sonidos.aplausos();
             Animaciones.mostrarGolAnimado(lblGol);
             Animaciones.animarBalonGol(imgBalon); // 🎞️ Nuevo rebote del balón
-
+            golAnotado(2);
             resetearBalon();
         }
 
@@ -374,9 +377,7 @@ public class PartidoController extends Controller implements Initializable {
             System.out.println("⚽ ¡GOL para el equipo 1!");
             // 🔊 Sonido de aplausos
             Sonidos.aplausos();
-            Animaciones.mostrarGolAnimado(lblGol);
-            Animaciones.animarBalonGol(imgBalon); // 🎞️ Nuevo rebote del balón
-
+            golAnotado(1);
             resetearBalon();
         }
     }
@@ -387,4 +388,34 @@ public class PartidoController extends Controller implements Initializable {
         imgBalon.setLayoutY(fondoImgCancha.getHeight() / 2 - imgBalon.getFitHeight() / 2);
     }
 
+    private void iniciarGolDeOro() {
+        enGolDeOro = true;
+        if (timeline != null) {
+            timeline.stop(); // 🔥 Detiene el temporizador
+        }
+        parpadeoGolDeOro(lblTiempo);
+        lblTiempo.setText("⚽ ¡Gol de Oro!");
+    }
+    
+    private void golAnotado(int equipo) {
+        Sonidos.aplausos();
+        Animaciones.mostrarGolAnimado(lblGol);
+        Animaciones.animarBalonGol(imgBalon);
+
+        if (enGolDeOro) {
+            Finalizar();
+        } else {
+            resetearBalon();
+        }
+    }
+    
+    public static void parpadeoGolDeOro(Label label) {
+        Timeline timeline = new Timeline(
+            new KeyFrame(Duration.seconds(0.5), e -> label.setStyle("-fx-text-fill: red; -fx-font-weight: bold;")),
+            new KeyFrame(Duration.seconds(1), e -> label.setStyle("-fx-text-fill: white;"))
+        );
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+    }
+   
 }
