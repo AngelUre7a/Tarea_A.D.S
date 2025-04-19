@@ -80,6 +80,8 @@ public class PartidoController extends Controller implements Initializable {
     private ImageView imgEscudo2;
     @FXML
     private Label lblGol;
+    @FXML
+    private Label lblGolDeOro;
 
     private Timeline timeline;
     private int tiempoRestante;
@@ -119,7 +121,7 @@ public class PartidoController extends Controller implements Initializable {
     }
 
     private void Finalizar() {
-        if ("finalizado".equals(estadoPartida)){
+        if ("finalizado".equals(estadoPartida)) {
             return;
         }
         EstadisticasEquipoPT estadisticasEquipo1 = (EstadisticasEquipoPT) AppContext.getInstance().get("ESTADISTICAS_" + equipo1.getNombre() + "_" + torneo.getId());
@@ -164,18 +166,18 @@ public class PartidoController extends Controller implements Initializable {
         if (marcadorEquipo1 > marcadorEquipo2) {
             ganadorId = equipo1.getId();
             estadisticasEquipo1.incrementarPartidosGanados();
-            if(enGolDeOro == true){
+            if (enGolDeOro == true) {
                 estadisticasEquipo1.incrementarPuntosDesempate();
-            }else{
+            } else {
                 estadisticasEquipo1.incrementarPuntosGaneDirecto();
             }
             agregarEstadisticasPTAGeneral(estadisticasGenEquipo2, estadisticasEquipo2);
         } else if (marcadorEquipo2 > marcadorEquipo1) {
             ganadorId = equipo2.getId();
             estadisticasEquipo2.incrementarPartidosGanados();
-            if(enGolDeOro == true){
+            if (enGolDeOro == true) {
                 estadisticasEquipo2.incrementarPuntosDesempate();
-            }else{
+            } else {
                 estadisticasEquipo2.incrementarPuntosGaneDirecto();
             }
             agregarEstadisticasPTAGeneral(estadisticasGenEquipo1, estadisticasEquipo1);
@@ -403,10 +405,14 @@ public class PartidoController extends Controller implements Initializable {
         if (timeline != null) {
             timeline.stop(); // 🔥 Detiene el temporizador
         }
-        parpadeoGolDeOro(lblTiempo);
+        Animaciones.mostrarGolDeOro(lblGolDeOro);
+        Animaciones.parpadeoGolDeOro(lblTiempo);
+        Animaciones.animarBalonDorado(imgBalon);
+        Animaciones.animarCanchaDorada(imgCancha);
+
         lblTiempo.setText("⚽ ¡Gol de Oro!");
     }
-    
+
     private void golAnotado(int equipo) {
         Sonidos.aplausos();
         Animaciones.mostrarGolAnimado(lblGol);
@@ -418,14 +424,5 @@ public class PartidoController extends Controller implements Initializable {
             resetearBalon();
         }
     }
-    
-    public static void parpadeoGolDeOro(Label label) {
-        Timeline timeline = new Timeline(
-            new KeyFrame(Duration.seconds(0.5), e -> label.setStyle("-fx-text-fill: red; -fx-font-weight: bold;")),
-            new KeyFrame(Duration.seconds(1), e -> label.setStyle("-fx-text-fill: white;"))
-        );
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
-    }
-   
+
 }

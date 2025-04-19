@@ -11,56 +11,59 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:id="root" prefHeight="500.0" prefWidth="700.0" styleClass="vBox" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.PartidoController">
-   <top>
-      <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="700.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox alignment="CENTER" prefHeight="42.0" prefWidth="154.0">
-               <children>
-                  <Label fx:id="lblTiempo" alignment="CENTER" prefHeight="17.0" prefWidth="163.0" text="00:00" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="401.0" spacing="10.0">
-               <children>
-                  <ImageView fx:id="imgEscudo1" fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="lblEquipo1" alignment="CENTER" prefHeight="45.0" prefWidth="87.0" text="equipo1" />
-                  <Label fx:id="lblMarcador1" text="0" />
-                  <Label text="-" />
-                  <Label fx:id="lblMarcador2" text="0" />
-                  <Label fx:id="lblEquipo2" alignment="CENTER" prefHeight="45.0" prefWidth="79.0" text="equipo2" />
-                  <ImageView fx:id="imgEscudo2" fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </HBox>
-         </children>
-         <padding>
-            <Insets left="65.0" />
-         </padding>
-      </HBox>
-   </top>
-   <center>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" BorderPane.alignment="CENTER">
-         <children>
-            <AnchorPane fx:id="fondoImgCancha" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0">
-               <children>
-                  <ImageView fx:id="imgCancha" fitHeight="400.0" fitWidth="700.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@../resources/CanchaFutbol.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imgEquipo2" fitHeight="66.0" fitWidth="67.0" layoutX="619.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imgBalon" fitHeight="66.0" fitWidth="67.0" layoutX="317.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imgEquipo1" fitHeight="66.0" fitWidth="67.0" layoutX="14.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
-             <Label fx:id="lblGol" layoutX="230.0" layoutY="100.0" style="-fx-font-size: 64px; -fx-text-fill: gold; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, black, 10, 0.5, 2, 2);" text="¡GOOOOL!" visible="false" />
+    <top>
+        <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="CENTER" prefHeight="42.0" prefWidth="154.0">
+                    <children>
+                        <Label fx:id="lblTiempo" alignment="CENTER" prefHeight="17.0" prefWidth="163.0" text="00:00" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="401.0" spacing="10.0">
+                    <children>
+                        <ImageView fx:id="imgEscudo1" fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="lblEquipo1" alignment="CENTER" prefHeight="45.0" prefWidth="87.0" text="equipo1" />
+                        <Label fx:id="lblMarcador1" text="0" />
+                        <Label text="-" />
+                        <Label fx:id="lblMarcador2" text="0" />
+                        <Label fx:id="lblEquipo2" alignment="CENTER" prefHeight="45.0" prefWidth="79.0" text="equipo2" />
+                        <ImageView fx:id="imgEscudo2" fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
+                    </children>
+                </HBox>
+            </children>
+            <padding>
+                <Insets left="65.0" />
+            </padding>
+        </HBox>
+    </top>
+    <center>
+        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+            <children>
+                <AnchorPane fx:id="fondoImgCancha" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0">
+                    <children>
+                        <ImageView fx:id="imgCancha" fitHeight="400.0" fitWidth="700.0" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/CanchaFutbol.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="imgEquipo2" fitHeight="66.0" fitWidth="67.0" layoutX="619.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imgBalon" fitHeight="66.0" fitWidth="67.0" layoutX="317.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imgEquipo1" fitHeight="66.0" fitWidth="67.0" layoutX="14.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="lblGol" layoutX="230.0" layoutY="100.0" style="-fx-font-size: 64px; -fx-text-fill: gold; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, black, 10, 0.5, 2, 2);" text="¡GOOOOL!" visible="false" />
+                        <Label fx:id="lblGolDeOro" layoutX="210.0" layoutY="170.0"
+                               style="-fx-font-size: 48px; -fx-text-fill: gold; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, black, 10, 0.5, 2, 2);"
+                               text="¡GOL DE ORO!" visible="false" />
 
-               </children>
-            </AnchorPane>
-         </children>
-      </VBox>
-   </center>
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <MFXButton fx:id="btnFinalizar" onAction="#onActionBtnFinalizar" prefHeight="45.0" styleClass="mfx-button" stylesheets="@../css/Style.css" text="FINALIZAR PARTIDO" />
-         </children>
-      </HBox>
-   </bottom>
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <MFXButton fx:id="btnFinalizar" onAction="#onActionBtnFinalizar" prefHeight="45.0" styleClass="mfx-button" stylesheets="@../css/Style.css" text="FINALIZAR PARTIDO" />
+            </children>
+        </HBox>
+    </bottom>
 </BorderPane>
