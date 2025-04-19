@@ -57,15 +57,17 @@ public class Equipo {
 
     public void setImagen(Image imagen) {
         this.imagen = imagen;
-        if (imagen != null && imagen.getUrl() != null && imagen.getUrl().startsWith("file:")) {
-            try {
+        try {
+            if (imagen != null && imagen.getUrl() != null && imagen.getUrl().startsWith("file:")) {
                 File file = new File(new java.net.URI(imagen.getUrl()));
                 byte[] bytes = Files.readAllBytes(file.toPath());
                 this.imagenBase64 = Base64.getEncoder().encodeToString(bytes);
-            } catch (Exception e) {
-                System.err.println("Error al convertir imagen a base64 desde URL: " + imagen.getUrl());
-                e.printStackTrace();
+            } else {
+                System.out.println("Advertencia: La imagen no tiene URL tipo file, no se genera Base64.");
             }
+        } catch (Exception e) {
+            System.err.println("Error al convertir imagen a base64 desde URL: " + (imagen != null ? imagen.getUrl() : "null"));
+            e.printStackTrace();
         }
     }
 
