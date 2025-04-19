@@ -15,7 +15,7 @@
    <children>
       <VBox prefHeight="600.0" prefWidth="760.0" spacing="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="CENTER" prefHeight="34.0" prefWidth="760.0" text="Creacion De Torneo" VBox.vgrow="ALWAYS">
+            <Label alignment="CENTER" prefHeight="34.0" prefWidth="760.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Creacion De Torneo" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" top="10.0" />
                </VBox.margin>

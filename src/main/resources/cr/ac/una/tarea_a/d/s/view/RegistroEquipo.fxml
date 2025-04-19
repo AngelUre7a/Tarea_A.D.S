@@ -16,7 +16,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="600.0">
                <children>
-                  <Label fx:id="lbRegistroE" alignment="CENTER" prefHeight="10.0" prefWidth="220.0" text="Registro Equipo con balon" />
+                  <Label fx:id="lbRegistroE" alignment="CENTER" prefHeight="10.0" prefWidth="220.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Registro Equipo con balon" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="270.0">
