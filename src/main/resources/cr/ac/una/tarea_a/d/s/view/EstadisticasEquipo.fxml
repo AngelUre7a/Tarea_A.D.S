@@ -12,67 +12,67 @@
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="34.0" prefWidth="600.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="34.0" prefWidth="161.0" text="Estadisticas del equipo:" />
-                  <Label fx:id="lblNombreEquipo" prefHeight="34.0" prefWidth="245.0" text="Label" />
+                  <Label alignment="CENTER" prefHeight="34.0" prefWidth="161.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Estadisticas del equipo:" />
+                  <Label fx:id="lblNombreEquipo" prefHeight="34.0" prefWidth="245.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Label" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label prefHeight="29.0" prefWidth="300.0" text="Estadisticas generales" />
+                        <Label prefHeight="29.0" prefWidth="300.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Estadisticas generales" />
                         <HBox prefHeight="60.0" prefWidth="300.0">
                            <children>
-                              <Label prefHeight="57.0" prefWidth="111.0" text="Torneos ganados:" />
-                              <Label fx:id="lblTorneosGanados" prefHeight="111.0" prefWidth="188.0" text="Label" />
+                              <Label prefHeight="57.0" prefWidth="111.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Torneos ganados:" />
+                              <Label fx:id="lblTorneosGanados" prefHeight="111.0" prefWidth="188.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Label" />
                            </children>
                         </HBox>
                         <HBox prefHeight="60.0" prefWidth="300.0">
                            <children>
-                              <Label prefHeight="59.0" prefWidth="117.0" text="Goles totales:" />
-                              <Label fx:id="lblGolesTotales" prefHeight="100.0" prefWidth="244.0" text="Label" />
+                              <Label prefHeight="59.0" prefWidth="117.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Goles totales:" />
+                              <Label fx:id="lblGolesTotales" prefHeight="100.0" prefWidth="244.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Label" />
                            </children>
                         </HBox>
                         <HBox prefHeight="60.0" prefWidth="300.0">
                            <children>
-                              <Label prefHeight="59.0" prefWidth="103.0" text="Puntos totales:" />
-                              <Label fx:id="lblPuntosTotales" prefHeight="111.0" prefWidth="219.0" text="Label" />
+                              <Label prefHeight="59.0" prefWidth="103.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Puntos totales:" />
+                              <Label fx:id="lblPuntosTotales" prefHeight="111.0" prefWidth="219.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Label" />
                            </children>
                         </HBox>
                         <HBox prefHeight="60.0" prefWidth="300.0">
                            <children>
-                              <Label prefHeight="59.0" prefWidth="161.0" text="Partidos ganados:" />
-                              <Label fx:id="lblPartidosGanados" prefHeight="100.0" prefWidth="244.0" text="Label" />
+                              <Label prefHeight="59.0" prefWidth="161.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Partidos ganados:" />
+                              <Label fx:id="lblPartidosGanados" prefHeight="100.0" prefWidth="244.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Label" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label alignment="CENTER" prefHeight="33.0" prefWidth="94.0" text="Por torneo:" />
+                        <Label alignment="CENTER" prefHeight="33.0" prefWidth="94.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Por torneo:" />
                         <ComboBox fx:id="cmbTorneos" onAction="#onActionCmbTorneos" prefHeight="50.0" prefWidth="253.0" styleClass="mfx-combo-box" stylesheets="@../css/Style.css" />
                         <HBox prefHeight="60.0" prefWidth="200.0">
                            <children>
-                              <Label prefHeight="99.0" prefWidth="42.0" text="Goles:" />
-                              <Label fx:id="lblGolesTorneo" prefHeight="100.0" prefWidth="244.0" text="Label" />
+                              <Label prefHeight="99.0" prefWidth="42.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Goles:" />
+                              <Label fx:id="lblGolesTorneo" prefHeight="100.0" prefWidth="244.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Label" />
                            </children>
                         </HBox>
                         <HBox prefHeight="60.0" prefWidth="200.0">
                            <children>
-                              <Label prefHeight="60.0" prefWidth="49.0" text="Puntos:" />
-                              <Label fx:id="lblPuntosTorneo" prefHeight="111.0" prefWidth="219.0" text="Label" />
+                              <Label prefHeight="60.0" prefWidth="49.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Puntos:" />
+                              <Label fx:id="lblPuntosTorneo" prefHeight="111.0" prefWidth="219.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Label" />
                            </children>
                         </HBox>
                         <HBox prefHeight="60.0" prefWidth="200.0">
                            <children>
-                              <Label prefHeight="60.0" prefWidth="278.0" text="Partidos ganados en el torneo:" />
-                              <Label fx:id="lblPartidosGanadosTorneo" prefHeight="111.0" prefWidth="219.0" text="Label" />
+                              <Label prefHeight="60.0" prefWidth="278.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Partidos ganados en el torneo:" />
+                              <Label fx:id="lblPartidosGanadosTorneo" prefHeight="111.0" prefWidth="219.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Label" />
                            </children>
                         </HBox>
                         <HBox prefHeight="60.0" prefWidth="200.0">
                            <children>
-                              <Label prefHeight="60.0" prefWidth="114.0" text="Ganó el torneo:" />
-                              <Label fx:id="lblEsGanador" prefHeight="111.0" prefWidth="219.0" text="Label" />
+                              <Label prefHeight="60.0" prefWidth="114.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Ganó el torneo:" />
+                              <Label fx:id="lblEsGanador" prefHeight="111.0" prefWidth="219.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Label" />
                            </children>
                         </HBox>
                      </children>
