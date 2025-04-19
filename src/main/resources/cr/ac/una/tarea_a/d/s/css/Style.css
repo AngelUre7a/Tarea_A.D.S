@@ -132,6 +132,10 @@ BorderPane {
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }
+.labelCertificado {
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
 
 .jfx-title-label-menu,
 .jfx-title-label-AcercaDe {

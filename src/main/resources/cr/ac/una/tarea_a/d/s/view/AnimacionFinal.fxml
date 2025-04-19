@@ -25,7 +25,7 @@
          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="350.0">
             <children>
                <MFXButton fx:id="btnCertificado" onAction="#OnActionBtnCertificado" prefHeight="40.0" prefWidth="120.0" text="Certificado" />
-               <MFXButton fx:id="btnSalit" onAction="#onActionBtnSalir" prefHeight="40.0" prefWidth="100.0" text="SALIR" />
+               <MFXButton fx:id="btnSalir" onAction="#onActionBtnSalir" prefHeight="40.0" prefWidth="100.0" text="SALIR" />
             </children>
          </HBox>
       </children>

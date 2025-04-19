@@ -77,8 +77,8 @@ public class PartidoController extends Controller implements Initializable {
     private ImageView imgEscudo1;
     @FXML
     private ImageView imgEscudo2;
-@FXML
-private Label lblGol;
+    @FXML
+    private Label lblGol;
 
     private Timeline timeline;
     private int tiempoRestante;

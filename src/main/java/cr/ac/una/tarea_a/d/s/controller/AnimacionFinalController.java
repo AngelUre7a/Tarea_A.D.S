@@ -7,6 +7,8 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,7 +28,7 @@ public class AnimacionFinalController extends Controller {
     @FXML
     private AnchorPane root;
     @FXML
-    private MFXButton btnSalit;
+    private MFXButton btnSalir;
     @FXML
     private MFXButton btnCertificado;
 
@@ -59,15 +61,30 @@ public class AnimacionFinalController extends Controller {
 
     @FXML
     private void OnActionBtnCertificado(ActionEvent event) {
-        Stage stageActual = (Stage) root.getScene().getWindow(); // guardás el stage actual
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/MostrarCertificado.fxml"));
+            Parent rootCert = loader.load();
+            MostrarCertificadoController controller = loader.getController();
 
-        // Cerrás la ventana de animación
-        stageActual.close();
+//            // PASAR DATOS (aquí podés usar AppContext si querés también)
 
-        // Y luego abrís la modal con ese stage como padre
-        FlowController.getInstance().goViewInWindowModal("MostrarCertificado", stageActual, Boolean.FALSE);
+            // controller.setDatos(...);
+            Stage stage = new Stage();
+            stage.setTitle("🏅 Certificado del equipo");
+            stage.setScene(new Scene(rootCert));
+            stage.setResizable(false);
+            stage.show();
+
+            // Luego de mostrar, cerrar esta ventana
+            Stage actual = (Stage) root.getScene().getWindow();
+            actual.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-      @Override
+
+    @Override
     public void initialize() {
     }
 

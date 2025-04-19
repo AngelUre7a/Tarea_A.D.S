@@ -466,26 +466,47 @@ public class LlavesController extends Controller implements Initializable {
         ganadoresTemporales.clear();
     }
 
-    private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/AnimacionFinal.fxml"));
-            Parent root = loader.load();
-            AnimacionFinalController controller = loader.getController();
+//    private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/AnimacionFinal.fxml"));
+//            Parent root = loader.load();
+//            AnimacionFinalController controller = loader.getController();
+//
+//            String escudoBase64 = campeon.getImagenBase64();
+//            String balonBase64 = deporte != null ? deporte.getImagenBase64() : "";
+//
+//            controller.mostrarAnimacion(escudoBase64, balonBase64, campeon.getNombre());
+//
+//            Stage stage = new Stage();
+//            stage.setScene(new Scene(root));
+//            stage.setTitle("🏆 Campeón del Torneo");
+//            stage.show();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/AnimacionFinal.fxml"));
+        Parent root = loader.load();
+        AnimacionFinalController controller = loader.getController();
 
-            String escudoBase64 = campeon.getImagenBase64();
-            String balonBase64 = deporte != null ? deporte.getImagenBase64() : "";
+        String escudoBase64 = campeon.getImagenBase64();
+        String balonBase64 = (deporte != null) ? deporte.getImagenBase64() : "";
 
-            controller.mostrarAnimacion(escudoBase64, balonBase64, campeon.getNombre());
+        controller.mostrarAnimacion(escudoBase64, balonBase64, campeon.getNombre());
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("🏆 Campeón del Torneo");
-            stage.show();
+        Stage stage = new Stage();
+        stage.setTitle("🏆 Campeón del Torneo");
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.show();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
 
     private void mostrarCampeon(Equipo campeon) {
         System.out.println("🏆 CAMPEÓN: " + campeon.getNombre());

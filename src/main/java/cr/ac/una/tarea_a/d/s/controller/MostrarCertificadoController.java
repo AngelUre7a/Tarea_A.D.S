@@ -3,6 +3,9 @@ package cr.ac.una.tarea_a.d.s.controller;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import cr.ac.una.tarea_a.d.s.model.Deporte;
+import cr.ac.una.tarea_a.d.s.model.Equipo;
+import cr.ac.una.tarea_a.d.s.util.Animaciones;
 import cr.ac.una.tarea_a.d.s.util.FlowController;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.utils.SwingFXUtils;
@@ -106,8 +109,19 @@ public class MostrarCertificadoController extends Controller implements Initiali
 
     @FXML
     private void OnActionBtnSalir(ActionEvent event) {
-         Stage stage = (Stage) root.getScene().getWindow();
+        Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
+    }
+
+    public void cargarDatos(Equipo equipo, Deporte deporte) {
+        lblNombreEquipo.setText(equipo.getNombre());
+        lblDeporteJugado.setText(deporte.getNombre());
+//        lblPuntos.setText(String.valueOf(equipo.getPuntos())); // ejemplo
+
+        Image escudo = Animaciones.convertirBase64AImage(equipo.getImagenBase64());
+        if (escudo != null) {
+            imgEscudo.setImage(escudo);
+        }
     }
 
 }
