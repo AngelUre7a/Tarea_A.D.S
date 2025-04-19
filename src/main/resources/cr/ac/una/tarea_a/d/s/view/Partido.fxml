@@ -59,7 +59,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <MFXButton fx:id="btnFinalizar" onAction="#onActionBtnFinalizar" prefHeight="45.0" text="FINALIZAR PARTIDO" />
+            <MFXButton fx:id="btnFinalizar" onAction="#onActionBtnFinalizar" prefHeight="45.0" styleClass="mfx-button" stylesheets="@../css/Style.css" text="FINALIZAR PARTIDO" />
          </children>
       </HBox>
    </bottom>

@@ -28,7 +28,7 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0" spacing="20.0">
                      <children>
-                        <MFXButton fx:id="btnCargarImagen" onAction="#onActionBtnCargarImagen" prefHeight="70.0" prefWidth="150.0" text="Cargar Imagen">
+                        <MFXButton fx:id="btnCargarImagen" onAction="#onActionBtnCargarImagen" prefHeight="70.0" prefWidth="150.0" styleClass="jfx-button-long-text" text="Cargar Imagen">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0">
                                  <image>
@@ -36,7 +36,7 @@
                                  </image>
                               </ImageView>
                            </graphic></MFXButton>
-                        <MFXButton fx:id="btnAbrirCamera" onAction="#OnActionBtnAbrirCamera" prefHeight="70.0" prefWidth="150.0" text="Abrir Camara">
+                        <MFXButton fx:id="btnAbrirCamera" onAction="#OnActionBtnAbrirCamera" prefHeight="70.0" prefWidth="150.0" styleClass="jfx-button-long-text" text="Abrir Camara">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0">
                                  <image>
@@ -44,7 +44,14 @@
                                  </image>
                               </ImageView>
                            </graphic></MFXButton>
-                        <MFXButton fx:id="btnTomarFoto" onAction="#onActionBtnTomarFoto" prefHeight="70.0" prefWidth="150.0" text="Tomar Foto" />
+                        <MFXButton fx:id="btnTomarFoto" onAction="#onActionBtnTomarFoto" prefHeight="70.0" prefWidth="150.0" styleClass="jfx-button-long-text" text="Tomar Foto">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0">
+                                 <image>
+                                    <Image url="@../resources/cursor.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></MFXButton>
                      </children>
                   </VBox>
                   <ImageView fx:id="ImageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
