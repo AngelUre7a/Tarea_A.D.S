@@ -14,7 +14,7 @@ public class Equipo {
     private transient Image imagen; // No se serializa
     private String tipoDeporte;
     private String imagenBase64;
-    private Boolean enTorneo = false;
+    private int cuantosTorneos = 0;
 
     public Equipo() {
     }
@@ -101,14 +101,18 @@ public class Equipo {
         }
     }
 
-    public boolean isEnTorneo() {
-        return enTorneo;
+    public int getCantidadTorneos() {
+        return cuantosTorneos;
     }
 
-    public void setEnTorneo(Boolean enTorneo) {
-        this.enTorneo = enTorneo;
+    public void addTorneo() {
+        cuantosTorneos++;
     }
 
+    public void deleteTorneo(){
+        cuantosTorneos--;
+    }
+    
     @Override
     public String toString() {
         return "Equipo{"
@@ -116,7 +120,7 @@ public class Equipo {
                 + ", nombre='" + nombre + '\''
                 + ", tipoDeporte='" + tipoDeporte + '\''
                 + ", imagenCargada=" + (imagen != null) + '\''
-                + ", en torneo?: " + enTorneo
+                + ", cantidad torneos: " + cuantosTorneos
                 + '}';
     }
 }

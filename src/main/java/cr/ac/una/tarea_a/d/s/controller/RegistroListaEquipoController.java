@@ -104,7 +104,7 @@ public class RegistroListaEquipoController extends Controller implements Initial
                 btnEditar.setOnAction(event -> {
                     Equipo equipo = getTableView().getItems().get(getIndex());
 //                    Equiporepo.findById(equipo.getId()):
-                    if (equipo.isEnTorneo()) {
+                    if (equipo.getCantidadTorneos()>0) {
                          new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede editar ya que actualmente esta participando en un torneo.");
                     
                      } else {

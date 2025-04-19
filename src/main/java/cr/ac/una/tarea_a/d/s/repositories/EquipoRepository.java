@@ -109,7 +109,7 @@ public class EquipoRepository implements IEquipoRepository {
             Equipo equipo = equipoOptional.get();
 
             // Verificar si el equipo está en un torneo
-            if (equipo.isEnTorneo()) {
+            if (equipo.getCantidadTorneos()>0) {
                 throw new IllegalArgumentException("El equipo no puede ser eliminado porque está participando en un torneo.");
             }
 

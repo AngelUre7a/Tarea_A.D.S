@@ -234,7 +234,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
             return;
         }
         Torneo torneo = new Torneo(id, nombre, deporte.getNombre(), cantidadEquipos, tiempoPorPartida, new ArrayList<>(equiposInscritos));
-        equiposEnTorneo(equiposInscritos);
+        equiposAddTorneo(equiposInscritos);
         AppContext.getInstance().set("TORNEO_NUEVO", torneo);
         // Añadir el torneo a la lista global de torneos
         if (!AppContext.getInstance().containsItem("LISTA_TORNEOS")) {
@@ -285,7 +285,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
             return;
         }
         Torneo torneo = new Torneo(id, nombre, deporte.getNombre(), cantidadEquipos, tiempoPorPartida, new ArrayList<>(equiposInscritos));
-        equiposEnTorneo(equiposInscritos);
+        equiposAddTorneo(equiposInscritos);
         AppContext.getInstance().set("TORNEO_NUEVO", torneo);
         // Añadir el torneo a la lista global de torneos
         if (!AppContext.getInstance().containsItem("LISTA_TORNEOS")) {
@@ -307,9 +307,9 @@ public class CreacionTorneoController extends Controller implements Initializabl
 
     }
 
-    private void equiposEnTorneo(List<Equipo> equipos) {
+    private void equiposAddTorneo(List<Equipo> equipos) {
         for (Equipo equipo : equipos) {
-            equipo.setEnTorneo(true);
+            equipo.addTorneo();
             try {
                 Equiporepo.update(equipo);
             } catch (IOException e) {

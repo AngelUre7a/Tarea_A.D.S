@@ -37,7 +37,7 @@ import javafx.stage.Stage;
 public class LlavesController extends Controller implements Initializable {
 
     private final PartidaRepository partidaRepository = new PartidaRepository();
-     private final EquipoRepository Equiporepo = new EquipoRepository();
+    private final EquipoRepository Equiporepo = new EquipoRepository();
 
     private Torneo torneo1;
     private List<List<Equipo>> llavesPorRonda = new ArrayList<>();
@@ -80,6 +80,7 @@ public class LlavesController extends Controller implements Initializable {
             equiposBye.add(new Equipo(java.util.UUID.randomUUID().toString(), "BYE", torneo1.getTipoDeporte()));
         }
         equipos = intercalarEquipos(equipos, equiposBye);
+        torneo1.setEquiposInscritos(equipos);
         llavesPorRonda.add(new ArrayList<>(equipos));
         int partidosEnLaRonda = totalEquipos / 2;
         for (int r = 0; r < rondas; r++) {
@@ -117,19 +118,14 @@ public class LlavesController extends Controller implements Initializable {
     }
 
     private List<Equipo> intercalarEquipos(List<Equipo> equipos, List<Equipo> equiposBye) {
-        List<Equipo> listaIntercalada = new ArrayList<>();
-        int i = 0, j = 0;
+        List<Equipo> listaIntercalada = new ArrayList<>(equipos);
+        int insertIndex = listaIntercalada.size();  // inicia justo después del último elemento
 
-        // Alternar entre equipos reales y BYEs
-        while (i < equipos.size() || j < equiposBye.size()) {
-            if (i < equipos.size()) {
-                listaIntercalada.add(equipos.get(i++));
-            }
-            if (j < equiposBye.size()) {
-                listaIntercalada.add(equiposBye.get(j++));
-            }
+        for (int i = 0; i < equiposBye.size(); i++) {
+            listaIntercalada.add(insertIndex, equiposBye.get(i));
+            insertIndex--;  // retrocedemos uno hacia el "medio" de la lista
         }
-        Collections.reverse(listaIntercalada);
+
         return listaIntercalada;
     }
 
@@ -140,8 +136,8 @@ public class LlavesController extends Controller implements Initializable {
         int index = 0;
         for (int i = 0; i < equipos.size(); i += 2) {
 
-            Equipo eq2 = equipos.get(i);
-            Equipo eq1 = equipos.get(i + 1);
+            Equipo eq1 = equipos.get(i);
+            Equipo eq2 = equipos.get(i + 1);
 
             VBox partidoVBox = (VBox) primeraRondaVBox.getChildren().get(index);
             HBox hbox1 = (HBox) partidoVBox.getChildren().get(0);
@@ -369,6 +365,7 @@ public class LlavesController extends Controller implements Initializable {
     }
 
     private void reconstruirDesdePartidas() {
+        llenarPrimerRonda();
         try {
             PartidaRepository repo = new PartidaRepository();
             List<Partida> partidasGuardadas = repo.findAll();
@@ -380,15 +377,15 @@ public class LlavesController extends Controller implements Initializable {
 
             // ordenar por ronda lógica: en tu caso es por orden de creación, así que no se ocupa mucho
             List<Equipo> rondaActual = new ArrayList<>(torneo1.getEquiposInscritos());
-            while (rondaActual.size() % 2 != 0) {
-                rondaActual.add(new Equipo(java.util.UUID.randomUUID().toString(), "BYE", torneo1.getTipoDeporte()));
-            }
+//            while (rondaActual.size() % 2 != 0) {
+//                rondaActual.add(new Equipo(java.util.UUID.randomUUID().toString(), "BYE", torneo1.getTipoDeporte()));
+//            }
 
             int rondaIndex = 0;
             while (rondaActual.size() > 1) {
-                if (rondaActual.size() % 2 != 0) {
-                    rondaActual.add(new Equipo(java.util.UUID.randomUUID().toString(), "BYE", torneo1.getTipoDeporte()));
-                }
+//                if (rondaActual.size() % 2 != 0) {
+//                    rondaActual.add(new Equipo(java.util.UUID.randomUUID().toString(), "BYE", torneo1.getTipoDeporte()));
+//                }
                 VBox rondaVBox = (VBox) hboxLlaves.getChildren().get(rondaIndex);
                 List<Equipo> ganadores = new ArrayList<>();
 
@@ -433,15 +430,14 @@ public class LlavesController extends Controller implements Initializable {
                             FlowController.getInstance().goViewInWindowModal("Partido", ((Stage) root.getScene().getWindow()), false);
                             procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
                         });
-                    } else {
-                        btn.setDisable(true);
+                    } //else {
+                    //btn.setDisable(true);
 
-                        // Solo agregamos un ganador por BYE si no existe partida pendiente entre ellos
-                        if (partida == null) {
-                            ganadores.add(!eq1.getNombre().equals("BYE") ? eq1 : eq2);
-                        }
-                    }
-
+                    // Solo agregamos un ganador por BYE si no existe partida pendiente entre ellos
+                    //if (partida == null) {
+                    //ganadores.add(!eq1.getNombre().equals("BYE") ? eq1 : eq2);
+                    //}
+                    //}
                 }
 
                 llavesPorRonda.add(ganadores);
@@ -467,27 +463,27 @@ public class LlavesController extends Controller implements Initializable {
         ganadoresTemporales.clear();
     }
 
-private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/AnimacionFinal.fxml"));
-        Parent root = loader.load();
-        AnimacionFinalController controller = loader.getController();
+    private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/AnimacionFinal.fxml"));
+            Parent root = loader.load();
+            AnimacionFinalController controller = loader.getController();
 
-        String escudoBase64 = campeon.getImagenBase64();
-        String balonBase64 = (deporte != null) ? deporte.getImagenBase64() : "";
+            String escudoBase64 = campeon.getImagenBase64();
+            String balonBase64 = (deporte != null) ? deporte.getImagenBase64() : "";
 
-        controller.mostrarAnimacion(escudoBase64, balonBase64, campeon.getNombre());
+            controller.mostrarAnimacion(escudoBase64, balonBase64, campeon.getNombre());
 
-        Stage stage = new Stage();
-        stage.setTitle("Campeón del Torneo");
-        stage.setScene(new Scene(root));
-        stage.setResizable(false);
-        stage.show();
+            Stage stage = new Stage();
+            stage.setTitle("Campeón del Torneo");
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
 
-    } catch (Exception e) {
-        e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-}
 
     private void mostrarCampeon(Equipo campeon) throws IOException {
         guardarEstadisticasCampeon(campeon.getId(), torneo1.getId());
@@ -501,7 +497,7 @@ private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
         mostrarAnimacionDelCampeon(campeon, deporte);
 
         torneo1.setEstado("finalizado");
-        equiposSinTorneo(torneo1.getEquiposInscritos());
+        equiposDeleteTorneo(torneo1.getEquiposInscritos());
 
         try {
             TorneoRepository torneoRepo = new TorneoRepository();
@@ -514,13 +510,13 @@ private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
         AppContext.getInstance().set("TORNEO_ACTUAL", torneo1);
 
     }
-    
-    private void guardarEstadisticasCampeon(String idCampeon, String idTorneoActual) throws IOException{
+
+    private void guardarEstadisticasCampeon(String idCampeon, String idTorneoActual) throws IOException {
         EstadisticasEquipoPTRepository repoPT = new EstadisticasEquipoPTRepository();
         List<EstadisticasEquipoPT> listaStatsPT = repoPT.findAll(); // o filtrar por torneo si es necesario
 
-       EstadisticasEquipoPT statsPTCampeon = null;
-       for (EstadisticasEquipoPT stat : listaStatsPT) {
+        EstadisticasEquipoPT statsPTCampeon = null;
+        for (EstadisticasEquipoPT stat : listaStatsPT) {
             if (stat.getIdEquipo().equals(idCampeon) && stat.getIdTorneo().equals(idTorneoActual)) {
                 statsPTCampeon = stat;
                 break;
@@ -565,11 +561,17 @@ private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
         }
         return null;
     }
-    private void equiposSinTorneo(List<Equipo> equipos) {
+
+    private void equiposDeleteTorneo(List<Equipo> equipos) {
         for (Equipo equipo : equipos) {
-            equipo.setEnTorneo(false);
+            equipo.deleteTorneo();
             try {
+
                 Equiporepo.update(equipo);
+                if ("BYE".equals(equipo.getNombre())) {
+                    Equiporepo.deleteById(equipo.getId());
+                    System.out.println("BYE ELIMINADO");
+                }
             } catch (IOException e) {
                 new Mensaje().show(Alert.AlertType.ERROR, "Error al actualizar equipo", "No se pudo actualizar el estado del equipo: " + equipo.getNombre());
                 e.printStackTrace();
