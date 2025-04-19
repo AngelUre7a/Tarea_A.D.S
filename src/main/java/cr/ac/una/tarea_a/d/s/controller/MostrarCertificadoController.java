@@ -123,10 +123,11 @@ public class MostrarCertificadoController extends Controller implements Initiali
     }
     
     private void ImprimirCertificado(){
-        ContainerSinBotones.applyCss();
-        ContainerSinBotones.layout();
+        btnVolver.setVisible(false);
+        btnSalir.setVisible(false);
+        btnImprimirCert.setVisible(false);
         try {
-            WritableImage snapshot = ContainerSinBotones.snapshot(new SnapshotParameters(), null);
+            WritableImage snapshot = root.snapshot(new SnapshotParameters(), null);
             BufferedImage bufferedImage = SwingFXUtils.fromFXImage(snapshot, null);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -150,6 +151,9 @@ public class MostrarCertificadoController extends Controller implements Initiali
         } catch (Exception e) {
             e.printStackTrace();
         }
+        btnVolver.setVisible(true);
+        btnSalir.setVisible(true);
+        btnImprimirCert.setVisible(true);
     }
 
     @FXML
