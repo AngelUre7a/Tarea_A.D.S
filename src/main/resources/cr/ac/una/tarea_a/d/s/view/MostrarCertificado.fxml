@@ -3,67 +3,109 @@
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" styleClass="anchor-paneModal" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.MostrarCertificadoController">
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.MostrarCertificadoController">
+
    <children>
-      <VBox layoutX="192.0" layoutY="115.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" stylesheets="@../css/Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+      <!-- Fondo como imagen -->
+      <ImageView fitHeight="400.0" fitWidth="600.0" mouseTransparent="true" preserveRatio="false">
+         <image>
+            <Image url="@../resources/fondoModal.png" />
+         </image>
+      </ImageView>
+
+      <!-- Contenedor principal -->
+      <VBox spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <children>
-            <VBox fx:id="ContainerSinBotones" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" stylesheets="@../css/Style.css" VBox.vgrow="ALWAYS">
+
+            <!-- Sección que se imprime -->
+            <VBox fx:id="ContainerSinBotones" alignment="CENTER" VBox.vgrow="ALWAYS">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                  <HBox VBox.vgrow="ALWAYS">
                      <children>
-                        <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+
+                        <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                            <children>
-                              <ImageView fitHeight="55.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label fx:id="lblNombreEquipo" alignment="CENTER" prefHeight="38.0" prefWidth="87.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="&quot;nombre&quot;" />
-                              <Label prefHeight="31.0" prefWidth="283.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Estadisticas:" />
+                              <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/Corona.png" />
+                                 </image>
+                              </ImageView>
+
+                              <Label fx:id="lblNombreEquipo" alignment="CENTER" prefHeight="74.0" prefWidth="247.0" styleClass="labelCertificado" text="&quot;nombre&quot;" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+
+                              <Label prefHeight="31.0" prefWidth="283.0" styleClass="labelCertificado" text="Estadísticas">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+
                               <HBox prefHeight="36.0" prefWidth="280.0">
                                  <children>
-                                    <Label prefHeight="38.0" prefWidth="50.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Puntos:" />
-                                    <Label fx:id="lblPuntos" prefHeight="36.0" prefWidth="208.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Label" />
+                                    <Label prefHeight="41.0" prefWidth="50.0" styleClass="labelCertificado" text="Puntos:" />
+                                    <Label fx:id="lblPuntos" prefHeight="46.0" prefWidth="191.0" styleClass="labelCertificado" text="Label" />
                                  </children>
                               </HBox>
+
                               <HBox prefHeight="36.0" prefWidth="280.0">
                                  <children>
-                                    <Label prefHeight="36.0" prefWidth="136.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Partidos Ganados:" />
-                                    <Label fx:id="lblPartidosGanados" prefHeight="36.0" prefWidth="208.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Label" />
+                                    <Label prefHeight="36.0" prefWidth="109.0" styleClass="labelCertificado" text="Partidos Ganados:" />
+                                    <Label fx:id="lblPartidosGanados" prefHeight="41.0" prefWidth="149.0" styleClass="labelCertificado" text="Label" />
                                  </children>
                               </HBox>
+
                               <HBox prefHeight="36.0" prefWidth="280.0">
                                  <children>
-                                    <Label prefHeight="36.0" prefWidth="125.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Deporte Jugado:" />
-                                    <Label fx:id="lblDeporteJugado" prefHeight="36.0" prefWidth="208.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Label" />
+                                    <Label prefHeight="38.0" prefWidth="111.0" styleClass="labelCertificado" text="Deporte Jugado:" />
+                                    <Label fx:id="lblDeporteJugado" prefHeight="45.0" prefWidth="185.0" styleClass="labelCertificado" text="Label" />
                                  </children>
                               </HBox>
                            </children>
                         </VBox>
-                        <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+
+                        <VBox HBox.hgrow="ALWAYS">
                            <children>
                               <ImageView fx:id="imgEscudo" fitHeight="266.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </VBox>
+
                      </children>
                   </HBox>
-                  <Label alignment="CENTER" prefHeight="47.0" prefWidth="560.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="¡Felicidades equipo por su increible victoria en el torneo!" />
+
+                  <Label alignment="CENTER" prefHeight="47.0" prefWidth="560.0" styleClass="labelCertificado" text="¡Felicidades equipo por su increíble victoria en el torneo!">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
                </children>
             </VBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="560.0" spacing="50.0" stylesheets="@../css/Style.css">
+
+            <!-- Botones -->
+            <HBox alignment="CENTER_LEFT" spacing="50.0">
                <children>
-                  <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" prefHeight="35.0" prefWidth="100.0" stylesheets="@../css/Style.css" text="Volver" />
-                  <MFXButton fx:id="btnImprimirCert" onAction="#onActionBtnImprimirCert" prefHeight="35.0" prefWidth="200.0" stylesheets="@../css/Style.css" text="Imprimir certificado" />
+                  <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" prefHeight="35.0" prefWidth="100.0" text="Volver" />
+                  <MFXButton fx:id="btnImprimirCert" onAction="#onActionBtnImprimirCert" prefHeight="35.0" prefWidth="200.0" text="Imprimir certificado" />
                   <MFXButton fx:id="btnSalir" onAction="#OnActionBtnSalir" prefHeight="35.0" prefWidth="100.0" text="Salir" />
                </children>
                <padding>
                   <Insets left="35.0" />
                </padding>
             </HBox>
+
          </children>
       </VBox>
    </children>

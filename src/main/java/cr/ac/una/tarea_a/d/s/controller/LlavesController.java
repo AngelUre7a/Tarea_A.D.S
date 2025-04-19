@@ -211,10 +211,8 @@ public class LlavesController extends Controller implements Initializable {
 
                         try {
                             partidaRepository.save(partida);
-                            // Agregar la partida al torneo
                             List<Partida> partidasDelTorneo = torneo.getPartidas();
 
-// Verificar si ya estaba esa partida (por si reanudaste)
                             Partida existente = partidasDelTorneo.stream()
                                     .filter(p -> (p.getIdEquipoA().equals(partida.getIdEquipoA()) && p.getIdEquipoB().equals(partida.getIdEquipoB()))
                                     || (p.getIdEquipoA().equals(partida.getIdEquipoB()) && p.getIdEquipoB().equals(partida.getIdEquipoA())))
@@ -226,17 +224,16 @@ public class LlavesController extends Controller implements Initializable {
 
                             partidasDelTorneo.add(partida);
 
-// Guardar el torneo actualizado
                             try {
                                 new TorneoRepository().save(torneo);
-                                System.out.println("✅ Torneo actualizado con nuevas partidas.");
+                                System.out.println("Torneo actualizado con nuevas partidas.");
                             } catch (IOException j) {
-                                System.err.println("❌ No se pudo guardar el torneo actualizado: " + j.getMessage());
+                                System.err.println("No se pudo guardar el torneo actualizado: " + j.getMessage());
                             }
 
-                            System.out.println("✅ Partida guardada exitosamente en JSON.");
+                            System.out.println("Partida guardada exitosamente en JSON.");
                         } catch (IOException em) {
-                            System.err.println("❌ Error al guardar la partida: " + em.getMessage());
+                            System.err.println("Error al guardar la partida: " + em.getMessage());
                         }
                     }
 
@@ -482,7 +479,7 @@ private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
         controller.mostrarAnimacion(escudoBase64, balonBase64, campeon.getNombre());
 
         Stage stage = new Stage();
-        stage.setTitle("🏆 Campeón del Torneo");
+        stage.setTitle("Campeón del Torneo");
         stage.setScene(new Scene(root));
         stage.setResizable(false);
         stage.show();
@@ -494,7 +491,7 @@ private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
 
     private void mostrarCampeon(Equipo campeon) throws IOException {
         guardarEstadisticasCampeon(campeon.getId(), torneo1.getId());
-        System.out.println("🏆 CAMPEÓN: " + campeon.getNombre());
+        System.out.println("CAMPEÓN: " + campeon.getNombre());
         campeon.cargarImagenDesdeBase64();
         Deporte deporte = torneo1.getTipoDeporte() != null ? buscarDeportePorNombre(torneo1.getTipoDeporte()) : null;
         if (deporte != null) {
@@ -513,6 +510,8 @@ private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        AppContext.getInstance().set("EQUIPO_CAMPEON", campeon);
+        AppContext.getInstance().set("TORNEO_ACTUAL", torneo1);
 
     }
     
@@ -520,8 +519,7 @@ private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
         EstadisticasEquipoPTRepository repoPT = new EstadisticasEquipoPTRepository();
         List<EstadisticasEquipoPT> listaStatsPT = repoPT.findAll(); // o filtrar por torneo si es necesario
 
-        // 2. Buscar estadísticas del campeón en esa lista
-        EstadisticasEquipoPT statsPTCampeon = null;
+       EstadisticasEquipoPT statsPTCampeon = null;
        for (EstadisticasEquipoPT stat : listaStatsPT) {
             if (stat.getIdEquipo().equals(idCampeon) && stat.getIdTorneo().equals(idTorneoActual)) {
                 statsPTCampeon = stat;
@@ -530,30 +528,27 @@ private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
         }
 
         if (statsPTCampeon == null) {
-            System.out.println("❌ No se encontraron estadísticas por torneo para el campeón");
+            System.out.println("No se encontraron estadísticas por torneo para el campeón");
             return;
         }
 
-        // 3. Cargar o crear estadísticas generales del equipo
         EstadisticasEquipoGeneralesRepository repoGen = new EstadisticasEquipoGeneralesRepository();
         EstadisticasEquipoGenerales statsGenerales;
         try {
             statsGenerales = repoGen.findById(idCampeon).orElse(new EstadisticasEquipoGenerales(idCampeon));
 
-            // 4. Sumarle las estadísticas del torneo
             statsGenerales.setGolesAFavor(statsGenerales.getGolesAFavor() + statsPTCampeon.getGolesAFavorPT());
             statsGenerales.setPartidosGanados(statsGenerales.getPartidosGanados() + statsPTCampeon.getPartidosGanadosPT());
             statsGenerales.setPuntos(statsGenerales.getPuntos() + statsPTCampeon.getPuntosPT());
             statsGenerales.setTorneosGanados(statsGenerales.getTorneosGanados() + 1);
             statsPTCampeon.setEsGanadorDT(true);
 
-            // 5. Guardar
             repoPT.save(statsPTCampeon);
             repoGen.save(statsGenerales);
 
-            System.out.println("🏆 Estadísticas generales del campeón actualizadas correctamente");
+            System.out.println("Estadísticas generales del campeón actualizadas correctamente");
         } catch (IOException e) {
-            System.err.println("❌ Error al guardar estadísticas generales del campeón: " + e.getMessage());
+            System.err.println("Error al guardar estadísticas generales del campeón: " + e.getMessage());
         }
     }
 

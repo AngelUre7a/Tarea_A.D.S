@@ -57,7 +57,6 @@ public class RankingController extends Controller implements Initializable {
 
     private final ObservableList<Equipo> equiposLista = FXCollections.observableArrayList();
     private final EquipoRepository equipoRepo = new EquipoRepository();
-    private final ObservableList<Deporte> deportesLista = FXCollections.observableArrayList();
     private final DeporteRepository deporteRepo = new DeporteRepository();
     private final ObservableList<EstadisticasEquipoGenerales> estadisticasLista = FXCollections.observableArrayList();
     private final EstadisticasEquipoGeneralesRepository estadisticasRepo = new EstadisticasEquipoGeneralesRepository();

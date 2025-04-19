@@ -5,7 +5,11 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
+import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipoPT;
+import cr.ac.una.tarea_a.d.s.model.Torneo;
+import cr.ac.una.tarea_a.d.s.repositories.EstadisticasEquipoPTRepository;
 import cr.ac.una.tarea_a.d.s.util.Animaciones;
+import cr.ac.una.tarea_a.d.s.util.AppContext;
 import cr.ac.una.tarea_a.d.s.util.FlowController;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.utils.SwingFXUtils;
@@ -13,8 +17,14 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -56,9 +66,51 @@ public class MostrarCertificadoController extends Controller implements Initiali
     @FXML
     private MFXButton btnSalir;
 
+    private Equipo equipoCampeon;
+    private Torneo torneo;
+    private EstadisticasEquipoPTRepository estadisticasRepo;
+    private final ObservableList<EstadisticasEquipoPT> estadisticasLista = FXCollections.observableArrayList();
+    private EstadisticasEquipoPT statsPTCampeon;
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        equipoCampeon = (Equipo) AppContext.getInstance().get("EQUIPO_CAMPEON");
+        torneo = (Torneo) AppContext.getInstance().get("TORNEO_ACTUAL");
+        estadisticasRepo = new EstadisticasEquipoPTRepository();
+
+        List<EstadisticasEquipoPT> listaStatsPT = null;
+
+        try {
+            listaStatsPT = estadisticasRepo.findAll();
+            estadisticasLista.setAll(listaStatsPT);
+        } catch (IOException ex) {
+            Logger.getLogger(RankingController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (listaStatsPT != null) {
+            for (EstadisticasEquipoPT stat : listaStatsPT) {
+                if (stat.getIdEquipo().equals(equipoCampeon.getId()) && stat.getIdTorneo().equals(torneo.getId())) {
+                    statsPTCampeon = stat;
+                    break;
+                }
+            }
+        }
+
+        if (equipoCampeon != null && statsPTCampeon != null) {
+            lblNombreEquipo.setText(equipoCampeon.getNombre());
+            lblDeporteJugado.setText(equipoCampeon.getTipoDeporte());
+            lblPuntos.setText(String.valueOf(statsPTCampeon.getPuntosPT()));
+            lblPartidosGanados.setText(String.valueOf(statsPTCampeon.getPartidosGanadosPT()));
+
+            if (equipoCampeon.getImagen() != null) {
+                imgEscudo.setImage(equipoCampeon.getImagen());
+            } else if (equipoCampeon.getImagenBase64() != null) {
+                equipoCampeon.cargarImagenDesdeBase64();
+                imgEscudo.setImage(equipoCampeon.getImagen());
+            }
+        }
     }
 
     @Override
@@ -67,20 +119,23 @@ public class MostrarCertificadoController extends Controller implements Initiali
 
     @FXML
     private void onActionBtnImprimirCert(ActionEvent event) {
+        ImprimirCertificado();
+    }
+    
+    private void ImprimirCertificado(){
+        ContainerSinBotones.applyCss();
+        ContainerSinBotones.layout();
         try {
-            // 1. Tomamos snapshot del panel completo
             WritableImage snapshot = ContainerSinBotones.snapshot(new SnapshotParameters(), null);
             BufferedImage bufferedImage = SwingFXUtils.fromFXImage(snapshot, null);
 
-            // 2. Convertimos BufferedImage a byte[]
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(bufferedImage, "png", baos);
             baos.flush();
             byte[] imageInBytes = baos.toByteArray();
             baos.close();
 
-            // 3. Guardamos en PDF usando iText
-            File file = new File("certificado_equipo.pdf"); // Cambiar ruta si se quiere
+            File file = new File("Certificado_ganador_del_torneo_" + torneo.getNombre()+ ".pdf");
             PdfWriter writer = new PdfWriter(new FileOutputStream(file));
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
@@ -99,11 +154,9 @@ public class MostrarCertificadoController extends Controller implements Initiali
 
     @FXML
     private void onActionBtnVolver(ActionEvent event) {
-        // Cerrás la ventana actual del certificado
         Stage stageActual = (Stage) root.getScene().getWindow();
         stageActual.close();
 
-        // Y abrís la vista de la animación final como modal
         FlowController.getInstance().goViewInWindowModal("AnimacionFinal", stageActual, Boolean.FALSE);
     }
 
@@ -112,16 +165,4 @@ public class MostrarCertificadoController extends Controller implements Initiali
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
     }
-
-    public void cargarDatos(Equipo equipo, Deporte deporte) {
-        lblNombreEquipo.setText(equipo.getNombre());
-        lblDeporteJugado.setText(deporte.getNombre());
-//        lblPuntos.setText(String.valueOf(equipo.getPuntos())); // ejemplo
-
-        Image escudo = Animaciones.convertirBase64AImage(equipo.getImagenBase64());
-        if (escudo != null) {
-            imgEscudo.setImage(escudo);
-        }
-    }
-
 }
