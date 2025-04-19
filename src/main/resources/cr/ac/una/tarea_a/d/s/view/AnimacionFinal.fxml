@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="root" prefHeight="400" prefWidth="600" styleClass="anchor-paneModal" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.AnimacionFinalController">
+<AnchorPane fx:id="root" prefHeight="400" prefWidth="600" styleClass="anchor-pane2" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.AnimacionFinalController">
 
     <!-- Escudo / Imagen del equipo -->
     <ImageView fx:id="imgEquipo" fitHeight="120" fitWidth="120" layoutX="240" layoutY="250" preserveRatio="true" />

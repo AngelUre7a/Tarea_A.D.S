@@ -39,7 +39,7 @@
 }
 
 .anchor-pane2 {
-    -fx-background-image: url("../resources/ganador.png");
+    -fx-background-image: url("../resources/ganadorT.png");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
 }
