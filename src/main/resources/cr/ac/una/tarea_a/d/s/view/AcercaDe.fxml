@@ -10,20 +10,31 @@
 <AnchorPane fx:id="root" prefHeight="600.0" prefWidth="900.0" styleClass="vBox" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.AcercaDeController">
 
     <!-- VBox con créditos que se animan -->
-    <VBox fx:id="vboxCreditos" alignment="CENTER" layoutX="136.0" layoutY="362.0" prefHeight="268.0" prefWidth="628.0" spacing="15">
+    <VBox fx:id="vboxCreditos" alignment="CENTER" layoutX="136.0" layoutY="362.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="628.0" spacing="10" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
         <ImageView fx:id="imgLogo" fitHeight="100" fitWidth="100" />
-        
-        <Label fx:id="lblTitulo" style="-fx-font-size: 20px; -fx-font-weight: bold;" styleClass="jfx-title-label-AcercaDe" />
-        
-        <Label fx:id="lblDescripcion" style="-fx-font-size: 14px; -fx-text-alignment: center;" styleClass="jfx-title-label-AcercaDe" wrapText="true" />
-        
-        <Label fx:id="lblVersion" style="-fx-font-size: 12px;" styleClass="jfx-title-label-AcercaDe" />
-        
-        <Label fx:id="lblAutores" style="-fx-font-size: 12px;" styleClass="jfx-title-label-AcercaDe" />
+
+        <Label fx:id="lblTitulo" alignment="CENTER" prefHeight="30.0" prefWidth="643.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" styleClass="jfx-title-label-AcercaDe" />
+
+        <Label fx:id="lblDescripcion" alignment="CENTER" prefHeight="20.0" prefWidth="878.0" style="-fx-font-size: 14px; -fx-text-alignment: center;" styleClass="jfx-title-label-AcercaDe" wrapText="true" />
+
+        <Label fx:id="lblVersion" alignment="CENTER" prefHeight="17.0" prefWidth="898.0" style="-fx-font-size: 12px;" styleClass="jfx-title-label-AcercaDe" />
+
+        <Label fx:id="lblAutores" alignment="CENTER" prefHeight="17.0" prefWidth="663.0" style="-fx-font-size: 12px;" styleClass="jfx-title-label-AcercaDe" />
+
+        <Label fx:id="lblProfesor" alignment="CENTER" prefHeight="17.0" prefWidth="682.0" style="-fx-font-size: 12px;" styleClass="jfx-title-label-AcercaDe" />
+
+        <Label fx:id="lblTecnologias" alignment="CENTER" prefHeight="17.0" prefWidth="671.0" style="-fx-font-size: 12px;" styleClass="jfx-title-label-AcercaDe" wrapText="true" />
+
+        <Label fx:id="lblFecha" alignment="CENTER" prefHeight="17.0" prefWidth="651.0" style="-fx-font-size: 12px;" styleClass="jfx-title-label-AcercaDe" />
+
+        <Label fx:id="lblContacto" alignment="CENTER" prefHeight="17.0" prefWidth="878.0" style="-fx-font-size: 12px;" styleClass="jfx-title-label-AcercaDe" wrapText="true" />
+
+        <Label fx:id="lblObjetivo" alignment="CENTER" prefHeight="17.0" prefWidth="595.0" style="-fx-font-size: 12px;" styleClass="jfx-title-label-AcercaDe" wrapText="true" />
+      <ImageView fx:id="imgLogoUNA" fitHeight="81.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true" />
     </VBox>
 
-    <!-- Botón volver (NO animado) -->
-    <MFXButton fx:id="btnVolver" layoutX="14.0" layoutY="560.0" onAction="#OnActionBtnVolver" prefHeight="50.0" prefWidth="122.0" styleClass="mfx-button" stylesheets="@../css/Style.css" text="Volver">
+    <!-- Botón volver -->
+    <MFXButton fx:id="btnVolver" layoutX="14.0" layoutY="14.0" onAction="#OnActionBtnVolver" prefHeight="50.0" prefWidth="122.0" styleClass="mfx-button" stylesheets="@../css/Style.css" text="Volver">
         <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0">
                 <image>
