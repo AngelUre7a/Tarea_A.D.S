@@ -397,6 +397,8 @@ public class PartidoController extends Controller implements Initializable {
     }
 
     private void iniciarGolDeOro() {
+        btnFinalizar.setDisable(true);
+        btnFinalizar.setVisible(false);
         enGolDeOro = true;
         if (timeline != null) {
             timeline.stop(); // 🔥 Detiene el temporizador

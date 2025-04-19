@@ -95,6 +95,9 @@ public class ListaTorneoController extends Controller implements Initializable {
 
                 // Acción del botón
                 btnIniciar.setOnAction(event -> {
+                    for(int i=0;i<50;i++){
+                        System.out.println();
+                    }
                     Torneo torneo = getTableView().getItems().get(getIndex());
 
                     if ("finalizado".equalsIgnoreCase(torneo.getEstado())) {

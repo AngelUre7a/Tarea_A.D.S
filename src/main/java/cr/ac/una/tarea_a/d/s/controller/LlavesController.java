@@ -88,6 +88,7 @@ public class LlavesController extends Controller implements Initializable {
     }
 
     private void dibujarLineaEnL(Button origen, Button destino) {
+        System.out.println("entroEndibujarLineal");
         Bounds boundsOrigenScene = origen.localToScene(origen.getBoundsInLocal());
         Bounds boundsDestinoScene = destino.localToScene(destino.getBoundsInLocal());
 
@@ -106,6 +107,7 @@ public class LlavesController extends Controller implements Initializable {
         Line lineaH2 = new Line(midX, endY, endX, endY);
 
         for (Line l : List.of(lineaH1, lineaV, lineaH2)) {
+            System.out.println("forlineaL");
             l.setStrokeWidth(3);
             l.setStyle("-fx-stroke: black;");
             linePane.getChildren().add(l);
@@ -113,14 +115,18 @@ public class LlavesController extends Controller implements Initializable {
     }
 
     private void conectarPartidosConLineas() {
+        System.out.println("entro a lineas");
         Platform.runLater(() -> {
             linePane.getChildren().clear(); // Limpia líneas previas
-
+            
+            System.out.println("primer for");
             for (int ronda = 0; ronda < hboxLlaves.getChildren().size() - 1; ronda++) {
+
                 VBox rondaActual = (VBox) hboxLlaves.getChildren().get(ronda);
                 VBox siguienteRonda = (VBox) hboxLlaves.getChildren().get(ronda + 1);
 
                 for (int i = 0; i < siguienteRonda.getChildren().size(); i++) {
+                    System.out.println("segundo for");
                     VBox partidaSiguiente = (VBox) siguienteRonda.getChildren().get(i);
                     VBox partida1 = (VBox) rondaActual.getChildren().get(i * 2);
                     VBox partida2 = (VBox) rondaActual.getChildren().get(i * 2 + 1);
@@ -417,14 +423,20 @@ public class LlavesController extends Controller implements Initializable {
         if (torneo1 != null) {
             txfNombreTorneo.setText(torneo1.getNombre());
             generarEstructuraLlaves(); // esto arma la estructura base visual
+            reconstruirDesdePartidas();
 
             // ⚠️ Si el torneo está en curso o finalizado, recuperar estado
             if ("enCurso".equalsIgnoreCase(torneo1.getEstado()) || "finalizado".equalsIgnoreCase(torneo1.getEstado())) {
+                System.out.println("2");
                 reconstruirDesdePartidas();
-                 conectarPartidosConLineas();
+                conectarPartidosConLineas();
+                System.out.println("lineasDibujadas");
+
             } else {
+                System.out.println("1");
                 llenarPrimerRonda(); // solo si es nuevo
                 conectarPartidosConLineas();
+                System.out.println("lineasDibujadas");
                 torneo1.setEstado("enCurso");
                 try {
                     new TorneoRepository().save(torneo1);
@@ -534,7 +546,7 @@ public class LlavesController extends Controller implements Initializable {
         hboxLlaves.getChildren().clear();
         llavesPorRonda.clear();
         ganadoresTemporales.clear();
-        
+
         if (linePane != null) {
             linePane.getChildren().clear(); // 💥 limpia las líneas entre partidos
         }
