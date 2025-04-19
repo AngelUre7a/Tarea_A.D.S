@@ -68,12 +68,7 @@ public class RankingController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     
-        try {
-            List<EstadisticasEquipoGenerales> listaGenerales = estadisticasRepo.findAll();
-            estadisticasLista.setAll(listaGenerales);
-        } catch (IOException ex) {
-            Logger.getLogger(RankingController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        cargarEstadisticas();
         
         colRango.setCellValueFactory(cellData -> {
             // Calcula el rango como el índice + 1 en la lista ordenada
@@ -206,8 +201,18 @@ public class RankingController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnActualizar(ActionEvent event) {
+        cargarEstadisticas();
         cargarJson();
         Filtrar();
+    }
+    
+    private void cargarEstadisticas(){
+        try {
+            List<EstadisticasEquipoGenerales> listaGenerales = estadisticasRepo.findAll();
+            estadisticasLista.setAll(listaGenerales);
+        } catch (IOException ex) {
+            Logger.getLogger(RankingController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private void aplicarFiltro(FilteredList<Equipo> filteredData) {

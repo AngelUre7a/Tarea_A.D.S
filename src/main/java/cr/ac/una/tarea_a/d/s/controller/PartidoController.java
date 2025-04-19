@@ -95,6 +95,7 @@ public class PartidoController extends Controller implements Initializable {
 
     int marcadorEquipo1;
     int marcadorEquipo2;
+    String estadoPartida = "pendiente";
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -116,6 +117,9 @@ public class PartidoController extends Controller implements Initializable {
     }
 
     private void Finalizar() {
+        if ("finalizado".equals(estadoPartida)){
+            return;
+        }
         EstadisticasEquipoPT estadisticasEquipo1 = (EstadisticasEquipoPT) AppContext.getInstance().get("ESTADISTICAS_" + equipo1.getNombre() + "_" + torneo.getId());
         EstadisticasEquipoPT estadisticasEquipo2 = (EstadisticasEquipoPT) AppContext.getInstance().get("ESTADISTICAS_" + equipo2.getNombre() + "_" + torneo.getId());
         EstadisticasEquipoGenerales estadisticasGenEquipo1;
@@ -168,9 +172,9 @@ public class PartidoController extends Controller implements Initializable {
         } else {
             // Empate INNOVACION
         }
-
         // ✅ Crear y guardar partida
         if (torneo != null) {
+            estadoPartida = "finalizado";
             Partida partida = new Partida(
                     null, // id será generado por el repositorio
                     torneo.getId(),
@@ -178,7 +182,7 @@ public class PartidoController extends Controller implements Initializable {
                     equipo2.getId(),
                     marcadorEquipo1,
                     marcadorEquipo2,
-                    "finalizado",
+                    estadoPartida,
                     ganadorId,
                     tiempoRestante < 0 ? 0 : tiempoRestante
             );

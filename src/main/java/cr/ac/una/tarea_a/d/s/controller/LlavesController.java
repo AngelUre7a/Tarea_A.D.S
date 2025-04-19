@@ -2,10 +2,14 @@ package cr.ac.una.tarea_a.d.s.controller;
 
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
+import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipoGenerales;
+import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipoPT;
 import cr.ac.una.tarea_a.d.s.model.Partida;
 import cr.ac.una.tarea_a.d.s.model.Torneo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.repositories.EquipoRepository;
+import cr.ac.una.tarea_a.d.s.repositories.EstadisticasEquipoGeneralesRepository;
+import cr.ac.una.tarea_a.d.s.repositories.EstadisticasEquipoPTRepository;
 import cr.ac.una.tarea_a.d.s.repositories.PartidaRepository;
 import cr.ac.una.tarea_a.d.s.repositories.TorneoRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
@@ -466,26 +470,6 @@ public class LlavesController extends Controller implements Initializable {
         ganadoresTemporales.clear();
     }
 
-//    private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/AnimacionFinal.fxml"));
-//            Parent root = loader.load();
-//            AnimacionFinalController controller = loader.getController();
-//
-//            String escudoBase64 = campeon.getImagenBase64();
-//            String balonBase64 = deporte != null ? deporte.getImagenBase64() : "";
-//
-//            controller.mostrarAnimacion(escudoBase64, balonBase64, campeon.getNombre());
-//
-//            Stage stage = new Stage();
-//            stage.setScene(new Scene(root));
-//            stage.setTitle("🏆 Campeón del Torneo");
-//            stage.show();
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
     try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/AnimacionFinal.fxml"));
@@ -508,9 +492,9 @@ private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
     }
 }
 
-    private void mostrarCampeon(Equipo campeon) {
+    private void mostrarCampeon(Equipo campeon) throws IOException {
+        guardarEstadisticasCampeon(campeon.getId(), torneo1.getId());
         System.out.println("🏆 CAMPEÓN: " + campeon.getNombre());
-
         campeon.cargarImagenDesdeBase64();
         Deporte deporte = torneo1.getTipoDeporte() != null ? buscarDeportePorNombre(torneo1.getTipoDeporte()) : null;
         if (deporte != null) {
@@ -530,6 +514,47 @@ private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
             e.printStackTrace();
         }
 
+    }
+    
+    private void guardarEstadisticasCampeon(String idCampeon, String idTorneoActual) throws IOException{
+        EstadisticasEquipoPTRepository repoPT = new EstadisticasEquipoPTRepository();
+        List<EstadisticasEquipoPT> listaStatsPT = repoPT.findAll(); // o filtrar por torneo si es necesario
+
+        // 2. Buscar estadísticas del campeón en esa lista
+        EstadisticasEquipoPT statsPTCampeon = null;
+       for (EstadisticasEquipoPT stat : listaStatsPT) {
+            if (stat.getIdEquipo().equals(idCampeon) && stat.getIdTorneo().equals(idTorneoActual)) {
+                statsPTCampeon = stat;
+                break;
+            }
+        }
+
+        if (statsPTCampeon == null) {
+            System.out.println("❌ No se encontraron estadísticas por torneo para el campeón");
+            return;
+        }
+
+        // 3. Cargar o crear estadísticas generales del equipo
+        EstadisticasEquipoGeneralesRepository repoGen = new EstadisticasEquipoGeneralesRepository();
+        EstadisticasEquipoGenerales statsGenerales;
+        try {
+            statsGenerales = repoGen.findById(idCampeon).orElse(new EstadisticasEquipoGenerales(idCampeon));
+
+            // 4. Sumarle las estadísticas del torneo
+            statsGenerales.setGolesAFavor(statsGenerales.getGolesAFavor() + statsPTCampeon.getGolesAFavorPT());
+            statsGenerales.setPartidosGanados(statsGenerales.getPartidosGanados() + statsPTCampeon.getPartidosGanadosPT());
+            statsGenerales.setPuntos(statsGenerales.getPuntos() + statsPTCampeon.getPuntosPT());
+            statsGenerales.setTorneosGanados(statsGenerales.getTorneosGanados() + 1);
+            statsPTCampeon.setEsGanadorDT(true);
+
+            // 5. Guardar
+            repoPT.save(statsPTCampeon);
+            repoGen.save(statsGenerales);
+
+            System.out.println("🏆 Estadísticas generales del campeón actualizadas correctamente");
+        } catch (IOException e) {
+            System.err.println("❌ Error al guardar estadísticas generales del campeón: " + e.getMessage());
+        }
     }
 
     public Deporte buscarDeportePorNombre(String nombreDeporte) {
