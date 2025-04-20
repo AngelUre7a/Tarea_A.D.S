@@ -65,6 +65,11 @@ public class CreacionTorneoController extends Controller implements Initializabl
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        txtCantidadEquipos.textProperty().addListener((obs,oldText,newText)->{
+            equiposInscritos.clear();
+            tableView.refresh();
+         
+        });
         //SOLO PERMITIR NUMEROS
         txtCantidadEquipos.addEventFilter(javafx.scene.input.KeyEvent.KEY_TYPED, keyEvent -> {
             if (!keyEvent.getCharacter().matches("\\d")) {
@@ -297,6 +302,10 @@ public class CreacionTorneoController extends Controller implements Initializabl
         }
         if (tiempoPorPartida <= 0) {
             new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede crear el torneo, el tiempo debe de ser mayor a 0.");
+            return;
+        }
+        if(cantidadEquipos!=equiposInscritos.size()){
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede crear el torneo, debe agregar " + (cantidadEquipos - equiposInscritos.size()) + " equipos mas para poder crearlo.");
             return;
         }
         Torneo torneo = new Torneo(id, nombre, deporte.getNombre(), cantidadEquipos, tiempoPorPartida, new ArrayList<>(equiposInscritos));
