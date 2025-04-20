@@ -10,11 +10,8 @@ import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 import cr.ac.una.tarea_a.d.s.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXTextField;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Base64;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -25,16 +22,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import cr.ac.una.tarea_a.d.s.model.Partida;
@@ -44,7 +34,7 @@ import cr.ac.una.tarea_a.d.s.repositories.PartidaRepository;
 import cr.ac.una.tarea_a.d.s.repositories.TorneoRepository;
 import cr.ac.una.tarea_a.d.s.util.Animaciones;
 import java.util.List;
-import javafx.animation.Animation;
+
 
 public class PartidoController extends Controller implements Initializable {
 
@@ -204,8 +194,7 @@ public class PartidoController extends Controller implements Initializable {
                 partidaRepository.save(partida);
                 // Agregar la partida al torneo
                 List<Partida> partidasDelTorneo = torneo.getPartidas();
-
-// Verificar si ya estaba esa partida (por si reanudaste)
+                // Verificar si ya estaba esa partida 
                 Partida existente = partidasDelTorneo.stream()
                         .filter(p -> (p.getIdEquipoA().equals(partida.getIdEquipoA()) && p.getIdEquipoB().equals(partida.getIdEquipoB()))
                         || (p.getIdEquipoA().equals(partida.getIdEquipoB()) && p.getIdEquipoB().equals(partida.getIdEquipoA())))
@@ -217,7 +206,7 @@ public class PartidoController extends Controller implements Initializable {
 
                 partidasDelTorneo.add(partida);
 
-// Guardar el torneo actualizado
+                 // Guardar el torneo actualizado
                 try {
                     new TorneoRepository().save(torneo);
                     System.out.println("✅ Torneo actualizado con nuevas partidas.");
@@ -373,10 +362,10 @@ public class PartidoController extends Controller implements Initializable {
             marcadorEquipo2++;
             lblMarcador2.setText(String.valueOf(marcadorEquipo2));
             System.out.println("⚽ ¡GOL para el equipo 2!");
-            // 🔊 Sonido de aplausos
+            // Sonido de aplausos
             Sonidos.aplausos();
             Animaciones.mostrarGolAnimado(lblGol);
-            Animaciones.animarBalonGol(imgBalon); // 🎞️ Nuevo rebote del balón
+            Animaciones.animarBalonGol(imgBalon); 
             golAnotado(2);
             resetearBalon();
         }
@@ -385,7 +374,7 @@ public class PartidoController extends Controller implements Initializable {
             marcadorEquipo1++;
             lblMarcador1.setText(String.valueOf(marcadorEquipo1));
             System.out.println("⚽ ¡GOL para el equipo 1!");
-            // 🔊 Sonido de aplausos
+            // Sonido de aplausos
             Sonidos.aplausos();
             golAnotado(1);
             resetearBalon();

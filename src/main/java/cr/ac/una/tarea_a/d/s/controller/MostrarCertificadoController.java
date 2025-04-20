@@ -8,7 +8,6 @@ import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipoPT;
 import cr.ac.una.tarea_a.d.s.model.Torneo;
 import cr.ac.una.tarea_a.d.s.repositories.EstadisticasEquipoPTRepository;
-import cr.ac.una.tarea_a.d.s.util.Animaciones;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 import cr.ac.una.tarea_a.d.s.util.FlowController;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -30,7 +29,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
@@ -160,7 +158,6 @@ public class MostrarCertificadoController extends Controller implements Initiali
     private void onActionBtnVolver(ActionEvent event) {
         Stage stageActual = (Stage) root.getScene().getWindow();
         stageActual.close();
-
         FlowController.getInstance().goViewInWindowModal("AnimacionFinal", stageActual, Boolean.FALSE);
     }
 

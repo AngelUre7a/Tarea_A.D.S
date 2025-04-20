@@ -115,7 +115,7 @@ private void onActionBtnRegistrar(ActionEvent event) throws IOException {
     @FXML
     private void onActionBtnCargarImagen(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg", "*.bmp"));
 
         File archivoSeleccionado = fileChooser.showOpenDialog(null);
 

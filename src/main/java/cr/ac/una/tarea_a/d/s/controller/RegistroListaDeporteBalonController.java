@@ -215,10 +215,6 @@ public class RegistroListaDeporteBalonController extends Controller implements I
         abrirFormularioNuevo();
     }
 
-    @Override
-    public void initialize() {
-    }
-
     private void abrirFormularioNuevo() {
         AppContext.getInstance().delete("DEPORTE_EDITAR");
 
@@ -255,5 +251,9 @@ public class RegistroListaDeporteBalonController extends Controller implements I
     @FXML
     private void onActionBtnActualizar(ActionEvent event) {
         cargarFormulario();
+    }
+    
+    @Override
+    public void initialize() {
     }
 }

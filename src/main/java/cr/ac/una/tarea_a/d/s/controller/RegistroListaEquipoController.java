@@ -103,7 +103,6 @@ public class RegistroListaEquipoController extends Controller implements Initial
 
                 btnEditar.setOnAction(event -> {
                     Equipo equipo = getTableView().getItems().get(getIndex());
-//                    Equiporepo.findById(equipo.getId()):
                     if (equipo.getCantidadTorneos()>0) {
                          new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede editar ya que actualmente esta participando en un torneo.");
                     
@@ -148,7 +147,7 @@ public class RegistroListaEquipoController extends Controller implements Initial
                             equiposLista.remove(equipo);
                             tableView.refresh();
                         } catch (IllegalArgumentException ex) {
-                            new Mensaje().show(Alert.AlertType.WARNING, "No se pudo eliminar", ex.getMessage());
+                            new Mensaje().show(Alert.AlertType.WARNING, "No se pudo eliminar el equipo", ex.getMessage());
                         } catch (IOException ex) {
                             Logger.getLogger(RegistroListaEquipoController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -213,11 +212,6 @@ public class RegistroListaEquipoController extends Controller implements Initial
     private void onActionBtnAgregar(ActionEvent event) {
         abrirFormularioNuevo();
     }
-
-    @Override
-    public void initialize() {
-    }
-
     private void abrirFormularioNuevo() {
         AppContext.getInstance().delete("EQUIPO_EDITAR");
 
@@ -253,5 +247,9 @@ public class RegistroListaEquipoController extends Controller implements Initial
     @FXML
     private void onActionBtnActualizar(ActionEvent event) {
         tableView.refresh();
+    }
+    
+    @Override
+    public void initialize() {
     }
 }

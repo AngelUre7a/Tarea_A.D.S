@@ -61,10 +61,8 @@ public class PantallaInicialController extends Controller implements Initializab
     }
 
     @FXML
-    private void OnActionBtnAcercaDe(ActionEvent event)throws IOException {
-//        FlowController.getInstance().goViewInWindow("AcercaDe");
-//FlowController.getInstance().goView("AcercaDe");
-  FlowController.getInstance().goMain2();
+    private void OnActionBtnAcercaDe(ActionEvent event) throws IOException {
+        FlowController.getInstance().goMain2();
         ((Stage) root.getScene().getWindow()).close();
     }
 

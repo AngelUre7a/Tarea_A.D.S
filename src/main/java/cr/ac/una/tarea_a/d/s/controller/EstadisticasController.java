@@ -1,12 +1,9 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
-import cr.ac.una.tarea_a.d.s.App;
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
-import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipoPT;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.repositories.EquipoRepository;
-import cr.ac.una.tarea_a.d.s.repositories.EstadisticasEquipoPTRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 import cr.ac.una.tarea_a.d.s.util.FlowController;
 import cr.ac.una.tarea_a.d.s.util.Mensaje;
@@ -16,8 +13,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -214,7 +209,7 @@ public class EstadisticasController extends Controller implements Initializable 
                     setGraphic(null);
                 } else {
                     HBox hbox = new HBox(btnVer);
-                    hbox.setAlignment(Pos.CENTER); // <- centra el botón
+                    hbox.setAlignment(Pos.CENTER); // centra el botón
                     hbox.setPrefWidth(Double.MAX_VALUE); // opcional para forzar ancho
                     setGraphic(hbox);
                 }
@@ -222,14 +217,14 @@ public class EstadisticasController extends Controller implements Initializable 
         });
     }
 
-    @Override
-    public void initialize() {
-    }
-
     @FXML
     private void onActionBtnActualizar(ActionEvent event) {
         cargarJson();
         Filtrar();
+    }
+
+    @Override
+    public void initialize() {
     }
 
 }

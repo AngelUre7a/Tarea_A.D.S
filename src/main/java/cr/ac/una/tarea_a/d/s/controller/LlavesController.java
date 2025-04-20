@@ -18,21 +18,10 @@ import cr.ac.una.tarea_a.d.s.util.Mensaje;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -48,8 +37,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
-import javafx.animation.PauseTransition;
-import javafx.util.Duration;
 
 public class LlavesController extends Controller implements Initializable {
 
@@ -137,7 +124,6 @@ public class LlavesController extends Controller implements Initializable {
 
                     dibujarLineaEnL(btn1, btnDestino);
                     dibujarLineaEnL(btn2, btnDestino);
-
                 }
             }
         });

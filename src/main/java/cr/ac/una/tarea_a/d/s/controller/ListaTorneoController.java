@@ -95,7 +95,7 @@ public class ListaTorneoController extends Controller implements Initializable {
 
                 // Acción del botón
                 btnIniciar.setOnAction(event -> {
-                    for(int i=0;i<50;i++){
+                    for (int i = 0; i < 50; i++) {
                         System.out.println();
                     }
                     Torneo torneo = getTableView().getItems().get(getIndex());
@@ -183,7 +183,7 @@ public class ListaTorneoController extends Controller implements Initializable {
                 torneoLista.clear();
                 torneoLista.addAll(torneos);
                 cargarFormulario();
-                AppContext.getInstance().delete("TORNEO_NUEVO"); // Limpiar el contexto
+                AppContext.getInstance().delete("TORNEO_NUEVO");
             }
         }
     }
@@ -211,7 +211,7 @@ public class ListaTorneoController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnActualizar(ActionEvent event) {
+        tableView.refresh();
     }
 
-    
 }

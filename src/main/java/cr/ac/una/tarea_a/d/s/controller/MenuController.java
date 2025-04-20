@@ -18,7 +18,6 @@ import javafx.stage.Stage;
  * @author Usuario
  */
 public class MenuController extends Controller implements Initializable {
-
     @FXML
     private BorderPane root;
     @FXML
@@ -43,39 +42,38 @@ public class MenuController extends Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       title.setFocusTraversable(true);
-    }    
+        title.setFocusTraversable(true);
+    }
 
     @FXML
     private void onActionBtnRegistroDeporte(ActionEvent event) throws IOException {
         FlowController.getInstance().goView("RegistroListaDeporteBalon");
-
     }
 
     @FXML
-    private void onActionBtnRegistroEquipo(ActionEvent event)throws IOException {
+    private void onActionBtnRegistroEquipo(ActionEvent event) throws IOException {
         FlowController.getInstance().goView("RegistroListaEquipo");
     }
 
-    @FXML
-    private void onActionBtnEstadisticas(ActionEvent event) throws IOException {
-        FlowController.getInstance().goView("Estadisticas");
-    }
-    
     @FXML
     private void onActionBtnTorneos(ActionEvent event) {
         FlowController.getInstance().goView("ListaTorneo");
     }
 
     @FXML
+    private void onActionBtnEstadisticas(ActionEvent event) throws IOException {
+        FlowController.getInstance().goView("Estadisticas");
+    }
+
+    @FXML
+    private void onActionBtnRanking(ActionEvent event) {
+        FlowController.getInstance().goView("Ranking");
+    }
+
+    @FXML
     private void onActionBtnVolver(ActionEvent event) {
         FlowController.getInstance().goViewInWindow("PantallaInicial");
         ((Stage) root.getScene().getWindow()).close();
-    }
-    
-     @FXML
-    private void onActionBtnRanking(ActionEvent event) {
-        FlowController.getInstance().goView("Ranking");
     }
 
     @Override

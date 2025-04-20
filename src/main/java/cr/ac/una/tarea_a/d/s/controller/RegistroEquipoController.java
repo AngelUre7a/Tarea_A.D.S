@@ -63,7 +63,6 @@ public class RegistroEquipoController extends Controller implements Initializabl
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         limpiarFormulario();
-
 //        OpenCV.loadShared();
         OpenCV.loadLocally();
 
@@ -79,10 +78,10 @@ public class RegistroEquipoController extends Controller implements Initializabl
         try {
             DeporteRepository deporteRepo = new DeporteRepository();
             deportes = deporteRepo.findAll(); // carga desde el JSON
-            AppContext.getInstance().set("LISTA_DEPORTES", deportes); // guardamos en el contexto
+            AppContext.getInstance().set("LISTA_DEPORTES", deportes);
         } catch (IOException e) {
             new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar deportes", "No se pudo cargar la lista de deportes.");
-            e.printStackTrace(); // opcional
+            e.printStackTrace(); 
         }
         if (deportes != null) {
             ComboBoxDeportes.getItems().addAll(deportes);

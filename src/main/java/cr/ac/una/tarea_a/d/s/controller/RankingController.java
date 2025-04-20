@@ -60,15 +60,15 @@ public class RankingController extends Controller implements Initializable {
     private final DeporteRepository deporteRepo = new DeporteRepository();
     private final ObservableList<EstadisticasEquipoGenerales> estadisticasLista = FXCollections.observableArrayList();
     private final EstadisticasEquipoGeneralesRepository estadisticasRepo = new EstadisticasEquipoGeneralesRepository();
-    
+
     @FXML
     private MFXButton btnActualizar;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    
+
         cargarEstadisticas();
-        
+
         colRango.setCellValueFactory(cellData -> {
             // Calcula el rango como el índice + 1 en la lista ordenada
             int rango = equiposLista.indexOf(cellData.getValue()) + 1;
@@ -77,7 +77,7 @@ public class RankingController extends Controller implements Initializable {
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colImagen.setCellValueFactory(new PropertyValueFactory<>("imagen"));
         colDeporte.setCellValueFactory(new PropertyValueFactory<>("tipoDeporte"));
-        
+
         colImagen.setCellFactory(column -> new javafx.scene.control.TableCell<>() {
             private final ImageView imageView = new ImageView();
 
@@ -99,20 +99,20 @@ public class RankingController extends Controller implements Initializable {
             }
         });
         colPuntos.setCellValueFactory(cellData -> {
-        Equipo equipo = cellData.getValue();
-        Integer puntos = estadisticasLista.stream()
-                .filter(e -> e.getIdEquipo().equals(equipo.getId()))
-                .map(EstadisticasEquipoGenerales::getPuntos)
-                .findFirst()
-                .orElse(0);
-        return new javafx.beans.property.SimpleIntegerProperty(puntos).asObject();
-});
-        
+            Equipo equipo = cellData.getValue();
+            Integer puntos = estadisticasLista.stream()
+                    .filter(e -> e.getIdEquipo().equals(equipo.getId()))
+                    .map(EstadisticasEquipoGenerales::getPuntos)
+                    .findFirst()
+                    .orElse(0);
+            return new javafx.beans.property.SimpleIntegerProperty(puntos).asObject();
+        });
+
         cargarJson();
         Filtrar();
-    }   
-    
-    private void cargarJson(){ 
+    }
+
+    private void cargarJson() {
         try {
             equiposLista.clear();
             for (Equipo e : equipoRepo.findAll()) {
@@ -126,8 +126,8 @@ public class RankingController extends Controller implements Initializable {
             e.printStackTrace();
         }
     }
-    
-    private void Filtrar(){
+
+    private void Filtrar() {
         FilteredList<Equipo> filteredData = new FilteredList<>(equiposLista, b -> true);
 
         filterField.textProperty().addListener((obs, oldVal, newVal) -> {
@@ -194,18 +194,14 @@ public class RankingController extends Controller implements Initializable {
         });
     }
 
-    @Override
-    public void initialize() {
-    }
-
     @FXML
     private void onActionBtnActualizar(ActionEvent event) {
         cargarEstadisticas();
         cargarJson();
         Filtrar();
     }
-    
-    private void cargarEstadisticas(){
+
+    private void cargarEstadisticas() {
         try {
             List<EstadisticasEquipoGenerales> listaGenerales = estadisticasRepo.findAll();
             estadisticasLista.setAll(listaGenerales);
@@ -213,17 +209,21 @@ public class RankingController extends Controller implements Initializable {
             Logger.getLogger(RankingController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    private void aplicarFiltro(FilteredList<Equipo> filteredData) {
-    filteredData.setPredicate(equipo -> {
-        String filtroNombre = filterField.getText();
-        Deporte filtroDeporte = ComboBoxDeportes.getSelectionModel().getSelectedItem();
 
-        boolean coincideNombre = (filtroNombre == null || filtroNombre.isEmpty()) || equipo.getNombre().toLowerCase().contains(filtroNombre.toLowerCase());
-        boolean coincideDeporte = (filtroDeporte == null || "Todos".equalsIgnoreCase(filtroDeporte.getNombre())) || equipo.getTipoDeporte().equalsIgnoreCase(filtroDeporte.getNombre());
-        
-        return coincideNombre && coincideDeporte;
+    private void aplicarFiltro(FilteredList<Equipo> filteredData) {
+        filteredData.setPredicate(equipo -> {
+            String filtroNombre = filterField.getText();
+            Deporte filtroDeporte = ComboBoxDeportes.getSelectionModel().getSelectedItem();
+
+            boolean coincideNombre = (filtroNombre == null || filtroNombre.isEmpty()) || equipo.getNombre().toLowerCase().contains(filtroNombre.toLowerCase());
+            boolean coincideDeporte = (filtroDeporte == null || "Todos".equalsIgnoreCase(filtroDeporte.getNombre())) || equipo.getTipoDeporte().equalsIgnoreCase(filtroDeporte.getNombre());
+
+            return coincideNombre && coincideDeporte;
         });
     }
 
+    @Override
+    public void initialize() {
+    }
+    
 }
