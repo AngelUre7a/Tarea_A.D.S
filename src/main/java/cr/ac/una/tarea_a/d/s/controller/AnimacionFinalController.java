@@ -44,7 +44,7 @@ public class AnimacionFinalController extends Controller {
         }
 
         lblCampeon.setText("¡" + nombreEquipo + " CAMPEÓN!");
-        Sonidos.detener(); // Detenemos tensión
+        Sonidos.detener();
         Sonidos.ganador();
 
         Animaciones.animarEquipo(imgEquipo);
@@ -67,16 +67,12 @@ public class AnimacionFinalController extends Controller {
             Parent rootCert = loader.load();
             MostrarCertificadoController controller = loader.getController();
 
-//            // PASAR DATOS (aquí podés usar AppContext si querés también)
-
-            // controller.setDatos(...);
             Stage stage = new Stage();
-            stage.setTitle("🏅 Certificado del equipo");
+            stage.setTitle("Certificado del equipo");
             stage.setScene(new Scene(rootCert));
             stage.setResizable(false);
             stage.show();
 
-            // Luego de mostrar, cerrar esta ventana
             Stage actual = (Stage) root.getScene().getWindow();
             actual.close();
 

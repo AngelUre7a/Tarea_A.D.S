@@ -8,7 +8,6 @@ import cr.ac.una.tarea_a.d.s.repositories.EquipoRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 import cr.ac.una.tarea_a.d.s.util.FlowController;
 import cr.ac.una.tarea_a.d.s.util.Mensaje;
-import cr.ac.una.unaplanilla.util.Formato;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -26,7 +25,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -142,7 +140,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
                 }
 
                 Equipo equipo = getTableView().getItems().get(getIndex());
-                String base64 = equipo.getImagenBase64(); // suponiendo que ese es el getter
+                String base64 = equipo.getImagenBase64();
 
                 if (base64 != null && !base64.isBlank()) {
                     try {
@@ -170,10 +168,10 @@ public class CreacionTorneoController extends Controller implements Initializabl
         try {
             DeporteRepository deporteRepo = new DeporteRepository();
             deportes = deporteRepo.findAll(); // carga desde el JSON
-            AppContext.getInstance().set("LISTA_DEPORTES", deportes); // guardamos en el contexto
+            AppContext.getInstance().set("LISTA_DEPORTES", deportes);
         } catch (IOException e) {
             new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar deportes", "No se pudo cargar la lista de deportes.");
-            e.printStackTrace(); // opcional
+            e.printStackTrace();
         }
         if (deportes != null) {
             ComboBoxDeportes.getItems().addAll(deportes);
@@ -226,13 +224,22 @@ public class CreacionTorneoController extends Controller implements Initializabl
             return;
         }
         int cantidadEquipos = Integer.parseInt(txtCantidadEquipos.getText());
-
         int tiempoPorPartida = Integer.parseInt(txtTiempoPartido.getText());
         String id = java.util.UUID.randomUUID().toString();
+
         if (equiposInscritos.size() == 1) {
-            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede crear un torneo con un solo Equipo, Agrega mas equipos para crearlo.");
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede crear un torneo con un solo Equipo, agrega mas equipos para crearlo.");
             return;
         }
+        if (equiposInscritos.size() <= 0) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede crear un torneo sin equipos, agrega equipos para crearlo.");
+            return;
+        }
+        if (tiempoPorPartida <= 0) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede crear el torneo, el tiempo debe de ser mayor a 0.");
+            return;
+        }
+
         Torneo torneo = new Torneo(id, nombre, deporte.getNombre(), cantidadEquipos, tiempoPorPartida, new ArrayList<>(equiposInscritos));
         equiposAddTorneo(equiposInscritos);
         AppContext.getInstance().set("TORNEO_NUEVO", torneo);
@@ -250,7 +257,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
 
         txtCantidadEquipos.clear();
         txtTiempoPartido.clear();
-        //ComboBoxDeportes.setValue(null);
+
         AppContext.getInstance().set("TORNEO", torneo);
         FlowController.getInstance().goView("Llaves");
         LlavesController controller = (LlavesController) FlowController.getInstance().getController("Llaves");
@@ -263,7 +270,6 @@ public class CreacionTorneoController extends Controller implements Initializabl
 
     @FXML
     private void onActionBtnGuardarTorneo(ActionEvent event) {
-
         Deporte deporte = ComboBoxDeportes.getValue();
         if (deporte == null) {
             new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe seleccionar un tipo de deporte.");
@@ -277,16 +283,26 @@ public class CreacionTorneoController extends Controller implements Initializabl
             return;
         }
         int cantidadEquipos = Integer.parseInt(txtCantidadEquipos.getText());
-
         int tiempoPorPartida = Integer.parseInt(txtTiempoPartido.getText());
+
         String id = java.util.UUID.randomUUID().toString();
+        
         if (equiposInscritos.size() == 1) {
-            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede crear un torneo con un solo Equipo, Agrega mas equipos para crearlo.");
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede crear un torneo con un solo Equipo, agrega mas equipos para crearlo.");
+            return;
+        }
+        if (equiposInscritos.size() <= 0) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede crear un torneo sin equipos, agrega equipos para crearlo.");
+            return;
+        }
+        if (tiempoPorPartida <= 0) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede crear el torneo, el tiempo debe de ser mayor a 0.");
             return;
         }
         Torneo torneo = new Torneo(id, nombre, deporte.getNombre(), cantidadEquipos, tiempoPorPartida, new ArrayList<>(equiposInscritos));
         equiposAddTorneo(equiposInscritos);
         AppContext.getInstance().set("TORNEO_NUEVO", torneo);
+
         // Añadir el torneo a la lista global de torneos
         if (!AppContext.getInstance().containsItem("LISTA_TORNEOS")) {
             ObservableList<Torneo> listaTorneos = FXCollections.observableArrayList();
@@ -302,7 +318,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
 
         txtCantidadEquipos.clear();
         txtTiempoPartido.clear();
-        //ComboBoxDeportes.setValue(null);
+
         ((Stage) root.getScene().getWindow()).close();
 
     }

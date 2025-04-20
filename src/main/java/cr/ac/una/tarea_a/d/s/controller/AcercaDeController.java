@@ -53,14 +53,13 @@ public class AcercaDeController extends Controller implements Initializable {
 
         lblTitulo.setText("BALLIVERSE");
         lblDescripcion.setText("Aplicación JavaFX para gestionar deportes, equipos, torneos, partidos y estadísticas.\n\n- Programación II - UNA Sede Brunca.");
-        lblVersion.setText("Versión 1.0");
         lblAutores.setText("Desarrollado por: Daslyn Vargas, Saúl Chinchilla, Angel Ureña");
         lblProfesor.setText("Profesor: Carlos Carranza");
         lblTecnologias.setText("Tecnologías: Java 17, JavaFX, MaterialFX, Scene Builder");
         lblFecha.setText("Fecha de desarrollo: Abril 2025");
         lblContacto.setText("Contacto: daslyn.vargas.gamboa@est.una.ac.cr | saul.chinchilla.badilla@est.una.ac.cr | angel.ureña.naranjo@est.una.ac.cr");
         lblObjetivo.setText("Objetivo: Facilitar la gestión deportiva para equipos y torneos locales.");
-
+        lblVersion.setText("Versión 1.0");
         try {
             imgLogo.setImage(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/balliverse_logo.png").toExternalForm()));
             imgLogoUNA.setImage(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/LogoUNArojo.png").toExternalForm()));
