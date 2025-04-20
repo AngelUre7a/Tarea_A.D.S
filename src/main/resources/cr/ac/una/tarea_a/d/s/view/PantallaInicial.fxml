@@ -7,7 +7,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -37,9 +36,8 @@
                <children>
                   <VBox prefHeight="80.0">
                      <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Pane prefHeight="80.0" prefWidth="48.0" />
                               <MFXButton fx:id="btnJugar" onAction="#OnActionBtnJugar" prefHeight="80.0" prefWidth="250.0" text="Jugar">
                                  <graphic>
                                     <ImageView fitHeight="50.0" fitWidth="50.0">
@@ -71,9 +69,8 @@
                   </VBox>
                   <VBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="80.0">
                      <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Pane prefHeight="80.0" prefWidth="580.0" />
                                     <MFXButton fx:id="btnSalir" buttonType="RAISED" onAction="#OnActionBtnSalir" prefHeight="80.0" prefWidth="250.0" text="Salir">
                                  <font>
                                     <Font size="25.0" />

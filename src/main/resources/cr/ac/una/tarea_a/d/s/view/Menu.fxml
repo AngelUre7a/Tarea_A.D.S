@@ -11,21 +11,25 @@
 
 <BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.MenuController">
     <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="vBox" BorderPane.alignment="CENTER" />
+      <VBox prefHeight="200.0" prefWidth="707.0" styleClass="vBox" BorderPane.alignment="CENTER" />
     </center>
     <left>
         <HBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="600.0" prefWidth="140.0" styleClass="borderViews" BorderPane.alignment="CENTER">
             <children>
-                <VBox minHeight="-Infinity" prefHeight="500.0" prefWidth="125.0" spacing="10.0">
+                <VBox alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="500.0" prefWidth="125.0" spacing="10.0" HBox.hgrow="ALWAYS">
                     <children>
                         <Label fx:id="title1" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="18.0" prefHeight="50.0" prefWidth="115.0" styleClass="jfx-title-label-menu" text="Menu" />
                         <Label fx:id="title" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="115.0" styleClass="jfx-title-label-menu" text="Balliverse" VBox.vgrow="ALWAYS" />
                   <Separator prefWidth="200.0" />
-                        <MFXButton fx:id="btnRegistroDeporte" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegistroDeporte" prefHeight="50.0" styleClass="jfx-button-long-text" text="Registro Deporte" />
-                        <MFXButton fx:id="btnRegistroEquipo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegistroEquipo" prefHeight="50.0" styleClass="jfx-button-long-text" text="Registro Equipo" />
-                        <MFXButton fx:id="btnTorneos" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnTorneos" prefHeight="50.0" styleClass="jfx-button-long-text" text="Torneos" />
+                  <VBox minHeight="-Infinity" prefHeight="150.0" prefWidth="100.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                     <children>
+                              <MFXButton fx:id="btnRegistroDeporte" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegistroDeporte" prefHeight="50.0" styleClass="jfx-button-long-text" text="Registro Deporte" />
+                              <MFXButton fx:id="btnRegistroEquipo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegistroEquipo" prefHeight="50.0" styleClass="jfx-button-long-text" text="Registro Equipo" />
+                              <MFXButton fx:id="btnTorneos" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnTorneos" prefHeight="50.0" styleClass="jfx-button-long-text" text="Torneos" />
+                     </children>
+                  </VBox>
                   <Separator prefWidth="200.0" />
-                        <VBox alignment="BOTTOM_CENTER" minHeight="-Infinity" prefHeight="298.0" prefWidth="122.0" spacing="10.0">
+                        <VBox alignment="BOTTOM_CENTER" minHeight="-Infinity" prefHeight="300.0" prefWidth="122.0" spacing="10.0" VBox.vgrow="ALWAYS">
                             <children>
                         <ImageView fitHeight="112.0" fitWidth="113.0">
                            <image>
@@ -33,16 +37,21 @@
                            </image>
                         </ImageView>
                         <Separator prefWidth="200.0" />
-                                <MFXButton fx:id="btnEstadisticas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnEstadisticas" prefHeight="50.0" text="Estadisticas" />
-                                <MFXButton fx:id="btnRanking" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRanking" prefHeight="50.0" text="Ranking" />
-                                <MFXButton fx:id="btnVolver" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnVolver" prefHeight="50.0" prefWidth="122.0" text="Volver">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0">
-                                 <image>
-                                    <Image url="@../resources/volver-flecha.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic></MFXButton>
+                        <VBox alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="150.0" prefWidth="100.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                           <children>
+                                      <MFXButton fx:id="btnEstadisticas" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnEstadisticas" prefHeight="50.0" text="Estadisticas" />
+                                      <MFXButton fx:id="btnRanking" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRanking" prefHeight="50.0" text="Ranking" />
+                                      <MFXButton fx:id="btnVolver" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnVolver" prefHeight="50.0" prefWidth="122.0" text="Volver">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0">
+                                       <image>
+                                          <Image url="@../resources/volver-flecha.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </MFXButton>
+                           </children>
+                        </VBox>
                             </children>
                         </VBox>
                     </children>
