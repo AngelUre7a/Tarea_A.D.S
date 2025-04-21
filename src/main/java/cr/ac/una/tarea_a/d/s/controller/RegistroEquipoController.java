@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -124,6 +126,17 @@ public class RegistroEquipoController extends Controller implements Initializabl
         }
 
         EquipoRepository equipoRepo = new EquipoRepository();
+        try {
+            List<Equipo> equiposExistentes = equipoRepo.findAll();
+            for (Equipo equipo1 : equiposExistentes) {
+                if (equipo1.getNombre().equalsIgnoreCase(nombre.trim())) {
+                    new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Ya hay un deporte con ese nombre.");
+                    return;
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(CreacionTorneoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         if (esEdicion && equipo != null) {
             equipo = (Equipo) AppContext.getInstance().get("EQUIPO_EDITAR");

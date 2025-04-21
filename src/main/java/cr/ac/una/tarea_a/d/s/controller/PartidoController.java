@@ -5,6 +5,7 @@ import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipoGenerales;
 import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipoPT;
+import cr.ac.una.tarea_a.d.s.model.EstadoPartida;
 import cr.ac.una.tarea_a.d.s.model.Torneo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
@@ -88,7 +89,7 @@ public class PartidoController extends Controller implements Initializable {
 
     int marcadorEquipo1;
     int marcadorEquipo2;
-    String estadoPartida = "pendiente";
+    EstadoPartida estadoPartida = EstadoPartida.PENDIENTE;
     private boolean enGolDeOro = false;
 
     @Override
@@ -177,7 +178,7 @@ public class PartidoController extends Controller implements Initializable {
         }
         // ✅ Crear y guardar partida
         if (torneo != null) {
-            estadoPartida = "finalizado";
+            estadoPartida = EstadoPartida.FINALIZADO;
             Partida partida = new Partida(
                     null, // id será generado por el repositorio
                     torneo.getId(),

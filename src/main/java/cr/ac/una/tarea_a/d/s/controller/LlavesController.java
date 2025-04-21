@@ -4,6 +4,7 @@ import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipoGenerales;
 import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipoPT;
+import cr.ac.una.tarea_a.d.s.model.EstadoPartida;
 import cr.ac.una.tarea_a.d.s.model.Partida;
 import cr.ac.una.tarea_a.d.s.model.Torneo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
@@ -66,12 +67,14 @@ public class LlavesController extends Controller implements Initializable {
         torneo1 = (Torneo) AppContext.getInstance().get("TORNEO");
         if (torneo1 != null) {
             generarEstructuraLlaves();
-            llenarPrimerRonda();
+            reconstruirDesdePartidas();
+            //llenarPrimerRonda();
             //reconstruirDesdePartidas();
             conectarPartidosConLineas();
         } else {
             System.out.println("Torneo null en LlavesController");
         }
+        System.out.println("SALE DE INITIALIZE");
     }
 
     private int siguientePotencia(int cantidadEquipos) {
@@ -267,7 +270,7 @@ public class LlavesController extends Controller implements Initializable {
                                 equipo2.getId(),
                                 0,
                                 0,
-                                "finalizado",
+                                EstadoPartida.FINALIZADO,
                                 ganador.getId(),
                                 0
                         );
@@ -286,6 +289,14 @@ public class LlavesController extends Controller implements Initializable {
                             }
 
                             partidasDelTorneo.add(partida);
+                            // ✅ Marcar visualmente al ganador (cambia color de texto)
+                            if (ganador.getId().equals(eq1.getId())) {
+                                label1.setStyle("-fx-font-weight: bold; -fx-text-fill: green;");
+                                label2.setStyle("-fx-text-fill: red;");
+                            } else {
+                                label2.setStyle("-fx-font-weight: bold; -fx-text-fill: green;");
+                                label1.setStyle("-fx-text-fill: red;");
+                            }
 
                             try {
                                 new TorneoRepository().save(torneo);
@@ -314,15 +325,42 @@ public class LlavesController extends Controller implements Initializable {
 
                 }
                 FlowController.getInstance().goViewInWindowModal("Partido", ((Stage) root.getScene().getWindow()), false);
-                procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
+                procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);// ✅ Marcar visualmente al ganador (cambia color de texto)
+                PartidaRepository partidaRepository = new PartidaRepository();
+                List<Partida> partidasActualizadas = null;
+                try {
+                    partidasActualizadas = partidaRepository.findAll();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+                if (partidasActualizadas != null) {
+                    Partida partidaActualizada = partidasActualizadas.stream()
+                            .filter(p -> (p.getIdEquipoA().equals(eq1.getId()) && p.getIdEquipoB().equals(eq2.getId()))
+                            || (p.getIdEquipoA().equals(eq2.getId()) && p.getIdEquipoB().equals(eq1.getId())))
+                            .findFirst().orElse(null);
+
+                    if (partidaActualizada != null && partidaActualizada.getGanadorId() != null) {
+                        String idGanador = partidaActualizada.getGanadorId();
+                        if (idGanador.equals(eq1.getId())) {
+                            label1.setStyle("-fx-font-weight: bold; -fx-text-fill: green;");
+                            label2.setStyle("-fx-text-fill: red;");
+                        } else if (idGanador.equals(eq2.getId())) {
+                            label2.setStyle("-fx-font-weight: bold; -fx-text-fill: green;");
+                            label1.setStyle("-fx-text-fill: red;");
+                        }
+                    }
+                }
+
             });
+
             // Crear Partida y agregarla al torneo
             Partida partida = new Partida();
             partida.setId(java.util.UUID.randomUUID().toString());
             partida.setIdTorneo(torneo1.getId());
             partida.setIdEquipoA(eq1.getId());
             partida.setIdEquipoB(eq2.getId());
-            partida.setEstado("pendiente");
+            partida.setEstado(EstadoPartida.PENDIENTE);
             partida.setGolesEquipoA(0);
             partida.setGolesEquipoB(0);
             partida.setTiempoRestante(torneo1.getTiempoPorPartida());
@@ -372,6 +410,7 @@ public class LlavesController extends Controller implements Initializable {
     }
 
     private void llenarRondaSiguiente(int rondaIndex, List<Equipo> ganadores) {
+        System.out.println("avanzando de ronda");
         VBox rondaVBox = (VBox) hboxLlaves.getChildren().get(rondaIndex);
         int index = 0;
         for (int i = 0; i < ganadores.size(); i += 2) {
@@ -401,6 +440,31 @@ public class LlavesController extends Controller implements Initializable {
                 AppContext.getInstance().set("DEPORTE", torneo1.getTipoDeporte());
                 FlowController.getInstance().goViewInWindowModal("Partido", ((Stage) root.getScene().getWindow()), false);
                 procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
+                PartidaRepository partidaRepository = new PartidaRepository();
+                List<Partida> partidasActualizadas = null;
+                try {
+                    partidasActualizadas = partidaRepository.findAll();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+                if (partidasActualizadas != null) {
+                    Partida partidaActualizada = partidasActualizadas.stream()
+                            .filter(p -> (p.getIdEquipoA().equals(eq1.getId()) && p.getIdEquipoB().equals(eq2.getId()))
+                            || (p.getIdEquipoA().equals(eq2.getId()) && p.getIdEquipoB().equals(eq1.getId())))
+                            .findFirst().orElse(null);
+
+                    if (partidaActualizada != null && partidaActualizada.getGanadorId() != null) {
+                        String idGanador = partidaActualizada.getGanadorId();
+                        if (idGanador.equals(eq1.getId())) {
+                            label1.setStyle("-fx-font-weight: bold; -fx-text-fill: green;");
+                            label2.setStyle("-fx-text-fill: red;");
+                        } else if (idGanador.equals(eq2.getId())) {
+                            label2.setStyle("-fx-font-weight: bold; -fx-text-fill: green;");
+                            label1.setStyle("-fx-text-fill: red;");
+                        }
+                    }
+                }
             });
 
             index++;
@@ -444,6 +508,7 @@ public class LlavesController extends Controller implements Initializable {
     }
 
     private void reconstruirDesdePartidas() {
+
         //llenarPrimerRonda();
         try {
             PartidaRepository repo = new PartidaRepository();
@@ -490,7 +555,7 @@ public class LlavesController extends Controller implements Initializable {
                             || (p.getIdEquipoA().equals(eq2.getId()) && p.getIdEquipoB().equals(eq1.getId())))
                             .findFirst().orElse(null);
 
-                    if (partida != null && "finalizado".equals(partida.getEstado())) {
+                    if (partida != null && partida.getEstado() == EstadoPartida.FINALIZADO) {
                         btn.setText(partida.getGolesEquipoA() + " - " + partida.getGolesEquipoB());
                         btn.setDisable(true);
                         Equipo ganador = torneo1.getEquiposInscritos().stream()
@@ -498,6 +563,14 @@ public class LlavesController extends Controller implements Initializable {
                                 .findFirst().orElse(null);
                         if (ganador != null) {
                             ganadores.add(ganador);
+                            // ✅ Marcar visualmente al ganador (cambia color de texto)
+                            if (ganador.getId().equals(eq1.getId())) {
+                                label1.setStyle("-fx-font-weight: bold; -fx-text-fill: green;");
+                                label2.setStyle("-fx-text-fill: red;");
+                            } else {
+                                label2.setStyle("-fx-font-weight: bold; -fx-text-fill: green;");
+                                label1.setStyle("-fx-text-fill: red;");
+                            }
                         }
                     } else {
                         btn.setDisable(false);
@@ -533,7 +606,7 @@ public class LlavesController extends Controller implements Initializable {
                                             eq2.getId(),
                                             0,
                                             0,
-                                            "finalizado",
+                                            EstadoPartida.FINALIZADO,
                                             ganador.getId(),
                                             0
                                     );
@@ -596,10 +669,11 @@ public class LlavesController extends Controller implements Initializable {
                 rondaIndex++;
             }
             boolean torneoCompleto = torneo1.getPartidas().stream()
-                    .filter(p -> p.getEstado().equalsIgnoreCase("finalizado"))
+                    .filter(p -> p.getEstado() == EstadoPartida.FINALIZADO)
                     .count() >= torneo1.getCantidadEquipos() - 1;
 
-            if (torneoCompleto && rondaActual.size() == 1) {
+            if (!todosPartidosJugados() && rondaActual.size() == 1) {
+                System.out.println("CAMPEONOOOO");
                 mostrarCampeon(rondaActual.get(0));
             }
         } catch (IOException e) {
@@ -733,6 +807,38 @@ public class LlavesController extends Controller implements Initializable {
                 e.printStackTrace();
             }
         }
+    }
+
+    private boolean todosPartidosJugados() {
+        try {
+            PartidaRepository repo = new PartidaRepository();
+            List<Partida> partidasGuardadas = repo.findAll();
+
+            // filtrar solo las del torneo actual
+            List<Partida> partidasTorneo = partidasGuardadas.stream()
+                    .filter(p -> p.getIdTorneo().equals(torneo1.getId()))
+                    .toList();
+            if (partidasTorneo.size() == 0) {
+                System.out.println("ceroooooooooooooo");
+                return false;
+            }
+            for (Partida partida : partidasTorneo) {
+                System.out.println(partida.getEstado());
+                if (partida.getEstado() != EstadoPartida.FINALIZADO) {
+                    return false;
+                }
+            }
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private void finalizarPartido(Partida partida, Equipo ganador) throws IOException {
+        partida.setGanadorId(ganador.getId());
+        partida.setEstado(EstadoPartida.FINALIZADO);
+        partidaRepository.save(partida);
     }
 
     @Override

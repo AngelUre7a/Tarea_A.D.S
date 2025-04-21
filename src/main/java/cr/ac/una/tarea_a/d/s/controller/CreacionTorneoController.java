@@ -5,6 +5,7 @@ import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.model.Torneo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.repositories.EquipoRepository;
+import cr.ac.una.tarea_a.d.s.repositories.TorneoRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
 import cr.ac.una.tarea_a.d.s.util.FlowController;
 import cr.ac.una.tarea_a.d.s.util.Mensaje;
@@ -16,6 +17,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -59,16 +62,17 @@ public class CreacionTorneoController extends Controller implements Initializabl
     private final ObservableList<Equipo> equiposLista = FXCollections.observableArrayList();
     private final EquipoRepository Equiporepo = new EquipoRepository();
     private final ObservableList<Equipo> equiposInscritos = FXCollections.observableArrayList();
+    private final TorneoRepository Torneorepo = new TorneoRepository();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        txtCantidadEquipos.textProperty().addListener((obs,oldText,newText)->{
+        txtCantidadEquipos.textProperty().addListener((obs, oldText, newText) -> {
             equiposInscritos.clear();
             tableView.refresh();
-         
+
         });
         //SOLO PERMITIR NUMEROS
         txtCantidadEquipos.addEventFilter(javafx.scene.input.KeyEvent.KEY_TYPED, keyEvent -> {
@@ -228,6 +232,19 @@ public class CreacionTorneoController extends Controller implements Initializabl
             new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar el nombre, cantidad de equipos y tiempo de cada partido.");
             return;
         }
+        
+        try {
+            List<Torneo> torneosExistentes = Torneorepo.findAll();
+            for (Torneo torneo : torneosExistentes) {
+                if (torneo.getNombre().equalsIgnoreCase(nombre.trim())) {
+                    new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Ya hay un torneo con ese nombre.");
+                    return;
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(CreacionTorneoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         int cantidadEquipos = Integer.parseInt(txtCantidadEquipos.getText());
         int tiempoPorPartida = Integer.parseInt(txtTiempoPartido.getText());
         String id = java.util.UUID.randomUUID().toString();
@@ -287,11 +304,23 @@ public class CreacionTorneoController extends Controller implements Initializabl
             new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar el nombre, cantidad de equipos y tiempo de cada partido.");
             return;
         }
+        try {
+            List<Torneo> torneosExistentes = Torneorepo.findAll();
+            for (Torneo torneo : torneosExistentes) {
+                if (torneo.getNombre().equalsIgnoreCase(nombre.trim())) {
+                    new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Ya hay un torneo con ese nombre.");
+                    return;
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(CreacionTorneoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         int cantidadEquipos = Integer.parseInt(txtCantidadEquipos.getText());
         int tiempoPorPartida = Integer.parseInt(txtTiempoPartido.getText());
 
         String id = java.util.UUID.randomUUID().toString();
-        
+
         if (equiposInscritos.size() == 1) {
             new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede crear un torneo con un solo Equipo, agrega mas equipos para crearlo.");
             return;
@@ -304,7 +333,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
             new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede crear el torneo, el tiempo debe de ser mayor a 0.");
             return;
         }
-        if(cantidadEquipos!=equiposInscritos.size()){
+        if (cantidadEquipos != equiposInscritos.size()) {
             new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede crear el torneo, debe agregar " + (cantidadEquipos - equiposInscritos.size()) + " equipos mas para poder crearlo.");
             return;
         }
