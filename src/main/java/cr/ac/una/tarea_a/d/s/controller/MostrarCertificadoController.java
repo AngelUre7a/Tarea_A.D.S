@@ -69,11 +69,15 @@ public class MostrarCertificadoController extends Controller implements Initiali
     private EstadisticasEquipoPTRepository estadisticasRepo;
     private final ObservableList<EstadisticasEquipoPT> estadisticasLista = FXCollections.observableArrayList();
     private EstadisticasEquipoPT statsPTCampeon;
+    @FXML
+    private ImageView imgFondo;
     
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        imgFondo.fitHeightProperty().bind(root.heightProperty());
+        imgFondo.fitWidthProperty().bind(root.widthProperty());
         equipoCampeon = (Equipo) AppContext.getInstance().get("EQUIPO_CAMPEON");
         torneo = (Torneo) AppContext.getInstance().get("TORNEO_ACTUAL");
         estadisticasRepo = new EstadisticasEquipoPTRepository();

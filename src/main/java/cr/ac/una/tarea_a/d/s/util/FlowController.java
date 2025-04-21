@@ -154,8 +154,8 @@ public class FlowController {
             controller.initialize();
 
             Stage stage = new Stage();
-            stage.getIcons().add(new Image("cr/ac/una/tarea_a/d/s/resources/Logo-Principal-View.png"));
-            stage.setTitle(controller.getNombreVista());
+            stage.getIcons().add(new Image("cr/ac/una/tarea_a/d/s/resources/balliverse_logo.png"));
+            stage.setTitle("BALLIVERSE");
             stage.setOnHidden((WindowEvent event) -> {
                 controller.getStage().getScene().setRoot(new Pane());
                 controller.setStage(null);
@@ -179,8 +179,8 @@ public class FlowController {
             controller.initialize();
 
             Stage stage = new Stage();
-            stage.getIcons().add(new Image("cr/ac/una/tarea_a/d/s/resources/Logo-Principal-View.png"));
-            stage.setTitle(controller.getNombreVista());
+            stage.getIcons().add(new Image("cr/ac/una/tarea_a/d/s/resources/balliverse_logo.png"));
+            stage.setTitle("BALLIVERSE");
             stage.setResizable(resizable);
             stage.setOnHidden((WindowEvent event) -> {
                 controller.getStage().getScene().setRoot(new Pane());
