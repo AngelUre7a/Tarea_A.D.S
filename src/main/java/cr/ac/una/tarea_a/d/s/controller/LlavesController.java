@@ -82,7 +82,7 @@ public class LlavesController extends Controller implements Initializable {
     }
 
     private void dibujarLineaEnL(Button origen, Button destino) {
-        System.out.println("entroEndibujarLineal");
+        //System.out.println("entroEndibujarLineal");
         Bounds boundsOrigenScene = origen.localToScene(origen.getBoundsInLocal());
         Bounds boundsDestinoScene = destino.localToScene(destino.getBoundsInLocal());
 
@@ -101,7 +101,7 @@ public class LlavesController extends Controller implements Initializable {
         Line lineaH2 = new Line(midX, endY, endX, endY);
 
         for (Line l : List.of(lineaH1, lineaV, lineaH2)) {
-            System.out.println("forlineaL");
+            //System.out.println("forlineaL");
             l.setStrokeWidth(3);
             l.setStyle("-fx-stroke: black;");
             linePane.getChildren().add(l);
@@ -109,18 +109,18 @@ public class LlavesController extends Controller implements Initializable {
     }
 
     private void conectarPartidosConLineas() {
-        System.out.println("entro a lineas");
+        //System.out.println("entro a lineas");
         Platform.runLater(() -> {
             linePane.getChildren().clear(); // Limpia líneas previas
 
-            System.out.println("primer for");
+            //System.out.println("primer for");
             for (int ronda = 0; ronda < hboxLlaves.getChildren().size() - 1; ronda++) {
 
                 VBox rondaActual = (VBox) hboxLlaves.getChildren().get(ronda);
                 VBox siguienteRonda = (VBox) hboxLlaves.getChildren().get(ronda + 1);
 
                 for (int i = 0; i < siguienteRonda.getChildren().size(); i++) {
-                    System.out.println("segundo for");
+                    //System.out.println("segundo for");
                     VBox partidaSiguiente = (VBox) siguienteRonda.getChildren().get(i);
                     VBox partida1 = (VBox) rondaActual.getChildren().get(i * 2);
                     VBox partida2 = (VBox) rondaActual.getChildren().get(i * 2 + 1);
@@ -395,7 +395,7 @@ public class LlavesController extends Controller implements Initializable {
             Button btn = (Button) marcadorVBox.getChildren().get(0);
             btn.setText(ultima.getGolesEquipoA() + " - " + ultima.getGolesEquipoB());
             btn.setDisable(true);
-
+            System.out.println("ganadores temporales: " + ganadoresTemporales.size());
             if (ganadoresTemporales.size() == rondaVBox.getChildren().size()) {
                 if (rondaActual + 1 < hboxLlaves.getChildren().size()) {
                     llenarRondaSiguiente(rondaActual + 1, new ArrayList<>(ganadoresTemporales));
@@ -671,8 +671,9 @@ public class LlavesController extends Controller implements Initializable {
             boolean torneoCompleto = torneo1.getPartidas().stream()
                     .filter(p -> p.getEstado() == EstadoPartida.FINALIZADO)
                     .count() >= torneo1.getCantidadEquipos() - 1;
-
-            if (!todosPartidosJugados() && rondaActual.size() == 1) {
+            System.out.println("ronda: " + rondaActual.size());
+            System.out.println(todosPartidosJugados());
+            if (todosPartidosJugados() && rondaActual.size() == 1) {
                 System.out.println("CAMPEONOOOO");
                 mostrarCampeon(rondaActual.get(0));
             }
@@ -695,6 +696,7 @@ public class LlavesController extends Controller implements Initializable {
 
     private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
         try {
+            System.out.println("ENTRO ANIMCAION");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/AnimacionFinal.fxml"));
             Parent root = loader.load();
             AnimacionFinalController controller = loader.getController();
@@ -823,13 +825,19 @@ public class LlavesController extends Controller implements Initializable {
                 return false;
             }
             for (Partida partida : partidasTorneo) {
-                System.out.println(partida.getEstado());
+                System.out.println(partida.getGolesEquipoA()
+                );
+                System.out.println(partida.getGolesEquipoB());
+                System.out.println(partida.getEstado()
+                );
+                
                 if (partida.getEstado() != EstadoPartida.FINALIZADO) {
                     return false;
                 }
             }
             return true;
         } catch (IOException e) {
+            System.out.println("probelma");
             e.printStackTrace();
             return false;
         }
