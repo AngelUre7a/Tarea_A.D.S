@@ -360,24 +360,24 @@ public class PartidoController extends Controller implements Initializable {
         double y = imgBalon.getLayoutY();
 
         if (x < 50 && y > 150 && y < 250) {
-            marcadorEquipo2++;
-            lblMarcador2.setText(String.valueOf(marcadorEquipo2));
-            System.out.println("⚽ ¡GOL para el equipo 2!");
-            // Sonido de aplausos
-            Sonidos.aplausos();
-            Animaciones.mostrarGolAnimado(lblGol);
-            Animaciones.animarBalonGol(imgBalon); 
-            golAnotado(2);
-            resetearBalon();
-        }
-
-        if (x + imgBalon.getFitWidth() > fondoImgCancha.getWidth() - 50 && y > 150 && y < 250) {
             marcadorEquipo1++;
             lblMarcador1.setText(String.valueOf(marcadorEquipo1));
             System.out.println("⚽ ¡GOL para el equipo 1!");
             // Sonido de aplausos
             Sonidos.aplausos();
+            Animaciones.mostrarGolAnimado(lblGol);
+            Animaciones.animarBalonGol(imgBalon); 
             golAnotado(1);
+            resetearBalon();
+        }
+
+        if (x + imgBalon.getFitWidth() > fondoImgCancha.getWidth() - 50 && y > 150 && y < 250) {
+            marcadorEquipo2++;
+            lblMarcador2.setText(String.valueOf(marcadorEquipo2));
+            System.out.println("⚽ ¡GOL para el equipo 2!");
+            // Sonido de aplausos
+            Sonidos.aplausos();
+            golAnotado(2);
             resetearBalon();
         }
     }
