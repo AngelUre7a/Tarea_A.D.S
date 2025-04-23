@@ -67,6 +67,12 @@
                                     <Label fx:id="lblPartidosGanados" prefHeight="41.0" prefWidth="149.0" styleClass="labelCertificado" text="Label" />
                                  </children>
                               </HBox>
+                              <HBox prefHeight="36.0" prefWidth="280.0">
+                                 <children>
+                                    <Label prefHeight="32.0" prefWidth="42.0" styleClass="labelCertificado" text="Goles:" />
+                                    <Label fx:id="lblGoles" prefHeight="46.0" prefWidth="191.0" styleClass="labelCertificado" text="Label" />
+                                 </children>
+                              </HBox>
 
                               <HBox prefHeight="36.0" prefWidth="280.0">
                                  <children>

@@ -71,6 +71,8 @@ public class MostrarCertificadoController extends Controller implements Initiali
     private EstadisticasEquipoPT statsPTCampeon;
     @FXML
     private ImageView imgFondo;
+    @FXML
+    private Label lblGoles;
     
     
     
@@ -104,6 +106,7 @@ public class MostrarCertificadoController extends Controller implements Initiali
             lblNombreEquipo.setText(equipoCampeon.getNombre());
             lblDeporteJugado.setText(equipoCampeon.getTipoDeporte());
             lblPuntos.setText(String.valueOf(statsPTCampeon.getPuntosPT()));
+            lblGoles.setText(String.valueOf(statsPTCampeon.getGolesAFavorPT()));
             lblPartidosGanados.setText(String.valueOf(statsPTCampeon.getPartidosGanadosPT()));
 
             if (equipoCampeon.getImagen() != null) {
