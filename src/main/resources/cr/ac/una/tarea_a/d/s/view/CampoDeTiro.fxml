@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="root" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.CampoDeTiroController">
+   <top>
+      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="700.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="imgEquipo" fitHeight="37.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="lblNombreEquipo" prefHeight="37.0" prefWidth="131.0" text="NombreEquipo" />
+            <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="37.0" prefWidth="142.0">
+               <children>
+                  <Label fx:id="lblTemporizador" prefHeight="37.0" prefWidth="146.0" text="Tiempo" />
+               </children>
+            </HBox>
+            <MFXButton fx:id="btnIniciar" onAction="#onActionBtnIniciar" prefHeight="37.0" prefWidth="90.0" text="Iniciar">
+               <HBox.margin>
+                  <Insets left="50.0" />
+               </HBox.margin>
+            </MFXButton>
+            <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" prefHeight="37.0" prefWidth="78.0" text="Volver" />
+         </children></HBox>
+   </top>
+   <center>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane fx:id="CampoTiro" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <ImageView fx:id="imgBalon" fitHeight="80.0" fitWidth="80.0" layoutX="310.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

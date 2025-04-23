@@ -37,7 +37,7 @@
         </HBox>
     </top>
     <center>
-        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+        <VBox fx:id="Cancha" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" BorderPane.alignment="CENTER">
             <children>
                 <AnchorPane fx:id="fondoImgCancha" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0">
                     <children>
@@ -50,9 +50,6 @@
                         <ImageView fx:id="imgBalon" fitHeight="66.0" fitWidth="67.0" layoutX="317.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="imgEquipo1" fitHeight="66.0" fitWidth="67.0" layoutX="14.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
                         <Label fx:id="lblGol" layoutX="230.0" layoutY="100.0" style="-fx-font-size: 64px; -fx-text-fill: gold; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, black, 10, 0.5, 2, 2);" text="¡GOOOOL!" visible="false" />
-                        <Label fx:id="lblGolDeOro" layoutX="210.0" layoutY="170.0"
-                               style="-fx-font-size: 48px; -fx-text-fill: gold; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, black, 10, 0.5, 2, 2);"
-                               text="¡GOL DE ORO!" visible="false" />
 
                     </children>
                 </AnchorPane>
