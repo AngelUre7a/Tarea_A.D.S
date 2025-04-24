@@ -191,7 +191,7 @@ public class FlowController {
             Scene scene = new Scene(root);
             MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
             stage.setScene(scene);
-            stage.initStyle(StageStyle.UNDECORATED); // Esto es lo que necesitás agregar
+            stage.initStyle(StageStyle.UNDECORATED); //quitar equis en modales
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(parentStage);
             stage.centerOnScreen();

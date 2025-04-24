@@ -44,7 +44,7 @@
     -fx-background-repeat: no-repeat;
 }
 .anchor-paneModal {
-    -fx-background-image: url("../resources/fondoModal.png");
+    -fx-background-image: url("../resources/fondoModales.png");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
 }
