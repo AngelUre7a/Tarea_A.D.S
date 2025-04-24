@@ -38,6 +38,8 @@ public class RegistroDeporteController extends Controller implements Initializab
 
     private Deporte deporte;
     private boolean esEdicion = false;
+    @FXML
+    private MFXButton btnVolver;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -80,18 +82,18 @@ public class RegistroDeporteController extends Controller implements Initializab
             event.consume();
         });
     }
-    
-@FXML
-private void onActionBtnRegistrar(ActionEvent event) throws IOException {
-    String nombre = txtNombreDeporte.getText();
-    Image imagen = imageView.getImage();
 
-    if (nombre.isEmpty() || imagen == null) {
-        new Mensaje().show(Alert.AlertType.WARNING, "Campos vacíos", "Por favor, complete todos los campos.");
-        return;
-    }
+    @FXML
+    private void onActionBtnRegistrar(ActionEvent event) throws IOException {
+        String nombre = txtNombreDeporte.getText();
+        Image imagen = imageView.getImage();
 
-    DeporteRepository deporteRepo = new DeporteRepository();
+        if (nombre.isEmpty() || imagen == null) {
+            new Mensaje().show(Alert.AlertType.WARNING, "Campos vacíos", "Por favor, complete todos los campos.");
+            return;
+        }
+
+        DeporteRepository deporteRepo = new DeporteRepository();
         try {
             List<Deporte> deportesExistentes = deporteRepo.findAll();
             for (Deporte deporte1 : deportesExistentes) {
@@ -104,27 +106,26 @@ private void onActionBtnRegistrar(ActionEvent event) throws IOException {
             Logger.getLogger(CreacionTorneoController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    if (esEdicion && deporte != null) {
-        deporte.setNombre(nombre);
-        deporte.setImagen(imagen);
-        deporteRepo.save(deporte);
-        limpiarFormulario(); 
-    } else {
-        String id = java.util.UUID.randomUUID().toString();
-        deporte = new Deporte(id, nombre, imagen);
-        deporteRepo.save(deporte);
-        limpiarFormulario();  
+        if (esEdicion && deporte != null) {
+            deporte.setNombre(nombre);
+            deporte.setImagen(imagen);
+            deporteRepo.save(deporte);
+            limpiarFormulario();
+        } else {
+            String id = java.util.UUID.randomUUID().toString();
+            deporte = new Deporte(id, nombre, imagen);
+            deporteRepo.save(deporte);
+            limpiarFormulario();
+        }
+
+        new Mensaje().show(Alert.AlertType.INFORMATION, "Registro exitoso", "Deporte registrado correctamente.");
+        AppContext.getInstance().delete("DEPORTE_EDITAR");
+        deporte = null;
+        esEdicion = false;
+
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.close();
     }
-
-    new Mensaje().show(Alert.AlertType.INFORMATION, "Registro exitoso", "Deporte registrado correctamente.");
-    AppContext.getInstance().delete("DEPORTE_EDITAR");
-    deporte = null;
-    esEdicion = false;
-
-    Stage stage = (Stage) root.getScene().getWindow();
-    stage.close();
-}
-
 
     @FXML
     private void onActionBtnCargarImagen(ActionEvent event) {
@@ -148,5 +149,14 @@ private void onActionBtnRegistrar(ActionEvent event) throws IOException {
         imageView.setImage(null);
         deporte = null;
         esEdicion = false;
+    }
+
+    @FXML
+    private void onActionBtnVolver(ActionEvent event) {
+        deporte = null;
+        esEdicion = false;
+
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.close();
     }
 }

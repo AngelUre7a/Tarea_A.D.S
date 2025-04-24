@@ -61,6 +61,8 @@ public class RegistroEquipoController extends Controller implements Initializabl
 
     private Equipo equipo;
     private boolean esEdicion = false;
+    @FXML
+    private MFXButton btnVolver;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -279,6 +281,13 @@ public class RegistroEquipoController extends Controller implements Initializabl
         ComboBoxDeportes.setValue(null);
         equipo = null;
         esEdicion = false;
+    }
+
+    @FXML
+    private void onActionBtnVolver(ActionEvent event) {
+        cerrarCamara(); // cerrar la cámara antes de cerrar la ventana
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.close();
     }
 
 }

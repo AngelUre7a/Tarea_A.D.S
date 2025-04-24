@@ -56,13 +56,13 @@ public class CreacionTorneoController extends Controller implements Initializabl
     private ComboBox<Deporte> ComboBoxDeportes;
     @FXML
     private MFXButton btnJugarTorneo;
-    @FXML
-    private MFXButton btnActTabla;
 
     private final ObservableList<Equipo> equiposLista = FXCollections.observableArrayList();
     private final EquipoRepository Equiporepo = new EquipoRepository();
     private final ObservableList<Equipo> equiposInscritos = FXCollections.observableArrayList();
     private final TorneoRepository Torneorepo = new TorneoRepository();
+    @FXML
+    private MFXButton btnVolver;
 
     /**
      * Initializes the controller class.
@@ -232,7 +232,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
             new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar el nombre, cantidad de equipos y tiempo de cada partido.");
             return;
         }
-        
+
         try {
             List<Torneo> torneosExistentes = Torneorepo.findAll();
             for (Torneo torneo : torneosExistentes) {
@@ -244,7 +244,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
         } catch (IOException ex) {
             Logger.getLogger(CreacionTorneoController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         int cantidadEquipos = Integer.parseInt(txtCantidadEquipos.getText());
         int tiempoPorPartida = Integer.parseInt(txtTiempoPartido.getText());
         String id = java.util.UUID.randomUUID().toString();
@@ -371,6 +371,24 @@ public class CreacionTorneoController extends Controller implements Initializabl
                 e.printStackTrace();
             }
         }
+    }
+
+    @FXML
+    private void onActionBtnVolver(ActionEvent event) {
+        Mensaje mensaje = new Mensaje();
+        Boolean respuesta = mensaje.showConfirmation("BALLIVERSE", "¿Estás seguro que deseas cerrar BALLIVERSE?");
+        if (respuesta) {
+            txtCantidadEquipos.clear();
+            txtTiempoPartido.clear();
+
+            ((Stage) root.getScene().getWindow()).close();
+        } else {
+            return;
+        }
+        txtCantidadEquipos.clear();
+        txtTiempoPartido.clear();
+
+        ((Stage) root.getScene().getWindow()).close();
     }
 
 }
