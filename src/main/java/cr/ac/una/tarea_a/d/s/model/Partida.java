@@ -12,14 +12,14 @@ public class Partida {
     private String idEquipoB;
     private int golesEquipoA;
     private int golesEquipoB;
-    private EstadoPartida estado; // "pendiente", "enJuego", "finalizado"
+    private String estado; // "pendiente", "enJuego", "finalizado"
     private String ganadorId;
     private int tiempoRestante;
 
     public Partida() {
     }
 
-    public Partida(String id, String idTorneo, String idEquipoA, String idEquipoB, int golesEquipoA, int golesEquipoB, EstadoPartida estado, String ganadorId, int tiempoRestante) {
+    public Partida(String id, String idTorneo, String idEquipoA, String idEquipoB, int golesEquipoA, int golesEquipoB, String estado, String ganadorId, int tiempoRestante) {
         this.id = id;
         this.idTorneo = idTorneo;
         this.idEquipoA = idEquipoA;
@@ -79,11 +79,11 @@ public class Partida {
         this.golesEquipoB = golesEquipoB;
     }
 
-    public EstadoPartida getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(EstadoPartida estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
