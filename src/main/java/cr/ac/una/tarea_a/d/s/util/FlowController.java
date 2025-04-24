@@ -18,6 +18,7 @@ import javafx.stage.WindowEvent;
 import cr.ac.una.tarea_a.d.s.controller.Controller;
 import io.github.palexdev.materialfx.css.themes.MFXThemeManager;
 import io.github.palexdev.materialfx.css.themes.Themes;
+import javafx.stage.StageStyle;
 
 public class FlowController {
 
@@ -190,6 +191,7 @@ public class FlowController {
             Scene scene = new Scene(root);
             MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
             stage.setScene(scene);
+            stage.initStyle(StageStyle.UNDECORATED); // Esto es lo que necesitás agregar
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(parentStage);
             stage.centerOnScreen();
