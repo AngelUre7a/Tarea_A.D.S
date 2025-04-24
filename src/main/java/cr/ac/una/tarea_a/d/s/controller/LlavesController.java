@@ -37,6 +37,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
+import static cr.ac.una.tarea_a.d.s.util.Utilidades.ajustarAnchorVentana;
+
 
 public class LlavesController extends Controller implements Initializable {
 

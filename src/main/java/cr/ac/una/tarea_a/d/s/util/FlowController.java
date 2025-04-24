@@ -119,11 +119,9 @@ public class FlowController {
                 BorderPane borderPane = (BorderPane) stage.getScene().getRoot();
                 VBox vBox = (VBox) borderPane.getCenter();
                 vBox.getChildren().clear();
+                Parent root = loader.getRoot();
+                VBox.setVgrow(root, javafx.scene.layout.Priority.ALWAYS);
                 vBox.getChildren().add(loader.getRoot());
-
-                /*VBox vBox = ((VBox) ((BorderPane) stage.getScene().getRoot()).getCenter());
-                vBox.getChildren().clear();
-                vBox.getChildren().add(loader.getRoot());*/
                 break;
             case "Top":
                 break;

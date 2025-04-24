@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.MenuController">
+<BorderPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.MenuController">
     <center>
-      <VBox prefHeight="200.0" prefWidth="707.0" styleClass="vBox" BorderPane.alignment="CENTER" />
+      <VBox alignment="CENTER" fillWidth="true" maxHeight="Infinity" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="707.0" styleClass="vBox" BorderPane.alignment="CENTER" VBox.vgrow="ALWAYS" />
     </center>
     <left>
         <HBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="600.0" prefWidth="140.0" styleClass="borderViews" BorderPane.alignment="CENTER">
