@@ -165,7 +165,8 @@ public class MostrarCertificadoController extends Controller implements Initiali
     private void onActionBtnVolver(ActionEvent event) {
         Stage stageActual = (Stage) root.getScene().getWindow();
         stageActual.close();
-        FlowController.getInstance().goViewInWindowModal("AnimacionFinal", stageActual, Boolean.FALSE);
+        //no volver a la animacion volver al torneo
+//        FlowController.getInstance().goViewInWindowModal("AnimacionFinal", stageActual, Boolean.FALSE);
     }
 
     @FXML

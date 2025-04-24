@@ -38,11 +38,11 @@
     -fx-background-color: -fx-color-celadon;
 }
 
-.anchor-pane2 {
+/*.anchor-pane2 {
     -fx-background-image: url("../resources/ganadorT.png");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
-}
+}*/
 .anchor-paneModal {
     -fx-background-image: url("../resources/fondoModales.png");
     -fx-background-size: cover;
