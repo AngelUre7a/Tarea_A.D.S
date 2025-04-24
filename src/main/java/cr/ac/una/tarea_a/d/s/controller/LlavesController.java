@@ -423,6 +423,8 @@ public class LlavesController extends Controller implements Initializable {
             if ("enCurso".equalsIgnoreCase(torneo1.getEstado())) {
                 System.out.println("2");
                 reconstruirDesdePartidas();
+                hboxLlaves.applyCss();   // Asegura que los estilos ya estén aplicados
+hboxLlaves.layout();     // Fuerza el cálculo de tamaño y posición
                 conectarPartidosConLineas();
                 System.out.println("lineasDibujadas");
 
@@ -572,7 +574,7 @@ public class LlavesController extends Controller implements Initializable {
                                 alert.setContentText("Este partido no se jugó porque uno de los equipos tiene 'BYE'.\n\n"
                                         + "¡" + ganador.getNombre() + " avanza automáticamente!");
                                 alert.showAndWait();
-
+                                ganadoresTemporales.add(ganador); 
                                 // Procesar avance directamente
                                 procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
                                 return; // No continúa a la vista de partido
@@ -590,10 +592,19 @@ public class LlavesController extends Controller implements Initializable {
                     //}
                     //}
                 }
-
+//
+//                llavesPorRonda.add(ganadores);
+//                rondaActual = ganadores;
+//                rondaIndex++;
                 llavesPorRonda.add(ganadores);
                 rondaActual = ganadores;
+
+// 🔄 Sincroniza ganadores temporales para permitir avance
+                ganadoresTemporales.clear();
+                ganadoresTemporales.addAll(ganadores);
+
                 rondaIndex++;
+
             }
             boolean torneoCompleto = torneo1.getPartidas().stream()
                     .filter(p -> p.getEstado().equalsIgnoreCase("finalizado"))
