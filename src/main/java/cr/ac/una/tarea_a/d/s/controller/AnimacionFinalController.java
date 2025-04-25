@@ -34,6 +34,8 @@ public class AnimacionFinalController extends Controller {
     private MFXButton btnSalir;
     @FXML
     private Pane paneConfeti;
+    @FXML
+    private MFXButton btnCertificado;
 
     public void mostrarAnimacion(String base64Escudo, String base64Balon, String nombreEquipo) {
         Image imagenEscudo = Animaciones.convertirBase64AImage(base64Escudo);
@@ -87,6 +89,7 @@ public class AnimacionFinalController extends Controller {
         stage.close();
     }
 
+    @FXML
     private void OnActionBtnCertificado(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/MostrarCertificado.fxml"));

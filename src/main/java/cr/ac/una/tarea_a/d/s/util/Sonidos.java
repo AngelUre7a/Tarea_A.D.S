@@ -40,15 +40,15 @@ public class Sonidos {
     public static void golDeOroTension() {
         playSound("tension.mp3");
     }
-//    
-//    // 🔊 Método general para asignar sonido al hacer hover en botones
-//    public static void agregarHover(Button... botones) {
-//        for (Button boton : botones) {
-//            boton.setOnMouseEntered(e -> {
-//                if (player == null || player.getStatus() != MediaPlayer.Status.PLAYING) {
-//                    silbato(); // Cambiá por otro si querés otro sonido
-//                }
-//            });
-//        }
-//    }
+    
+    // 🔊 Método general para asignar sonido al hacer hover en botones
+    public static void agregarHover(Button... botones) {
+        for (Button boton : botones) {
+            boton.setOnMouseEntered(e -> {
+                if (player == null || player.getStatus() != MediaPlayer.Status.PLAYING) {
+                    silbato(); // Cambiá por otro si querés otro sonido
+                }
+            });
+        }
+    }
 }
