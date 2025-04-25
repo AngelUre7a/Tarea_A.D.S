@@ -801,6 +801,7 @@ private void reconstruirDesdePartidas() {
     }
 
     private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
+        
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/AnimacionFinal.fxml"));
             Parent root = loader.load();
@@ -823,7 +824,12 @@ private void reconstruirDesdePartidas() {
     }
 
     private void mostrarCampeon(Equipo campeon) throws IOException {
+        
         guardarEstadisticasCampeon(campeon.getId(), torneo1.getId());
+        boolean esGanador = (boolean) AppContext.getInstance().get("ES_GANADOR");
+        if(esGanador == true){
+            return;
+        }
         System.out.println("CAMPEÓN: " + campeon.getNombre());
         campeon.cargarImagenDesdeBase64();
         Deporte deporte = torneo1.getTipoDeporte() != null ? buscarDeportePorNombre(torneo1.getTipoDeporte()) : null;
@@ -876,6 +882,11 @@ private void reconstruirDesdePartidas() {
 
         if (statsPTCampeon == null) {
             System.out.println("No se encontraron estadísticas por torneo para el campeón");
+            return;
+        }
+        AppContext.getInstance().set("ES_GANADOR", statsPTCampeon.esGanadorDT());
+        if (statsPTCampeon.esGanadorDT()) {
+            System.out.println("⚠️ Estadísticas ya marcadas como ganadoras, se omite actualización.");
             return;
         }
 

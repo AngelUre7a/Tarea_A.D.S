@@ -177,9 +177,11 @@ public class CampoDeTiroController extends Controller implements Initializable {
                 if (segundosEquipo1 < segundosEquipo2) {
                     ganador = equipo1.getNombre();
                     AppContext.getInstance().set("GANADOR_DESEMPATE", equipo1);
+                    new Mensaje().show(Alert.AlertType.INFORMATION, "Ganador Desempate", "¡" + equipo1.getNombre() + " ganó el desempate! Se le agregará un gol por haber ganado");
                 } else {
                     ganador = equipo2.getNombre();
                     AppContext.getInstance().set("GANADOR_DESEMPATE", equipo2);
+                    new Mensaje().show(Alert.AlertType.INFORMATION, "Ganador Desempate", "¡" + equipo2.getNombre() + " ganó el desempate! Se le agregará un gol por haber ganado");
                 }
                 lblGanador.setText("¡El ganador es: " + ganador + "!");
                 btnIniciar.setDisable(true);

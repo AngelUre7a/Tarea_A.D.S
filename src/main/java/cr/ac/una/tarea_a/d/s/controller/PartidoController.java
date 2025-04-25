@@ -401,7 +401,6 @@ public class PartidoController extends Controller implements Initializable {
                 marcadorEquipo2++;
             }
         }
-        new Mensaje().show(Alert.AlertType.INFORMATION, "Ganador Desempate", "¡" + equipoGanador.getNombre() + " ganó el desempate! Se le agregará un gol por haber ganado");
         Finalizar();
     }
 }

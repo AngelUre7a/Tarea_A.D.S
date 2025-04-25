@@ -94,6 +94,7 @@ public class AnimacionFinalController extends Controller {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/MostrarCertificado.fxml"));
             Parent rootCert = loader.load();
+            MostrarCertificadoController controller = loader.getController();
 
             Stage stage = new Stage();
             stage.setTitle("Certificado del equipo");

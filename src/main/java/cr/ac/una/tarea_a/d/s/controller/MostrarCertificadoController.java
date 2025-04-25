@@ -3,13 +3,12 @@ package cr.ac.una.tarea_a.d.s.controller;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
-import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipoPT;
 import cr.ac.una.tarea_a.d.s.model.Torneo;
 import cr.ac.una.tarea_a.d.s.repositories.EstadisticasEquipoPTRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
-import cr.ac.una.tarea_a.d.s.util.FlowController;
+import cr.ac.una.tarea_a.d.s.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.utils.SwingFXUtils;
 import java.awt.image.BufferedImage;
@@ -28,6 +27,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
@@ -63,16 +63,17 @@ public class MostrarCertificadoController extends Controller implements Initiali
     private MFXButton btnVolver;
     @FXML
     private MFXButton btnSalir;
+    @FXML
+    private ImageView imgFondo;
+    @FXML
+    private Label lblGoles;
 
     private Equipo equipoCampeon;
     private Torneo torneo;
     private EstadisticasEquipoPTRepository estadisticasRepo;
     private final ObservableList<EstadisticasEquipoPT> estadisticasLista = FXCollections.observableArrayList();
     private EstadisticasEquipoPT statsPTCampeon;
-    @FXML
-    private ImageView imgFondo;
-    @FXML
-    private Label lblGoles;
+    
     
     
     
@@ -152,7 +153,7 @@ public class MostrarCertificadoController extends Controller implements Initiali
             document.add(pdfImage);
 
             document.close();
-            System.out.println("✅ Certificado exportado exitosamente a: " + file.getAbsolutePath());
+            new Mensaje().show(Alert.AlertType.INFORMATION, "Certificado guardado", "¡El certificado se ha guardado correctamente!");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -165,8 +166,6 @@ public class MostrarCertificadoController extends Controller implements Initiali
     private void onActionBtnVolver(ActionEvent event) {
         Stage stageActual = (Stage) root.getScene().getWindow();
         stageActual.close();
-        //no volver a la animacion volver al torneo
-//        FlowController.getInstance().goViewInWindowModal("AnimacionFinal", stageActual, Boolean.FALSE);
     }
 
     @FXML
