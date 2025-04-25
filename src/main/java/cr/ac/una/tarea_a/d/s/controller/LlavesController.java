@@ -310,11 +310,13 @@ public class LlavesController extends Controller implements Initializable {
 
                     // Procesar avance directamente
                     procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
+                    onShow();
                     return; // No continúa a la vista de partido
 
                 }
                 FlowController.getInstance().goViewInWindowModal("Partido", ((Stage) root.getScene().getWindow()), false);
                 procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
+                onShow();
             });
             // Crear Partida y agregarla al torneo
             Partida partida = new Partida();
@@ -328,11 +330,11 @@ public class LlavesController extends Controller implements Initializable {
             partida.setTiempoRestante(torneo1.getTiempoPorPartida());
             index++;
         }
+        
     }
 
     private void procesarGanadorDespuesDePartido(int rondaActual, int partidoIndex) {
         try {
-
             PartidaRepository repo = new PartidaRepository();
             List<Partida> partidas = repo.findAll();
             if (partidas.isEmpty()) {
@@ -362,6 +364,7 @@ public class LlavesController extends Controller implements Initializable {
                 if (rondaActual + 1 < hboxLlaves.getChildren().size()) {
                     llenarRondaSiguiente(rondaActual + 1, new ArrayList<>(ganadoresTemporales));
                     ganadoresTemporales.clear();
+                   
                 } else {
                     mostrarCampeon(ganador);
                 }
@@ -406,6 +409,7 @@ public class LlavesController extends Controller implements Initializable {
             index++;
         }
         llavesPorRonda.add(ganadores);
+        onShow();
     }
 
     public void onShow() {
@@ -623,6 +627,7 @@ public class LlavesController extends Controller implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
     }
 
     private void limpiarVista() {
