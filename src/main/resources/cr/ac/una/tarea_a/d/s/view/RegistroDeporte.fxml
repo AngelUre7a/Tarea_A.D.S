@@ -7,6 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" styleClass="anchor-paneModal" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RegistroDeporteController">
@@ -33,12 +34,21 @@
                            </image>
                         </ImageView>
                      </graphic></MFXButton>
-                        <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0">
+                           <image>
+                              <Image url="@../resources/DragnDrop.png" />
+                           </image>
+                        </ImageView>
+                              <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </StackPane>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="215.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                     <children>
-                  <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" text="Volver" />
+                  <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" prefHeight="30.0" prefWidth="125.0" text="Volver" />
                         <MFXButton fx:id="btnRegistrar" onAction="#onActionBtnRegistrar" prefHeight="30.0" prefWidth="125.0" text="Registrar" />
                     </children>
                 </HBox>

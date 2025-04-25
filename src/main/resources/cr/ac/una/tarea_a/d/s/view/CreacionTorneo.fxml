@@ -69,7 +69,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" text="Volver" />
+                  <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" prefHeight="30.0" prefWidth="125.0" text="Volver" />
                   <MFXButton fx:id="btnJugarTorneo" alignment="CENTER" contentDisplay="CENTER" onAction="#onActionBtnGuardarTorneo" text="Guardar Torneo" />
                   <MFXButton fx:id="btnJugarTorneo" onAction="#onActionBtnJugarTorneo" text="Jugar Torneo" />
                </children>
