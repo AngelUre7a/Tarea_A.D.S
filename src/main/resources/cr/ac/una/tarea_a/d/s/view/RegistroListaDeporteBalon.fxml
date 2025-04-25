@@ -16,7 +16,7 @@
    <children>
       <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="130.0" prefWidth="760.0" spacing="20.0" stylesheets="@../css/Style.css">
+            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="112.0" prefWidth="760.0" spacing="20.0" stylesheets="@../css/Style.css">
                <children>
                   <Label alignment="TOP_CENTER" text="Lista de Deportes con balón " />
                   <HBox alignment="CENTER" prefHeight="23.0" prefWidth="778.0" spacing="10.0">
@@ -26,7 +26,7 @@
                               <Image url="@../resources/buscar.png" />
                            </image>
                         </ImageView>
-                        <MFXTextField fx:id="filterField" floatMode="BORDER" floatingText="Buscador" floatingTextGap="0.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="500.0" styleClass="mfx-text-field" stylesheets="@../css/Style.css" />
+                        <MFXTextField fx:id="filterField" floatMode="BORDER" floatingText="Buscador" floatingTextGap="0.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="35.0" prefWidth="500.0" styleClass="mfx-text-field" stylesheets="@../css/Style.css" />
                         <MFXButton fx:id="btnAgregar" buttonType="RAISED" onAction="#onActionBtnAgregar" pickOnBounds="false" prefHeight="35.0" prefWidth="90.0" styleClass="jfx-button-long-text" text="Agregar" />
                         <MFXButton fx:id="btnActualizar" buttonType="RAISED" onAction="#onActionBtnActualizar" pickOnBounds="false" prefHeight="35.0" prefWidth="90.0" styleClass="jfx-button-long-text" text="Actualizar" />
                      </children>

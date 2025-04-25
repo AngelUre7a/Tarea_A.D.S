@@ -17,7 +17,7 @@
    <children>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="130.0" prefWidth="760.0" spacing="20.0">
+            <VBox alignment="CENTER" prefHeight="112.0" prefWidth="760.0" spacing="20.0">
                <children>
                   <Label text="Ranking" />
                   <HBox alignment="TOP_CENTER" prefHeight="23.0" prefWidth="778.0" spacing="10.0">
@@ -27,7 +27,7 @@
                               <Image url="@../resources/buscar.png" />
                            </image>
                         </ImageView>
-                        <MFXTextField fx:id="filterField" floatMode="BORDER" floatingText="Buscador" floatingTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="450.0" />
+                        <MFXTextField fx:id="filterField" floatMode="BORDER" floatingText="Buscador" floatingTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="35.0" prefWidth="450.0" />
                         <ComboBox fx:id="ComboBoxDeportes" maxWidth="200.0" prefHeight="35.0" prefWidth="170.0" styleClass="mfx-combo-box" stylesheets="@../css/Style.css" />
                         <MFXButton fx:id="btnActualizar" onAction="#onActionBtnActualizar" prefHeight="35.0" prefWidth="90.0" styleClass="jfx-button-long-text" stylesheets="@../css/Style.css" text="Actualizar" />
                      </children>

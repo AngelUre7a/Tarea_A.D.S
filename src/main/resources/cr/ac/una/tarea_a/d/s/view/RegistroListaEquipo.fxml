@@ -16,7 +16,7 @@
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="106.0" prefWidth="753.0" spacing="20.0" stylesheets="@../css/Style.css">
+            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="112.0" prefWidth="753.0" spacing="20.0" stylesheets="@../css/Style.css">
                <children>
                   <Label alignment="TOP_CENTER" text="Lista de Equipos " />
                   <HBox alignment="TOP_CENTER" prefHeight="23.0" prefWidth="778.0" spacing="10.0">
