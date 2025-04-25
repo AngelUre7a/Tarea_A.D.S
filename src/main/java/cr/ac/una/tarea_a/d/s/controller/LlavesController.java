@@ -310,13 +310,13 @@ public class LlavesController extends Controller implements Initializable {
 
                     // Procesar avance directamente
                     procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
-                    onShow();
+                    
                     return; // No continúa a la vista de partido
 
                 }
                 FlowController.getInstance().goViewInWindowModal("Partido", ((Stage) root.getScene().getWindow()), false);
                 procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
-                onShow();
+                
             });
             // Crear Partida y agregarla al torneo
             Partida partida = new Partida();
@@ -369,6 +369,7 @@ public class LlavesController extends Controller implements Initializable {
                     mostrarCampeon(ganador);
                 }
             }
+            onShow();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -424,8 +425,8 @@ public class LlavesController extends Controller implements Initializable {
             //Thread.sleep(5000);
 
             // ⚠️ Si el torneo está en curso, recuperar estado
-            if ("enCurso".equalsIgnoreCase(torneo1.getEstado())) {
-                System.out.println("2");
+            if ("enCurso".equalsIgnoreCase(torneo1.getEstado())||"finalizado".equalsIgnoreCase(torneo1.getEstado())) {
+                System.out.println("22222");
                 reconstruirDesdePartidas();
                 hboxLlaves.applyCss();   // Asegura que los estilos ya estén aplicados
                 hboxLlaves.layout();     // Fuerza el cálculo de tamaño y posición
@@ -433,7 +434,7 @@ public class LlavesController extends Controller implements Initializable {
                 System.out.println("lineasDibujadas");
 
             } else {
-                System.out.println("1");
+                System.out.println("1111");
                 llenarPrimerRonda(); // solo si es nuevo
                 conectarPartidosConLineas();
                 System.out.println("lineasDibujadas");
