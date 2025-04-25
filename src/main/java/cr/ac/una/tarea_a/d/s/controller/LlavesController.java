@@ -38,7 +38,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 
-
 public class LlavesController extends Controller implements Initializable {
 
     private final PartidaRepository partidaRepository = new PartidaRepository();
@@ -425,7 +424,7 @@ public class LlavesController extends Controller implements Initializable {
                 System.out.println("2");
                 reconstruirDesdePartidas();
                 hboxLlaves.applyCss();   // Asegura que los estilos ya estén aplicados
-hboxLlaves.layout();     // Fuerza el cálculo de tamaño y posición
+                hboxLlaves.layout();     // Fuerza el cálculo de tamaño y posición
                 conectarPartidosConLineas();
                 System.out.println("lineasDibujadas");
 
@@ -575,7 +574,7 @@ hboxLlaves.layout();     // Fuerza el cálculo de tamaño y posición
                                 alert.setContentText("Este partido no se jugó porque uno de los equipos tiene 'BYE'.\n\n"
                                         + "¡" + ganador.getNombre() + " avanza automáticamente!");
                                 alert.showAndWait();
-                                ganadoresTemporales.add(ganador); 
+                                ganadoresTemporales.add(ganador);
                                 // Procesar avance directamente
                                 procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
                                 return; // No continúa a la vista de partido
@@ -666,6 +665,20 @@ hboxLlaves.layout();     // Fuerza el cálculo de tamaño y posición
 
         torneo1.setEstado("finalizado");
         equiposDeleteTorneo(torneo1.getEquiposInscritos());
+        
+        List<Deporte> listaDeportes = null;
+        String deporteUsado = torneo1.getTipoDeporte();
+        DeporteRepository deporteRepo = new DeporteRepository();
+        listaDeportes = deporteRepo.findAll();
+        for(Deporte deporteActual: listaDeportes){
+            System.out.println(deporteActual.getNombre());
+            if(deporteActual.getNombre().equals(deporteUsado)){
+                System.out.println("borrando torneo" + deporteActual.getCantidadTorneosInscritos());
+                deporteActual.deleteTorneoInscrito();
+                deporteRepo.update(deporteActual);
+                System.out.println(deporteActual.getCantidadTorneosInscritos());
+            }
+        }
 
         try {
             TorneoRepository torneoRepo = new TorneoRepository();

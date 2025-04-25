@@ -100,7 +100,13 @@ public class RegistroListaDeporteBalonController extends Controller implements I
 
                 btnEditar.setOnAction(event -> {
                     Deporte deporte = getTableView().getItems().get(getIndex());
-                    abrirFormularioEditar(deporte);
+                    if (deporte.getCantidadTorneosInscritos() > 0) {
+                        new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede editar ya que actualmente esta participando en un torneo.");
+
+                    } else {
+                        System.out.println("entrando a editar deporte " + deporte.getCantidadTorneosInscritos());
+                        abrirFormularioEditar(deporte);
+                    }
                 });
             }
 
@@ -252,7 +258,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
     private void onActionBtnActualizar(ActionEvent event) {
         cargarFormulario();
     }
-    
+
     @Override
     public void initialize() {
     }

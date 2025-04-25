@@ -271,6 +271,18 @@ public class CreacionTorneoController extends Controller implements Initializabl
             AppContext.getInstance().set("LISTA_TORNEOS", listaTorneos);
         }
 
+        try {
+            DeporteRepository deporteRepo = new DeporteRepository();
+            deporte.addTorneoInscrito();
+
+            System.out.println(deporte.getCantidadTorneosInscritos());
+            deporteRepo.update(deporte);
+
+        } catch (IOException e) {
+            new Mensaje().show(Alert.AlertType.ERROR, "Error al actualizar deporte", "No se pudo actualizar el deporte: " + deporte.getNombre());
+            e.printStackTrace();
+        }
+        
         List<Torneo> torneos = (List<Torneo>) AppContext.getInstance().get("LISTA_TORNEOS");
         ObservableList<Torneo> listaTorneos = FXCollections.observableArrayList(torneos);
         listaTorneos.add(torneo);
@@ -350,6 +362,18 @@ public class CreacionTorneoController extends Controller implements Initializabl
         List<Torneo> torneos = (List<Torneo>) AppContext.getInstance().get("LISTA_TORNEOS");
         ObservableList<Torneo> listaTorneos = FXCollections.observableArrayList(torneos);
         listaTorneos.add(torneo);
+        System.out.println("torneo guarda");
+        try {
+            DeporteRepository deporteRepo = new DeporteRepository();
+            deporte.addTorneoInscrito();
+
+            System.out.println(deporte.getCantidadTorneosInscritos());
+            deporteRepo.update(deporte);
+
+        } catch (IOException e) {
+            new Mensaje().show(Alert.AlertType.ERROR, "Error al actualizar deporte", "No se pudo actualizar el deporte: " + deporte.getNombre());
+            e.printStackTrace();
+        }
 
         new Mensaje().show(Alert.AlertType.INFORMATION, "BALLIVERSE", "Torneo guardado correctamente");
         torneo.setEstado("pendiente");
@@ -386,7 +410,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
         } else {
             return;
         }
-        
+
     }
 
 }

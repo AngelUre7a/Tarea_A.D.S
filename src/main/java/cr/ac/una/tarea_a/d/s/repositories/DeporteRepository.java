@@ -108,5 +108,14 @@ public class  DeporteRepository implements IDeporteRepository  {
 
         return removed;
     }
+    public void update(Deporte deporte) throws IOException {
+        List<Deporte> deportes = findAll();
+        deportes.removeIf(e -> e.getId().equals(deporte.getId())); // Eliminar el equipo anterior
+        deportes.add(deporte); // Agregar el equipo actualizado
+
+        try (FileWriter writer = new FileWriter(filePath)) {
+            gson.toJson(deportes, writer);
+        }
+    }
 
 }

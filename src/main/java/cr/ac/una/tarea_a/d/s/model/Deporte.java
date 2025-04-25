@@ -1,4 +1,3 @@
-
 package cr.ac.una.tarea_a.d.s.model;
 
 import java.io.File;
@@ -14,6 +13,7 @@ public class Deporte {
     private String nombre;
     private transient Image imagen; // No se serializa
     private String imagenBase64;
+    private int torneosInscritos = 0;
 
     // Constructor con imagen
     public Deporte(String id, String nombre, Image imagen) {
@@ -71,6 +71,18 @@ public class Deporte {
         cargarImagenDesdeBase64(); // Reconstruir imagen automáticamente
     }
 
+    public int getCantidadTorneosInscritos() {
+        return torneosInscritos;
+    }
+
+    public void addTorneoInscrito() {
+        torneosInscritos++;
+    }
+
+    public void deleteTorneoInscrito() {
+        torneosInscritos--;
+    }
+
     // Cargar imagen desde un archivo y convertir a base64
     public void cargarImagenDesdeArchivo(String ruta) {
         try {
@@ -103,10 +115,10 @@ public class Deporte {
 
     @Override
     public String toString() {
-        return "Deporte{" +
-                "id='" + id + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", imagenCargada=" + (imagen != null) +
-                '}';
+        return "Deporte{"
+                + "id='" + id + '\''
+                + ", nombre='" + nombre + '\''
+                + ", imagenCargada=" + (imagen != null)
+                + '}';
     }
 }

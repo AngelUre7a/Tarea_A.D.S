@@ -9,6 +9,7 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -69,12 +70,23 @@ public class RegistroDeporteController extends Controller implements Initializab
             if (db.hasFiles()) {
                 File archivoSeleccionado = db.getFiles().get(0);
                 if (archivoSeleccionado != null) {
-                    try {
-                        Image imagen = new Image(archivoSeleccionado.toURI().toString());
-                        imageView.setImage(imagen);
-                        success = true;
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    List<String> formatosPermitidos = Arrays.asList(".png", ".jpg", ".jpeg", ".bmp");
+
+                    
+                    String nombreArchivo = archivoSeleccionado.getName().toLowerCase();
+                    boolean formatoValido = formatosPermitidos.stream()
+                            .anyMatch(ext -> nombreArchivo.endsWith(ext));
+
+                    if (formatoValido) {
+                        try {
+                            Image imagen = new Image(archivoSeleccionado.toURI().toString());
+                            imageView.setImage(imagen);
+                            success = true;
+                        } catch (Exception e) {
+                            System.err.println("Error al cargar la imagen: " + e.getMessage());
+                        }
+                    } else {
+                        new Alert(Alert.AlertType.WARNING, "Solo se permiten PNG, JPG, JPEG o BMP").show();
                     }
                 }
             }
@@ -157,13 +169,13 @@ public class RegistroDeporteController extends Controller implements Initializab
         Boolean respuesta = mensaje.showConfirmation("BALLIVERSE", "¿Estás seguro que deseas salir de la ventana para crear deportes?");
         if (respuesta) {
             deporte = null;
-        esEdicion = false;
+            esEdicion = false;
 
-        Stage stage = (Stage) root.getScene().getWindow();
-        stage.close();
+            Stage stage = (Stage) root.getScene().getWindow();
+            stage.close();
         } else {
             return;
         }
-        
+
     }
 }
