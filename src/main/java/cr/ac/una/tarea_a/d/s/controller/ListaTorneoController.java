@@ -36,11 +36,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Usuario
- */
 public class ListaTorneoController extends Controller implements Initializable {
 
     @FXML
@@ -74,9 +69,7 @@ public class ListaTorneoController extends Controller implements Initializable {
     private final TorneoRepository Torneorepo = new TorneoRepository();
     private final EquipoRepository Equiporepo = new EquipoRepository();
 
-    /**
-     * Initializes the controller class.
-     */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -89,8 +82,8 @@ public class ListaTorneoController extends Controller implements Initializable {
         colIniciar.setCellFactory(column -> new javafx.scene.control.TableCell<Torneo, String>() {
             private final MFXButton btnIniciar = new MFXButton("");
 
-            {// Configuración visual del botón
-                btnIniciar.setText(""); // Eliminar texto
+            {
+                btnIniciar.setText("");
                 ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/iniciar.png").toExternalForm()));
                 icono.setFitWidth(40);
                 icono.setFitHeight(40);
@@ -129,9 +122,9 @@ public class ListaTorneoController extends Controller implements Initializable {
                 } else {
                     Torneo torneo = getTableView().getItems().get(getIndex());
                     if ("finalizado".equalsIgnoreCase(torneo.getEstado())) {
-                        btnIniciar.setDisable(true); // bloquear botón si ya terminó
+                        btnIniciar.setDisable(true);
                     } else {
-                        btnIniciar.setDisable(false); // habilitar si está pendiente o en curso
+                        btnIniciar.setDisable(false);
                     }
 
                     HBox hbox = new HBox(btnIniciar);
@@ -195,23 +188,18 @@ public class ListaTorneoController extends Controller implements Initializable {
         sortedData.comparatorProperty().bind(tableView.comparatorProperty());
 
         tableView.setItems(sortedData);
-
     }
 
     @FXML
     private void onActionBtnAgregar(ActionEvent event) throws IOException {
         FlowController.getInstance().goViewInWindowModal("CreacionTorneo", ((Stage) root.getScene().getWindow()), false);
         if (AppContext.getInstance().containsItem("TORNEO_NUEVO")) {
-            // Obtener el nuevo deporte desde el AppContext
 
             Torneo nuevo = (Torneo) AppContext.getInstance().get("TORNEO_NUEVO");
-            // Asegúrate de que la lista no se reinicie al agregar
             if (nuevo != null) {
-                // Guardar el nuevo deporte en el repositorio
                 Torneorepo.save(nuevo);
                 List<Torneo> torneos = (List<Torneo>) AppContext.getInstance().get("LISTA_TORNEOS");
 
-                // Agregar el nuevo deporte a la lista sin eliminar los anteriores
                 torneoLista.add(nuevo);
                 torneoLista.clear();
                 torneoLista.addAll(torneos);

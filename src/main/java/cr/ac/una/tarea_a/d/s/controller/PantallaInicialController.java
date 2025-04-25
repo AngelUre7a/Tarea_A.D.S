@@ -13,11 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Usuario
- */
 public class PantallaInicialController extends Controller implements Initializable {
 
     @FXML
@@ -30,10 +25,7 @@ public class PantallaInicialController extends Controller implements Initializab
     private Label title;
     @FXML
     private MFXButton btnAcercaDe;
-
-    /**
-     * Initializes the controller class.
-     */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         title.setFocusTraversable(true);

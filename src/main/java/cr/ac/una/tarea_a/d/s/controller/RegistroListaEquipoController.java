@@ -13,8 +13,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -93,7 +91,6 @@ public class RegistroListaEquipoController extends Controller implements Initial
 
         colEditar.setCellFactory(param -> new TableCell<>() {
             private final MFXButton btnEditar = new MFXButton();
-
             {
                 btnEditar.setText("");
                 ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/editar.png").toExternalForm()));
@@ -123,7 +120,6 @@ public class RegistroListaEquipoController extends Controller implements Initial
 
         colEliminar.setCellFactory(param -> new TableCell<>() {
             private final MFXButton btnEliminar = new MFXButton();
-
             {
                 btnEliminar.setText("");
                 ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/borrar.png").toExternalForm()));
@@ -154,7 +150,6 @@ public class RegistroListaEquipoController extends Controller implements Initial
                 }});
             }
         });
-
         cargarFormulario();
         cargarComboBox();
         aplicarFiltrosAvanzados();
@@ -190,7 +185,6 @@ public class RegistroListaEquipoController extends Controller implements Initial
             new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar deportes", "No se pudo cargar la lista de deportes.");
             e.printStackTrace();
         }
-
         cmbBox.setCellFactory(param -> new ListCell<>() {
             @Override
             protected void updateItem(Deporte item, boolean empty) {
@@ -198,7 +192,6 @@ public class RegistroListaEquipoController extends Controller implements Initial
                 setText(item == null || empty ? null : item.getNombre());
             }
         });
-
         cmbBox.setButtonCell(new ListCell<>() {
             @Override
             protected void updateItem(Deporte item, boolean empty) {
@@ -210,10 +203,8 @@ public class RegistroListaEquipoController extends Controller implements Initial
 
     private void aplicarFiltrosAvanzados() {
         FilteredList<Equipo> filteredData = new FilteredList<>(equiposLista, p -> true);
-
         filterField.textProperty().addListener((obs, oldVal, newVal) -> aplicarFiltroCombo(filteredData));
         cmbBox.valueProperty().addListener((obs, oldVal, newVal) -> aplicarFiltroCombo(filteredData));
-
         SortedList<Equipo> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(tableView.comparatorProperty());
         tableView.setItems(sortedData);
@@ -224,11 +215,9 @@ public class RegistroListaEquipoController extends Controller implements Initial
             String filtroNombre = filterField.getText();
             Deporte filtroDeporte = cmbBox.getSelectionModel().getSelectedItem();
 
-            boolean coincideNombre = (filtroNombre == null || filtroNombre.isEmpty()) ||
-                                     equipo.getNombre().toLowerCase().contains(filtroNombre.toLowerCase());
+            boolean coincideNombre = (filtroNombre == null || filtroNombre.isEmpty()) || equipo.getNombre().toLowerCase().contains(filtroNombre.toLowerCase());
 
-            boolean coincideDeporte = (filtroDeporte == null || "Todos".equalsIgnoreCase(filtroDeporte.getNombre())) ||
-                                      equipo.getTipoDeporte().equalsIgnoreCase(filtroDeporte.getNombre());
+            boolean coincideDeporte = (filtroDeporte == null || "Todos".equalsIgnoreCase(filtroDeporte.getNombre())) || equipo.getTipoDeporte().equalsIgnoreCase(filtroDeporte.getNombre());
 
             return coincideNombre && coincideDeporte;
         });

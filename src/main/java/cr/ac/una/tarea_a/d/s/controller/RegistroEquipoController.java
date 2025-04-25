@@ -55,33 +55,28 @@ public class RegistroEquipoController extends Controller implements Initializabl
     private Label lbRegistroE;
     @FXML
     private ComboBox<Deporte> ComboBoxDeportes;
-
-    private VideoCapture capture;
-    private boolean isCameraRunning = false;
-
-    private Equipo equipo;
-    private boolean esEdicion = false;
     @FXML
     private MFXButton btnVolver;
 
+    private VideoCapture capture;
+    private boolean isCameraRunning = false;
+    private Equipo equipo;
+    private boolean esEdicion = false;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         limpiarFormulario();
-//        OpenCV.loadShared();
         OpenCV.loadLocally();
-
         List<Deporte> deportes = null;
-
         if (AppContext.getInstance().hasValue("EQUIPO_EDITAR")) {
             equipo = (Equipo) AppContext.getInstance().get("EQUIPO_EDITAR");
             txtNombreEquipo.setText(equipo.getNombre());
             ImageView.setImage(equipo.getImagen());
             esEdicion = true;
         }
-
         try {
             DeporteRepository deporteRepo = new DeporteRepository();
-            deportes = deporteRepo.findAll(); // carga desde el JSON
+            deportes = deporteRepo.findAll();
             AppContext.getInstance().set("LISTA_DEPORTES", deportes);
         } catch (IOException e) {
             new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar deportes", "No se pudo cargar la lista de deportes.");
@@ -90,8 +85,6 @@ public class RegistroEquipoController extends Controller implements Initializabl
         if (deportes != null) {
             ComboBoxDeportes.getItems().addAll(deportes);
         }
-
-        // Configura cómo mostrar los nombres
         ComboBoxDeportes.setCellFactory(param -> new javafx.scene.control.ListCell<>() {
             @Override
             protected void updateItem(Deporte item, boolean empty) {
@@ -99,7 +92,6 @@ public class RegistroEquipoController extends Controller implements Initializabl
                 setText(item == null || empty ? null : item.getNombre());
             }
         });
-
         ComboBoxDeportes.setButtonCell(new javafx.scene.control.ListCell<>() {
             @Override
             protected void updateItem(Deporte item, boolean empty) {
@@ -108,14 +100,12 @@ public class RegistroEquipoController extends Controller implements Initializabl
             }
         });
     }
-
     @FXML
     private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
         String rutaImagen = (String) AppContext.getInstance().get("IMAGEN_TOMADA");
         String nombre = txtNombreEquipo.getText();
         Image imagen;
         String deporte = ComboBoxDeportes.getValue() != null ? ComboBoxDeportes.getValue().getNombre() : null;
-
         if (rutaImagen != null) {
             imagen = new Image(new File(rutaImagen).toURI().toString());
             AppContext.getInstance().delete("IMAGEN_TOMADA");
@@ -126,7 +116,6 @@ public class RegistroEquipoController extends Controller implements Initializabl
             new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar un nombre, una imagen y un tipo de deporte.");
             return;
         }
-
         EquipoRepository equipoRepo = new EquipoRepository();
         try {
             List<Equipo> equiposExistentes = equipoRepo.findAll();
@@ -139,7 +128,6 @@ public class RegistroEquipoController extends Controller implements Initializabl
         } catch (IOException ex) {
             Logger.getLogger(CreacionTorneoController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         if (esEdicion && equipo != null) {
             equipo = (Equipo) AppContext.getInstance().get("EQUIPO_EDITAR");
             equipo.setNombre(nombre);
@@ -147,7 +135,6 @@ public class RegistroEquipoController extends Controller implements Initializabl
             equipo.setTipoDeporte(deporte);
             equipoRepo.save(equipo);
         } else {
-
             String id = java.util.UUID.randomUUID().toString();
             equipo = new Equipo(id, nombre, imagen, deporte);
             equipoRepo.save(equipo);
@@ -158,8 +145,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
         AppContext.getInstance().delete("EQUIPO_EDITAR");
         equipo = null;
         esEdicion = false;
-
-        cerrarCamara(); // cerrar la cámara antes de cerrar la ventana
+        cerrarCamara();
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
     }
@@ -190,7 +176,6 @@ public class RegistroEquipoController extends Controller implements Initializabl
             });
             cameraThread.setDaemon(true);
             cameraThread.start();
-
         }
     }
 
@@ -209,12 +194,9 @@ public class RegistroEquipoController extends Controller implements Initializabl
                     }
                     File outputFile = new File(carpeta, "equipo_" + System.currentTimeMillis() + ".png");
                     ImageIO.write(bufferedImage, "png", outputFile);
-
                     Image imageFromFile = new Image(outputFile.toURI().toString());
                     ImageView.setImage(imageFromFile);
-
                     AppContext.getInstance().set("IMAGEN_TOMADA", outputFile.getAbsolutePath());
-
                 } catch (IOException e) {
                     e.printStackTrace();
                     new Mensaje().show(Alert.AlertType.ERROR, "Error", "No se pudo guardar la imagen tomada.");
@@ -228,12 +210,9 @@ public class RegistroEquipoController extends Controller implements Initializabl
     private void onActionBtnCargarImagen(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imagenes", "*.png", "*.jpg", "*.jpeg", "*.bmp"));
-
         File archivoSeleccionado = fileChooser.showOpenDialog(null);
-
         if (archivoSeleccionado != null) {
             Image imagen = new Image(archivoSeleccionado.toURI().toString());
-
             ImageView.setImage(imagen);
         }
     }
@@ -241,10 +220,8 @@ public class RegistroEquipoController extends Controller implements Initializabl
     private javafx.scene.image.Image matToImage(Mat Frame) {
         int width = Frame.width();
         int height = Frame.height();
-
         byte[] data = new byte[width * height * (int) Frame.elemSize()];
         Frame.get(0, 0, data);
-
         javafx.scene.image.WritableImage writableImage = new javafx.scene.image.WritableImage(width, height);
         javafx.scene.image.PixelWriter pixelWriter = writableImage.getPixelWriter();
 
@@ -259,7 +236,6 @@ public class RegistroEquipoController extends Controller implements Initializabl
                 pixelWriter.setColor(j, i, javafx.scene.paint.Color.rgb(r, g, b));
             }
         }
-
         return writableImage;
     }
 
@@ -288,7 +264,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
         Mensaje mensaje = new Mensaje();
         Boolean respuesta = mensaje.showConfirmation("BALLIVERSE", "¿Estás seguro que deseas salir de la ventana para crear Equipos??");
         if (respuesta) {
-            cerrarCamara(); // cerrar la cámara antes de cerrar la ventana
+            cerrarCamara();
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
         } else {

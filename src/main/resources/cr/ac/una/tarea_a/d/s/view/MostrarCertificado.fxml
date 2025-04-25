@@ -27,7 +27,7 @@
          <children>
 
             <!-- Sección que se imprime -->
-            <VBox fx:id="ContainerSinBotones" alignment="CENTER" VBox.vgrow="ALWAYS">
+            <VBox alignment="CENTER" VBox.vgrow="ALWAYS">
                <children>
                   <HBox VBox.vgrow="ALWAYS">
                      <children>
@@ -101,7 +101,6 @@
             <!-- Botones -->
             <HBox alignment="CENTER" spacing="50.0">
                <children>
-                  <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" prefHeight="35.0" prefWidth="100.0" text="Volver" />
                   <MFXButton fx:id="btnImprimirCert" onAction="#onActionBtnImprimirCert" prefHeight="35.0" prefWidth="200.0" text="Imprimir certificado" />
                   <MFXButton fx:id="btnSalir" onAction="#OnActionBtnSalir" prefHeight="35.0" prefWidth="100.0" text="Salir" />
                </children>

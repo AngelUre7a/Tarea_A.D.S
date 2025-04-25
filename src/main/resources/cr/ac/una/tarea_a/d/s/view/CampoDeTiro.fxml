@@ -40,8 +40,8 @@
                         <Image url="@../resources/FondoCampoDeTiro.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="imgBalon" fitHeight="80.0" fitWidth="80.0" layoutX="310.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="310.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="363.0" />
-                  <Label fx:id="lblInstrucciones" alignment="CENTER" layoutY="375.0" prefHeight="84.0" prefWidth="304.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="396.0" AnchorPane.topAnchor="375.0" />
+                  <ImageView fx:id="imgBalon" fitHeight="80.0" fitWidth="80.0" layoutX="310.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="lblInstrucciones" alignment="CENTER" layoutY="375.0" prefHeight="84.0" prefWidth="283.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="417.0" AnchorPane.topAnchor="375.0" />
                   <Label fx:id="lblGanador" alignment="CENTER" layoutX="101.0" layoutY="93.0" prefHeight="124.0" prefWidth="498.0" styleClass="labelCertificado" AnchorPane.bottomAnchor="242.0" AnchorPane.leftAnchor="101.0" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="93.0">
                      <font>
                         <Font size="23.0" />

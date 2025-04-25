@@ -31,11 +31,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-/**
- * FXML Controller class
- *
- * @author Usuario
- */
 public class RankingController extends Controller implements Initializable {
 
     @FXML
@@ -70,7 +65,6 @@ public class RankingController extends Controller implements Initializable {
         cargarEstadisticas();
 
         colRango.setCellValueFactory(cellData -> {
-            // Calcula el rango como el índice + 1 en la lista ordenada
             int rango = equiposLista.indexOf(cellData.getValue()) + 1;
             return new javafx.beans.property.SimpleIntegerProperty(rango).asObject();
         });
@@ -182,12 +176,10 @@ public class RankingController extends Controller implements Initializable {
                     .findFirst()
                     .orElse(0);
 
-            return Integer.compare(puntos2, puntos1); // Descendente
+            return Integer.compare(puntos2, puntos1);
         });
 
         tableView.setItems(sortedData);
-
-        // Ajusta colRango para que funcione con la tabla real y su orden
         colRango.setCellValueFactory(cellData -> {
             int rango = tableView.getItems().indexOf(cellData.getValue()) + 1;
             return new javafx.beans.property.SimpleIntegerProperty(rango).asObject();
@@ -214,10 +206,8 @@ public class RankingController extends Controller implements Initializable {
         filteredData.setPredicate(equipo -> {
             String filtroNombre = filterField.getText();
             Deporte filtroDeporte = ComboBoxDeportes.getSelectionModel().getSelectedItem();
-
             boolean coincideNombre = (filtroNombre == null || filtroNombre.isEmpty()) || equipo.getNombre().toLowerCase().contains(filtroNombre.toLowerCase());
             boolean coincideDeporte = (filtroDeporte == null || "Todos".equalsIgnoreCase(filtroDeporte.getNombre())) || equipo.getTipoDeporte().equalsIgnoreCase(filtroDeporte.getNombre());
-
             return coincideNombre && coincideDeporte;
         });
     }

@@ -32,15 +32,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
-/**
- * FXML Controller class
- *
- * @author Usuario
- */
 public class MostrarCertificadoController extends Controller implements Initializable {
 
     @FXML
@@ -54,13 +48,11 @@ public class MostrarCertificadoController extends Controller implements Initiali
     @FXML
     private Label lblDeporteJugado;
     @FXML
+    private Label lblGoles;
+    @FXML
     private ImageView imgEscudo;
     @FXML
     private MFXButton btnImprimirCert;
-    @FXML
-    private VBox ContainerSinBotones;
-    @FXML
-    private MFXButton btnVolver;
     @FXML
     private MFXButton btnSalir;
 
@@ -69,13 +61,8 @@ public class MostrarCertificadoController extends Controller implements Initiali
     private EstadisticasEquipoPTRepository estadisticasRepo;
     private final ObservableList<EstadisticasEquipoPT> estadisticasLista = FXCollections.observableArrayList();
     private EstadisticasEquipoPT statsPTCampeon;
-    @FXML
     private ImageView imgFondo;
-    @FXML
-    private Label lblGoles;
-    
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         imgFondo.fitHeightProperty().bind(root.heightProperty());
@@ -128,7 +115,6 @@ public class MostrarCertificadoController extends Controller implements Initiali
     }
     
     private void ImprimirCertificado(){
-        btnVolver.setVisible(false);
         btnSalir.setVisible(false);
         btnImprimirCert.setVisible(false);
         try {
@@ -156,17 +142,8 @@ public class MostrarCertificadoController extends Controller implements Initiali
         } catch (Exception e) {
             e.printStackTrace();
         }
-        btnVolver.setVisible(true);
         btnSalir.setVisible(true);
         btnImprimirCert.setVisible(true);
-    }
-
-    @FXML
-    private void onActionBtnVolver(ActionEvent event) {
-        Stage stageActual = (Stage) root.getScene().getWindow();
-        stageActual.close();
-        //no volver a la animacion volver al torneo
-//        FlowController.getInstance().goViewInWindowModal("AnimacionFinal", stageActual, Boolean.FALSE);
     }
 
     @FXML

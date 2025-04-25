@@ -1,6 +1,5 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
-import cr.ac.una.Tarea_A.D.S.util.Sonidos;
 import cr.ac.una.tarea_a.d.s.util.FlowController;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import java.io.IOException;
@@ -13,11 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Usuario
- */
 public class MenuController extends Controller implements Initializable {
     @FXML
     private BorderPane root;
@@ -38,22 +32,9 @@ public class MenuController extends Controller implements Initializable {
     @FXML
     private MFXButton btnTorneos;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         title.setFocusTraversable(true);
-//        
-//    // Aplicar sonido al hacer hover en los botones del menú
-//    Sonidos.agregarHover(
-//        btnEstadisticas,
-//        btnRegistroDeporte,
-//        btnRegistroEquipo,
-//        btnVolver,
-//        btnRanking,
-//        btnTorneos
-//    );
     }
 
     @FXML

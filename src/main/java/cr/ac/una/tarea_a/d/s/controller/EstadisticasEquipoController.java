@@ -26,11 +26,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Laptop
- */
 public class EstadisticasEquipoController extends Controller implements Initializable {
 
     @FXML
@@ -146,10 +141,7 @@ public class EstadisticasEquipoController extends Controller implements Initiali
             torneoLista.add(torneo);
         }
     }
-
     cmbTorneos.setItems(torneoLista);
-
-    // Mostrar solo el nombre del torneo en el ComboBox
     cmbTorneos.setCellFactory(lv -> new javafx.scene.control.ListCell<Torneo>() {
         @Override
         protected void updateItem(Torneo item, boolean empty) {

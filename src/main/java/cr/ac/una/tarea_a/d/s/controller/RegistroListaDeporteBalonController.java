@@ -64,16 +64,13 @@ public class RegistroListaDeporteBalonController extends Controller implements I
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colImagen.setCellValueFactory(new PropertyValueFactory<>("imagen"));
-
         colImagen.setCellFactory(column -> new TableCell<>() {
             private final ImageView imageView = new ImageView();
-
             {
                 imageView.setFitWidth(50);
                 imageView.setFitHeight(50);
                 imageView.setPreserveRatio(true);
             }
-
             @Override
             protected void updateItem(Image item, boolean empty) {
                 super.updateItem(item, empty);
@@ -88,9 +85,8 @@ public class RegistroListaDeporteBalonController extends Controller implements I
 
         colEditar.setCellFactory(param -> new TableCell<>() {
             private final MFXButton btnEditar = new MFXButton();
-
             {
-                btnEditar.setText(""); // Por si acaso, eliminar texto
+                btnEditar.setText("");
                 ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/editar.png").toExternalForm()));
                 icono.setFitWidth(40);
                 icono.setFitHeight(40);
@@ -113,34 +109,30 @@ public class RegistroListaDeporteBalonController extends Controller implements I
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
-
                 if (empty) {
                     setGraphic(null);
                 } else {
                     HBox hbox = new HBox(btnEditar);
-                    hbox.setAlignment(Pos.CENTER); // <- centra el botón
-                    hbox.setPrefWidth(Double.MAX_VALUE); // opcional para forzar ancho
+                    hbox.setAlignment(Pos.CENTER);
+                    hbox.setPrefWidth(Double.MAX_VALUE);
                     setGraphic(hbox);
                 }
             }
         });
         colEliminar.setCellFactory(param -> new TableCell<>() {
             private final MFXButton btnEliminar = new MFXButton();
-
             {
-                btnEliminar.setText(""); // Elimina texto por defecto
+                btnEliminar.setText("");
                 ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/borrar.png").toExternalForm()));
                 icono.setFitWidth(40);
                 icono.setFitHeight(40);
                 btnEliminar.setGraphic(icono);
                 btnEliminar.getStyleClass().add("boton-tabla-icono");
                 btnEliminar.setStyle("-fx-background-color: transparent;");
-
                 btnEliminar.setOnAction(event -> {
                     Deporte deporte = getTableView().getItems().get(getIndex());
                     String nombreDeporte = deporte.getNombre();
                     System.out.println("Nombre del deporte a eliminar: " + nombreDeporte);
-
                     try {
                         equiposLista.clear();
                         equiposLista.addAll(Equiporepo.findAll());
@@ -148,9 +140,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
                         new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar equipos", "No se pudo cargar la lista de equipos.");
                         e.printStackTrace();
                     }
-
                     boolean siTieneEquiposAsociados = equiposLista.stream().anyMatch(equipo -> equipo.getTipoDeporte().equals(nombreDeporte));
-
                     if (siTieneEquiposAsociados) {
                         new Mensaje().show(Alert.AlertType.ERROR, "Error al eliminar deporte", "No se puede eliminar el deporte porque tiene equipos asociados.");
                     } else {
@@ -223,10 +213,8 @@ public class RegistroListaDeporteBalonController extends Controller implements I
 
     private void abrirFormularioNuevo() {
         AppContext.getInstance().delete("DEPORTE_EDITAR");
-
         FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
         cargarFormulario();
-
         if (AppContext.getInstance().containsItem("DEPORTE_EDITAR")) {
             Deporte nuevo = (Deporte) AppContext.getInstance().get("DEPORTE_EDITAR");
 
@@ -239,17 +227,14 @@ public class RegistroListaDeporteBalonController extends Controller implements I
             } catch (IOException e) {
                 new Mensaje().show(Alert.AlertType.ERROR, "Error al guardar deporte", "No se pudo guardar el nuevo deporte.");
             }
-
             AppContext.getInstance().delete("DEPORTE_EDITAR");
         }
     }
 
     private void abrirFormularioEditar(Deporte deporte) {
         AppContext.getInstance().set("DEPORTE_EDITAR", deporte);
-
         FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
         cargarFormulario();
-
         AppContext.getInstance().delete("DEPORTE_EDITAR");
 
     }

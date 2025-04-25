@@ -374,6 +374,8 @@ public class PartidoController extends Controller implements Initializable {
             lblMarcador2.setText(String.valueOf(marcadorEquipo2));
             System.out.println("⚽ ¡GOL para el equipo 2!");
             Sonidos.aplausos();
+            Animaciones.mostrarGolAnimado(lblGol);
+            Animaciones.animarBalonGol(imgBalon); 
             resetearBalon();
         }
     }

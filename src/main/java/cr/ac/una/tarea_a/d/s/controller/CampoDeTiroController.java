@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -48,9 +47,9 @@ public class CampoDeTiroController extends Controller implements Initializable {
     @FXML
     private Label lblInstrucciones;
 
-    private Deporte deporte = (Deporte) AppContext.getInstance().get("DEPORTE_PARA_BALON");
-    private Equipo equipo1 = (Equipo) AppContext.getInstance().get("EQUIPO1");
-    private Equipo equipo2 = (Equipo) AppContext.getInstance().get("EQUIPO2");
+    private final Deporte deporte = (Deporte) AppContext.getInstance().get("DEPORTE_PARA_BALON");
+    private final Equipo equipo1 = (Equipo) AppContext.getInstance().get("EQUIPO1");
+    private final Equipo equipo2 = (Equipo) AppContext.getInstance().get("EQUIPO2");
 
     private boolean turnoEquipo1 = true;
     private double balonInicialX, balonInicialY;
@@ -150,12 +149,8 @@ public class CampoDeTiroController extends Controller implements Initializable {
                     break;
                 }
             }
-
-            // Volver a posición inicial
             imgBalon.setLayoutX(balonInicialX);
             imgBalon.setLayoutY(balonInicialY);
-
-            // Si se eliminaron todas las dianas, finaliza el turno
             if (dianas.isEmpty()) {
                 terminarTurno();
             }
@@ -165,12 +160,10 @@ public class CampoDeTiroController extends Controller implements Initializable {
     private void terminarTurno() {
         detenerCronometro();
         puedeMoverBalon = false;
-        btnIniciar.setDisable(false); // Habilitar botón para siguiente turno
+        btnIniciar.setDisable(false);
 
         if (!turnoEquipo1) {
-            // Ya jugaron ambos turnos
             if (segundosEquipo1 == segundosEquipo2) {
-                // EMPATE: Reiniciar tiempos y turnos
                 segundosEquipo1 = 0;
                 segundosEquipo2 = 0;
                 turnoEquipo1 = true;
@@ -195,7 +188,6 @@ public class CampoDeTiroController extends Controller implements Initializable {
             }
 
         } else {
-            // Cambiar turno a equipo 2
             turnoEquipo1 = false;
             actualizarVistaEquipo();
             generarDianas(6);
@@ -244,10 +236,7 @@ public class CampoDeTiroController extends Controller implements Initializable {
                 + "Cada equipo debe arrastrar el balón a las dianas rojas.\n"
                 + "Gana quien lo haga en el menor tiempo.\n"
                 + "¡Buena suerte!");
-        lblInstrucciones.setVisible(true); // Hacer visible el Label con las instrucciones
-
-        // Hacer que el Label desaparezca después de un tiempo, si lo deseas
-        // Esto es opcional, puedes ajustar el tiempo que quieres que dure visible
+        lblInstrucciones.setVisible(true);
         new Timeline(new KeyFrame(Duration.seconds(10), e -> lblInstrucciones.setVisible(false))).play();
     }
     
@@ -267,6 +256,4 @@ public class CampoDeTiroController extends Controller implements Initializable {
     @Override
     public void initialize() {
     }
-
-    
 }

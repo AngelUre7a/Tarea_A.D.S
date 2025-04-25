@@ -64,9 +64,6 @@ public class CreacionTorneoController extends Controller implements Initializabl
     @FXML
     private MFXButton btnVolver;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         txtCantidadEquipos.textProperty().addListener((obs, oldText, newText) -> {
@@ -74,7 +71,6 @@ public class CreacionTorneoController extends Controller implements Initializabl
             tableView.refresh();
 
         });
-        //SOLO PERMITIR NUMEROS
         txtCantidadEquipos.addEventFilter(javafx.scene.input.KeyEvent.KEY_TYPED, keyEvent -> {
             if (!keyEvent.getCharacter().matches("\\d")) {
                 keyEvent.consume();
@@ -87,11 +83,9 @@ public class CreacionTorneoController extends Controller implements Initializabl
         });
         colAgregar.setCellFactory(column -> new javafx.scene.control.TableCell<Equipo, String>() {
             private final MFXCheckbox checkbox = new MFXCheckbox("");
-
             {
                 checkbox.setOnAction(event -> {
                     Equipo equipo = getTableView().getItems().get(getIndex());
-
                     if (checkbox.isSelected()) {
                         if (!equiposInscritos.contains(equipo)) {
                             equiposInscritos.add(equipo);
@@ -99,11 +93,9 @@ public class CreacionTorneoController extends Controller implements Initializabl
                     } else {
                         equiposInscritos.remove(equipo);
                     }
-
-                    // Limita la cantidad si se supera el máximo
                     if (!txtCantidadEquipos.getText().isBlank()) {
                         int max = Integer.parseInt(txtCantidadEquipos.getText());
-                        tableView.refresh(); // esto desactiva los checkboxes cuando se alcanza el límite
+                        tableView.refresh();
                     }
                 });
             }
@@ -118,7 +110,6 @@ public class CreacionTorneoController extends Controller implements Initializabl
                     Equipo equipo = getTableView().getItems().get(getIndex());
                     checkbox.setSelected(equiposInscritos.contains(equipo));
 
-                    // Desactiva si ya se alcanzó el máximo y este equipo no está seleccionado
                     if (!txtCantidadEquipos.getText().isBlank()) {
                         int max = Integer.parseInt(txtCantidadEquipos.getText());
                         checkbox.setDisable(!checkbox.isSelected() && equiposInscritos.size() >= max);
@@ -171,12 +162,11 @@ public class CreacionTorneoController extends Controller implements Initializabl
         } catch (IOException e) {
             new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar datos", "No se pudieron cargar los equipos.");
         }
-
-        //MANEJO DE DEPORTES PARA EL COMBOBOX
+        
         List<Deporte> deportes = null;
         try {
             DeporteRepository deporteRepo = new DeporteRepository();
-            deportes = deporteRepo.findAll(); // carga desde el JSON
+            deportes = deporteRepo.findAll();
             AppContext.getInstance().set("LISTA_DEPORTES", deportes);
         } catch (IOException e) {
             new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar deportes", "No se pudo cargar la lista de deportes.");
@@ -186,7 +176,6 @@ public class CreacionTorneoController extends Controller implements Initializabl
             ComboBoxDeportes.getItems().addAll(deportes);
         }
 
-        // Configura cómo mostrar los nombres
         ComboBoxDeportes.setCellFactory(param -> new javafx.scene.control.ListCell<>() {
             @Override
             protected void updateItem(Deporte item, boolean empty) {
@@ -265,7 +254,6 @@ public class CreacionTorneoController extends Controller implements Initializabl
         Torneo torneo = new Torneo(id, nombre, deporte.getNombre(), cantidadEquipos, tiempoPorPartida, new ArrayList<>(equiposInscritos));
         equiposAddTorneo(equiposInscritos);
         AppContext.getInstance().set("TORNEO_NUEVO", torneo);
-        // Añadir el torneo a la lista global de torneos
         if (!AppContext.getInstance().containsItem("LISTA_TORNEOS")) {
             ObservableList<Torneo> listaTorneos = FXCollections.observableArrayList();
             AppContext.getInstance().set("LISTA_TORNEOS", listaTorneos);
@@ -353,7 +341,6 @@ public class CreacionTorneoController extends Controller implements Initializabl
         equiposAddTorneo(equiposInscritos);
         AppContext.getInstance().set("TORNEO_NUEVO", torneo);
 
-        // Añadir el torneo a la lista global de torneos
         if (!AppContext.getInstance().containsItem("LISTA_TORNEOS")) {
             ObservableList<Torneo> listaTorneos = FXCollections.observableArrayList();
             AppContext.getInstance().set("LISTA_TORNEOS", listaTorneos);

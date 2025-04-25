@@ -155,7 +155,7 @@ public class RegistroDeporteController extends Controller implements Initializab
     @Override
     public void initialize() {
     }
-
+    
     private void limpiarFormulario() {
         txtNombreDeporte.clear();
         imageView.setImage(null);
@@ -170,7 +170,6 @@ public class RegistroDeporteController extends Controller implements Initializab
         if (respuesta) {
             deporte = null;
             esEdicion = false;
-
             Stage stage = (Stage) root.getScene().getWindow();
             stage.close();
         } else {
