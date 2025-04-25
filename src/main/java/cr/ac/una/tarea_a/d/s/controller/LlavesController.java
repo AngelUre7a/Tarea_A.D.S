@@ -37,6 +37,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
+import javafx.util.Duration;
 
 public class LlavesController extends Controller implements Initializable {
 
@@ -347,6 +348,7 @@ public class LlavesController extends Controller implements Initializable {
             Equipo ganador = torneo1.getEquiposInscritos().stream()
                     .filter(e -> e.getId().equals(idGanador))
                     .findFirst().orElse(null);
+            mostrarAnimacionGanadorPartido(ganador);
 
             if (ganador == null) {
                 return;
@@ -450,194 +452,7 @@ public class LlavesController extends Controller implements Initializable {
         }
     }
 
-//    private void reconstruirDesdePartidas() {
-//        //llenarPrimerRonda();
-//        try {
-//            PartidaRepository repo = new PartidaRepository();
-//            List<Partida> partidasGuardadas = repo.findAll();
-//
-//            // filtrar solo las del torneo actual
-//            List<Partida> partidasTorneo = partidasGuardadas.stream()
-//                    .filter(p -> p.getIdTorneo().equals(torneo1.getId()))
-//                    .toList();
-//
-//            // ordenar por ronda lógica: en tu caso es por orden de creación, así que no se ocupa mucho
-//            List<Equipo> rondaActual = new ArrayList<>(torneo1.getEquiposInscritos());
-    ////            while (rondaActual.size() % 2 != 0) {
-////                rondaActual.add(new Equipo(java.util.UUID.randomUUID().toString(), "BYE", torneo1.getTipoDeporte()));
-////            }
-//
-//            int rondaIndex = 0;
-//            while (rondaActual.size() > 1) {
-////                if (rondaActual.size() % 2 != 0) {
-////                    rondaActual.add(new Equipo(java.util.UUID.randomUUID().toString(), "BYE", torneo1.getTipoDeporte()));
-////                }
-//                VBox rondaVBox = (VBox) hboxLlaves.getChildren().get(rondaIndex);
-//                List<Equipo> ganadores = new ArrayList<>();
-//System.out.println("🧪 Ronda " + rondaIndex + " con " + rondaActual.size() + " equipos.");
-//System.out.println("Partidos visuales en VBox: " + rondaVBox.getChildren().size());
-//
-//                for (int i = 0; i < rondaActual.size(); i += 2) {
-//                    Equipo eq1 = rondaActual.get(i);
-//                    Equipo eq2 = rondaActual.get(i + 1);
-//
-//                    if (i / 2 >= rondaVBox.getChildren().size()) {
-//                        System.err.println("⚠️ El partido #" + (i / 2) + " no existe en la ronda " + rondaIndex);
-//                        continue; // salta al siguiente par
-//                    }
-//
-//                    VBox partidoVBox = (VBox) rondaVBox.getChildren().get(i / 2);
-//
-//                    HBox hbox1 = (HBox) partidoVBox.getChildren().get(0);
-//                    HBox hbox2 = (HBox) partidoVBox.getChildren().get(2);
-//                    Label label1 = (Label) hbox1.getChildren().get(0);
-//                    Label label2 = (Label) hbox2.getChildren().get(0);
-//
-//                    label1.setText(eq1.getNombre());
-//                    label2.setText(eq2.getNombre());
-//
-//                    VBox marcadorVBox = (VBox) partidoVBox.getChildren().get(1);
-//                    Button btn = (Button) marcadorVBox.getChildren().get(0);
-//
-//                    // buscar partida de este par
-//                    Partida partida = partidasTorneo.stream()
-//                            .filter(p -> (p.getIdEquipoA().equals(eq1.getId()) && p.getIdEquipoB().equals(eq2.getId()))
-//                            || (p.getIdEquipoA().equals(eq2.getId()) && p.getIdEquipoB().equals(eq1.getId())))
-//                            .findFirst().orElse(null);
-//
-//                    if (partida != null && "finalizado".equals(partida.getEstado())) {
-//                        btn.setText(partida.getGolesEquipoA() + " - " + partida.getGolesEquipoB());
-//                        btn.setDisable(true);
-//                        Equipo ganador = torneo1.getEquiposInscritos().stream()
-//                                .filter(e -> e.getId().equals(partida.getGanadorId()))
-//                                .findFirst().orElse(null);
-//                        if (ganador != null) {
-//                            ganadores.add(ganador);
-//                        }
-//                    } else {
-//                        btn.setDisable(false);
-//                        btn.setUserData(new Object[]{eq1, eq2, rondaIndex, i / 2});
-//                        btn.setOnAction(e -> {
-//                            Object[] data = (Object[]) btn.getUserData();
-//                            AppContext.getInstance().set("EQUIPO1", data[0]);
-//                            AppContext.getInstance().set("EQUIPO2", data[1]);
-//                            AppContext.getInstance().set("DEPORTE", torneo1.getTipoDeporte());
-//
-//                            Boolean partidoBye = false;
-//                            //else if (!eq1.getNombre().equals("BYE") && !eq2.getNombre().equals("BYE")) {
-//                            if ("BYE".equalsIgnoreCase(eq2.getNombre())) {
-//                                partidoBye = true;
-//                            }
-//                            if (partidoBye) {
-//                                Equipo ganador;
-//                                // Verificar cuál equipo tiene el nombre "BYE" y establecer el ganador
-//                                if ("BYE".equalsIgnoreCase(eq2.getNombre())) {
-//                                    ganador = eq1;
-//                                    System.out.println("EQUIPO 1 AVANZA POR BYE");
-//                                } else {
-//                                    ganador = eq1;
-//                                    System.out.println("EQUIPO 2 AVANZA POR BYE");
-//                                }
-//                                AppContext.getInstance().set("EQUIPO_GANADOR_BYE", ganador);
-//                                Torneo torneo = (Torneo) AppContext.getInstance().get("TORNEO");
-//                                if (torneo != null) {
-//                                    Partida partidaBye = new Partida(
-//                                            null, // id será generado por el repositorio
-//                                            torneo.getId(),
-//                                            eq1.getId(),
-//                                            eq2.getId(),
-//                                            0,
-//                                            0,
-//                                            "finalizado",
-//                                            ganador.getId(),
-//                                            0
-//                                    );
-//                                    try {
-//                                        partidaRepository.save(partidaBye);
-//                                        List<Partida> partidasDelTorneo = torneo.getPartidas();
-//
-//                                        Partida existente = partidasDelTorneo.stream()
-//                                                .filter(p -> (p.getIdEquipoA().equals(partidaBye.getIdEquipoA()) && p.getIdEquipoB().equals(partidaBye.getIdEquipoB()))
-//                                                || (p.getIdEquipoA().equals(partidaBye.getIdEquipoB()) && p.getIdEquipoB().equals(partidaBye.getIdEquipoA())))
-//                                                .findFirst().orElse(null);
-//
-//                                        if (existente != null) {
-//                                            partidasDelTorneo.remove(existente); // reemplazamos
-//                                        }
-//
-//                                        partidasDelTorneo.add(partidaBye);
-//
-//                                        try {
-//                                            new TorneoRepository().save(torneo);
-//                                            System.out.println("Torneo actualizado con nuevas partidas.");
-//                                        } catch (IOException j) {
-//                                            System.err.println("No se pudo guardar el torneo actualizado: " + j.getMessage());
-//                                        }
-//
-//                                        System.out.println("Partida guardada exitosamente en JSON.");
-//                                    } catch (IOException em) {
-//                                        System.err.println("Error al guardar la partida: " + em.getMessage());
-//                                    }
-//                                }
-//
-//                                // Mostrar alerta informando que no se jugará el partido
-//                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                                alert.setTitle("Partido no jugado");
-//                                alert.setHeaderText(null);
-//                                alert.setContentText("Este partido no se jugó porque uno de los equipos tiene 'BYE'.\n\n"
-//                                        + "¡" + ganador.getNombre() + " avanza automáticamente!");
-//                                alert.showAndWait();
-//                                ganadoresTemporales.add(ganador);
-//                                // Procesar avance directamente
-//                                procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
-//                                return; // No continúa a la vista de partido
-//
-//                            }
-//                            FlowController.getInstance().goViewInWindowModal("Partido", ((Stage) root.getScene().getWindow()), false);
-//                            procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
-//                        });
-//                    } //else {
-//                    //btn.setDisable(true);
-//
-//                    // Solo agregamos un ganador por BYE si no existe partida pendiente entre ellos
-//                    //if (partida == null) {
-//                    //ganadores.add(!eq1.getNombre().equals("BYE") ? eq1 : eq2);
-//                    //}
-//                    //}
-//                }
-////
-////                llavesPorRonda.add(ganadores);
-////                rondaActual = ganadores;
-////                rondaIndex++;
-//                llavesPorRonda.add(ganadores);
-//                rondaActual = ganadores;
-//
-//// 🔄 Sincroniza ganadores temporales para permitir avance
-//                ganadoresTemporales.clear();
-//                ganadoresTemporales.addAll(ganadores);
-//
-//                rondaIndex++;
-//
-//            }
-//            boolean torneoCompleto = torneo1.getPartidas().stream()
-//                    .filter(p -> p.getEstado().equalsIgnoreCase("finalizado"))
-//                    .count() >= torneo1.getEquiposInscritos().size() - 1;
-//
-//            if (torneoCompleto) {
-//                Partida ultimaPartida = partidasTorneo.get(partidasTorneo.size() - 1);
-//                if (ultimaPartida != null && "finalizado".equalsIgnoreCase(ultimaPartida.getEstado()) && ultimaPartida.getGanadorId() != null) {
-//                    Equipo campeon = buscarEquipoPorId(ultimaPartida.getGanadorId());
-//                    if (campeon != null) {
-//                        mostrarCampeon(campeon);
-//                    }
-//                }
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-private void reconstruirDesdePartidas() {
+    private void reconstruirDesdePartidas() {
         try {
             PartidaRepository repo = new PartidaRepository();
             List<Partida> partidasGuardadas = repo.findAll();
@@ -800,8 +615,37 @@ private void reconstruirDesdePartidas() {
 
     }
 
+    private void mostrarAnimacionGanadorPartido(Equipo ganador) {
+        try {
+               FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
+  
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/AnimacionPorPartido.fxml"));
+            Parent root = loader.load();
+            AnimacionPorPartidoController controller = loader.getController();
+
+            String escudoBase64 = ganador.getImagenBase64();
+            String balonBase64 = (torneo1.getTipoDeporte() != null) ? buscarDeportePorNombre(torneo1.getTipoDeporte()).getImagenBase64() : "";
+
+            controller.mostrarAnimacion(escudoBase64, balonBase64, ganador.getNombre());
+
+            Stage stage = new Stage();
+            stage.setTitle("¡Ganador de la partida!");
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
+
+            // Que se cierre automáticamente después de unos segundos
+            javafx.animation.PauseTransition delay = new javafx.animation.PauseTransition(Duration.seconds(4));
+            delay.setOnFinished(e -> stage.close());
+            delay.play();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void mostrarAnimacionDelCampeon(Equipo campeon, Deporte deporte) {
-        
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/AnimacionFinal.fxml"));
             Parent root = loader.load();
@@ -824,10 +668,10 @@ private void reconstruirDesdePartidas() {
     }
 
     private void mostrarCampeon(Equipo campeon) throws IOException {
-        
+
         guardarEstadisticasCampeon(campeon.getId(), torneo1.getId());
         boolean esGanador = (boolean) AppContext.getInstance().get("ES_GANADOR");
-        if(esGanador == true){
+        if (esGanador == true) {
             return;
         }
         System.out.println("CAMPEÓN: " + campeon.getNombre());
