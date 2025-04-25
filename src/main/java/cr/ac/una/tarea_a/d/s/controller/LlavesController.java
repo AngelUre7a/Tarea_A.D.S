@@ -617,8 +617,7 @@ public class LlavesController extends Controller implements Initializable {
 
     private void mostrarAnimacionGanadorPartido(Equipo ganador) {
         try {
-               FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
-  
+            
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/AnimacionPorPartido.fxml"));
             Parent root = loader.load();
             AnimacionPorPartidoController controller = loader.getController();
