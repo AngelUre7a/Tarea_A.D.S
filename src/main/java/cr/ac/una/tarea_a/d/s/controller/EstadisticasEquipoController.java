@@ -24,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -195,6 +196,8 @@ public class EstadisticasEquipoController extends Controller implements Initiali
 
     @FXML
     private void onActionBtnVolver(ActionEvent event) {
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.close();
     }
 
   
