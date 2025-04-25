@@ -9,6 +9,7 @@ import cr.ac.una.tarea_a.d.s.repositories.EstadisticasEquipoGeneralesRepository;
 import cr.ac.una.tarea_a.d.s.repositories.EstadisticasEquipoPTRepository;
 import cr.ac.una.tarea_a.d.s.repositories.TorneoRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -23,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -66,7 +68,8 @@ public class EstadisticasEquipoController extends Controller implements Initiali
     private final EstadisticasEquipoPTRepository EstadisticasRepo = new EstadisticasEquipoPTRepository();
     private final ObservableList<EstadisticasEquipoGenerales> estadisticasGeneralesLista = FXCollections.observableArrayList();
     private final EstadisticasEquipoGeneralesRepository estadisticasGenRepo = new EstadisticasEquipoGeneralesRepository();
-
+    @FXML
+    private MFXButton btnVolver;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -190,5 +193,12 @@ public class EstadisticasEquipoController extends Controller implements Initiali
             }
         }
     }
-    
+
+    @FXML
+    private void onActionBtnVolver(ActionEvent event) {
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.close();
+    }
+
+  
 }
