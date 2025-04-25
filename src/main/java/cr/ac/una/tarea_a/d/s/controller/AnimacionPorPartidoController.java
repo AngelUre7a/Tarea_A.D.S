@@ -9,9 +9,6 @@ import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,7 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class AnimacionFinalController extends Controller {
+public class AnimacionPorPartidoController extends Controller {
 
     @FXML
     private ImageView imgEquipo;
@@ -46,7 +43,7 @@ public class AnimacionFinalController extends Controller {
             imgBalon.setImage(imagenBalon);
         }
 
-        lblCampeon.setText("¡" + nombreEquipo + " CAMPEÓN!");
+        lblCampeon.setText("¡" + nombreEquipo + " GANÓ LA PARTIDA!");
         Sonidos.detener();
         Sonidos.ganador();
 
@@ -79,30 +76,10 @@ public class AnimacionFinalController extends Controller {
         }
     });
 }
-
-
     @FXML
     private void onActionBtnSalir(ActionEvent event) {
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
-    }
-
-    private void OnActionBtnCertificado(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/MostrarCertificado.fxml"));
-            Parent rootCert = loader.load();
-
-            Stage stage = new Stage();
-            stage.setTitle("Certificado del equipo");
-            stage.setScene(new Scene(rootCert));
-            stage.setResizable(false);
-            stage.show();
-
-            Stage actual = (Stage) root.getScene().getWindow();
-            actual.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
