@@ -45,6 +45,8 @@ public class CampoDeTiroController extends Controller implements Initializable {
     private Button btnIniciar;
     @FXML
     private MFXButton btnVolver;
+    @FXML
+    private Label lblInstrucciones;
 
     private Deporte deporte = (Deporte) AppContext.getInstance().get("DEPORTE_PARA_BALON");
     private Equipo equipo1 = (Equipo) AppContext.getInstance().get("EQUIPO1");
@@ -61,6 +63,9 @@ public class CampoDeTiroController extends Controller implements Initializable {
     private int segundosEquipo2 = 0;
 
     private final List<Circle> dianas = new ArrayList<>();
+    @FXML
+    private Label lblGanador;
+    
     
 
     @Override
@@ -74,6 +79,8 @@ public class CampoDeTiroController extends Controller implements Initializable {
             configurarArrastreBalon();
             actualizarVistaEquipo();
         });
+        mostrarInstrucciones();
+
     }
 
     private void generarDianas(int cantidad) {
@@ -181,7 +188,7 @@ public class CampoDeTiroController extends Controller implements Initializable {
                     ganador = equipo2.getNombre();
                     AppContext.getInstance().set("GANADOR_DESEMPATE", equipo2);
                 }
-                lblTemporizador.setText("Ganador: " + ganador);
+                lblGanador.setText("¡El ganador es: " + ganador + "!");
                 btnIniciar.setDisable(true);
                 btnVolver.setDisable(false);
                 btnVolver.setVisible(true);
@@ -230,6 +237,18 @@ public class CampoDeTiroController extends Controller implements Initializable {
         int minutos = totalSegundos / 60;
         int segundos = totalSegundos % 60;
         return String.format("%02d:%02d", minutos, segundos);
+    }
+    
+    private void mostrarInstrucciones() {
+        lblInstrucciones.setText("¡Bienvenido al campo de tiro!\n"
+                + "Cada equipo debe arrastrar el balón a las dianas rojas.\n"
+                + "Gana quien lo haga en el menor tiempo.\n"
+                + "¡Buena suerte!");
+        lblInstrucciones.setVisible(true); // Hacer visible el Label con las instrucciones
+
+        // Hacer que el Label desaparezca después de un tiempo, si lo deseas
+        // Esto es opcional, puedes ajustar el tiempo que quieres que dure visible
+        new Timeline(new KeyFrame(Duration.seconds(10), e -> lblInstrucciones.setVisible(false))).play();
     }
     
     @FXML
