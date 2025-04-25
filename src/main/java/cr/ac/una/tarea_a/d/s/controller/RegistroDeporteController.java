@@ -153,10 +153,17 @@ public class RegistroDeporteController extends Controller implements Initializab
 
     @FXML
     private void onActionBtnVolver(ActionEvent event) {
-        deporte = null;
+        Mensaje mensaje = new Mensaje();
+        Boolean respuesta = mensaje.showConfirmation("BALLIVERSE", "¿Estás seguro que deseas salir de la ventana para crear deportes?");
+        if (respuesta) {
+            deporte = null;
         esEdicion = false;
 
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
+        } else {
+            return;
+        }
+        
     }
 }

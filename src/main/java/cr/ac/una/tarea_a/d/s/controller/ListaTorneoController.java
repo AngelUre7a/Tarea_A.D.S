@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -24,6 +26,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -62,6 +65,8 @@ public class ListaTorneoController extends Controller implements Initializable {
     private TableColumn<Torneo, String> colIniciar;
     @FXML
     private TableColumn<Torneo, String> colEstado;
+    @FXML
+    private TableColumn<Torneo, Void> colEliminar;
     @FXML
     private MFXButton btnActualizar;
 
@@ -134,6 +139,34 @@ public class ListaTorneoController extends Controller implements Initializable {
                     hbox.setPrefWidth(Double.MAX_VALUE);
                     setGraphic(hbox);
                 }
+            }
+
+        });
+        colEliminar.setCellFactory(param -> new TableCell<>() {
+            private final MFXButton btnEliminar = new MFXButton();
+
+            {
+                btnEliminar.setText("");
+                ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/borrar.png").toExternalForm()));
+                icono.setFitWidth(40);
+                icono.setFitHeight(40);
+                btnEliminar.setGraphic(icono);
+                btnEliminar.getStyleClass().add("boton-tabla-icono");
+                btnEliminar.setStyle("-fx-background-color: transparent;");
+                //css
+
+                btnEliminar.setOnAction(event -> {
+                    Torneo torneo = getTableView().getItems().get(getIndex());
+                    if (new Mensaje().showConfirmation("Confirmación", "¿Está seguro de eliminar el deporte?")) {
+                        try {
+                            Torneorepo.deleteById(torneo.getId());
+                        } catch (IOException ex) {
+                            Logger.getLogger(RegistroListaDeporteBalonController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        torneoLista.remove(torneo);
+                        tableView.refresh();
+                    }
+                });
             }
 
         });

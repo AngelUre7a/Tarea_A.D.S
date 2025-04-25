@@ -227,7 +227,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
     @FXML
     private void onActionBtnCargarImagen(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imagenes", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imagenes", "*.png", "*.jpg", "*.jpeg", "*.bmp"));
 
         File archivoSeleccionado = fileChooser.showOpenDialog(null);
 
@@ -285,9 +285,16 @@ public class RegistroEquipoController extends Controller implements Initializabl
 
     @FXML
     private void onActionBtnVolver(ActionEvent event) {
-        cerrarCamara(); // cerrar la cámara antes de cerrar la ventana
+        Mensaje mensaje = new Mensaje();
+        Boolean respuesta = mensaje.showConfirmation("BALLIVERSE", "¿Estás seguro que deseas salir de la ventana para crear Equipos??");
+        if (respuesta) {
+            cerrarCamara(); // cerrar la cámara antes de cerrar la ventana
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
+        } else {
+            return;
+        }
+        
     }
 
 }

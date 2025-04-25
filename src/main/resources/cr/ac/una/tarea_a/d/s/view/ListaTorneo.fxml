@@ -45,6 +45,7 @@
                   <TableColumn fx:id="colTiempo" prefWidth="134.0" resizable="false" text="Tiempo(Minutos)" />
                   <TableColumn fx:id="colEstado" prefWidth="75.0" text="Estado" />
                   <TableColumn fx:id="colIniciar" prefWidth="75.0" text="Iniciar" />
+                  <TableColumn fx:id="colEliminar" prefWidth="75.0" text="Eliminar" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

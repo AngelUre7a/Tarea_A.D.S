@@ -1,0 +1,34 @@
+[
+  {
+    "idTorneo": "5b292a3f-427d-44cc-8ace-1633fdba1984",
+    "idEquipo": "e9f57a2b-f351-4309-a1ad-b82b6f6d3a20",
+    "partidosGanadosPT": 0,
+    "golesAFavorPT": 0,
+    "puntosPT": 0,
+    "esGanadorDT": false
+  },
+  {
+    "idTorneo": "5b292a3f-427d-44cc-8ace-1633fdba1984",
+    "idEquipo": "93ca2d36-c539-400c-b7dc-be55fa0abe10",
+    "partidosGanadosPT": 1,
+    "golesAFavorPT": 1,
+    "puntosPT": 3,
+    "esGanadorDT": true
+  },
+  {
+    "idTorneo": "17221e9b-e136-4fae-8002-c62333e3405a",
+    "idEquipo": "bddcedbb-a874-4798-ab6a-275e2db7758c",
+    "partidosGanadosPT": 0,
+    "golesAFavorPT": 0,
+    "puntosPT": 0,
+    "esGanadorDT": false
+  },
+  {
+    "idTorneo": "17221e9b-e136-4fae-8002-c62333e3405a",
+    "idEquipo": "f6d7548b-4185-4348-9b81-1805503fcd48",
+    "partidosGanadosPT": 1,
+    "golesAFavorPT": 1,
+    "puntosPT": 3,
+    "esGanadorDT": true
+  }
+]

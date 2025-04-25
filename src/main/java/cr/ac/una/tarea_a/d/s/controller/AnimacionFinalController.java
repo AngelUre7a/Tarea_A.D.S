@@ -174,7 +174,7 @@ public class AnimacionFinalController extends Controller {
 
     @FXML
     private void onActionBtnSalir(ActionEvent event) {
-        FlowController.getInstance().goView("ListaTorneo");
+        //FlowController.getInstance().goView("ListaTorneo");
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
     }

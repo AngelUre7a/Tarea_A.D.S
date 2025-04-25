@@ -1,0 +1,30 @@
+[
+  {
+    "idEquipo": "e9f57a2b-f351-4309-a1ad-b82b6f6d3a20",
+    "torneosGanados": 0,
+    "partidosGanados": 0,
+    "golesAFavor": 0,
+    "puntos": 0
+  },
+  {
+    "idEquipo": "93ca2d36-c539-400c-b7dc-be55fa0abe10",
+    "torneosGanados": 1,
+    "partidosGanados": 1,
+    "golesAFavor": 1,
+    "puntos": 3
+  },
+  {
+    "idEquipo": "bddcedbb-a874-4798-ab6a-275e2db7758c",
+    "torneosGanados": 0,
+    "partidosGanados": 0,
+    "golesAFavor": 0,
+    "puntos": 0
+  },
+  {
+    "idEquipo": "f6d7548b-4185-4348-9b81-1805503fcd48",
+    "torneosGanados": 3,
+    "partidosGanados": 4,
+    "golesAFavor": 4,
+    "puntos": 12
+  }
+]

@@ -376,19 +376,17 @@ public class CreacionTorneoController extends Controller implements Initializabl
     @FXML
     private void onActionBtnVolver(ActionEvent event) {
         Mensaje mensaje = new Mensaje();
-        Boolean respuesta = mensaje.showConfirmation("BALLIVERSE", "¿Estás seguro que deseas cerrar BALLIVERSE?");
+        Boolean respuesta = mensaje.showConfirmation("BALLIVERSE", "¿Estás seguro que deseas salir de la ventana para crear Torneos?");
         if (respuesta) {
             txtCantidadEquipos.clear();
             txtTiempoPartido.clear();
 
-            ((Stage) root.getScene().getWindow()).close();
+            Stage stage = (Stage) root.getScene().getWindow();
+            stage.close();
         } else {
             return;
         }
-        txtCantidadEquipos.clear();
-        txtTiempoPartido.clear();
-
-        ((Stage) root.getScene().getWindow()).close();
+        
     }
 
 }
