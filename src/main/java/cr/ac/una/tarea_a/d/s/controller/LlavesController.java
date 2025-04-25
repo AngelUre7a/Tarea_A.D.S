@@ -445,6 +445,7 @@ public class LlavesController extends Controller implements Initializable {
         }
     }
 
+
     private void reconstruirDesdePartidas() {
         //llenarPrimerRonda();
         try {
@@ -608,10 +609,16 @@ public class LlavesController extends Controller implements Initializable {
             }
             boolean torneoCompleto = torneo1.getPartidas().stream()
                     .filter(p -> p.getEstado().equalsIgnoreCase("finalizado"))
-                    .count() >= torneo1.getCantidadEquipos() - 1;
+                    .count() >= torneo1.getEquiposInscritos().size() - 1;
 
-            if (torneoCompleto && rondaActual.size() == 1) {
-                mostrarCampeon(rondaActual.get(0));
+            if (torneoCompleto) {
+                Partida ultimaPartida = partidasTorneo.get(partidasTorneo.size() - 1);
+                if (ultimaPartida != null && "finalizado".equalsIgnoreCase(ultimaPartida.getEstado()) && ultimaPartida.getGanadorId() != null) {
+                    Equipo campeon = buscarEquipoPorId(ultimaPartida.getGanadorId());
+                    if (campeon != null) {
+                        mostrarCampeon(campeon);
+                    }
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -758,6 +765,13 @@ public class LlavesController extends Controller implements Initializable {
                 e.printStackTrace();
             }
         }
+    }
+    
+    private Equipo buscarEquipoPorId(String id) {
+        return torneo1.getEquiposInscritos().stream()
+                .filter(e -> e.getId().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
