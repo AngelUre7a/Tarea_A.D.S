@@ -46,6 +46,8 @@ public class CampoDeTiroController extends Controller implements Initializable {
     private MFXButton btnVolver;
     @FXML
     private Label lblInstrucciones;
+    @FXML
+    private Label lblGanador;
 
     private final Deporte deporte = (Deporte) AppContext.getInstance().get("DEPORTE_PARA_BALON");
     private final Equipo equipo1 = (Equipo) AppContext.getInstance().get("EQUIPO1");
@@ -62,11 +64,7 @@ public class CampoDeTiroController extends Controller implements Initializable {
     private int segundosEquipo2 = 0;
 
     private final List<Node> dianas = new ArrayList<>();
-    @FXML
-    private Label lblGanador;
-
-
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btnVolver.setDisable(true);
@@ -74,7 +72,7 @@ public class CampoDeTiroController extends Controller implements Initializable {
         imgBalon.setImage(deporte.getImagen());
 
         Platform.runLater(() -> {
-            generarDianas(6);
+            generarDianas(8);
             configurarArrastreBalon();
             actualizarVistaEquipo();
         });
@@ -84,8 +82,8 @@ public class CampoDeTiroController extends Controller implements Initializable {
 
     private void generarDianas(int cantidad) {
         Image imagenDiana = new Image(getClass().getResourceAsStream("/cr/ac/una/tarea_a/d/s/resources/diana.png"));
-        double anchoDiana = 60;
-        double altoDiana = 60;
+        double anchoDiana = 80;
+        double altoDiana = 80;
         double limiteInferior = imgBalon.getLayoutY() - altoDiana;
 
         for (int i = 0; i < cantidad; i++) {
@@ -141,8 +139,21 @@ public class CampoDeTiroController extends Controller implements Initializable {
 
         imgBalon.setOnMouseDragged(e -> {
             if (!puedeMoverBalon) return;
-            imgBalon.setLayoutX(e.getSceneX() - offsetX);
-            imgBalon.setLayoutY(e.getSceneY() - offsetY);
+
+            double nuevoX = e.getSceneX() - offsetX;
+            double nuevoY = e.getSceneY() - offsetY;
+
+            if (nuevoX < 0) nuevoX = 0;
+            if (nuevoY < 0) nuevoY = 0;
+            if (nuevoX + imgBalon.getFitWidth() > CampoTiro.getWidth()) {
+                nuevoX = CampoTiro.getWidth() - imgBalon.getFitWidth();
+            }
+            if (nuevoY + imgBalon.getFitHeight() > CampoTiro.getHeight()) {
+                nuevoY = CampoTiro.getHeight() - imgBalon.getFitHeight();
+            }
+
+            imgBalon.setLayoutX(nuevoX);
+            imgBalon.setLayoutY(nuevoY);
         });
 
         imgBalon.setOnMouseReleased(e -> {
@@ -185,7 +196,7 @@ public class CampoDeTiroController extends Controller implements Initializable {
 
                 new Mensaje().show(Alert.AlertType.INFORMATION, "Empate", "¡Hay un empate! Se jugará una revancha.");
                 actualizarVistaEquipo();
-                generarDianas(6);
+                generarDianas(8);
 
             } else {
                 String ganador;
@@ -207,7 +218,7 @@ public class CampoDeTiroController extends Controller implements Initializable {
         } else {
             turnoEquipo1 = false;
             actualizarVistaEquipo();
-            generarDianas(6);
+            generarDianas(8);
         }
     }
 
@@ -250,11 +261,11 @@ public class CampoDeTiroController extends Controller implements Initializable {
 
     private void mostrarInstrucciones() {
         lblInstrucciones.setText("¡Bienvenido al campo de tiro!\n"
-                + "Cada equipo debe arrastrar el balón a las dianas rojas.\n"
+                + "Cada equipo debe arrastrar el balón a las dianas.\n"
                 + "Gana quien lo haga en el menor tiempo.\n"
                 + "¡Buena suerte!");
         lblInstrucciones.setVisible(true);
-        new Timeline(new KeyFrame(Duration.seconds(10), e -> lblInstrucciones.setVisible(false))).play();
+        new Timeline(new KeyFrame(Duration.seconds(15), e -> lblInstrucciones.setVisible(false))).play();
     }
 
     @FXML

@@ -196,13 +196,11 @@ public class RegistroEquipoController extends Controller implements Initializabl
     private void onActionBtnTomarFoto(ActionEvent event) {
          Sonidos.click();
         btnTomarFoto.setDisable(true);
-//        btnTomarFoto.setVisible(false);
         btnTomarFoto.setManaged(false);
         btnTomarFoto.setVisible(false);
         btnAbrirCamera.setDisable(false);
         btnAbrirCamera.setManaged(true);
         btnAbrirCamera.setVisible(true);
-//        btnAbrirCamera.setVisible(true);
         if (capture != null && capture.isOpened()) {
             Mat Frame = new Mat();
             if (capture.read(Frame)) {

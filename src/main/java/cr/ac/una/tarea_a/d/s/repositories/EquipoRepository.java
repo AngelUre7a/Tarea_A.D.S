@@ -14,10 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-/**
- *
- * @author dasly
- */
+
 public class EquipoRepository implements IEquipoRepository {
 
     private static final String DEFAULT_FILE_NAME = "Equipo.json";

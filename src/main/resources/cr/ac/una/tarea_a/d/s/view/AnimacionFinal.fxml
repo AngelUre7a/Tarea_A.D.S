@@ -12,7 +12,6 @@
 
 <AnchorPane fx:id="root" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.AnimacionFinalController">
 
-    <!-- Panel de confeti (solo elementos visuales) -->
     <Pane fx:id="paneConfeti" layoutX="8.0" layoutY="10.0" mouseTransparent="true" pickOnBounds="false" prefHeight="423.0" prefWidth="692.0" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
         <children>
             <ImageView fitHeight="171.0" fitWidth="186.0" layoutX="475.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
@@ -29,7 +28,6 @@
         </children>
     </Pane>
 
-    <!-- Contenedor de botones FUERA del paneConfeti -->
     <VBox layoutX="40.0" layoutY="426.0" prefHeight="60.0" prefWidth="600.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="60.0">
         <children>
             <HBox alignment="CENTER" prefHeight="60.0" prefWidth="677.0" spacing="350.0">

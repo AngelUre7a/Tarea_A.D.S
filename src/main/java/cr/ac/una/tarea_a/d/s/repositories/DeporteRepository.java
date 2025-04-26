@@ -14,10 +14,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-/**
- *
- * @author dasly
- */
 public class  DeporteRepository implements IDeporteRepository  {
     private static final String DEFAULT_FILE_NAME = "Deporte.json";
     private final String filePath;

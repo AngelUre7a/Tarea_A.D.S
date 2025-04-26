@@ -4,10 +4,7 @@ import cr.ac.una.tarea_a.d.s.model.Equipo;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-/**
- *
- * @author dasly
- */
+
 public interface IEquipoRepository {
      Equipo save(Equipo equipo) throws IOException;
 

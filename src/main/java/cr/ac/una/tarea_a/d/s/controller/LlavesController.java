@@ -63,7 +63,7 @@ public class LlavesController extends Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("initialize");
+        
         txfNombreTorneo.setFocusTraversable(true);
         torneo1 = (Torneo) AppContext.getInstance().get("TORNEO");
         if (torneo1 != null) {
@@ -226,9 +226,6 @@ public class LlavesController extends Controller implements Initializable {
                 Equipo equipo1 = (Equipo) data[0];
                 Equipo equipo2 = (Equipo) data[1];
 
-                System.out.println("Equipo 1: " + equipo1);
-                System.out.println("Equipo 2: " + equipo2);
-
                 AppContext.getInstance().set("EQUIPO1", data[0]);
                 AppContext.getInstance().set("EQUIPO2", data[1]);
                 AppContext.getInstance().set("DEPORTE", torneo1.getTipoDeporte());
@@ -289,14 +286,9 @@ public class LlavesController extends Controller implements Initializable {
                             System.err.println("Error al guardar la partida: " + em.getMessage());
                         }
                     }
-
-                    mensaje.show(Alert.AlertType.INFORMATION, "Partido no jugado",
-                            "Este partido no se jugó porque uno de los equipos tiene 'BYE'.\n\n¡" + ganador.getNombre() + " avanza automáticamente!");
-
+                    mostrarAlertaBye(ganador);
                     procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
-
                     return;
-
                 }
                 FlowController.getInstance().goViewInWindowModal("Partido", ((Stage) root.getScene().getWindow()), false);
                 procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
@@ -364,7 +356,6 @@ public class LlavesController extends Controller implements Initializable {
         VBox rondaVBox = (VBox) hboxLlaves.getChildren().get(rondaIndex);
         int index = 0;
         for (int i = 0; i < ganadores.size(); i += 2) {
-            System.out.println(" ganadores: " + ganadores.size());
             Equipo eq1 = ganadores.get(i);
             if (ganadores.size() % 2 != 0) {
                 return;
@@ -448,20 +439,13 @@ public class LlavesController extends Controller implements Initializable {
                 if (rondaIndex > 0) {
 
                     List<Equipo> rondaAnterior = llavesPorRonda.get(rondaIndex - 1);
-                    System.out.println("ronda anterior: " + rondaAnterior);
                     if (rondaAnterior.size() / 2 != rondaActual.size()) {
-                        System.out.println("Faltan partidos por jugar en ronda " + (rondaIndex - 1));
-                        System.out.println("ronda anterior size: " + rondaAnterior.size());
-                        System.out.println("actual: " + rondaActual.size());
                         return;
                     }
                 }
 
                 VBox rondaVBox = (VBox) hboxLlaves.getChildren().get(rondaIndex);
                 List<Equipo> ganadores = new ArrayList<>();
-
-                System.out.println("Ronda " + rondaIndex + " con " + rondaActual.size() + " equipos.");
-                System.out.println("Partidos visuales en VBox: " + rondaVBox.getChildren().size());
 
                 for (int i = 0; i < rondaActual.size(); i += 2) {
                     Equipo eq1 = rondaActual.get(i);
@@ -657,7 +641,6 @@ public class LlavesController extends Controller implements Initializable {
         if (esGanador == true) {
             return;
         }
-        System.out.println("CAMPEÓN: " + campeon.getNombre());
         campeon.cargarImagenDesdeBase64();
         Deporte deporte = torneo1.getTipoDeporte() != null ? buscarDeportePorNombre(torneo1.getTipoDeporte()) : null;
         if (deporte != null) {
@@ -674,7 +657,6 @@ public class LlavesController extends Controller implements Initializable {
         DeporteRepository deporteRepo = new DeporteRepository();
         listaDeportes = deporteRepo.findAll();
         for (Deporte deporteActual : listaDeportes) {
-            System.out.println(deporteActual.getNombre());
             if (deporteActual.getNombre().equals(deporteUsado)) {
                 System.out.println("borrando torneo" + deporteActual.getCantidadTorneosInscritos());
                 deporteActual.deleteTorneoInscrito();
