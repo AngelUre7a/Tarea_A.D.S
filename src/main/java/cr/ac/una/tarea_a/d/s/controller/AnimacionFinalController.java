@@ -38,6 +38,8 @@ public class AnimacionFinalController extends Controller {
     private MFXButton btnCertificado;
 
     public void mostrarAnimacion(String base64Escudo, String base64Balon, String nombreEquipo) {
+        paneConfeti.setMouseTransparent(true);
+        paneConfeti.setPickOnBounds(false);
         Image imagenEscudo = Animaciones.convertirBase64AImage(base64Escudo);
         Image imagenBalon = Animaciones.convertirBase64AImage(base64Balon);
 

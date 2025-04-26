@@ -12,34 +12,37 @@
 
 <AnchorPane fx:id="root" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.AnimacionFinalController">
 
-    <Pane fx:id="paneConfeti" mouseTransparent="true" pickOnBounds="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <children>
-         <ImageView fitHeight="171.0" fitWidth="186.0" layoutX="475.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../resources/trofeo.png" />
-            </image>
-         </ImageView>
-      
-          <Label fx:id="lblCampeon" layoutX="40.0" layoutY="209.0" styleClass="lblCampeon" text="¡CAMPEÓN!" />
-      
-          <VBox layoutX="40.0" layoutY="426.0" prefHeight="60.0" prefWidth="600.0">
-              <children>
-                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="677.0" spacing="350.0">
-                      <children>
-                          <MFXButton fx:id="btnCertificado" onAction="#OnActionBtnCertificado" prefHeight="40.0" prefWidth="120.0" text="Certificado" />
-                          <MFXButton fx:id="btnSalir" onAction="#onActionBtnSalir" prefHeight="40.0" prefWidth="120.0" text="SALIR" />
-                      </children>
-                  </HBox>
-              </children>
-          </VBox>
-      
-          <ImageView fx:id="imgEquipo" fitHeight="160.0" fitWidth="160.0" layoutX="280.0" layoutY="280.0" preserveRatio="true" />
-      
-                <ImageView fx:id="imgBalon" fitHeight="100.0" fitWidth="100.0" layoutX="297.0" layoutY="60.0" preserveRatio="true" />
-      </children></Pane>
-   <styleClass>
-      <String fx:value="anchor-paneModal" />
-      <String fx:value="modal-vista" />
-   </styleClass>
+    <!-- Panel de confeti (solo elementos visuales) -->
+    <Pane fx:id="paneConfeti" layoutX="8.0" layoutY="10.0" mouseTransparent="true" pickOnBounds="false" prefHeight="423.0" prefWidth="692.0" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+        <children>
+            <ImageView fitHeight="171.0" fitWidth="186.0" layoutX="475.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../resources/trofeo.png" />
+                </image>
+            </ImageView>
+            
+            <Label fx:id="lblCampeon" layoutX="40.0" layoutY="209.0" styleClass="lblCampeon" text="¡CAMPEÓN!" />
+            
+            <ImageView fx:id="imgEquipo" fitHeight="160.0" fitWidth="160.0" layoutX="280.0" layoutY="280.0" preserveRatio="true" />
+            
+            <ImageView fx:id="imgBalon" fitHeight="100.0" fitWidth="100.0" layoutX="297.0" layoutY="60.0" preserveRatio="true" />
+        </children>
+    </Pane>
 
+    <!-- Contenedor de botones FUERA del paneConfeti -->
+    <VBox layoutX="40.0" layoutY="426.0" prefHeight="60.0" prefWidth="600.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="60.0">
+        <children>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="677.0" spacing="350.0">
+                <children>
+                    <MFXButton fx:id="btnCertificado" onAction="#OnActionBtnCertificado" prefHeight="40.0" prefWidth="120.0" text="Certificado" />
+                    <MFXButton fx:id="btnSalir" onAction="#onActionBtnSalir" prefHeight="40.0" prefWidth="120.0" text="SALIR" />
+                </children>
+            </HBox>
+        </children>
+    </VBox>
+
+    <styleClass>
+        <String fx:value="anchor-paneModal" />
+        <String fx:value="modal-vista" />
+    </styleClass>
 </AnchorPane>
