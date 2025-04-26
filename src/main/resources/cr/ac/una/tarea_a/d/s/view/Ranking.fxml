@@ -15,21 +15,21 @@
 
 <AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RankingController">
    <children>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="760.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
          <children>
             <VBox alignment="CENTER" prefHeight="112.0" prefWidth="760.0" spacing="20.0">
                <children>
-                  <Label text="Ranking" />
-                  <HBox alignment="TOP_CENTER" prefHeight="23.0" prefWidth="778.0" spacing="10.0">
+                  <Label styleClass="jfx-title-label" stylesheets="@../css/Style.css" text="Ranking" />
+                  <HBox alignment="CENTER" prefHeight="80.0" prefWidth="760.0" spacing="10.0">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0">
                            <image>
                               <Image url="@../resources/buscar.png" />
                            </image>
                         </ImageView>
-                        <MFXTextField fx:id="filterField" floatMode="BORDER" floatingText="Buscador" floatingTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="35.0" prefWidth="450.0" />
-                        <ComboBox fx:id="ComboBoxDeportes" maxWidth="200.0" prefHeight="35.0" prefWidth="170.0" styleClass="mfx-combo-box" stylesheets="@../css/Style.css" />
-                        <MFXButton fx:id="btnActualizar" onAction="#onActionBtnActualizar" prefHeight="35.0" prefWidth="90.0" styleClass="jfx-button-long-text" stylesheets="@../css/Style.css" text="Actualizar" />
+                        <MFXTextField fx:id="filterField" floatMode="BORDER" floatingText="Buscador" floatingTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" />
+                        <ComboBox fx:id="ComboBoxDeportes" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="150.0" styleClass="mfx-combo-box" stylesheets="@../css/Style.css" />
+                        <MFXButton fx:id="btnActualizar" minWidth="-Infinity" onAction="#onActionBtnActualizar" prefHeight="40.0" prefWidth="90.0" styleClass="jfx-button-long-text" stylesheets="@../css/Style.css" text="Actualizar" />
                      </children>
                      <padding>
                         <Insets left="10.0" right="10.0" />

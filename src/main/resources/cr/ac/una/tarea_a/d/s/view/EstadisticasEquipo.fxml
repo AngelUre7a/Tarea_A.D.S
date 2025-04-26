@@ -4,15 +4,16 @@
 <?import java.lang.String?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.EstadisticasEquipoController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.EstadisticasEquipoController">
    <children>
       <VBox layoutX="64.0" layoutY="38.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="TOP_CENTER" prefHeight="34.0" prefWidth="600.0">
+            <HBox alignment="TOP_CENTER" prefHeight="34.0" prefWidth="600.0" stylesheets="@../css/Style.css">
                <children>
                   <Label alignment="CENTER" prefHeight="34.0" prefWidth="161.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Estadisticas del equipo:" />
                   <Label fx:id="lblNombreEquipo" prefHeight="34.0" prefWidth="245.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" />
@@ -20,6 +21,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Label prefHeight="49.0" prefWidth="297.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Estadisticas generales:" />
@@ -49,6 +51,7 @@
                         </HBox>
                      </children>
                   </VBox>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
                         <ComboBox fx:id="cmbTorneos" onAction="#onActionCmbTorneos" prefHeight="50.0" prefWidth="253.0" promptText="Por torneo:" styleClass="mfx-combo-box" stylesheets="@../css/Style.css" />
@@ -82,7 +85,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="594.0" spacing="20.0">
                <children>
-                  <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" text="Volver" />
+                  <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" prefHeight="40.0" prefWidth="90.0" text="Volver" />
                </children>
             </HBox>
          </children>

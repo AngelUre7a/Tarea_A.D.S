@@ -1,9 +1,6 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
-import cr.ac.una.tarea_a.d.s.model.Deporte;
-import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.model.Torneo;
-import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.repositories.EquipoRepository;
 import cr.ac.una.tarea_a.d.s.repositories.TorneoRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
@@ -69,21 +66,28 @@ public class ListaTorneoController extends Controller implements Initializable {
     private final TorneoRepository Torneorepo = new TorneoRepository();
     private final EquipoRepository Equiporepo = new EquipoRepository();
 
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        configurarColumnas();
+        configurarBotones();
+        configurarFiltro();
+        cargarFormulario();
+    }
+
+    private void configurarColumnas() {
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colCategoria.setCellValueFactory(new PropertyValueFactory<>("tipoDeporte"));
         colEquiposRegistrados.setCellValueFactory(new PropertyValueFactory<>("cantidadEquipos"));
         colTiempo.setCellValueFactory(new PropertyValueFactory<>("tiempoPorPartida"));
         colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
+    }
 
-        colIniciar.setCellFactory(column -> new javafx.scene.control.TableCell<Torneo, String>() {
+    private void configurarBotones() {
+        colIniciar.setCellFactory(column -> new TableCell<>() {
             private final MFXButton btnIniciar = new MFXButton("");
 
             {
-                btnIniciar.setText("");
                 ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/iniciar.png").toExternalForm()));
                 icono.setFitWidth(40);
                 icono.setFitHeight(40);
@@ -91,27 +95,17 @@ public class ListaTorneoController extends Controller implements Initializable {
                 btnIniciar.getStyleClass().add("boton-tabla-icono");
                 btnIniciar.setStyle("-fx-background-color: transparent;");
 
-                // Acción del botón
                 btnIniciar.setOnAction(event -> {
-                    for (int i = 0; i < 50; i++) {
-                        System.out.println();
-                    }
                     Torneo torneo = getTableView().getItems().get(getIndex());
-
                     if ("finalizado".equalsIgnoreCase(torneo.getEstado())) {
                         new Mensaje().show(Alert.AlertType.INFORMATION, "Torneo finalizado", "Este torneo ya terminó y no se puede volver a jugar.");
                         return;
                     }
-
                     AppContext.getInstance().set("TORNEO", torneo);
                     FlowController.getInstance().goView("Llaves");
                     LlavesController controller = (LlavesController) FlowController.getInstance().getController("Llaves");
-
-                    if (controller != null) {
-                        controller.onShow();
-                    }
+                    if (controller != null) controller.onShow();
                 });
-
             }
 
             @Override
@@ -121,118 +115,102 @@ public class ListaTorneoController extends Controller implements Initializable {
                     setGraphic(null);
                 } else {
                     Torneo torneo = getTableView().getItems().get(getIndex());
-                    if ("finalizado".equalsIgnoreCase(torneo.getEstado())) {
-                        btnIniciar.setDisable(true);
-                    } else {
-                        btnIniciar.setDisable(false);
-                    }
-
+                    btnIniciar.setDisable("finalizado".equalsIgnoreCase(torneo.getEstado()));
                     HBox hbox = new HBox(btnIniciar);
                     hbox.setAlignment(Pos.CENTER);
-                    hbox.setPrefWidth(Double.MAX_VALUE);
                     setGraphic(hbox);
                 }
             }
-
         });
+/*
         colEliminar.setCellFactory(param -> new TableCell<>() {
             private final MFXButton btnEliminar = new MFXButton();
 
             {
-                btnEliminar.setText("");
                 ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/borrar.png").toExternalForm()));
                 icono.setFitWidth(40);
                 icono.setFitHeight(40);
                 btnEliminar.setGraphic(icono);
                 btnEliminar.getStyleClass().add("boton-tabla-icono");
                 btnEliminar.setStyle("-fx-background-color: transparent;");
-                //css
 
                 btnEliminar.setOnAction(event -> {
                     Torneo torneo = getTableView().getItems().get(getIndex());
-                    if (new Mensaje().showConfirmation("Confirmación", "¿Está seguro de eliminar el deporte?")) {
+                    if (new Mensaje().showConfirmation("Confirmación", "¿Está seguro de eliminar el torneo?")) {
                         try {
                             Torneorepo.deleteById(torneo.getId());
+                            torneoLista.remove(torneo);
                         } catch (IOException ex) {
                             Logger.getLogger(RegistroListaDeporteBalonController.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        torneoLista.remove(torneo);
-                        tableView.refresh();
                     }
                 });
             }
 
-        });
-        cargarFormulario();
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    HBox hbox = new HBox(btnEliminar);
+                    hbox.setAlignment(Pos.CENTER);
+                    setGraphic(hbox);
+                }
+            }
+        });*/
+    }
 
+    private void configurarFiltro() {
         FilteredList<Torneo> filteredData = new FilteredList<>(torneoLista, b -> true);
 
         filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(Torneo -> {
+            filteredData.setPredicate(torneo -> {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-
                 String lowerCaseFilter = newValue.toLowerCase();
-
-                if (Torneo.getTipoDeporte().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return (torneo.getId() != null && torneo.getId().toLowerCase().contains(lowerCaseFilter)) ||
+                       (torneo.getNombre() != null && torneo.getNombre().toLowerCase().contains(lowerCaseFilter)) ||
+                       (torneo.getTipoDeporte() != null && torneo.getTipoDeporte().toLowerCase().contains(lowerCaseFilter)) ||
+                       (torneo.getEstado() != null && torneo.getEstado().toLowerCase().contains(lowerCaseFilter));
             });
         });
 
         SortedList<Torneo> sortedData = new SortedList<>(filteredData);
-
         sortedData.comparatorProperty().bind(tableView.comparatorProperty());
-
         tableView.setItems(sortedData);
+    }
+
+    private void cargarFormulario() {
+        try {
+            torneoLista.clear();
+            torneoLista.addAll(Torneorepo.findAll());
+        } catch (IOException e) {
+            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar torneos", "No se pudo cargar la lista de torneos.");
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void onActionBtnAgregar(ActionEvent event) throws IOException {
         FlowController.getInstance().goViewInWindowModal("CreacionTorneo", ((Stage) root.getScene().getWindow()), false);
         if (AppContext.getInstance().containsItem("TORNEO_NUEVO")) {
-
             Torneo nuevo = (Torneo) AppContext.getInstance().get("TORNEO_NUEVO");
             if (nuevo != null) {
                 Torneorepo.save(nuevo);
-                List<Torneo> torneos = (List<Torneo>) AppContext.getInstance().get("LISTA_TORNEOS");
-
                 torneoLista.add(nuevo);
-                torneoLista.clear();
-                torneoLista.addAll(torneos);
-                cargarFormulario();
                 AppContext.getInstance().delete("TORNEO_NUEVO");
             }
         }
     }
 
-    @Override
-    public void initialize() {
+    @FXML
+    private void onActionBtnActualizar(ActionEvent event) {
         cargarFormulario();
     }
 
-    private void cargarFormulario() {
-
-        try {
-            torneoLista.clear();
-            for (Torneo t : Torneorepo.findAll()) {
-                torneoLista.add(t);
-            }
-            tableView.setItems(torneoLista);
-            tableView.refresh();
-        } catch (IOException e) {
-            new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar torneos", "No se pudo cargar la lista de torneos.");
-            e.printStackTrace();
-
-        }
+    @Override
+    public void initialize() {
     }
-
-    @FXML
-    private void onActionBtnActualizar(ActionEvent event) {
-        tableView.refresh();
-    }
-
 }

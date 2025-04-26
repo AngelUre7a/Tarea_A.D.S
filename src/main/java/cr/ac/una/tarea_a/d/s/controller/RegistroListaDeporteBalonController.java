@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -58,6 +59,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
     private final DeporteRepository Deporterepo = new DeporteRepository();
     private final ObservableList<Equipo> equiposLista = FXCollections.observableArrayList();
     private final EquipoRepository Equiporepo = new EquipoRepository();
+    private FilteredList<Deporte> deportesFiltrados;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -66,11 +68,13 @@ public class RegistroListaDeporteBalonController extends Controller implements I
         colImagen.setCellValueFactory(new PropertyValueFactory<>("imagen"));
         colImagen.setCellFactory(column -> new TableCell<>() {
             private final ImageView imageView = new ImageView();
+
             {
                 imageView.setFitWidth(50);
                 imageView.setFitHeight(50);
                 imageView.setPreserveRatio(true);
             }
+
             @Override
             protected void updateItem(Image item, boolean empty) {
                 super.updateItem(item, empty);
@@ -85,6 +89,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
 
         colEditar.setCellFactory(param -> new TableCell<>() {
             private final MFXButton btnEditar = new MFXButton();
+
             {
                 btnEditar.setText("");
                 ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/editar.png").toExternalForm()));
@@ -121,6 +126,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
         });
         colEliminar.setCellFactory(param -> new TableCell<>() {
             private final MFXButton btnEliminar = new MFXButton();
+
             {
                 btnEliminar.setText("");
                 ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/borrar.png").toExternalForm()));
@@ -182,7 +188,8 @@ public class RegistroListaDeporteBalonController extends Controller implements I
                 d.cargarImagenDesdeBase64();
                 deportesLista.add(d);
             }
-            tableView.setItems(deportesLista);
+            deportesFiltrados = new FilteredList<>(deportesLista, p -> true);
+            tableView.setItems(deportesFiltrados);
             tableView.refresh();
         } catch (IOException e) {
             new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar deportes", "No se pudo cargar la lista de deportes.");
@@ -192,17 +199,12 @@ public class RegistroListaDeporteBalonController extends Controller implements I
 
     private void aplicarFiltro() {
         filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == null || newValue.isBlank()) {
-                tableView.setItems(deportesLista);
-            } else {
-                ObservableList<Deporte> filteredList = FXCollections.observableArrayList();
-                for (Deporte deporte : deportesLista) {
-                    if (deporte.getNombre().toLowerCase().contains(newValue.toLowerCase())) {
-                        filteredList.add(deporte);
-                    }
+            deportesFiltrados.setPredicate(deporte -> {
+                if (newValue == null || newValue.isBlank()) {
+                    return true;
                 }
-                tableView.setItems(filteredList);
-            }
+                return deporte.getNombre().toLowerCase().contains(newValue.toLowerCase());
+            });
         });
     }
 
