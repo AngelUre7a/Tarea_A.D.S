@@ -62,7 +62,7 @@ public class MostrarCertificadoController extends Controller implements Initiali
     private VBox ContainerSinBotones;
     @FXML
     private MFXButton btnVolver;
-    private MFXButton btnSalir;
+    
     @FXML
     private ImageView imgFondo;
     @FXML
@@ -128,7 +128,6 @@ public class MostrarCertificadoController extends Controller implements Initiali
     private void ImprimirCertificado(){
          Sonidos.click();
         btnVolver.setVisible(false);
-        btnSalir.setVisible(false);
         btnImprimirCert.setVisible(false);
         try {
             WritableImage snapshot = root.snapshot(new SnapshotParameters(), null);

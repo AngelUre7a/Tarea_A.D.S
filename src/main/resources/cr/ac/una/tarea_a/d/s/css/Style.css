@@ -54,7 +54,7 @@ BorderPane {
 
 /* ========================================================= */
 /* Botones */
-
+/* ========================================================= */
 .button {
     -fx-background-color: -fx-color-balliverse;
     -fx-padding: 5;
@@ -75,7 +75,7 @@ BorderPane {
 .button:hover {
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
-    -fx-background-radius: 21px;  /* Radio ajustado al escalado */
+    -fx-background-radius: 21px;
     -fx-border-radius: 21px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.3, 4, 4);
     -fx-background-color: -fx-color-rich_black;
@@ -211,7 +211,9 @@ BorderPane {
     -fx-font-size: 65px;
 }
 
-/* Texto especial para campeón */
+/* ========================================================= */
+/* Para campeón */
+/* ========================================================= */
 #lblCampeon {
     -fx-font-family: "Arial Black";
     -fx-text-fill: #ffe600;
@@ -220,9 +222,6 @@ BorderPane {
     -fx-alignment: center;
 }
 
-/* ========================================================= */
-/*  Imágenes */
-/* ========================================================= */
 #imgEquipo {
     -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 20, 0.5, 0, 0);
     -fx-border-radius: 10px;
@@ -240,8 +239,6 @@ BorderPane {
     -fx-border-color: black;
     -fx-border-width: 2px;
     -fx-font-size: 12px;
-/*    -fx-padding: 5px;*/
-    -fx-margen:5px;
 }
 
 .table-view .column-header {
@@ -297,3 +294,7 @@ BorderPane {
     -fx-background-color: transparent !important;
     -fx-border-color: transparent !important;
 }
+/*
+ * Este método carga todos los equipos registrados
+ * en el ComboBox principal de la vista.
+ */
