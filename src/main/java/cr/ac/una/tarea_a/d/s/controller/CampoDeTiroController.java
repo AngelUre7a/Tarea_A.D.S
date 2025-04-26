@@ -245,7 +245,6 @@ public class CampoDeTiroController extends Controller implements Initializable {
     
     @FXML
     private void onActionBtnIniciar(ActionEvent event) {
-        Sonidos.musicaDesempate();
             puedeMoverBalon = true;
             btnIniciar.setDisable(true);
             iniciarCronometro();

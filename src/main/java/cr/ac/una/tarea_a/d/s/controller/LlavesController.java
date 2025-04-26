@@ -43,6 +43,7 @@ public class LlavesController extends Controller implements Initializable {
 
     private final PartidaRepository partidaRepository = new PartidaRepository();
     private final EquipoRepository Equiporepo = new EquipoRepository();
+    private final Mensaje mensaje = new Mensaje();
 
     private Torneo torneo1;
     private List<List<Equipo>> llavesPorRonda = new ArrayList<>();
@@ -62,13 +63,11 @@ public class LlavesController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("initialize");
-        //limpiarVista();
         txfNombreTorneo.setFocusTraversable(true);
         torneo1 = (Torneo) AppContext.getInstance().get("TORNEO");
         if (torneo1 != null) {
             generarEstructuraLlaves();
             llenarPrimerRonda();
-            //reconstruirDesdePartidas();
             conectarPartidosConLineas();
         } else {
             System.out.println("Torneo null en LlavesController");
@@ -106,7 +105,7 @@ public class LlavesController extends Controller implements Initializable {
 
     private void conectarPartidosConLineas() {
         Platform.runLater(() -> {
-            linePane.getChildren().clear(); // Limpia líneas previas
+            linePane.getChildren().clear();
 
             for (int ronda = 0; ronda < hboxLlaves.getChildren().size() - 1; ronda++) {
 
@@ -137,7 +136,7 @@ public class LlavesController extends Controller implements Initializable {
         int totalEquipos = siguientePotencia(equipos.size());
         int rondas = (int) (Math.log(totalEquipos) / Math.log(2));
         int numByes = totalEquipos - equipos.size();
-        // Crear una lista de equipos BYE
+
         List<Equipo> equiposBye = new ArrayList<>();
         for (int i = 0; i < numByes; i++) {
             equiposBye.add(new Equipo(java.util.UUID.randomUUID().toString(), "BYE", torneo1.getTipoDeporte()));
@@ -182,11 +181,11 @@ public class LlavesController extends Controller implements Initializable {
 
     private List<Equipo> intercalarEquipos(List<Equipo> equipos, List<Equipo> equiposBye) {
         List<Equipo> listaIntercalada = new ArrayList<>(equipos);
-        int insertIndex = listaIntercalada.size();  // inicia justo después del último elemento
+        int insertIndex = listaIntercalada.size();
 
         for (int i = 0; i < equiposBye.size(); i++) {
             listaIntercalada.add(insertIndex, equiposBye.get(i));
-            insertIndex--;  // retrocedemos uno hacia el "medio" de la lista
+            insertIndex--;
         }
 
         return listaIntercalada;
@@ -223,11 +222,9 @@ public class LlavesController extends Controller implements Initializable {
 
                 Object[] data = (Object[]) btn.getUserData();
 
-                // Obtener los objetos Equipo de los datos
                 Equipo equipo1 = (Equipo) data[0];
                 Equipo equipo2 = (Equipo) data[1];
 
-                // Depuración para verificar los valores de los equipos
                 System.out.println("Equipo 1: " + equipo1);
                 System.out.println("Equipo 2: " + equipo2);
 
@@ -237,15 +234,11 @@ public class LlavesController extends Controller implements Initializable {
 
                 Boolean partidoBye = false;
 
-//                System.out.println("equipo1: " + AppContext.getInstance().get("EQUIPO1"));
-//                System.out.println("equipo2: " + AppContext.getInstance().get("EQUIPO2"));
-                // Verificar si alguno de los equipos tiene el nombre "BYE"
                 if ("BYE".equalsIgnoreCase(equipo2.getNombre())) {
                     partidoBye = true;
                 }
                 if (partidoBye) {
                     Equipo ganador;
-                    // Verificar cuál equipo tiene el nombre "BYE" y establecer el ganador
                     if ("BYE".equalsIgnoreCase(equipo2.getNombre())) {
                         ganador = equipo1;
                         System.out.println("EQUIPO 1 AVANZA POR BYE");
@@ -296,25 +289,19 @@ public class LlavesController extends Controller implements Initializable {
                         }
                     }
 
-                    // Mostrar alerta informando que no se jugará el partido
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Partido no jugado");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Este partido no se jugó porque uno de los equipos tiene 'BYE'.\n\n"
-                            + "¡" + ganador.getNombre() + " avanza automáticamente!");
-                    alert.showAndWait();
+                    mensaje.show(Alert.AlertType.INFORMATION, "Partido no jugado",
+                            "Este partido no se jugó porque uno de los equipos tiene 'BYE'.\n\n¡" + ganador.getNombre() + " avanza automáticamente!");
 
-                    // Procesar avance directamente
                     procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
 
-                    return; // No continúa a la vista de partido
+                    return;
 
                 }
                 FlowController.getInstance().goViewInWindowModal("Partido", ((Stage) root.getScene().getWindow()), false);
                 procesarGanadorDespuesDePartido((int) data[2], (int) data[3]);
 
             });
-            // Crear Partida y agregarla al torneo
+
             Partida partida = new Partida();
             partida.setId(java.util.UUID.randomUUID().toString());
             partida.setIdTorneo(torneo1.getId());
@@ -378,11 +365,9 @@ public class LlavesController extends Controller implements Initializable {
         for (int i = 0; i < ganadores.size(); i += 2) {
             System.out.println(" ganadores: " + ganadores.size());
             Equipo eq1 = ganadores.get(i);
-            if(ganadores.size()%2!=0){
+            if (ganadores.size() % 2 != 0) {
                 return;
             }
-            System.out.println("aquiiiiii");
-//            Equipo eq2 = i + 1 < ganadores.size() ? ganadores.get(i + 1) : new Equipo(java.util.UUID.randomUUID().toString(), "BYE", torneo1.getTipoDeporte());
             Equipo eq2 = ganadores.get(i + 1);
 
             VBox partidoVBox = (VBox) rondaVBox.getChildren().get(index);
@@ -417,25 +402,21 @@ public class LlavesController extends Controller implements Initializable {
     }
 
     public void onShow() {
-        //limpiarVista();
+
         torneo1 = (Torneo) AppContext.getInstance().get("TORNEO");
 
         if (torneo1 != null) {
             txfNombreTorneo.setText(torneo1.getNombre());
-            generarEstructuraLlaves(); // esto arma la estructura base visual
-            //reconstruirDesdePartidas();
-            System.out.println("esperando 5 seg");
-            //Thread.sleep(5000);
+            generarEstructuraLlaves();
 
-            // ⚠️ Si el torneo está en curso, recuperar estado
             if ("enCurso".equalsIgnoreCase(torneo1.getEstado()) || "finalizado".equalsIgnoreCase(torneo1.getEstado())) {
                 reconstruirDesdePartidas();
-                hboxLlaves.applyCss();   // Asegura que los estilos ya estén aplicados
-                hboxLlaves.layout();     // Fuerza el cálculo de tamaño y posición
+                hboxLlaves.applyCss();
+                hboxLlaves.layout();
                 conectarPartidosConLineas();
 
             } else {
-                llenarPrimerRonda(); // solo si es nuevo
+                llenarPrimerRonda();
                 conectarPartidosConLineas();
                 torneo1.setEstado("enCurso");
                 try {
@@ -461,33 +442,32 @@ public class LlavesController extends Controller implements Initializable {
             List<Equipo> rondaActual = new ArrayList<>(torneo1.getEquiposInscritos());
 
             int rondaIndex = 0;
-            
+
             while (rondaActual.size() > 1) {
-                if(rondaIndex>0){
-                // Verificar si todos los partidos de la ronda anterior están en llavesPorRonda
-                List<Equipo> rondaAnterior = llavesPorRonda.get(rondaIndex - 1);
+                if (rondaIndex > 0) {
+
+                    List<Equipo> rondaAnterior = llavesPorRonda.get(rondaIndex - 1);
                     System.out.println("ronda anterior: " + rondaAnterior);
-                if (rondaAnterior.size()/2 != rondaActual.size()) {
-                    System.out.println("Faltan partidos por jugar en ronda " + (rondaIndex - 1));
-                    System.out.println("ronda anterior size: " + rondaAnterior.size());
-                    System.out.println("actual: " + rondaActual.size());
-                    return;
+                    if (rondaAnterior.size() / 2 != rondaActual.size()) {
+                        System.out.println("Faltan partidos por jugar en ronda " + (rondaIndex - 1));
+                        System.out.println("ronda anterior size: " + rondaAnterior.size());
+                        System.out.println("actual: " + rondaActual.size());
+                        return;
+                    }
                 }
-            }
 
                 VBox rondaVBox = (VBox) hboxLlaves.getChildren().get(rondaIndex);
                 List<Equipo> ganadores = new ArrayList<>();
 
-                System.out.println("🧪 Ronda " + rondaIndex + " con " + rondaActual.size() + " equipos.");
+                System.out.println("Ronda " + rondaIndex + " con " + rondaActual.size() + " equipos.");
                 System.out.println("Partidos visuales en VBox: " + rondaVBox.getChildren().size());
 
                 for (int i = 0; i < rondaActual.size(); i += 2) {
                     Equipo eq1 = rondaActual.get(i);
                     Equipo eq2 = rondaActual.get(i + 1);
 
-                    // ✅ Validar que el VBox tenga el partido correspondiente
                     if (i / 2 >= rondaVBox.getChildren().size()) {
-                        System.err.println("❌ Error: El partido #" + (i / 2) + " no existe en la ronda " + rondaIndex);
+                        System.err.println("Error: El partido #" + (i / 2) + " no existe en la ronda " + rondaIndex);
                         continue;
                     }
 
@@ -503,7 +483,6 @@ public class LlavesController extends Controller implements Initializable {
                     VBox marcadorVBox = (VBox) partidoVBox.getChildren().get(1);
                     Button btn = (Button) marcadorVBox.getChildren().get(0);
 
-                    // 🔍 Buscar la partida en JSON
                     Partida partida = partidasTorneo.stream()
                             .filter(p -> (p.getIdEquipoA().equals(eq1.getId()) && p.getIdEquipoB().equals(eq2.getId()))
                             || (p.getIdEquipoA().equals(eq2.getId()) && p.getIdEquipoB().equals(eq1.getId())))
@@ -553,7 +532,6 @@ public class LlavesController extends Controller implements Initializable {
                 rondaIndex++;
             }
 
-            // 🎯 Mostrar animación final si el torneo ya fue jugado
             boolean torneoCompleto = torneo1.getPartidas().stream()
                     .filter(p -> p.getEstado().equalsIgnoreCase("finalizado"))
                     .count() >= torneo1.getEquiposInscritos().size() - 1;
@@ -600,12 +578,9 @@ public class LlavesController extends Controller implements Initializable {
     }
 
     private void mostrarAlertaBye(Equipo ganador) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Partido no jugado");
-        alert.setHeaderText(null);
-        alert.setContentText("Este partido no se jugó porque uno de los equipos tiene 'BYE'.\n\n"
-                + "¡" + ganador.getNombre() + " avanza automáticamente!");
-        alert.showAndWait();
+      mensaje.show(Alert.AlertType.INFORMATION, "Partido no jugado", 
+    "Este partido no se jugó porque uno de los equipos tiene 'BYE'.\n\n¡" + ganador.getNombre() + " avanza automáticamente!");
+
     }
 
     private void limpiarVista() {
@@ -615,14 +590,14 @@ public class LlavesController extends Controller implements Initializable {
         ganadoresTemporales.clear();
 
         if (linePane != null) {
-            linePane.getChildren().clear(); // 💥 limpia las líneas entre partidos
+            linePane.getChildren().clear();
         }
 
     }
 
     private void mostrarAnimacionGanadorPartido(Equipo ganador) {
         try {
-            
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/AnimacionPorPartido.fxml"));
             Parent root = loader.load();
             AnimacionPorPartidoController controller = loader.getController();
@@ -638,7 +613,6 @@ public class LlavesController extends Controller implements Initializable {
             stage.setResizable(false);
             stage.show();
 
-            // Que se cierre automáticamente después de unos segundos
             javafx.animation.PauseTransition delay = new javafx.animation.PauseTransition(Duration.seconds(4));
             delay.setOnFinished(e -> stage.close());
             delay.play();
@@ -706,8 +680,8 @@ public class LlavesController extends Controller implements Initializable {
 
         try {
             TorneoRepository torneoRepo = new TorneoRepository();
-            torneoRepo.save(torneo1); // Asumiendo que tu repositorio actualiza si ya existe
-            System.out.println("✅ Torneo marcado como finalizado.");
+            torneoRepo.save(torneo1);
+            System.out.println(" Torneo marcado como finalizado.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -734,7 +708,7 @@ public class LlavesController extends Controller implements Initializable {
         }
         AppContext.getInstance().set("ES_GANADOR", statsPTCampeon.esGanadorDT());
         if (statsPTCampeon.esGanadorDT()) {
-            System.out.println("⚠️ Estadísticas ya marcadas como ganadoras, se omite actualización.");
+            System.out.println("Estadísticas ya marcadas como ganadoras, se omite actualización.");
             return;
         }
 
@@ -783,8 +757,9 @@ public class LlavesController extends Controller implements Initializable {
                     System.out.println("BYE ELIMINADO");
                 }
             } catch (IOException e) {
-                new Mensaje().show(Alert.AlertType.ERROR, "Error al actualizar equipo", "No se pudo actualizar el estado del equipo: " + equipo.getNombre());
-                e.printStackTrace();
+              mensaje.show(Alert.AlertType.ERROR, "Error al actualizar equipo", 
+    "No se pudo actualizar el estado del equipo: " + equipo.getNombre());
+
             }
         }
     }
