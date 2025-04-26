@@ -62,9 +62,12 @@ public class RegistroEquipoController extends Controller implements Initializabl
     private boolean isCameraRunning = false;
     private Equipo equipo;
     private boolean esEdicion = false;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        btnTomarFoto.setDisable(true);
+        btnTomarFoto.setVisible(false);
+        btnTomarFoto.setManaged(false);;
         limpiarFormulario();
         OpenCV.loadLocally();
         List<Deporte> deportes = null;
@@ -80,7 +83,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
             AppContext.getInstance().set("LISTA_DEPORTES", deportes);
         } catch (IOException e) {
             new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar deportes", "No se pudo cargar la lista de deportes.");
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
         if (deportes != null) {
             ComboBoxDeportes.getItems().addAll(deportes);
@@ -100,6 +103,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
             }
         });
     }
+
     @FXML
     private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
         String rutaImagen = (String) AppContext.getInstance().get("IMAGEN_TOMADA");
@@ -152,6 +156,12 @@ public class RegistroEquipoController extends Controller implements Initializabl
 
     @FXML
     private void OnActionBtnAbrirCamera(ActionEvent event) {
+        btnAbrirCamera.setDisable(true);
+        btnAbrirCamera.setVisible(false);
+        btnAbrirCamera.setManaged(false);
+        btnTomarFoto.setDisable(false);
+        btnTomarFoto.setVisible(true);
+        btnTomarFoto.setManaged(true);
         if (!isCameraRunning) {
             capture = new VideoCapture(0);
             if (!capture.isOpened()) {
@@ -181,6 +191,14 @@ public class RegistroEquipoController extends Controller implements Initializabl
 
     @FXML
     private void onActionBtnTomarFoto(ActionEvent event) {
+        btnTomarFoto.setDisable(true);
+//        btnTomarFoto.setVisible(false);
+        btnTomarFoto.setManaged(false);
+        btnTomarFoto.setVisible(false);
+        btnAbrirCamera.setDisable(false);
+        btnAbrirCamera.setManaged(true);
+        btnAbrirCamera.setVisible(true);
+//        btnAbrirCamera.setVisible(true);
         if (capture != null && capture.isOpened()) {
             Mat Frame = new Mat();
             if (capture.read(Frame)) {
@@ -204,6 +222,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
             }
         }
         cerrarCamara();
+
     }
 
     @FXML
@@ -265,12 +284,12 @@ public class RegistroEquipoController extends Controller implements Initializabl
         Boolean respuesta = mensaje.showConfirmation("BALLIVERSE", "¿Estás seguro que deseas salir de la ventana para crear Equipos??");
         if (respuesta) {
             cerrarCamara();
-        Stage stage = (Stage) root.getScene().getWindow();
-        stage.close();
+            Stage stage = (Stage) root.getScene().getWindow();
+            stage.close();
         } else {
             return;
         }
-        
+
     }
 
 }
