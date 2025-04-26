@@ -56,7 +56,8 @@ public class RegistroDeporteController extends Controller implements Initializab
 
         DragAndDropForImageView();
     }
-
+// esto habilita la funcionalidad de arrastrar y soltar imágenes sobre el ImageView
+    
     private void DragAndDropForImageView() {
         imageView.setOnDragOver(event -> {
             if (event.getGestureSource() != imageView && event.getDragboard().hasFiles()) {
@@ -95,7 +96,8 @@ public class RegistroDeporteController extends Controller implements Initializab
             event.consume();
         });
     }
-
+   //Maneja el"Registrar los datos Crea un nuevo deporte o actualiza uno existente
+    
     @FXML
     private void onActionBtnRegistrar(ActionEvent event) throws IOException {
          Sonidos.click();
@@ -140,7 +142,7 @@ public class RegistroDeporteController extends Controller implements Initializab
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
     }
-
+//maneja la logica de cargar imagenen desde archivss
     @FXML
     private void onActionBtnCargarImagen(ActionEvent event) {
          Sonidos.click();
@@ -159,6 +161,7 @@ public class RegistroDeporteController extends Controller implements Initializab
     public void initialize() {
     }
     
+     // Limpia los campos del formulario y restablece el estado del controlador.
     private void limpiarFormulario() {
         txtNombreDeporte.clear();
         imageView.setImage(null);

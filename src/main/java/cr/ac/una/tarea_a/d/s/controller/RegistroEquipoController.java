@@ -156,6 +156,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
         stage.close();
     }
 
+    // Abre la cámara y empieza a mostrar en vivo
     @FXML
     private void OnActionBtnAbrirCamera(ActionEvent event) {
          Sonidos.click();
@@ -191,6 +192,8 @@ public class RegistroEquipoController extends Controller implements Initializabl
             cameraThread.start();
         }
     }
+    
+     //taqui oma una foto usando la cámara y guarda la imagen en un archivo local
 
     @FXML
     private void onActionBtnTomarFoto(ActionEvent event) {
@@ -238,7 +241,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
             ImageView.setImage(imagen);
         }
     }
-
+//aquic se Convierte un Mat de OpenCV en una Image de JavaFX.
     private javafx.scene.image.Image matToImage(Mat Frame) {
         int width = Frame.width();
         int height = Frame.height();

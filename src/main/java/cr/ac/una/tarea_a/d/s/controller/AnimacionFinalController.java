@@ -61,6 +61,8 @@ public class AnimacionFinalController extends Controller {
         lanzarConfetiVisual();
     }
 
+   
+// en esta animacion cada estrella rota y se mueve de arriba hacia abajo.
     private void lanzarConfetiVisual() {
         Platform.runLater(() -> {
             for (int i = 0; i < 40; i++) {
