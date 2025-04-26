@@ -30,6 +30,7 @@ public class AnimacionPorPartidoController extends Controller {
     @FXML
     private Pane paneConfeti;
 
+    //Una pequeña animacion para mostrar quien gano el partido actual
     public void mostrarAnimacion(String base64Escudo, String base64Balon, String nombreEquipo) {
         Image imagenEscudo = Animaciones.convertirBase64AImage(base64Escudo);
         Image imagenBalon = Animaciones.convertirBase64AImage(base64Balon);

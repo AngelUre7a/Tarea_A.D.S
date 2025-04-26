@@ -201,6 +201,11 @@ public class CreacionTorneoController extends Controller implements Initializabl
     public void initialize() {
     }
 
+    
+//    muestra todos los deportes agregados en el programa
+//    lo usamos para filtar solo los equipos de ese deporte
+//    ademas aprovechamos y lo usamos para setear el tipo de
+//    deporte que será el torneo creado
     @FXML
     private void onActionComboBoxDeportes(ActionEvent event) {
         Sonidos.click();
@@ -210,6 +215,8 @@ public class CreacionTorneoController extends Controller implements Initializabl
         tableView.setItems(equiposFiltrados);
     }
 
+    
+//    guarda el torneo y muestra directamente las llaves del torneo creado
     @FXML
     private void onActionBtnJugarTorneo(ActionEvent event) {
         Sonidos.click();
@@ -304,6 +311,8 @@ public class CreacionTorneoController extends Controller implements Initializabl
         ((Stage) root.getScene().getWindow()).close();
     }
 
+    
+//    guarda el torneo pero no muestra las llaves, muestra la lista de torneos 
     @FXML
     private void onActionBtnGuardarTorneo(ActionEvent event) {
         Sonidos.click();
@@ -398,6 +407,8 @@ public class CreacionTorneoController extends Controller implements Initializabl
 
     }
 
+    
+//    metodo para guardar los equipos que estaran en ese torneo creado
     private void equiposAddTorneo(List<Equipo> equipos) {
         for (Equipo equipo : equipos) {
             equipo.addTorneo();
@@ -410,6 +421,8 @@ public class CreacionTorneoController extends Controller implements Initializabl
         }
     }
 
+    
+    
     @FXML
     private void onActionBtnVolver(ActionEvent event) {
         Sonidos.click();

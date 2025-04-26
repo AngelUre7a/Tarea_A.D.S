@@ -75,6 +75,9 @@ public class ListaTorneoController extends Controller implements Initializable {
         cargarFormulario();
     }
 
+    
+//    estos 3 metodos configuran columnas botones y como funcionara la barra
+//    del buscador
     private void configurarColumnas() {
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -148,6 +151,10 @@ public class ListaTorneoController extends Controller implements Initializable {
         tableView.setItems(sortedData);
     }
 
+    
+    
+    
+//    carga todos los torneos creados en el tableView
     private void cargarFormulario() {
         try {
             torneoLista.clear();
@@ -158,6 +165,7 @@ public class ListaTorneoController extends Controller implements Initializable {
         }
     }
 
+    
     @FXML
     private void onActionBtnAgregar(ActionEvent event) throws IOException {
          Sonidos.click();
@@ -172,6 +180,9 @@ public class ListaTorneoController extends Controller implements Initializable {
         }
     }
 
+    
+    
+//    actualiza el tableView
     @FXML
     private void onActionBtnActualizar(ActionEvent event) {
          Sonidos.click();

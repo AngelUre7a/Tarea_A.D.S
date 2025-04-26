@@ -63,7 +63,7 @@ public class LlavesController extends Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         txfNombreTorneo.setFocusTraversable(true);
         torneo1 = (Torneo) AppContext.getInstance().get("TORNEO");
         if (torneo1 != null) {
@@ -75,60 +75,16 @@ public class LlavesController extends Controller implements Initializable {
         }
     }
 
+    
+//    Este metodo solo lo usamos para saber si hay que agregar equipos "BYE "
+//    para completar las llaves, y si cuantos hay que agregar
     private int siguientePotencia(int cantidadEquipos) {
         return (int) Math.pow(2, Math.ceil(Math.log(cantidadEquipos) / Math.log(2)));
     }
 
-    private void dibujarLineaEnL(Button origen, Button destino) {
-        Bounds boundsOrigenScene = origen.localToScene(origen.getBoundsInLocal());
-        Bounds boundsDestinoScene = destino.localToScene(destino.getBoundsInLocal());
-
-        Bounds origenLocal = linePane.sceneToLocal(boundsOrigenScene);
-        Bounds destinoLocal = linePane.sceneToLocal(boundsDestinoScene);
-
-        double startX = origenLocal.getMinX() + origenLocal.getWidth();
-        double startY = origenLocal.getMinY() + origenLocal.getHeight() / 2;
-        double endX = destinoLocal.getMinX();
-        double endY = destinoLocal.getMinY() + destinoLocal.getHeight() / 2;
-
-        double midX = (startX + endX) / 2;
-
-        Line lineaH1 = new Line(startX, startY, midX, startY);
-        Line lineaV = new Line(midX, startY, midX, endY);
-        Line lineaH2 = new Line(midX, endY, endX, endY);
-
-        for (Line l : List.of(lineaH1, lineaV, lineaH2)) {
-            l.setStrokeWidth(3);
-            l.setStyle("-fx-stroke: black;");
-            linePane.getChildren().add(l);
-        }
-    }
-
-    private void conectarPartidosConLineas() {
-        Platform.runLater(() -> {
-            linePane.getChildren().clear();
-
-            for (int ronda = 0; ronda < hboxLlaves.getChildren().size() - 1; ronda++) {
-
-                VBox rondaActual = (VBox) hboxLlaves.getChildren().get(ronda);
-                VBox siguienteRonda = (VBox) hboxLlaves.getChildren().get(ronda + 1);
-
-                for (int i = 0; i < siguienteRonda.getChildren().size(); i++) {
-                    VBox partidaSiguiente = (VBox) siguienteRonda.getChildren().get(i);
-                    VBox partida1 = (VBox) rondaActual.getChildren().get(i * 2);
-                    VBox partida2 = (VBox) rondaActual.getChildren().get(i * 2 + 1);
-
-                    Button btn1 = (Button) ((VBox) partida1.getChildren().get(1)).getChildren().get(0);
-                    Button btn2 = (Button) ((VBox) partida2.getChildren().get(1)).getChildren().get(0);
-                    Button btnDestino = (Button) ((VBox) partidaSiguiente.getChildren().get(1)).getChildren().get(0);
-
-                    dibujarLineaEnL(btn1, btnDestino);
-                    dibujarLineaEnL(btn2, btnDestino);
-                }
-            }
-        });
-    }
-
+    
+//    Este metodo genera la estructura de las llaves en base del total de equipos
+//    incluso con los "BYE"
     private void generarEstructuraLlaves() {
         hboxLlaves.getChildren().clear();
         llavesPorRonda.clear();
@@ -179,7 +135,66 @@ public class LlavesController extends Controller implements Initializable {
             partidosEnLaRonda /= 2;
         }
     }
+    
+    
+//    Este metodo solo conecta un VBox con el siguiente Vbox con una linea en L
+//    es como una utilidad para conectarPartidosConLineas()
+    private void dibujarLineaEnL(Button origen, Button destino) {
+        Bounds boundsOrigenScene = origen.localToScene(origen.getBoundsInLocal());
+        Bounds boundsDestinoScene = destino.localToScene(destino.getBoundsInLocal());
 
+        Bounds origenLocal = linePane.sceneToLocal(boundsOrigenScene);
+        Bounds destinoLocal = linePane.sceneToLocal(boundsDestinoScene);
+
+        double startX = origenLocal.getMinX() + origenLocal.getWidth();
+        double startY = origenLocal.getMinY() + origenLocal.getHeight() / 2;
+        double endX = destinoLocal.getMinX();
+        double endY = destinoLocal.getMinY() + destinoLocal.getHeight() / 2;
+
+        double midX = (startX + endX) / 2;
+
+        Line lineaH1 = new Line(startX, startY, midX, startY);
+        Line lineaV = new Line(midX, startY, midX, endY);
+        Line lineaH2 = new Line(midX, endY, endX, endY);
+
+        for (Line l : List.of(lineaH1, lineaV, lineaH2)) {
+            l.setStrokeWidth(3);
+            l.setStyle("-fx-stroke: black;");
+            linePane.getChildren().add(l);
+        }
+    }
+
+    
+//    Este metodo basicamente va recorriendo los Vbox de dos en dos para usar
+//    el anterior metodo para ir conectando toda la estructura con las lineas
+    private void conectarPartidosConLineas() {
+        Platform.runLater(() -> {
+            linePane.getChildren().clear();
+
+            for (int ronda = 0; ronda < hboxLlaves.getChildren().size() - 1; ronda++) {
+
+                VBox rondaActual = (VBox) hboxLlaves.getChildren().get(ronda);
+                VBox siguienteRonda = (VBox) hboxLlaves.getChildren().get(ronda + 1);
+
+                for (int i = 0; i < siguienteRonda.getChildren().size(); i++) {
+                    VBox partidaSiguiente = (VBox) siguienteRonda.getChildren().get(i);
+                    VBox partida1 = (VBox) rondaActual.getChildren().get(i * 2);
+                    VBox partida2 = (VBox) rondaActual.getChildren().get(i * 2 + 1);
+
+                    Button btn1 = (Button) ((VBox) partida1.getChildren().get(1)).getChildren().get(0);
+                    Button btn2 = (Button) ((VBox) partida2.getChildren().get(1)).getChildren().get(0);
+                    Button btnDestino = (Button) ((VBox) partidaSiguiente.getChildren().get(1)).getChildren().get(0);
+
+                    dibujarLineaEnL(btn1, btnDestino);
+                    dibujarLineaEnL(btn2, btnDestino);
+                }
+            }
+        });
+    }
+    
+       
+//    Este metodo recorre la lista total de equipos con los BYE incluidos
+//    y separa los "BYE" para que no hayan partidos de "BYE" vs "BYE"
     private List<Equipo> intercalarEquipos(List<Equipo> equipos, List<Equipo> equiposBye) {
         List<Equipo> listaIntercalada = new ArrayList<>(equipos);
         int insertIndex = listaIntercalada.size();
@@ -192,6 +207,9 @@ public class LlavesController extends Controller implements Initializable {
         return listaIntercalada;
     }
 
+    
+//    Este metodo llena la primer ronda con el total de equipos
+//    se llama solo cuando se crea el torneo por primera vez
     private void llenarPrimerRonda() {
         List<Equipo> equipos = llavesPorRonda.get(0);
         VBox primeraRondaVBox = (VBox) hboxLlaves.getChildren().get(0);
@@ -309,6 +327,9 @@ public class LlavesController extends Controller implements Initializable {
 
     }
 
+    
+//    Este metodo se llama cada que termina un partido, y guarda al ganador en
+//    una lista de ganadores que se usara en llenarRondaSiguiente()
     private void procesarGanadorDespuesDePartido(int rondaActual, int partidoIndex) {
         try {
             PartidaRepository repo = new PartidaRepository();
@@ -352,6 +373,9 @@ public class LlavesController extends Controller implements Initializable {
         }
     }
 
+    
+//    Este metodo setea los ganadores guardados en procesarGanadorDespuesDePartido()
+//    en la siguieente ronda
     private void llenarRondaSiguiente(int rondaIndex, List<Equipo> ganadores) {
         VBox rondaVBox = (VBox) hboxLlaves.getChildren().get(rondaIndex);
         int index = 0;
@@ -393,6 +417,9 @@ public class LlavesController extends Controller implements Initializable {
         onShow();
     }
 
+    
+//    Este metodo basicamente actualiza o refresca las llaves para que 
+//    se muestren los partidos o rondas actualizadas
     public void onShow() {
 
         torneo1 = (Torneo) AppContext.getInstance().get("TORNEO");
@@ -422,6 +449,11 @@ public class LlavesController extends Controller implements Initializable {
         }
     }
 
+    
+//    Es el metodo principal para que funcione la persistencia
+//    aqui se llaman todos los metodos necesarios para reconstruir
+//    llaves, partidas jugadas, y partidas por jugar, es el metodo
+//    mas importante del controller
     private void reconstruirDesdePartidas() {
         try {
             PartidaRepository repo = new PartidaRepository();
@@ -536,6 +568,10 @@ public class LlavesController extends Controller implements Initializable {
         }
     }
 
+    
+//    este metodo se llama cuando hay un partidoBYE osea uno de los equipos pasa 
+//    directo, lo hicimos en un metodo por aparte por motivos de 
+//    funcionalidad
     private void guardarPartidaBye(Equipo equipo1, Equipo equipo2, Equipo ganador) {
         try {
             Partida partidaBye = new Partida(
@@ -563,8 +599,8 @@ public class LlavesController extends Controller implements Initializable {
     }
 
     private void mostrarAlertaBye(Equipo ganador) {
-      mensaje.show(Alert.AlertType.INFORMATION, "Partido no jugado", 
-    "Este partido no se jugó porque uno de los equipos tiene 'BYE'.\n\n¡" + ganador.getNombre() + " avanza automáticamente!");
+        mensaje.show(Alert.AlertType.INFORMATION, "Partido no jugado",
+                "Este partido no se jugó porque uno de los equipos tiene 'BYE'.\n\n¡" + ganador.getNombre() + " avanza automáticamente!");
 
     }
 
@@ -594,7 +630,7 @@ public class LlavesController extends Controller implements Initializable {
 
             Stage stage = new Stage();
             stage.setTitle("¡Ganador de la partida!");
-            
+
             stage.initStyle(StageStyle.UNDECORATED); //quitar equis en modales
             stage.setScene(new Scene(root));
             stage.setResizable(false);
@@ -623,7 +659,7 @@ public class LlavesController extends Controller implements Initializable {
 
             Stage stage = new Stage();
             stage.setTitle("Campeón del Torneo");
-            
+
             stage.initStyle(StageStyle.UNDECORATED); //quitar equis en modales
             stage.setScene(new Scene(root));
             stage.setResizable(false);
@@ -733,6 +769,9 @@ public class LlavesController extends Controller implements Initializable {
         return null;
     }
 
+    
+//    recorre la lista de equipos y les setea el atributo de que ya no esta en torneo
+//    para efectos de puedan ser eliminados/editados en la lista de Equipos en otra vista
     private void equiposDeleteTorneo(List<Equipo> equipos) {
         for (Equipo equipo : equipos) {
             equipo.deleteTorneo();

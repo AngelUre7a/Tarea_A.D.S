@@ -185,6 +185,8 @@ public class RegistroListaDeporteBalonController extends Controller implements I
         aplicarFiltro();
     }
 
+    
+//    rellena el TableView
     private void cargarFormulario() {
         try {
             deportesLista.clear();
@@ -201,6 +203,8 @@ public class RegistroListaDeporteBalonController extends Controller implements I
         }
     }
 
+    
+//    metodo para trabajar el buscador o filtro de deportes
     private void aplicarFiltro() {
         filterField.textProperty().addListener((observable, oldValue, newValue) -> {
             deportesFiltrados.setPredicate(deporte -> {
@@ -212,12 +216,16 @@ public class RegistroListaDeporteBalonController extends Controller implements I
         });
     }
 
+    
+//    abre una vista para agregar un deporte nuevo
     @FXML
     private void onActionBtnAgregar(ActionEvent event) {
          Sonidos.click();
         abrirFormularioNuevo();
     }
 
+    
+//    carga en la vista de agregar deporte, pero un deporte nuevo
     private void abrirFormularioNuevo() {
         AppContext.getInstance().delete("DEPORTE_EDITAR");
         FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
@@ -238,6 +246,10 @@ public class RegistroListaDeporteBalonController extends Controller implements I
         }
     }
 
+    
+    
+//    carga la misma vista de agregar deporte, pero con los datos
+//    del deporte seleccionado para editar datos
     private void abrirFormularioEditar(Deporte deporte) {
         AppContext.getInstance().set("DEPORTE_EDITAR", deporte);
         FlowController.getInstance().goViewInWindowModal("RegistroDeporte", ((Stage) root.getScene().getWindow()), false);
@@ -246,6 +258,9 @@ public class RegistroListaDeporteBalonController extends Controller implements I
 
     }
 
+    
+    
+//    actualiza el tableView
     @FXML
     private void onActionBtnActualizar(ActionEvent event) {
          Sonidos.click();
