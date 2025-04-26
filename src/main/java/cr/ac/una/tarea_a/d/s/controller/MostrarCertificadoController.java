@@ -62,7 +62,6 @@ public class MostrarCertificadoController extends Controller implements Initiali
     private VBox ContainerSinBotones;
     @FXML
     private MFXButton btnVolver;
-    @FXML
     private MFXButton btnSalir;
     @FXML
     private ImageView imgFondo;
@@ -127,6 +126,7 @@ public class MostrarCertificadoController extends Controller implements Initiali
     }
     
     private void ImprimirCertificado(){
+         Sonidos.click();
         btnVolver.setVisible(false);
         btnSalir.setVisible(false);
         btnImprimirCert.setVisible(false);
@@ -156,7 +156,6 @@ public class MostrarCertificadoController extends Controller implements Initiali
             e.printStackTrace();
         }
         btnVolver.setVisible(true);
-        btnSalir.setVisible(true);
         btnImprimirCert.setVisible(true);
     }
 
@@ -167,12 +166,6 @@ public class MostrarCertificadoController extends Controller implements Initiali
         stageActual.close();
     }
 
-    @FXML
-    private void OnActionBtnSalir(ActionEvent event) {
-         Sonidos.click();
-        Stage stage = (Stage) root.getScene().getWindow();
-        stage.close();
-    }
     
       @Override
     public void initialize() {
