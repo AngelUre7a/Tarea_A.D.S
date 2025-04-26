@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -28,11 +27,7 @@
 
     <VBox layoutY="340.0" prefHeight="60.0" prefWidth="614.0">
         <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="350.0">
-                <children>
-                    <MFXButton fx:id="btnSalir" onAction="#onActionBtnSalir" prefHeight="40.0" prefWidth="100.0" text="SALIR" />
-                </children>
-            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="350.0" />
         </children>
     </VBox>
 

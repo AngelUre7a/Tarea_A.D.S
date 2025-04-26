@@ -3,6 +3,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -34,25 +35,18 @@
             </HBox>
             <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="261.0" prefWidth="700.0" spacing="20.0" styleClass="borderSombr" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox prefHeight="80.0">
+                  <VBox alignment="CENTER" prefHeight="396.0" prefWidth="880.0">
                      <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <MFXButton fx:id="btnJugar" onAction="#OnActionBtnJugar" prefHeight="80.0" prefWidth="250.0" text="Jugar">
-                                 <graphic>
-                                    <ImageView fitHeight="50.0" fitWidth="50.0">
-                                       <image>
-                                          <Image url="@../resources/jugar.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </MFXButton>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="80.0" spacing="5.0">
-                     <children>
+                        <MFXButton fx:id="btnJugar" onAction="#OnActionBtnJugar" prefHeight="80.0" prefWidth="250.0" text="Jugar">
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0">
+                                 <image>
+                                    <Image url="@../resources/jugar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MFXButton>
+                        <Separator prefHeight="69.0" prefWidth="880.0" visible="false" />
                         <MFXButton fx:id="btnAcercaDe" buttonType="RAISED" onAction="#OnActionBtnAcercaDe" prefHeight="80.0" prefWidth="250.0" text="Acerca de">
                            <font>
                               <Font size="25.0" />
@@ -65,26 +59,25 @@
                               </ImageView>
                            </graphic>
                         </MFXButton>
+                        <Separator prefHeight="69.0" prefWidth="880.0" visible="false" />
+                              <MFXButton fx:id="btnSalir" buttonType="RAISED" onAction="#OnActionBtnSalir" prefHeight="80.0" prefWidth="250.0" text="Salir">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0">
+                                 <image>
+                                    <Image url="@../resources/cerrar-sesion.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MFXButton>
                      </children>
                   </VBox>
+                  <VBox alignment="CENTER" prefHeight="80.0" spacing="5.0" />
                   <VBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="80.0">
                      <children>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                                    <MFXButton fx:id="btnSalir" buttonType="RAISED" onAction="#OnActionBtnSalir" prefHeight="80.0" prefWidth="250.0" text="Salir">
-                                 <font>
-                                    <Font size="25.0" />
-                                 </font>
-                                 <graphic>
-                                    <ImageView fitHeight="50.0" fitWidth="50.0">
-                                       <image>
-                                          <Image url="@../resources/cerrar-sesion.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </MFXButton>
-                           </children>
-                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" />
                      </children>
                   </VBox>
                </children>
