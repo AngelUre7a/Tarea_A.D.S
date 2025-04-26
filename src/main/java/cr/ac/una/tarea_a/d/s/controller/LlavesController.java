@@ -37,6 +37,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class LlavesController extends Controller implements Initializable {
@@ -609,6 +610,8 @@ public class LlavesController extends Controller implements Initializable {
 
             Stage stage = new Stage();
             stage.setTitle("¡Ganador de la partida!");
+            
+            stage.initStyle(StageStyle.UNDECORATED); //quitar equis en modales
             stage.setScene(new Scene(root));
             stage.setResizable(false);
             stage.show();
@@ -636,6 +639,8 @@ public class LlavesController extends Controller implements Initializable {
 
             Stage stage = new Stage();
             stage.setTitle("Campeón del Torneo");
+            
+            stage.initStyle(StageStyle.UNDECORATED); //quitar equis en modales
             stage.setScene(new Scene(root));
             stage.setResizable(false);
             stage.show();
@@ -757,9 +762,8 @@ public class LlavesController extends Controller implements Initializable {
                     System.out.println("BYE ELIMINADO");
                 }
             } catch (IOException e) {
-              mensaje.show(Alert.AlertType.ERROR, "Error al actualizar equipo", 
-    "No se pudo actualizar el estado del equipo: " + equipo.getNombre());
-
+                new Mensaje().show(Alert.AlertType.ERROR, "Error al actualizar equipo", "No se pudo actualizar el estado del equipo: " + equipo.getNombre());
+                e.printStackTrace();
             }
         }
     }
