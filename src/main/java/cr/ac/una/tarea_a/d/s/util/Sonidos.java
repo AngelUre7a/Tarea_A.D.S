@@ -37,18 +37,12 @@ public class Sonidos {
         playSound("silbato.mp3");
     }
 
-    public static void golDeOroTension() {
-        playSound("tension.mp3");
+    public static void musicaDesempate() {
+        playSound("minijuegoSound.mp3");
     }
-    
-    // 🔊 Método general para asignar sonido al hacer hover en botones
-    public static void agregarHover(Button... botones) {
-        for (Button boton : botones) {
-            boton.setOnMouseEntered(e -> {
-                if (player == null || player.getStatus() != MediaPlayer.Status.PLAYING) {
-                    silbato(); // Cambiá por otro si querés otro sonido
-                }
-            });
-        }
+
+    public static void click() {
+        playSound("click.mp3");
     }
+
 }

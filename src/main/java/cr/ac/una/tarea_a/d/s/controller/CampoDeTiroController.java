@@ -1,5 +1,6 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
+import cr.ac.una.Tarea_A.D.S.util.Sonidos;
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
@@ -244,6 +245,7 @@ public class CampoDeTiroController extends Controller implements Initializable {
     
     @FXML
     private void onActionBtnIniciar(ActionEvent event) {
+        Sonidos.musicaDesempate();
             puedeMoverBalon = true;
             btnIniciar.setDisable(true);
             iniciarCronometro();

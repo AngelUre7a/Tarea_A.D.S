@@ -58,31 +58,37 @@ public class MenuController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnRegistroDeporte(ActionEvent event) throws IOException {
+        Sonidos.click();
         FlowController.getInstance().goView("RegistroListaDeporteBalon");
     }
 
     @FXML
     private void onActionBtnRegistroEquipo(ActionEvent event) throws IOException {
+       Sonidos.click();
         FlowController.getInstance().goView("RegistroListaEquipo");
     }
 
     @FXML
     private void onActionBtnTorneos(ActionEvent event) {
+        Sonidos.click();
         FlowController.getInstance().goView("ListaTorneo");
     }
 
     @FXML
     private void onActionBtnEstadisticas(ActionEvent event) throws IOException {
+          Sonidos.click();
         FlowController.getInstance().goView("Estadisticas");
     }
 
     @FXML
     private void onActionBtnRanking(ActionEvent event) {
+        Sonidos.click();
         FlowController.getInstance().goView("Ranking");
     }
 
     @FXML
     private void onActionBtnVolver(ActionEvent event) {
+         Sonidos.click();
         FlowController.getInstance().goViewInWindow("PantallaInicial");
         ((Stage) root.getScene().getWindow()).close();
     }
