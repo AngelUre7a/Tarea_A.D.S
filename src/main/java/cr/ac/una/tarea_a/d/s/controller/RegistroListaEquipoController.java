@@ -1,5 +1,6 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
+import cr.ac.una.Tarea_A.D.S.util.Sonidos;
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
@@ -91,7 +92,9 @@ public class RegistroListaEquipoController extends Controller implements Initial
 
         colEditar.setCellFactory(param -> new TableCell<>() {
             private final MFXButton btnEditar = new MFXButton();
+
             {
+                Sonidos.click();
                 btnEditar.setText("");
                 ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/editar.png").toExternalForm()));
                 icono.setFitWidth(40);
@@ -112,15 +115,19 @@ public class RegistroListaEquipoController extends Controller implements Initial
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
-                setGraphic(empty ? null : new HBox(btnEditar) {{
-                    setAlignment(Pos.CENTER);
-                }});
+                setGraphic(empty ? null : new HBox(btnEditar) {
+                    {
+                        setAlignment(Pos.CENTER);
+                    }
+                });
             }
         });
 
         colEliminar.setCellFactory(param -> new TableCell<>() {
             private final MFXButton btnEliminar = new MFXButton();
+
             {
+                Sonidos.click();
                 btnEliminar.setText("");
                 ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/borrar.png").toExternalForm()));
                 icono.setFitWidth(40);
@@ -145,9 +152,11 @@ public class RegistroListaEquipoController extends Controller implements Initial
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
-                setGraphic(empty ? null : new HBox(btnEliminar) {{
-                    setAlignment(Pos.CENTER);
-                }});
+                setGraphic(empty ? null : new HBox(btnEliminar) {
+                    {
+                        setAlignment(Pos.CENTER);
+                    }
+                });
             }
         });
         cargarFormulario();
@@ -225,6 +234,7 @@ public class RegistroListaEquipoController extends Controller implements Initial
 
     @FXML
     private void onActionBtnAgregar(ActionEvent event) {
+        Sonidos.click();
         abrirFormularioNuevo();
     }
 
@@ -257,6 +267,7 @@ public class RegistroListaEquipoController extends Controller implements Initial
 
     @FXML
     private void onActionBtnActualizar(ActionEvent event) {
+        Sonidos.click();
         tableView.refresh();
     }
 

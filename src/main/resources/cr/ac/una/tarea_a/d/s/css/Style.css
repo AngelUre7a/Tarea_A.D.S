@@ -1,5 +1,5 @@
 /* ========================================================= */
-/* 🎨 Colores Globales */
+/* Colores Globales */
 /* ========================================================= */
 * {
     -fx-color-azul: #1CA7EC;
@@ -19,7 +19,7 @@
 }
 
 /* ========================================================= */
-/* 🖼️ Fondos por Vista */
+/*  Fondos por Vista */
 /* ========================================================= */
 .root {
     -fx-background-color: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
@@ -44,13 +44,8 @@
     -fx-background-repeat: no-repeat;
 }
 .modal-vista {
-/*    -fx-background-color: #ffffff;
-    -fx-background-radius: 20;*/
     -fx-border-color: -fx-color-balliverse;
     -fx-border-width: 5;
-/*    -fx-border-radius: 20;
-    -fx-effect: dropshadow(gesaussian, rgba(0, 0, 0, 0.25), 10, 0, 0, 4);
-    -fx-padding: 20;*/
 }
 
 BorderPane {
@@ -58,7 +53,7 @@ BorderPane {
 }
 
 /* ========================================================= */
-/* 🧩 Botones */
+/* Botones */
 
 .button {
     -fx-background-color: -fx-color-balliverse;
@@ -92,7 +87,7 @@ BorderPane {
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
 }
-/* 🔇 Quita el efecto de "ripple" blanco del clic */
+/* Quita el efecto de blanco del clic */
 .mfx-ripple-generator {
     -mfx-ripple-color: transparent;
 }
@@ -102,32 +97,10 @@ BorderPane {
 }
 
 /* ========================================================= */
-/* ✍️ TextFields y ComboBox */
-/* ========================================================= */
-/*.mfx-combo-box {
-    -fx-background-radius: 20px;
-    -fx-border-radius: 20px;
-    -fx-border-color: black;
-        -fx-text-fill:black;
-    -fx-font-weight: bold;
-}
-.mfx-text-field{
-    -mfx-main:  -fx-color-balliverse;
-    -fx-background-radius: 20px;
-    -fx-border-radius: 20px;
-    -fx-border-color: -fx-color-balliverse;
-    -fx-prompt-text-fill:-fx-color-balliverse;
-    -mfx-float-mode:BORDER;
-    -fx-font-size:12px;
-    -fx-text-fill:black;
-    -fx-alignment:TOP_LEFT;
-
-}*/
-/* ========================================================= */
-/* 🌌 Balliverse: TextFields y ComboBox                      */
+/*  Balliverse: TextFields y ComboBox                      */
 /* ========================================================= */
 
-/* 🎯 ComboBox */
+/*  ComboBox */
 .mfx-combo-box {
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
@@ -145,7 +118,7 @@ BorderPane {
     -fx-effect: dropshadow(gaussian, -fx-color-balliverse, 10, 0.3, 0, 2);
 }
 
-/* ✍️ TextField */
+/*  TextField */
 .mfx-text-field {
     -mfx-main: -fx-color-balliverse;
     -fx-background-radius: 20px;
@@ -167,17 +140,8 @@ BorderPane {
     -fx-effect: dropshadow(gaussian, -fx-color-balliverse, 8, 0.25, 0, 2);
 }
 
-
-/*.mfx-checkbox{
-    -mfx-main: -fx-base-color-focus;
-    -fx-font-size:14px;
-    -fx-min-height:26px;
-    -fx-pref-height:26px;
-    -fx-max-height:26px;
-    -fx-text-fill:-fx-base-color-etiquetas;
-}*/
 /* ========================================================= */
-/* 🏷️ Labels y Títulos */
+/* ️ Labels y Títulos */
 /* ========================================================= */
 .label {
     -fx-text-fill: white;
@@ -257,7 +221,7 @@ BorderPane {
 }
 
 /* ========================================================= */
-/* 🖼️ Imágenes */
+/*  Imágenes */
 /* ========================================================= */
 #imgEquipo {
     -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 20, 0.5, 0, 0);
@@ -269,7 +233,7 @@ BorderPane {
 }
 
 /* ========================================================= */
-/* 📊 TableViews */
+/*  TableViews */
 /* ========================================================= */
 .table-view {
     -fx-background-color: transparent;
@@ -291,7 +255,7 @@ BorderPane {
 }
 
 /* ========================================================= */
-/* 🧱 Bordes y Sombras */
+/* Bordes y Sombras */
 /* ========================================================= */
 .separator {
     -fx-background-color: black;
@@ -311,7 +275,7 @@ BorderPane {
 }
 
 /* ========================================================= */
-/* 📦 Contenedores Especiales */
+/*  Contenedores Especiales */
 /* ========================================================= */
 .contenedor-redondeado {
     -fx-background-radius: 20px;

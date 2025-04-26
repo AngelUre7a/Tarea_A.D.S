@@ -1,5 +1,6 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
+import cr.ac.una.Tarea_A.D.S.util.Sonidos;
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.model.Torneo;
@@ -201,6 +202,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
 
     @FXML
     private void onActionComboBoxDeportes(ActionEvent event) {
+         Sonidos.click();
         Deporte deporteSeleccionado = ComboBoxDeportes.getValue();
 
         ObservableList<Equipo> equiposFiltrados = equiposLista.filtered(equipo -> equipo.getTipoDeporte().equals(deporteSeleccionado.getNombre()));
@@ -209,6 +211,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
 
     @FXML
     private void onActionBtnJugarTorneo(ActionEvent event) {
+         Sonidos.click();
         Deporte deporte = ComboBoxDeportes.getValue();
         if (deporte == null) {
             new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe seleccionar un tipo de deporte.");
@@ -292,6 +295,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
 
     @FXML
     private void onActionBtnGuardarTorneo(ActionEvent event) {
+         Sonidos.click();
         Deporte deporte = ComboBoxDeportes.getValue();
         if (deporte == null) {
             new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe seleccionar un tipo de deporte.");
@@ -386,6 +390,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
 
     @FXML
     private void onActionBtnVolver(ActionEvent event) {
+         Sonidos.click();
         Mensaje mensaje = new Mensaje();
         Boolean respuesta = mensaje.showConfirmation("BALLIVERSE", "¿Estás seguro que deseas salir de la ventana para crear Torneos?");
         if (respuesta) {

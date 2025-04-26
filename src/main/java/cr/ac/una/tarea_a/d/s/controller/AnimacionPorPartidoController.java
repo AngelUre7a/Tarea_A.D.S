@@ -76,12 +76,7 @@ public class AnimacionPorPartidoController extends Controller {
         }
     });
 }
-    @FXML
-    private void onActionBtnSalir(ActionEvent event) {
-        Stage stage = (Stage) root.getScene().getWindow();
-        stage.close();
-    }
-
+    
     @Override
     public void initialize() {
     }

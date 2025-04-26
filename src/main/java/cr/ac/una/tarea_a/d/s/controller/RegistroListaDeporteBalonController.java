@@ -1,5 +1,6 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
+import cr.ac.una.Tarea_A.D.S.util.Sonidos;
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
@@ -91,6 +92,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
             private final MFXButton btnEditar = new MFXButton();
 
             {
+                 Sonidos.click();
                 btnEditar.setText("");
                 ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/editar.png").toExternalForm()));
                 icono.setFitWidth(40);
@@ -100,6 +102,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
                 btnEditar.setStyle("-fx-background-color: transparent;");
 
                 btnEditar.setOnAction(event -> {
+                     Sonidos.click();
                     Deporte deporte = getTableView().getItems().get(getIndex());
                     if (deporte.getCantidadTorneosInscritos() > 0) {
                         new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "No se puede editar ya que actualmente esta participando en un torneo.");
@@ -128,6 +131,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
             private final MFXButton btnEliminar = new MFXButton();
 
             {
+                 Sonidos.click();
                 btnEliminar.setText("");
                 ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/borrar.png").toExternalForm()));
                 icono.setFitWidth(40);
@@ -210,6 +214,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
 
     @FXML
     private void onActionBtnAgregar(ActionEvent event) {
+         Sonidos.click();
         abrirFormularioNuevo();
     }
 
@@ -243,6 +248,7 @@ public class RegistroListaDeporteBalonController extends Controller implements I
 
     @FXML
     private void onActionBtnActualizar(ActionEvent event) {
+         Sonidos.click();
         cargarFormulario();
     }
 

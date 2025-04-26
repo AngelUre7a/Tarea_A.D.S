@@ -109,6 +109,7 @@ public class PartidoController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnFinalizar(ActionEvent event) {
+         Sonidos.click();
         Finalizar();
     }
 
@@ -386,6 +387,7 @@ public class PartidoController extends Controller implements Initializable {
     }
 
     private void iniciarDesempate() {
+        Sonidos.musicaDesempate();
         btnFinalizar.setDisable(true);
         btnFinalizar.setVisible(false);
         enDesempate = true;

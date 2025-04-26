@@ -1,5 +1,6 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
+import cr.ac.una.Tarea_A.D.S.util.Sonidos;
 import cr.ac.una.tarea_a.d.s.model.Torneo;
 import cr.ac.una.tarea_a.d.s.repositories.EquipoRepository;
 import cr.ac.una.tarea_a.d.s.repositories.TorneoRepository;
@@ -88,6 +89,7 @@ public class ListaTorneoController extends Controller implements Initializable {
             private final MFXButton btnIniciar = new MFXButton("");
 
             {
+                 Sonidos.click();
                 ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/iniciar.png").toExternalForm()));
                 icono.setFitWidth(40);
                 icono.setFitHeight(40);
@@ -96,6 +98,7 @@ public class ListaTorneoController extends Controller implements Initializable {
                 btnIniciar.setStyle("-fx-background-color: transparent;");
 
                 btnIniciar.setOnAction(event -> {
+                     Sonidos.click();
                     Torneo torneo = getTableView().getItems().get(getIndex());
                     if ("finalizado".equalsIgnoreCase(torneo.getEstado())) {
                         new Mensaje().show(Alert.AlertType.INFORMATION, "Torneo finalizado", "Este torneo ya terminó y no se puede volver a jugar.");
@@ -122,43 +125,6 @@ public class ListaTorneoController extends Controller implements Initializable {
                 }
             }
         });
-/*
-        colEliminar.setCellFactory(param -> new TableCell<>() {
-            private final MFXButton btnEliminar = new MFXButton();
-
-            {
-                ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/borrar.png").toExternalForm()));
-                icono.setFitWidth(40);
-                icono.setFitHeight(40);
-                btnEliminar.setGraphic(icono);
-                btnEliminar.getStyleClass().add("boton-tabla-icono");
-                btnEliminar.setStyle("-fx-background-color: transparent;");
-
-                btnEliminar.setOnAction(event -> {
-                    Torneo torneo = getTableView().getItems().get(getIndex());
-                    if (new Mensaje().showConfirmation("Confirmación", "¿Está seguro de eliminar el torneo?")) {
-                        try {
-                            Torneorepo.deleteById(torneo.getId());
-                            torneoLista.remove(torneo);
-                        } catch (IOException ex) {
-                            Logger.getLogger(RegistroListaDeporteBalonController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                });
-            }
-
-            @Override
-            protected void updateItem(Void item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    HBox hbox = new HBox(btnEliminar);
-                    hbox.setAlignment(Pos.CENTER);
-                    setGraphic(hbox);
-                }
-            }
-        });*/
     }
 
     private void configurarFiltro() {
@@ -194,6 +160,7 @@ public class ListaTorneoController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnAgregar(ActionEvent event) throws IOException {
+         Sonidos.click();
         FlowController.getInstance().goViewInWindowModal("CreacionTorneo", ((Stage) root.getScene().getWindow()), false);
         if (AppContext.getInstance().containsItem("TORNEO_NUEVO")) {
             Torneo nuevo = (Torneo) AppContext.getInstance().get("TORNEO_NUEVO");
@@ -207,6 +174,7 @@ public class ListaTorneoController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnActualizar(ActionEvent event) {
+         Sonidos.click();
         cargarFormulario();
     }
 

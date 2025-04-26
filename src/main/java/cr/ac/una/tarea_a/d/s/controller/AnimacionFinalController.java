@@ -59,38 +59,39 @@ public class AnimacionFinalController extends Controller {
         lanzarConfetiVisual();
     }
 
-   private void lanzarConfetiVisual() {
-    Platform.runLater(() -> {
-        for (int i = 0; i < 40; i++) {
-            ImageView confeti = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/estrellap.png").toExternalForm()));
-            confeti.setFitWidth(50);
-            confeti.setFitHeight(50);
-            confeti.setLayoutX(Math.random() * paneConfeti.getWidth());
-            confeti.setLayoutY(-30);
-            paneConfeti.getChildren().add(confeti);
+    private void lanzarConfetiVisual() {
+        Platform.runLater(() -> {
+            for (int i = 0; i < 40; i++) {
+                ImageView confeti = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/estrellap.png").toExternalForm()));
+                confeti.setFitWidth(50);
+                confeti.setFitHeight(50);
+                confeti.setLayoutX(Math.random() * paneConfeti.getWidth());
+                confeti.setLayoutY(-30);
+                paneConfeti.getChildren().add(confeti);
 
-            TranslateTransition anim = new TranslateTransition(Duration.seconds(3 + Math.random()), confeti);
-            anim.setToY(paneConfeti.getHeight() + 50);
-            anim.setOnFinished(e -> paneConfeti.getChildren().remove(confeti));
-            anim.play();
+                TranslateTransition anim = new TranslateTransition(Duration.seconds(3 + Math.random()), confeti);
+                anim.setToY(paneConfeti.getHeight() + 50);
+                anim.setOnFinished(e -> paneConfeti.getChildren().remove(confeti));
+                anim.play();
 
-            RotateTransition rotar = new RotateTransition(Duration.seconds(2 + Math.random()), confeti);
-            rotar.setByAngle(360);
-            rotar.setCycleCount(Animation.INDEFINITE);
-            rotar.play();
-        }
-    });
-}
-
+                RotateTransition rotar = new RotateTransition(Duration.seconds(2 + Math.random()), confeti);
+                rotar.setByAngle(360);
+                rotar.setCycleCount(Animation.INDEFINITE);
+                rotar.play();
+            }
+        });
+    }
 
     @FXML
     private void onActionBtnSalir(ActionEvent event) {
+        Sonidos.click();
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
     }
 
     @FXML
     private void OnActionBtnCertificado(ActionEvent event) {
+        Sonidos.click();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/tarea_a/d/s/view/MostrarCertificado.fxml"));
             Parent rootCert = loader.load();

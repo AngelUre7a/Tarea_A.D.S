@@ -44,16 +44,6 @@ public class MenuController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         title.setFocusTraversable(true);
-//        
-//    // Aplicar sonido al hacer hover en los botones del menú
-//    Sonidos.agregarHover(
-//        btnEstadisticas,
-//        btnRegistroDeporte,
-//        btnRegistroEquipo,
-//        btnVolver,
-//        btnRanking,
-//        btnTorneos
-//    );
     }
 
     @FXML

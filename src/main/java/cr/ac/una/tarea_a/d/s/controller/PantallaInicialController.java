@@ -1,5 +1,6 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
+import cr.ac.una.Tarea_A.D.S.util.Sonidos;
 import cr.ac.una.tarea_a.d.s.util.FlowController;
 import cr.ac.una.tarea_a.d.s.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -33,12 +34,14 @@ public class PantallaInicialController extends Controller implements Initializab
 
     @FXML
     private void OnActionBtnJugar(ActionEvent event) throws IOException {
+         Sonidos.click();
         FlowController.getInstance().goMain();
         ((Stage) root.getScene().getWindow()).close();
     }
 
     @FXML
     private void OnActionBtnSalir(ActionEvent event) {
+         Sonidos.click();
         Mensaje mensaje = new Mensaje();
         Boolean respuesta = mensaje.showConfirmation("BALLIVERSE", "¿Estás seguro que deseas cerrar BALLIVERSE?");
         if (respuesta) {
@@ -54,6 +57,7 @@ public class PantallaInicialController extends Controller implements Initializab
 
     @FXML
     private void OnActionBtnAcercaDe(ActionEvent event) throws IOException {
+         Sonidos.click();
         FlowController.getInstance().goMain2();
         ((Stage) root.getScene().getWindow()).close();
     }

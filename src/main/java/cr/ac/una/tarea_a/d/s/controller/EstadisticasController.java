@@ -1,5 +1,6 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
+import cr.ac.una.Tarea_A.D.S.util.Sonidos;
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
@@ -183,7 +184,7 @@ public class EstadisticasController extends Controller implements Initializable 
             private final MFXButton btnVer = new MFXButton();
 
             {
-
+ Sonidos.click();
                 btnVer.setText(""); // Por si acaso, eliminar texto
                 ImageView icono = new ImageView(new Image(getClass().getResource("/cr/ac/una/tarea_a/d/s/resources/ojo.png").toExternalForm()));
                 icono.setFitWidth(40);
@@ -218,6 +219,7 @@ public class EstadisticasController extends Controller implements Initializable 
 
     @FXML
     private void onActionBtnActualizar(ActionEvent event) {
+         Sonidos.click();
         cargarJson();
         Filtrar();
     }

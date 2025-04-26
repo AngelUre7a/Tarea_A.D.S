@@ -1,5 +1,6 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
+import cr.ac.una.Tarea_A.D.S.util.Sonidos;
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipoGenerales;
@@ -188,6 +189,7 @@ public class RankingController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnActualizar(ActionEvent event) {
+         Sonidos.click();
         cargarEstadisticas();
         cargarJson();
         Filtrar();

@@ -1,5 +1,6 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
+import cr.ac.una.Tarea_A.D.S.util.Sonidos;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipoGenerales;
 import cr.ac.una.tarea_a.d.s.model.EstadisticasEquipoPT;
@@ -160,6 +161,7 @@ public class EstadisticasEquipoController extends Controller implements Initiali
     }
     @FXML
     private void onActionCmbTorneos(ActionEvent event) {
+         Sonidos.click();
         Torneo torneo = cmbTorneos.getValue();
         if (torneo != null && equipoSeleccionado != null) {
             EstadisticasEquipoPT estadisticaPorTorneo = null;
@@ -187,7 +189,8 @@ public class EstadisticasEquipoController extends Controller implements Initiali
     }
 
     @FXML
-    private void onActionBtnVolver(ActionEvent event) {
+    private void onActionBtnVolver(ActionEvent event) 
+    { Sonidos.click();
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
     }

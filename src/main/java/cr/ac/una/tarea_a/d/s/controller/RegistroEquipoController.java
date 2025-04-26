@@ -1,5 +1,6 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
+import cr.ac.una.Tarea_A.D.S.util.Sonidos;
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.model.Equipo;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
@@ -106,6 +107,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
 
     @FXML
     private void onActionBtnRegistrarEquipo(ActionEvent event) throws IOException {
+         Sonidos.click();
         String rutaImagen = (String) AppContext.getInstance().get("IMAGEN_TOMADA");
         String nombre = txtNombreEquipo.getText();
         Image imagen;
@@ -156,6 +158,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
 
     @FXML
     private void OnActionBtnAbrirCamera(ActionEvent event) {
+         Sonidos.click();
         btnAbrirCamera.setDisable(true);
         btnAbrirCamera.setVisible(false);
         btnAbrirCamera.setManaged(false);
@@ -191,6 +194,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
 
     @FXML
     private void onActionBtnTomarFoto(ActionEvent event) {
+         Sonidos.click();
         btnTomarFoto.setDisable(true);
 //        btnTomarFoto.setVisible(false);
         btnTomarFoto.setManaged(false);
@@ -227,6 +231,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
 
     @FXML
     private void onActionBtnCargarImagen(ActionEvent event) {
+         Sonidos.click();
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imagenes", "*.png", "*.jpg", "*.jpeg", "*.bmp"));
         File archivoSeleccionado = fileChooser.showOpenDialog(null);
@@ -263,6 +268,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
     }
 
     private void cerrarCamara() {
+         Sonidos.click();
         if (isCameraRunning && capture != null && capture.isOpened()) {
             isCameraRunning = false;
             capture.release();
@@ -280,6 +286,7 @@ public class RegistroEquipoController extends Controller implements Initializabl
 
     @FXML
     private void onActionBtnVolver(ActionEvent event) {
+         Sonidos.click();
         Mensaje mensaje = new Mensaje();
         Boolean respuesta = mensaje.showConfirmation("BALLIVERSE", "¿Estás seguro que deseas salir de la ventana para crear Equipos??");
         if (respuesta) {

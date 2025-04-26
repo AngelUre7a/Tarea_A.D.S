@@ -1,5 +1,6 @@
 package cr.ac.una.tarea_a.d.s.controller;
 
+import cr.ac.una.Tarea_A.D.S.util.Sonidos;
 import cr.ac.una.tarea_a.d.s.model.Deporte;
 import cr.ac.una.tarea_a.d.s.repositories.DeporteRepository;
 import cr.ac.una.tarea_a.d.s.util.AppContext;
@@ -97,6 +98,7 @@ public class RegistroDeporteController extends Controller implements Initializab
 
     @FXML
     private void onActionBtnRegistrar(ActionEvent event) throws IOException {
+         Sonidos.click();
         String nombre = txtNombreDeporte.getText();
         Image imagen = imageView.getImage();
 
@@ -141,6 +143,7 @@ public class RegistroDeporteController extends Controller implements Initializab
 
     @FXML
     private void onActionBtnCargarImagen(ActionEvent event) {
+         Sonidos.click();
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg", "*.bmp"));
 
@@ -165,6 +168,7 @@ public class RegistroDeporteController extends Controller implements Initializab
 
     @FXML
     private void onActionBtnVolver(ActionEvent event) {
+         Sonidos.click();
         Mensaje mensaje = new Mensaje();
         Boolean respuesta = mensaje.showConfirmation("BALLIVERSE", "¿Estás seguro que deseas salir de la ventana para crear deportes?");
         if (respuesta) {
