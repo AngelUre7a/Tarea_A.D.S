@@ -76,6 +76,7 @@ public class AcercaDeController extends Controller implements Initializable {
 
     @FXML
     private void OnActionBtnVolver(ActionEvent event) {
+        Sonidos.detener();
         FlowController.getInstance().goViewInWindow("PantallaInicial");
         ((Stage) root.getScene().getWindow()).close();
     }

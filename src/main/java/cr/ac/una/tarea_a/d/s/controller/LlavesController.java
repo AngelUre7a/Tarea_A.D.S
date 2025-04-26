@@ -80,7 +80,6 @@ public class LlavesController extends Controller implements Initializable {
     }
 
     private void dibujarLineaEnL(Button origen, Button destino) {
-        System.out.println("entroEndibujarLineal");
         Bounds boundsOrigenScene = origen.localToScene(origen.getBoundsInLocal());
         Bounds boundsDestinoScene = destino.localToScene(destino.getBoundsInLocal());
 
@@ -99,7 +98,6 @@ public class LlavesController extends Controller implements Initializable {
         Line lineaH2 = new Line(midX, endY, endX, endY);
 
         for (Line l : List.of(lineaH1, lineaV, lineaH2)) {
-            System.out.println("forlineaL");
             l.setStrokeWidth(3);
             l.setStyle("-fx-stroke: black;");
             linePane.getChildren().add(l);
@@ -107,18 +105,15 @@ public class LlavesController extends Controller implements Initializable {
     }
 
     private void conectarPartidosConLineas() {
-        System.out.println("entro a lineas");
         Platform.runLater(() -> {
             linePane.getChildren().clear(); // Limpia líneas previas
 
-            System.out.println("primer for");
             for (int ronda = 0; ronda < hboxLlaves.getChildren().size() - 1; ronda++) {
 
                 VBox rondaActual = (VBox) hboxLlaves.getChildren().get(ronda);
                 VBox siguienteRonda = (VBox) hboxLlaves.getChildren().get(ronda + 1);
 
                 for (int i = 0; i < siguienteRonda.getChildren().size(); i++) {
-                    System.out.println("segundo for");
                     VBox partidaSiguiente = (VBox) siguienteRonda.getChildren().get(i);
                     VBox partida1 = (VBox) rondaActual.getChildren().get(i * 2);
                     VBox partida2 = (VBox) rondaActual.getChildren().get(i * 2 + 1);
@@ -381,8 +376,14 @@ public class LlavesController extends Controller implements Initializable {
         VBox rondaVBox = (VBox) hboxLlaves.getChildren().get(rondaIndex);
         int index = 0;
         for (int i = 0; i < ganadores.size(); i += 2) {
+            System.out.println(" ganadores: " + ganadores.size());
             Equipo eq1 = ganadores.get(i);
-            Equipo eq2 = i + 1 < ganadores.size() ? ganadores.get(i + 1) : new Equipo(java.util.UUID.randomUUID().toString(), "BYE", torneo1.getTipoDeporte());
+            if(ganadores.size()%2!=0){
+                return;
+            }
+            System.out.println("aquiiiiii");
+//            Equipo eq2 = i + 1 < ganadores.size() ? ganadores.get(i + 1) : new Equipo(java.util.UUID.randomUUID().toString(), "BYE", torneo1.getTipoDeporte());
+            Equipo eq2 = ganadores.get(i + 1);
 
             VBox partidoVBox = (VBox) rondaVBox.getChildren().get(index);
             HBox hbox1 = (HBox) partidoVBox.getChildren().get(0);
@@ -428,18 +429,14 @@ public class LlavesController extends Controller implements Initializable {
 
             // ⚠️ Si el torneo está en curso, recuperar estado
             if ("enCurso".equalsIgnoreCase(torneo1.getEstado()) || "finalizado".equalsIgnoreCase(torneo1.getEstado())) {
-                System.out.println("22222");
                 reconstruirDesdePartidas();
                 hboxLlaves.applyCss();   // Asegura que los estilos ya estén aplicados
                 hboxLlaves.layout();     // Fuerza el cálculo de tamaño y posición
                 conectarPartidosConLineas();
-                System.out.println("lineasDibujadas");
 
             } else {
-                System.out.println("1111");
                 llenarPrimerRonda(); // solo si es nuevo
                 conectarPartidosConLineas();
-                System.out.println("lineasDibujadas");
                 torneo1.setEstado("enCurso");
                 try {
                     new TorneoRepository().save(torneo1);
@@ -464,11 +461,19 @@ public class LlavesController extends Controller implements Initializable {
             List<Equipo> rondaActual = new ArrayList<>(torneo1.getEquiposInscritos());
 
             int rondaIndex = 0;
+            
             while (rondaActual.size() > 1) {
-                // ✅ Asegurarse de tener número par de equipos
-                if (rondaActual.size() % 2 != 0) {
-                    rondaActual.add(new Equipo(java.util.UUID.randomUUID().toString(), "BYE", torneo1.getTipoDeporte()));
+                if(rondaIndex>0){
+                // Verificar si todos los partidos de la ronda anterior están en llavesPorRonda
+                List<Equipo> rondaAnterior = llavesPorRonda.get(rondaIndex - 1);
+                    System.out.println("ronda anterior: " + rondaAnterior);
+                if (rondaAnterior.size()/2 != rondaActual.size()) {
+                    System.out.println("Faltan partidos por jugar en ronda " + (rondaIndex - 1));
+                    System.out.println("ronda anterior size: " + rondaAnterior.size());
+                    System.out.println("actual: " + rondaActual.size());
+                    return;
                 }
+            }
 
                 VBox rondaVBox = (VBox) hboxLlaves.getChildren().get(rondaIndex);
                 List<Equipo> ganadores = new ArrayList<>();
