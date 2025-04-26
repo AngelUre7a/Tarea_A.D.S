@@ -5,16 +5,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
-
 import java.io.ByteArrayInputStream;
 import java.util.Base64;
 import javafx.scene.Node;
-import javafx.scene.effect.Blend;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Glow;
-import javafx.scene.paint.Color;
 
 public class Animaciones {
 
@@ -57,27 +50,11 @@ public class Animaciones {
         new ParallelTransition(fadeIn, zoom).play();
     }
 
-    public static void animarConfeti(Label lblConfeti) {
-        TranslateTransition caer = new TranslateTransition(Duration.seconds(2), lblConfeti);
-        caer.setFromY(-100);
-        caer.setToY(0);
-        caer.setCycleCount(Animation.INDEFINITE);
-        caer.setAutoReverse(true);
-
-        RotateTransition girar = new RotateTransition(Duration.seconds(1), lblConfeti);
-        girar.setFromAngle(-10);
-        girar.setToAngle(10);
-        girar.setCycleCount(Animation.INDEFINITE);
-        girar.setAutoReverse(true);
-
-        new ParallelTransition(caer, girar).play();
-    }
-
     public static void animarCreditos(Node nodo, double fromY, double toY, double duracionSegundos) {
         TranslateTransition subir = new TranslateTransition(Duration.seconds(duracionSegundos), nodo);
         subir.setFromY(fromY);
         subir.setToY(toY);
-        subir.setCycleCount(TranslateTransition.INDEFINITE); // o 1 si querés solo una vez
+        subir.setCycleCount(TranslateTransition.INDEFINITE); 
         subir.setAutoReverse(false);
         subir.play();
     }
@@ -126,77 +103,8 @@ public class Animaciones {
         secuencia.play();
     }
 
-    public static void parpadeoGolDeOro(Label label) {
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(0.5), e -> label.setStyle("-fx-text-fill: #FFD700; -fx-font-weight: bold;")),
-                new KeyFrame(Duration.seconds(1), e -> label.setStyle("-fx-text-fill: #FFF9E3; -fx-font-weight: bold;"))
-        );
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
-    }
 
-    public static void mostrarGolDeOro(Label lblGolDeOro) {
-        lblGolDeOro.setVisible(true);
-        lblGolDeOro.setScaleX(0.5);
-        lblGolDeOro.setScaleY(0.5);
-        lblGolDeOro.setOpacity(0);
-
-        ScaleTransition zoom = new ScaleTransition(Duration.seconds(0.6), lblGolDeOro);
-        zoom.setFromX(0.5);
-        zoom.setFromY(0.5);
-        zoom.setToX(1.4);
-        zoom.setToY(1.4);
-
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.6), lblGolDeOro);
-        fadeIn.setFromValue(0);
-        fadeIn.setToValue(1);
-
-        PauseTransition pausa = new PauseTransition(Duration.seconds(1.8));
-
-        FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.8), lblGolDeOro);
-        fadeOut.setFromValue(1);
-        fadeOut.setToValue(0);
-        fadeOut.setOnFinished(e -> lblGolDeOro.setVisible(false));
-
-        new SequentialTransition(new ParallelTransition(zoom, fadeIn), pausa, fadeOut).play();
-    }
-
-    public static void animarBalonDorado(ImageView balon) {
-        DropShadow doradoBrillo = new DropShadow();
-        doradoBrillo.setColor(Color.web("#FFD700"));
-        doradoBrillo.setRadius(20);
-        doradoBrillo.setSpread(0.6);
-        balon.setEffect(doradoBrillo);
-
-        Timeline brillo = new Timeline(
-                new KeyFrame(Duration.seconds(0), new KeyValue(doradoBrillo.radiusProperty(), 20)),
-                new KeyFrame(Duration.seconds(0.5), new KeyValue(doradoBrillo.radiusProperty(), 30)),
-                new KeyFrame(Duration.seconds(1), new KeyValue(doradoBrillo.radiusProperty(), 20))
-        );
-        brillo.setCycleCount(Animation.INDEFINITE);
-        brillo.setAutoReverse(true);
-        brillo.play();
-    }
-    public static void animarCanchaDorada(ImageView cancha) {
-        DropShadow resplandorDorado = new DropShadow();
-        resplandorDorado.setColor(Color.web("#FFD700")); // Dorado puro
-        resplandorDorado.setRadius(40);
-        resplandorDorado.setSpread(0.6);
-        resplandorDorado.setOffsetX(0);
-        resplandorDorado.setOffsetY(0);
-
-        Timeline pulso = new Timeline(
-                new KeyFrame(Duration.seconds(0), new KeyValue(resplandorDorado.radiusProperty(), 30)),
-                new KeyFrame(Duration.seconds(0.5), new KeyValue(resplandorDorado.radiusProperty(), 50)),
-                new KeyFrame(Duration.seconds(1), new KeyValue(resplandorDorado.radiusProperty(), 30))
-        );
-        pulso.setCycleCount(Animation.INDEFINITE);
-        pulso.setAutoReverse(true);
-        pulso.play();
-
-        cancha.setEffect(resplandorDorado);
-    }
-
+   
     public static Image convertirBase64AImage(String base64) {
         try {
             if (base64 == null || base64.isEmpty()) {

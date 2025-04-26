@@ -9,7 +9,7 @@ public class Sonidos {
     private static MediaPlayer player;
 
     private static void playSound(String filename) {
-        detener(); // Detenemos cualquier sonido anterior
+        detener();
         Media sound = new Media(Sonidos.class.getResource("/cr/ac/una/tarea_a/d/s/resources/sonidos/" + filename).toExternalForm());
         player = new MediaPlayer(sound);
         player.play();

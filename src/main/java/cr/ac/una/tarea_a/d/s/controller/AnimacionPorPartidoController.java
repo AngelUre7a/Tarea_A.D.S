@@ -28,8 +28,6 @@ public class AnimacionPorPartidoController extends Controller {
     @FXML
     private AnchorPane root;
     @FXML
-    private MFXButton btnSalir;
-    @FXML
     private Pane paneConfeti;
 
     public void mostrarAnimacion(String base64Escudo, String base64Balon, String nombreEquipo) {

@@ -58,10 +58,11 @@ public class EquipoRepository implements IEquipoRepository {
         List<Equipo> deportes = findAll();
 
         if (equipo.getId() == null) {
-            // Generate ID for new products
+          
+
             equipo.setId(UUID.randomUUID().toString());
         } else {
-            // Remove existing product if updating
+            
             deportes.removeIf(p -> p.getId().equals(equipo.getId()));
         }
 
@@ -100,7 +101,6 @@ public class EquipoRepository implements IEquipoRepository {
     public boolean deleteById(String id) throws IOException {
         List<Equipo> equipos = findAll();
 
-        // Verificar si el equipo existe
         Optional<Equipo> equipoOptional = equipos.stream()
                 .filter(equipo -> equipo.getId().equals(id))
                 .findFirst();
@@ -108,7 +108,6 @@ public class EquipoRepository implements IEquipoRepository {
         if (equipoOptional.isPresent()) {
             Equipo equipo = equipoOptional.get();
 
-            // Verificar si el equipo está en un torneo
             if (equipo.getCantidadTorneos()>0) {
                 throw new IllegalArgumentException("El equipo no puede ser eliminado porque está participando en un torneo.");
             }
@@ -129,9 +128,8 @@ public class EquipoRepository implements IEquipoRepository {
 
     public void update(Equipo equipo) throws IOException {
         List<Equipo> equipos = findAll();
-        equipos.removeIf(e -> e.getId().equals(equipo.getId())); // Eliminar el equipo anterior
-        equipos.add(equipo); // Agregar el equipo actualizado
-
+        equipos.removeIf(e -> e.getId().equals(equipo.getId())); 
+        equipos.add(equipo); 
         try (FileWriter writer = new FileWriter(filePath)) {
             gson.toJson(equipos, writer);
         }

@@ -57,10 +57,10 @@ public class  DeporteRepository implements IDeporteRepository  {
         List<Deporte> deportes = findAll();
 
         if (deporte.getId() == null) {
-            // Generate ID for new products
+           
             deporte.setId(UUID.randomUUID().toString());
         } else {
-            // Remove existing product if updating
+      
             deportes.removeIf(p -> p.getId().equals(deporte.getId()));
         }
 

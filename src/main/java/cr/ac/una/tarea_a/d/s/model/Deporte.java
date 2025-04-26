@@ -11,23 +11,20 @@ public class Deporte {
 
     private String id;
     private String nombre;
-    private transient Image imagen; // No se serializa
+    private transient Image imagen;
     private String imagenBase64;
     private int torneosInscritos = 0;
 
-    // Constructor con imagen
     public Deporte(String id, String nombre, Image imagen) {
         this.id = id;
         this.nombre = nombre;
-        setImagen(imagen); // Usar el setter para sincronizar imagenBase64
+        setImagen(imagen); 
     }
 
-    // Constructor solo con nombre
     public Deporte(String nombre) {
         this.nombre = nombre;
     }
 
-    // Getters y Setters
     public String getId() {
         return id;
     }
@@ -68,7 +65,7 @@ public class Deporte {
 
     public void setImagenBase64(String imagenBase64) {
         this.imagenBase64 = imagenBase64;
-        cargarImagenDesdeBase64(); // Reconstruir imagen automáticamente
+        cargarImagenDesdeBase64(); 
     }
 
     public int getCantidadTorneosInscritos() {
@@ -83,7 +80,6 @@ public class Deporte {
         torneosInscritos--;
     }
 
-    // Cargar imagen desde un archivo y convertir a base64
     public void cargarImagenDesdeArchivo(String ruta) {
         try {
             File file = new File(ruta);
@@ -100,7 +96,6 @@ public class Deporte {
         }
     }
 
-    // Reconstruir imagen desde cadena base64
     public void cargarImagenDesdeBase64() {
         if (imagenBase64 != null && !imagenBase64.isEmpty()) {
             try {

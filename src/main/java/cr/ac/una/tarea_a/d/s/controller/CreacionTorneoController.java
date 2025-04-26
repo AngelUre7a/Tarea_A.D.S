@@ -57,13 +57,13 @@ public class CreacionTorneoController extends Controller implements Initializabl
     private ComboBox<Deporte> ComboBoxDeportes;
     @FXML
     private MFXButton btnJugarTorneo;
+    @FXML
+    private MFXButton btnVolver;
 
     private final ObservableList<Equipo> equiposLista = FXCollections.observableArrayList();
     private final EquipoRepository Equiporepo = new EquipoRepository();
     private final ObservableList<Equipo> equiposInscritos = FXCollections.observableArrayList();
     private final TorneoRepository Torneorepo = new TorneoRepository();
-    @FXML
-    private MFXButton btnVolver;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -84,6 +84,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
         });
         colAgregar.setCellFactory(column -> new javafx.scene.control.TableCell<Equipo, String>() {
             private final MFXCheckbox checkbox = new MFXCheckbox("");
+
             {
                 checkbox.setOnAction(event -> {
                     Equipo equipo = getTableView().getItems().get(getIndex());
@@ -163,7 +164,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
         } catch (IOException e) {
             new Mensaje().show(Alert.AlertType.ERROR, "Error al cargar datos", "No se pudieron cargar los equipos.");
         }
-        
+
         List<Deporte> deportes = null;
         try {
             DeporteRepository deporteRepo = new DeporteRepository();
@@ -202,7 +203,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
 
     @FXML
     private void onActionComboBoxDeportes(ActionEvent event) {
-         Sonidos.click();
+        Sonidos.click();
         Deporte deporteSeleccionado = ComboBoxDeportes.getValue();
 
         ObservableList<Equipo> equiposFiltrados = equiposLista.filtered(equipo -> equipo.getTipoDeporte().equals(deporteSeleccionado.getNombre()));
@@ -211,7 +212,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
 
     @FXML
     private void onActionBtnJugarTorneo(ActionEvent event) {
-         Sonidos.click();
+        Sonidos.click();
         Deporte deporte = ComboBoxDeportes.getValue();
         if (deporte == null) {
             new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe seleccionar un tipo de deporte.");
@@ -220,8 +221,18 @@ public class CreacionTorneoController extends Controller implements Initializabl
         String nombre = txtNombreTorneo.getText();
         String textCantidadEquipos = txtCantidadEquipos.getText();
         String textTiempoPorPartida = txtTiempoPartido.getText();
-        if (nombre == null || nombre.isBlank() || textCantidadEquipos == null || textCantidadEquipos.isBlank() || textTiempoPorPartida == null || textTiempoPorPartida.isBlank()) {
-            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar el nombre, cantidad de equipos y tiempo de cada partido.");
+        if (nombre == null || nombre.isBlank()) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar el nombre del torneo.");
+            return;
+        }
+
+        if (textCantidadEquipos == null || textCantidadEquipos.isBlank()) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar la cantidad de equipos.");
+            return;
+        }
+
+        if (textTiempoPorPartida == null || textTiempoPorPartida.isBlank()) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar el tiempo por partida.");
             return;
         }
 
@@ -273,7 +284,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
             new Mensaje().show(Alert.AlertType.ERROR, "Error al actualizar deporte", "No se pudo actualizar el deporte: " + deporte.getNombre());
             e.printStackTrace();
         }
-        
+
         List<Torneo> torneos = (List<Torneo>) AppContext.getInstance().get("LISTA_TORNEOS");
         ObservableList<Torneo> listaTorneos = FXCollections.observableArrayList(torneos);
         listaTorneos.add(torneo);
@@ -295,7 +306,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
 
     @FXML
     private void onActionBtnGuardarTorneo(ActionEvent event) {
-         Sonidos.click();
+        Sonidos.click();
         Deporte deporte = ComboBoxDeportes.getValue();
         if (deporte == null) {
             new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe seleccionar un tipo de deporte.");
@@ -304,10 +315,21 @@ public class CreacionTorneoController extends Controller implements Initializabl
         String nombre = txtNombreTorneo.getText();
         String textCantidadEquipos = txtCantidadEquipos.getText();
         String textTiempoPorPartida = txtTiempoPartido.getText();
-        if (nombre == null || nombre.isBlank() || textCantidadEquipos == null || textCantidadEquipos.isBlank() || textTiempoPorPartida == null || textTiempoPorPartida.isBlank()) {
-            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar el nombre, cantidad de equipos y tiempo de cada partido.");
+        if (nombre == null || nombre.isBlank()) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar el nombre del torneo.");
             return;
         }
+
+        if (textCantidadEquipos == null || textCantidadEquipos.isBlank()) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar la cantidad de equipos.");
+            return;
+        }
+
+        if (textTiempoPorPartida == null || textTiempoPorPartida.isBlank()) {
+            new Mensaje().show(Alert.AlertType.WARNING, "BALLIVERSE", "Debe ingresar el tiempo por partida.");
+            return;
+        }
+
         try {
             List<Torneo> torneosExistentes = Torneorepo.findAll();
             for (Torneo torneo : torneosExistentes) {
@@ -390,7 +412,7 @@ public class CreacionTorneoController extends Controller implements Initializabl
 
     @FXML
     private void onActionBtnVolver(ActionEvent event) {
-         Sonidos.click();
+        Sonidos.click();
         Mensaje mensaje = new Mensaje();
         Boolean respuesta = mensaje.showConfirmation("BALLIVERSE", "¿Estás seguro que deseas salir de la ventana para crear Torneos?");
         if (respuesta) {

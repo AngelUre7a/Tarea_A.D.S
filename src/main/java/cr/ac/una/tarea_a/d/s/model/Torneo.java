@@ -9,12 +9,12 @@ public class Torneo {
     private String nombre;
     private String tipoDeporte;
     private int cantidadEquipos;
-    private int tiempoPorPartida; // en minutos
+    private int tiempoPorPartida; 
     private List<Equipo> equiposInscritos;
-    private List<Partida> partidas; // 🔥 lista de partidas
-    private String estado; // "pendiente", "enCurso", "finalizado"
+    private List<Partida> partidas; 
+    private String estado; 
 
-    // ✅ Constructor principal SIN partidas (se inicializa vacía)
+    
     public Torneo(String id, String nombre, String tipoDeporte, int cantidadEquipos, int tiempoPorPartida, List<Equipo> equiposInscritos) {
         this.id = id;
         this.nombre = nombre;
@@ -26,7 +26,6 @@ public class Torneo {
         this.estado = "pendiente";
     }
 
-    // (Opcional) Constructor completo con partidas si lo ocupás en el futuro
     public Torneo(String id, String nombre, String tipoDeporte, int cantidadEquipos, int tiempoPorPartida, List<Equipo> equiposInscritos, List<Partida> partidas) {
         this.id = id;
         this.nombre = nombre;
@@ -37,8 +36,6 @@ public class Torneo {
         this.partidas = partidas;
         this.estado = "pendiente";
     }
-
-    // Getters y Setters
 
     public String getId() {
         return id;

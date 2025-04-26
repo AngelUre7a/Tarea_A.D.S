@@ -71,11 +71,10 @@ public class MostrarCertificadoController extends Controller implements Initiali
 
     private Equipo equipoCampeon;
     private Torneo torneo;
+    
     private EstadisticasEquipoPTRepository estadisticasRepo;
     private final ObservableList<EstadisticasEquipoPT> estadisticasLista = FXCollections.observableArrayList();
     private EstadisticasEquipoPT statsPTCampeon;
-    
-    
     
     
     @Override
@@ -120,10 +119,7 @@ public class MostrarCertificadoController extends Controller implements Initiali
         }
     }
 
-    @Override
-    public void initialize() {
-    }
-
+  
     @FXML
     private void onActionBtnImprimirCert(ActionEvent event) {
          Sonidos.click();
@@ -177,4 +173,9 @@ public class MostrarCertificadoController extends Controller implements Initiali
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
     }
+    
+      @Override
+    public void initialize() {
+    }
+
 }

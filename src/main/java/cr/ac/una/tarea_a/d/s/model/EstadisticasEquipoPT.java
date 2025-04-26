@@ -25,7 +25,6 @@ public class EstadisticasEquipoPT {
         this.puntosPT = puntosPT;
         this.esGanadorDT = esGanadorDT;
     }
- // Getters y Setters
 
     public String getIdEquipo() {
         return idEquipo;

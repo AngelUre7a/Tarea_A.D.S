@@ -26,7 +26,7 @@ public class PantallaInicialController extends Controller implements Initializab
     private Label title;
     @FXML
     private MFXButton btnAcercaDe;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         title.setFocusTraversable(true);
@@ -34,14 +34,14 @@ public class PantallaInicialController extends Controller implements Initializab
 
     @FXML
     private void OnActionBtnJugar(ActionEvent event) throws IOException {
-         Sonidos.click();
+        Sonidos.click();
         FlowController.getInstance().goMain();
         ((Stage) root.getScene().getWindow()).close();
     }
 
     @FXML
     private void OnActionBtnSalir(ActionEvent event) {
-         Sonidos.click();
+        Sonidos.click();
         Mensaje mensaje = new Mensaje();
         Boolean respuesta = mensaje.showConfirmation("BALLIVERSE", "¿Estás seguro que deseas cerrar BALLIVERSE?");
         if (respuesta) {
@@ -51,15 +51,14 @@ public class PantallaInicialController extends Controller implements Initializab
         }
     }
 
-    @Override
-    public void initialize() {
-    }
-
     @FXML
     private void OnActionBtnAcercaDe(ActionEvent event) throws IOException {
-         Sonidos.click();
+        Sonidos.click();
         FlowController.getInstance().goMain2();
         ((Stage) root.getScene().getWindow()).close();
     }
 
+    @Override
+    public void initialize() {
+    }
 }

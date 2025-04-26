@@ -1,7 +1,6 @@
 package cr.ac.una.tarea_a.d.s.model;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Base64;
 import java.nio.file.Files;
 import java.io.ByteArrayInputStream;
@@ -11,7 +10,7 @@ public class Equipo {
 
     private String id;
     private String nombre;
-    private transient Image imagen; // No se serializa
+    private transient Image imagen; 
     private String tipoDeporte;
     private String imagenBase64;
     private int cuantosTorneos = 0;
@@ -19,22 +18,19 @@ public class Equipo {
     public Equipo() {
     }
 
-    // Constructor con imagen
     public Equipo(String id, String nombre, Image imagen, String tipoDeporte) {
         this.id = id;
         this.nombre = nombre;
         this.tipoDeporte = tipoDeporte;
-        setImagen(imagen); // Guarda la imagen y genera imagenBase64
+        setImagen(imagen); 
     }
 
-    // Constructor solo con nombre, útil para combos o búsqueda
     public Equipo(String id, String nombre, String tipoDeporte) {
         this.id = id;
         this.nombre = nombre;
         this.tipoDeporte = tipoDeporte;
     }
 
-    // Getters y Setters
     public String getId() {
         return id;
     }
@@ -85,10 +81,9 @@ public class Equipo {
 
     public void setImagenBase64(String imagenBase64) {
         this.imagenBase64 = imagenBase64;
-        cargarImagenDesdeBase64(); // Reconstruir imagen automáticamente
+        cargarImagenDesdeBase64(); 
     }
 
-    // Reconstruir imagen desde base64
     public void cargarImagenDesdeBase64() {
         if (imagenBase64 != null && !imagenBase64.isEmpty()) {
             try {
