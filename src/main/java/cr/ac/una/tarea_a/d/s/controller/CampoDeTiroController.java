@@ -24,7 +24,9 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class CampoDeTiroController extends Controller implements Initializable {
@@ -62,11 +64,11 @@ public class CampoDeTiroController extends Controller implements Initializable {
     private int segundosEquipo1 = 0;
     private int segundosEquipo2 = 0;
 
-    private final List<Circle> dianas = new ArrayList<>();
+    private final List<Node> dianas = new ArrayList<>();
     @FXML
     private Label lblGanador;
-    
-    
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -84,13 +86,16 @@ public class CampoDeTiroController extends Controller implements Initializable {
     }
 
     private void generarDianas(int cantidad) {
-        double radio = 30;
-        double limiteInferior = imgBalon.getLayoutY() - radio * 2;
+        Image imagenDiana = new Image(getClass().getResourceAsStream("/cr/ac/una/tarea_a/d/s/resources/diana.png"));
+        double anchoDiana = 60;
+        double altoDiana = 60;
+        double limiteInferior = imgBalon.getLayoutY() - altoDiana;
 
         for (int i = 0; i < cantidad; i++) {
-            Circle diana = new Circle(radio);
-            diana.setFill(Color.RED);
-            diana.setStroke(Color.BLACK);
+            ImageView diana = new ImageView(imagenDiana);
+            diana.setPreserveRatio(true);
+            diana.setFitWidth(anchoDiana);
+            diana.setFitHeight(altoDiana);
 
             boolean posicionValida;
             double x = 0;
@@ -98,21 +103,30 @@ public class CampoDeTiroController extends Controller implements Initializable {
 
             do {
                 posicionValida = true;
-                x = Math.random() * (CampoTiro.getWidth() - radio * 2);
+                x = Math.random() * (CampoTiro.getWidth() - anchoDiana);
                 y = Math.random() * (limiteInferior > 0 ? limiteInferior : 0);
+
                 for (var nodo : dianas) {
-                    double dx = (x + radio) - nodo.getLayoutX();
-                    double dy = (y + radio) - nodo.getLayoutY();
-                    double distancia = Math.sqrt(dx * dx + dy * dy);
-                    if (distancia < radio * 2) {
-                        posicionValida = false;
-                        break;
+                    if (nodo instanceof ImageView imgDiana) {
+                        double centroXNodo = imgDiana.getLayoutX() + imgDiana.getFitWidth()/2;
+                        double centroYNodo = imgDiana.getLayoutY() + imgDiana.getFitHeight()/2;
+                        double centroXNew = x + anchoDiana/2;
+                        double centroYNew = y + altoDiana/2;
+
+                        double dx = centroXNew - centroXNodo;
+                        double dy = centroYNew - centroYNodo;
+                        double distancia = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distancia < (anchoDiana + altoDiana)/2) {
+                            posicionValida = false;
+                            break;
+                        }
                     }
                 }
             } while (!posicionValida);
 
-            diana.setLayoutX(x + radio);
-            diana.setLayoutY(y + radio);
+            diana.setLayoutX(x);
+            diana.setLayoutY(y);
             dianas.add(diana);
             CampoTiro.getChildren().add(diana);
         }
@@ -138,16 +152,19 @@ public class CampoDeTiroController extends Controller implements Initializable {
             if (!puedeMoverBalon) return;
             boolean colisiono = false;
 
-            for (Circle diana : new ArrayList<>(dianas)) {
-                double dx = (imgBalon.getLayoutX() + imgBalon.getFitWidth() / 2) - diana.getLayoutX();
-                double dy = (imgBalon.getLayoutY() + imgBalon.getFitHeight() / 2) - diana.getLayoutY();
-                double distancia = Math.sqrt(dx * dx + dy * dy);
+            for (Node nodo : new ArrayList<>(dianas)) {
+                if (nodo instanceof ImageView) {
+                    ImageView diana = (ImageView) nodo;
+                    double dx = (imgBalon.getLayoutX() + imgBalon.getFitWidth()/2) - (diana.getLayoutX() + diana.getFitWidth()/2);
+                    double dy = (imgBalon.getLayoutY() + imgBalon.getFitHeight()/2) - (diana.getLayoutY() + diana.getFitHeight()/2);
+                    double distancia = Math.sqrt(dx * dx + dy * dy);
 
-                if (distancia <= diana.getRadius()) {
-                    CampoTiro.getChildren().remove(diana);
-                    dianas.remove(diana);
-                    colisiono = true;
-                    break;
+                    if (distancia <= diana.getFitWidth()/2) {
+                        CampoTiro.getChildren().remove(diana);
+                        dianas.remove(diana);
+                        colisiono = true;
+                        break;
+                    }
                 }
             }
             imgBalon.setLayoutX(balonInicialX);
@@ -195,13 +212,13 @@ public class CampoDeTiroController extends Controller implements Initializable {
             actualizarVistaEquipo();
             generarDianas(6);
         }
-        }
+    }
 
-        private void actualizarVistaEquipo() {
-            Equipo actual = turnoEquipo1 ? equipo1 : equipo2;
-            lblNombreEquipo.setText(actual.getNombre());
-            imgEquipo.setImage(actual.getImagen());
-            lblTemporizador.setText("00:00");
+    private void actualizarVistaEquipo() {
+        Equipo actual = turnoEquipo1 ? equipo1 : equipo2;
+        lblNombreEquipo.setText(actual.getNombre());
+        imgEquipo.setImage(actual.getImagen());
+        lblTemporizador.setText("00:00");
     }
 
     private void iniciarCronometro() {
@@ -233,7 +250,7 @@ public class CampoDeTiroController extends Controller implements Initializable {
         int segundos = totalSegundos % 60;
         return String.format("%02d:%02d", minutos, segundos);
     }
-    
+
     private void mostrarInstrucciones() {
         lblInstrucciones.setText("¡Bienvenido al campo de tiro!\n"
                 + "Cada equipo debe arrastrar el balón a las dianas rojas.\n"
@@ -242,20 +259,20 @@ public class CampoDeTiroController extends Controller implements Initializable {
         lblInstrucciones.setVisible(true);
         new Timeline(new KeyFrame(Duration.seconds(10), e -> lblInstrucciones.setVisible(false))).play();
     }
-    
+
     @FXML
     private void onActionBtnIniciar(ActionEvent event) {
-            puedeMoverBalon = true;
-            btnIniciar.setDisable(true);
-            iniciarCronometro();
+        puedeMoverBalon = true;
+        btnIniciar.setDisable(true);
+        iniciarCronometro();
     }
-    
+
     @FXML
     private void onActionBtnVolver(ActionEvent event) {
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
     }
-    
+
     @Override
     public void initialize() {
     }
