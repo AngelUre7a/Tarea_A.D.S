@@ -122,6 +122,7 @@ public class RankingController extends Controller implements Initializable {
         }
     }
 
+    //Este método aplica los filtros en la tableView
     private void Filtrar() {
         FilteredList<Equipo> filteredData = new FilteredList<>(equiposLista, b -> true);
 
@@ -195,6 +196,7 @@ public class RankingController extends Controller implements Initializable {
         Filtrar();
     }
 
+    //Este metodo carga las estadisticas generales para obtener los puntos luego
     private void cargarEstadisticas() {
         try {
             List<EstadisticasEquipoGenerales> listaGenerales = estadisticasRepo.findAll();
@@ -203,7 +205,8 @@ public class RankingController extends Controller implements Initializable {
             Logger.getLogger(RankingController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    //Se aplican los 2 filtros, el del combobox y el del text field para que funcionen simultaneamente
     private void aplicarFiltro(FilteredList<Equipo> filteredData) {
         filteredData.setPredicate(equipo -> {
             String filtroNombre = filterField.getText();

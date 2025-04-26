@@ -80,6 +80,7 @@ public class CampoDeTiroController extends Controller implements Initializable {
 
     }
 
+    //Este método genera las dianas aleatoriamente por encima del balon y dentro del anchor pane de CampoTiro
     private void generarDianas(int cantidad) {
         Image imagenDiana = new Image(getClass().getResourceAsStream("/cr/ac/una/tarea_a/d/s/resources/diana.png"));
         double anchoDiana = 80;
@@ -126,7 +127,9 @@ public class CampoDeTiroController extends Controller implements Initializable {
             CampoTiro.getChildren().add(diana);
         }
     }
-
+    
+    //Este método hace posible que el balón se pueda arrastrar poniendole su limite en CampoTiro
+    // para que no se salga y verifica si el balón colisiona con alguna diana y además verifica que ya no hayan dianas para terminar el turno
     private void configurarArrastreBalon() {
         balonInicialX = imgBalon.getLayoutX();
         balonInicialY = imgBalon.getLayoutY();
@@ -183,6 +186,7 @@ public class CampoDeTiroController extends Controller implements Initializable {
         });
     }
 
+    //Este método termina el turno del primer equipo y si no ha terminado entonces pasa con el del equipo 2 y luego verifica el ganador o si hay un empate
     private void terminarTurno() {
         detenerCronometro();
         puedeMoverBalon = false;
@@ -222,6 +226,7 @@ public class CampoDeTiroController extends Controller implements Initializable {
         }
     }
 
+    //Este método cambia la vista para que salga el nombre y el escudo del siguiente equipo
     private void actualizarVistaEquipo() {
         Equipo actual = turnoEquipo1 ? equipo1 : equipo2;
         lblNombreEquipo.setText(actual.getNombre());
@@ -229,6 +234,7 @@ public class CampoDeTiroController extends Controller implements Initializable {
         lblTemporizador.setText("00:00");
     }
 
+    //Este método inicia el cronometro y carga el tiempo a las variables que son comparadas en otro método para determinar el ganador
     private void iniciarCronometro() {
         if (cronometro != null) {
             cronometro.stop();
@@ -253,12 +259,14 @@ public class CampoDeTiroController extends Controller implements Initializable {
         }
     }
 
+    //Este metodo convierte si hay 60 segundos en 1 minuto para que en el label se vean bien
     private String formatearTiempo(int totalSegundos) {
         int minutos = totalSegundos / 60;
         int segundos = totalSegundos % 60;
         return String.format("%02d:%02d", minutos, segundos);
     }
 
+    //Este método es para mostrar las instrucciones por 15 segundos como un label
     private void mostrarInstrucciones() {
         lblInstrucciones.setText("¡Bienvenido al campo de tiro!\n"
                 + "Cada equipo debe arrastrar el balón a las dianas.\n"

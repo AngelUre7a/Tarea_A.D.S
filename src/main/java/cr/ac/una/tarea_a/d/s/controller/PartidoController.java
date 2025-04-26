@@ -113,6 +113,7 @@ public class PartidoController extends Controller implements Initializable {
         Finalizar();
     }
 
+    //Este método finaliza el partido, comprobando su ganador, agregando las estadisticas generales al equipo perdedor y las estadisticas por torneo
     private void Finalizar() {
         if ("finalizado".equals(estadoPartida)) {
             return;
@@ -245,6 +246,7 @@ public class PartidoController extends Controller implements Initializable {
         stage.close();
     }
 
+    //Aqui se suman las estadisticas por torneo a las generales del equipo
     private void agregarEstadisticasPTAGeneral(EstadisticasEquipoGenerales generales, EstadisticasEquipoPT parciales) {
         generales.setGolesAFavor(generales.getGolesAFavor() + parciales.getGolesAFavorPT());
         generales.setPuntos(generales.getPuntos() + parciales.getPuntosPT());
@@ -265,6 +267,7 @@ public class PartidoController extends Controller implements Initializable {
         }
     }
 
+    //Este método busca el deporte mediante el nombre ya que se obtiene solo el nombre del deporte del torneo y se necesita la imagen del balón para el partido
     public Deporte buscarDeportePorNombre(String nombreDeporte) {
         for (Deporte d : deportesLista) {
             if (d.getNombre().equalsIgnoreCase(nombreDeporte)) {
@@ -276,6 +279,7 @@ public class PartidoController extends Controller implements Initializable {
         return null;
     }
 
+    //Se cargan datos como el balon, los nombres de los equipos y los escudos de ambos
     public void cargarDatosPartido() {
         Deporte deporte = buscarDeportePorNombre(nombreDeporte);
         if (deporte != null) {
@@ -306,6 +310,7 @@ public class PartidoController extends Controller implements Initializable {
         }
     }
 
+    //Inicia la cuenta atrás del partido convirtiendo el atributo del torneo de minutos a segundos para poder cargarlo bien al cronometro y si el tiempo termina se finaliza el partido
     public void iniciarCuentaAtras() {
         Torneo torneo = (Torneo) AppContext.getInstance().get("TORNEO");
         if (torneo != null) {
@@ -333,6 +338,7 @@ public class PartidoController extends Controller implements Initializable {
 
     }
 
+    //Se configura el movimiento del balon y se limita para que no se salga de la cancha 
     private void configurarMovimientoBalon() {
         imgBalon.setOnMousePressed(event -> {
             offsetX = event.getSceneX() - imgBalon.getLayoutX();
@@ -356,6 +362,7 @@ public class PartidoController extends Controller implements Initializable {
         });
     }
 
+    //Verifica el gol si se suelta en las posiciones del area chica de cada parte de la cancha
     private void verificarGol() {
         double x = imgBalon.getLayoutX();
         double y = imgBalon.getLayoutY();
@@ -381,11 +388,13 @@ public class PartidoController extends Controller implements Initializable {
         }
     }
 
+    //Resetea el balón a su posición original cuando se detecta un gol
     private void resetearBalon() {
         imgBalon.setLayoutX(fondoImgCancha.getWidth() / 2 - imgBalon.getFitWidth() / 2);
         imgBalon.setLayoutY(fondoImgCancha.getHeight() / 2 - imgBalon.getFitHeight() / 2);
     }
 
+    //Este método abre la ventana del desempate y pone el enDesempate en true para que se hagan las validaciones de sumar 2 puntos en Finalizar()
     private void iniciarDesempate() {
         Sonidos.musicaDesempate();
         btnFinalizar.setDisable(true);

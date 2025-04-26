@@ -66,9 +66,6 @@ public class EstadisticasController extends Controller implements Initializable 
     @FXML
     private MFXButton btnActualizar;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -100,6 +97,7 @@ public class EstadisticasController extends Controller implements Initializable 
 
     }
 
+    //Aquí carga los equipos del json
     private void cargarJson() {
         try {
             equiposLista.clear();
@@ -115,6 +113,7 @@ public class EstadisticasController extends Controller implements Initializable 
         }
     }
 
+    //Este método muestra la tableView con los filtros aplicados
     private void Filtrar() {
         FilteredList<Equipo> filteredData = new FilteredList<>(equiposLista, p -> true);
 
@@ -166,6 +165,7 @@ public class EstadisticasController extends Controller implements Initializable 
 
     }
 
+    //Aquí se aplican los filtros, tanto el del combobox como el del text field
     private void aplicarFiltro(FilteredList<Equipo> filteredData) {
         filteredData.setPredicate(equipo -> {
             String filtroNombre = filterField.getText();
@@ -178,6 +178,7 @@ public class EstadisticasController extends Controller implements Initializable 
         });
     }
 
+    //Este método agrega el botón para ver las estadisticas en cada fila
     private void agregarBotonVerStats() {
         colVerStats.setCellFactory(param -> new javafx.scene.control.TableCell<Equipo, Void>() {
 

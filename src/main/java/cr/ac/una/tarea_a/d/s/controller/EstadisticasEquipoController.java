@@ -134,6 +134,7 @@ public class EstadisticasEquipoController extends Controller implements Initiali
     public void initialize() {
     }
     
+    //Este método carga los torneos que coincidan con el deporte del equipo en el combobox para filtrar las estadisticas por torneo
     private void cargarTorneosPorDeporte(String deporte) throws IOException {
         torneoLista.clear();
 
@@ -159,6 +160,7 @@ public class EstadisticasEquipoController extends Controller implements Initiali
         }
     });
     }
+    
     @FXML
     private void onActionCmbTorneos(ActionEvent event) {
          Sonidos.click();

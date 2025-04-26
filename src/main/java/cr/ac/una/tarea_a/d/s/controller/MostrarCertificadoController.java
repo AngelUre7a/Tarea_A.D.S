@@ -125,8 +125,9 @@ public class MostrarCertificadoController extends Controller implements Initiali
         ImprimirCertificado();
     }
     
+    //Este método toma captura del root pane, luego la convierte, crea el pdf y lo guarda (se ocultan los botones para tomar la captura)
     private void ImprimirCertificado(){
-         Sonidos.click();
+        Sonidos.click();
         btnVolver.setVisible(false);
         btnImprimirCert.setVisible(false);
         try {
