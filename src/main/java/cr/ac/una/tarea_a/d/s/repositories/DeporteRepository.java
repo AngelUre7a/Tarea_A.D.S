@@ -25,6 +25,7 @@ public class  DeporteRepository implements IDeporteRepository  {
         createFileIfNotExists();
     }
 
+    //Resuelve la ruta donde se guardará el archivo json
     private String resolveFilePath() {
         String dataDir = "src/main/java/cr/ac/una/tarea_a/d/s/dataJson";
         File directory = new File(dataDir);
@@ -34,6 +35,7 @@ public class  DeporteRepository implements IDeporteRepository  {
         return dataDir + File.separator + DEFAULT_FILE_NAME;
     }
 
+   //Crea el json si no existe 
     private void createFileIfNotExists() {
         File file = new File(filePath);
         if (!file.exists()) {
@@ -48,6 +50,7 @@ public class  DeporteRepository implements IDeporteRepository  {
         }
     }
 
+    //Guarda el deporte en el archivo y si ya esta entonces lo actualiza
     @Override
     public Deporte save(Deporte deporte) throws IOException {
         List<Deporte> deportes = findAll();
@@ -69,6 +72,7 @@ public class  DeporteRepository implements IDeporteRepository  {
         return deporte;
     }
 
+    //Obtiene todos los datos del json
     @Override
     public List<Deporte> findAll() throws IOException {
         File file = new File(filePath);
@@ -83,6 +87,7 @@ public class  DeporteRepository implements IDeporteRepository  {
         }
     }
 
+    //Busca un deporte por su id
     @Override
     public Optional<Deporte> findById(String id) throws IOException {
         List<Deporte> deportes = findAll();
@@ -91,6 +96,7 @@ public class  DeporteRepository implements IDeporteRepository  {
                 .findFirst();
     }
 
+    //Borra un deporte por su id
     @Override
     public boolean deleteById(String id) throws IOException {
         List<Deporte> deportes = findAll();
@@ -104,6 +110,8 @@ public class  DeporteRepository implements IDeporteRepository  {
 
         return removed;
     }
+    
+    //Actualiza un deporte, lo elimina primero y luego agrega el actualizado
     public void update(Deporte deporte) throws IOException {
         List<Deporte> deportes = findAll();
         deportes.removeIf(e -> e.getId().equals(deporte.getId())); // Eliminar el equipo anterior

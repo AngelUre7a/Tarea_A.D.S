@@ -13,10 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-/**
- *
- * @author dasly
- */
+
 public class TorneoRepository implements ITorneoRepository {
     private static final String DEFAULT_FILE_NAME = "Torneo.json";
     private final String filePath;
@@ -28,6 +25,7 @@ public class TorneoRepository implements ITorneoRepository {
         createFileIfNotExists();
     }
 
+    //Resuelve la ruta del json
     private String resolveFilePath() {
         String dataDir = "src/main/java/cr/ac/una/tarea_a/d/s/dataJson";
         File directory = new File(dataDir);
@@ -37,6 +35,7 @@ public class TorneoRepository implements ITorneoRepository {
         return dataDir + File.separator + DEFAULT_FILE_NAME;
     }
 
+    //Crea el json si no existe
     private void createFileIfNotExists() {
         File file = new File(filePath);
         if (!file.exists()) {
@@ -51,6 +50,7 @@ public class TorneoRepository implements ITorneoRepository {
         }
     }
 
+    //Guarda los torneos
     @Override
     public Torneo save(Torneo torneo) throws IOException {
         List<Torneo> torneos = findAll();
@@ -70,6 +70,7 @@ public class TorneoRepository implements ITorneoRepository {
         return torneo;
     }
 
+    //Obtiene todos los datos del los torneos
     @Override
     public List<Torneo> findAll() throws IOException {
         File file = new File(filePath);
@@ -84,6 +85,7 @@ public class TorneoRepository implements ITorneoRepository {
         }
     }
 
+    //Busca torneos por id
     @Override
     public Optional<Torneo> findById(String id) throws IOException {
         List<Torneo> torneos = findAll();
@@ -92,6 +94,7 @@ public class TorneoRepository implements ITorneoRepository {
                 .findFirst();
     }
 
+    //Borra torneos por id
     @Override
     public boolean deleteById(String id) throws IOException {
         List<Torneo> torneos = findAll();

@@ -27,6 +27,7 @@ public class EquipoRepository implements IEquipoRepository {
         createFileIfNotExists();
     }
 
+    //Resuelve la ruta del json
     private String resolveFilePath() {
         String dataDir = "src/main/java/cr/ac/una/tarea_a/d/s/dataJson";
         File directory = new File(dataDir);
@@ -35,7 +36,8 @@ public class EquipoRepository implements IEquipoRepository {
         }
         return dataDir + File.separator + DEFAULT_FILE_NAME;
     }
-
+    
+    //Crea el json si no existe
     private void createFileIfNotExists() {
         File file = new File(filePath);
         if (!file.exists()) {
@@ -50,6 +52,7 @@ public class EquipoRepository implements IEquipoRepository {
         }
     }
 
+    //Guarda el equipo y si ya esta entonces lo actualiza
     @Override
     public Equipo save(Equipo equipo) throws IOException {
         List<Equipo> deportes = findAll();
@@ -72,6 +75,7 @@ public class EquipoRepository implements IEquipoRepository {
         return equipo;
     }
 
+    //Obtiene todos los datos del json
     @Override
     public List<Equipo> findAll() throws IOException {
         File file = new File(filePath);
@@ -86,6 +90,7 @@ public class EquipoRepository implements IEquipoRepository {
         }
     }
 
+    //Busca un equipo por su ID
     @Override
     public Optional<Equipo> findById(String id) throws IOException {
         List<Equipo> deportes = findAll();
@@ -94,6 +99,7 @@ public class EquipoRepository implements IEquipoRepository {
                 .findFirst();
     }
 
+    //Borra un equipo por su ID
     @Override
     public boolean deleteById(String id) throws IOException {
         List<Equipo> equipos = findAll();
@@ -123,6 +129,7 @@ public class EquipoRepository implements IEquipoRepository {
         }
     }
 
+    //Actualiza un equipo, lo elimina primero y luego agrega el actualizado
     public void update(Equipo equipo) throws IOException {
         List<Equipo> equipos = findAll();
         equipos.removeIf(e -> e.getId().equals(equipo.getId())); 

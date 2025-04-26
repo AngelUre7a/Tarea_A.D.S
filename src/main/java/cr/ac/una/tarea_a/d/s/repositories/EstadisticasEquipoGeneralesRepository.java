@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
 public class EstadisticasEquipoGeneralesRepository implements IEstadisticasEquipoGeneralesRepository {
 
     private static final String DEFAULT_FILE_NAME = "EstadisticasEquipoGenerales.json";
@@ -26,6 +27,7 @@ public class EstadisticasEquipoGeneralesRepository implements IEstadisticasEquip
         createFileIfNotExists();
     }
 
+    //Resuelve la ruta del json
     private String resolveFilePath() {
         String dataDir = "src/main/java/cr/ac/una/tarea_a/d/s/dataJson";
         File directory = new File(dataDir);
@@ -35,6 +37,7 @@ public class EstadisticasEquipoGeneralesRepository implements IEstadisticasEquip
         return dataDir + File.separator + DEFAULT_FILE_NAME;
     }
 
+    //Crea el json si no existe 
     private void createFileIfNotExists() {
         File file = new File(filePath);
         if (!file.exists()) {
@@ -49,6 +52,7 @@ public class EstadisticasEquipoGeneralesRepository implements IEstadisticasEquip
         }
     }
 
+    //Guarda las estadisticas generales por equipo y si ya estaban entonces se actualizan
     @Override
     public EstadisticasEquipoGenerales save(EstadisticasEquipoGenerales estadistica) throws IOException {
         List<EstadisticasEquipoGenerales> lista = findAll();
@@ -60,6 +64,7 @@ public class EstadisticasEquipoGeneralesRepository implements IEstadisticasEquip
         return estadistica;
     }
 
+    //Obtiene todos los datos del json
     @Override
     public List<EstadisticasEquipoGenerales> findAll() throws IOException {
         File file = new File(filePath);
@@ -72,6 +77,7 @@ public class EstadisticasEquipoGeneralesRepository implements IEstadisticasEquip
         }
     }
 
+    //Busca estadisticas por equipo generales por ID
     @Override
     public Optional<EstadisticasEquipoGenerales> findById(String idEquipo) throws IOException {
         return findAll().stream()
@@ -79,6 +85,7 @@ public class EstadisticasEquipoGeneralesRepository implements IEstadisticasEquip
                 .findFirst();
     }
 
+    //Borra estadisticas por equipo generales por ID
     @Override
     public boolean deleteById(String idEquipo) throws IOException {
         List<EstadisticasEquipoGenerales> lista = findAll();
@@ -91,6 +98,7 @@ public class EstadisticasEquipoGeneralesRepository implements IEstadisticasEquip
         return removed;
     }
 
+    //Actualiza las estadisticas generales de un equipo, las elimina primero y luego agrega las nuevas
     @Override
     public void update(EstadisticasEquipoGenerales estadistica) throws IOException {
         List<EstadisticasEquipoGenerales> lista = findAll();

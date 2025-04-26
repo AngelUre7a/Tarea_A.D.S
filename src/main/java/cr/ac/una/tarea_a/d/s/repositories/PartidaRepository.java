@@ -15,10 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-/**
- *
- * @author dasly
- */
+
 public class PartidaRepository implements IPartidaRepository {
     private static final String DEFAULT_FILE_NAME = "Partida.json";
     private final String filePath;
@@ -30,6 +27,7 @@ public class PartidaRepository implements IPartidaRepository {
         createFileIfNotExists();
     }
 
+    //Resuelve la ruta del json
     private String resolveFilePath() {
         String dataDir = "src/main/java/cr/ac/una/tarea_a/d/s/dataJson";
         File directory = new File(dataDir);
@@ -39,6 +37,7 @@ public class PartidaRepository implements IPartidaRepository {
         return dataDir + File.separator + DEFAULT_FILE_NAME;
     }
 
+    //Crea el json si no existe
     private void createFileIfNotExists() {
         File file = new File(filePath);
         if (!file.exists()) {
@@ -53,6 +52,7 @@ public class PartidaRepository implements IPartidaRepository {
         }
     }
 
+    //Guarda las partidas
     @Override
     public Partida save(Partida partida) throws IOException {
         List<Partida> partidas = findAll();
@@ -72,6 +72,7 @@ public class PartidaRepository implements IPartidaRepository {
         return partida;
     }
 
+    //Obtiene todas las partidas
     @Override
     public List<Partida> findAll() throws IOException {
         File file = new File(filePath);
@@ -85,6 +86,7 @@ public class PartidaRepository implements IPartidaRepository {
         }
     }
 
+    //Busca las partidas por id
     @Override
     public Optional<Partida> findById(String id) throws IOException {
         List<Partida> partidas = findAll();
@@ -93,6 +95,7 @@ public class PartidaRepository implements IPartidaRepository {
                 .findFirst();
     }
 
+    //Borra las partidas por ID
     @Override
     public boolean deleteById(String id) throws IOException {
         List<Partida> partidas = findAll();

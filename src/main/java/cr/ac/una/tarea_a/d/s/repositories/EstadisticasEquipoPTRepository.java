@@ -25,6 +25,7 @@ public class EstadisticasEquipoPTRepository implements IEstadisticasEquipoPTRepo
         createFileIfNotExists();
     }
 
+    //Resuelve la ruta del json
     private String resolveFilePath() {
         String dataDir = "src/main/java/cr/ac/una/tarea_a/d/s/dataJson";
         File directory = new File(dataDir);
@@ -34,6 +35,7 @@ public class EstadisticasEquipoPTRepository implements IEstadisticasEquipoPTRepo
         return dataDir + File.separator + DEFAULT_FILE_NAME;
     }
 
+    //Crea el json si no existe
     private void createFileIfNotExists() {
         File file = new File(filePath);
         if (!file.exists()) {
@@ -48,6 +50,7 @@ public class EstadisticasEquipoPTRepository implements IEstadisticasEquipoPTRepo
         }
     }
 
+    //Guarda las estadisticas por equipo por torneo
     @Override
     public EstadisticasEquipoPT save(EstadisticasEquipoPT estadistica) throws IOException {
         List<EstadisticasEquipoPT> estadisticas = findAll();
@@ -67,6 +70,7 @@ public class EstadisticasEquipoPTRepository implements IEstadisticasEquipoPTRepo
         return estadistica;
 }
 
+    //Obtiene todas las estadisticas por equipo por torneo
     @Override
     public List<EstadisticasEquipoPT> findAll() throws IOException {
         File file = new File(filePath);
@@ -80,6 +84,7 @@ public class EstadisticasEquipoPTRepository implements IEstadisticasEquipoPTRepo
         }
     }
 
+    //Busca las estadisticas por equipo por torneo por ID
     @Override
     public Optional<EstadisticasEquipoPT> findById(String idEquipo) throws IOException {
         List<EstadisticasEquipoPT> estadisticas = findAll();
@@ -88,6 +93,7 @@ public class EstadisticasEquipoPTRepository implements IEstadisticasEquipoPTRepo
                 .findFirst();
     }
 
+    //Borra estadisticas de equipo por torneo por ID
     @Override
     public boolean deleteById(String idEquipo) throws IOException {
         List<EstadisticasEquipoPT> estadisticas = findAll();
