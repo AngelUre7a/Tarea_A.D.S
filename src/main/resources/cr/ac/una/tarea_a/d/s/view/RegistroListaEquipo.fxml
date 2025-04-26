@@ -20,7 +20,7 @@
             <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="112.0" prefWidth="753.0" spacing="20.0" stylesheets="@../css/Style.css">
                <children>
                   <Label alignment="TOP_CENTER" text="Lista de Equipos " />
-                  <HBox alignment="TOP_CENTER" prefHeight="23.0" prefWidth="778.0" spacing="10.0">
+                  <HBox alignment="CENTER" prefHeight="23.0" prefWidth="778.0" spacing="10.0">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0">
                            <image>
@@ -28,7 +28,7 @@
                            </image>
                         </ImageView>
                         <MFXTextField fx:id="filterField" floatMode="BORDER" floatingText="Buscador" floatingTextGap="0.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="35.0" prefWidth="334.0" />
-                        <ComboBox fx:id="cmbBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="35.0" prefWidth="150.0" styleClass="mfx-combo-box" />
+                        <ComboBox fx:id="cmbBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="43.0" prefWidth="150.0" styleClass="mfx-combo-box" />
                         <MFXButton fx:id="btnAgregar" buttonType="RAISED" onAction="#onActionBtnAgregar" pickOnBounds="false" prefHeight="35.0" prefWidth="90.0" styleClass="jfx-button-long-text" text="Agregar" />
                         <MFXButton fx:id="btnActualizar" buttonType="RAISED" onAction="#onActionBtnActualizar" pickOnBounds="false" prefHeight="35.0" prefWidth="90.0" styleClass="jfx-button-long-text" text="Actualizar" />
                      </children>

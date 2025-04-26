@@ -11,21 +11,25 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RegistroEquipoController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.RegistroEquipoController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="4.0" prefHeight="400.0" prefWidth="600.0">
+      <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="4.0" prefHeight="492.0" prefWidth="693.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="600.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="693.0">
                <children>
-                  <Label fx:id="lbRegistroE" alignment="CENTER" prefHeight="10.0" prefWidth="220.0" styleClass="labelCertificado" stylesheets="@../css/Style.css" text="Registro Equipo con balon" />
+                  <Label fx:id="lbRegistroE" alignment="CENTER" prefHeight="45.0" prefWidth="345.0" stylesheets="@../css/Style.css" text="Registro Equipo con balon">
+                     <styleClass>
+                        <String fx:value="labelCertificado" />
+                        <String fx:value="jfx-title-label" />
+                     </styleClass></Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="270.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="693.0">
                <children>
-                  <MFXTextField fx:id="txtNombreEquipo" floatMode="BORDER" floatingText="Inserte el nombre del equipo" pickOnBounds="false" prefHeight="30.0" prefWidth="270.0" />
+                  <MFXTextField fx:id="txtNombreEquipo" floatMode="BORDER" floatingText="Inserte el nombre del equipo" pickOnBounds="false" prefHeight="30.0" prefWidth="270.0" styleClass="mfx-text-field" stylesheets="@../css/Style.css" />
                </children>
             </HBox>
-            <HBox prefHeight="200.0" prefWidth="600.0">
+            <HBox prefHeight="325.0" prefWidth="693.0">
                <children>
                   <VBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0" spacing="20.0">
                      <children>
@@ -55,11 +59,11 @@
                            </graphic></MFXButton>
                      </children>
                   </VBox>
-                  <ImageView fx:id="ImageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="ImageView" fitHeight="222.0" fitWidth="285.0" pickOnBounds="true" preserveRatio="true" />
                   <ComboBox fx:id="ComboBoxDeportes" prefHeight="25.0" prefWidth="199.0" promptText="Deportes Disponibles" styleClass="mfx-combo-box" stylesheets="@../css/Style.css" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="215.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="215.0" prefHeight="100.0" prefWidth="693.0" spacing="20.0">
                <children>
                   <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" prefHeight="30.0" prefWidth="125.0" text="Volver" />
                   <MFXButton fx:id="btnRegistrar" onAction="#onActionBtnRegistrarEquipo" prefHeight="30.0" prefWidth="125.0" text="Registrar" />

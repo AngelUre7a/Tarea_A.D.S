@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" prefHeight="500.0" prefWidth="700.0" styleClass="vBox" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.PartidoController">
+<BorderPane fx:id="root" prefHeight="500.0" prefWidth="700.0" styleClass="modal-vista" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.PartidoController">
     <top>
         <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="700.0" BorderPane.alignment="CENTER">
             <children>
@@ -37,11 +37,11 @@
         </HBox>
     </top>
     <center>
-        <VBox fx:id="Cancha" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+        <VBox fx:id="Cancha" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="700.0" BorderPane.alignment="CENTER">
             <children>
                 <AnchorPane fx:id="fondoImgCancha" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0">
                     <children>
-                        <ImageView fx:id="imgCancha" fitHeight="400.0" fitWidth="700.0" pickOnBounds="true">
+                        <ImageView fx:id="imgCancha" fitHeight="396.0" fitWidth="700.0" layoutY="8.0" pickOnBounds="true">
                             <image>
                                 <Image url="@../resources/CanchaFutbol.png" />
                             </image>
@@ -57,9 +57,9 @@
         </VBox>
     </center>
     <bottom>
-        <HBox alignment="CENTER" prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+        <HBox alignment="CENTER" prefHeight="45.0" prefWidth="700.0" BorderPane.alignment="CENTER">
             <children>
-                <MFXButton fx:id="btnFinalizar" onAction="#onActionBtnFinalizar" prefHeight="45.0" styleClass="mfx-button" stylesheets="@../css/Style.css" text="FINALIZAR PARTIDO" />
+                <MFXButton fx:id="btnFinalizar" onAction="#onActionBtnFinalizar" prefHeight="23.0" prefWidth="190.0" styleClass="mfx-button" stylesheets="@../css/Style.css" text="FINALIZAR PARTIDO" />
             </children>
         </HBox>
     </bottom>

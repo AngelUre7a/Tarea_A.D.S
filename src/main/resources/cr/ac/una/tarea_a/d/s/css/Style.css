@@ -187,6 +187,17 @@ BorderPane {
     -fx-text-fill: black;
     -fx-font-weight: bold;
 }
+.labelLetraNegra {
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+.jfx-title-label{
+    -fx-font-size:20px;
+    -fx-padding:5 0 5 0;
+    -fx-text-fill: #51b6cd;
+    -fx-font-weight:bold;
+    -fx-effect:dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 2, 0.0, 1, 2);
+}
 
 .jfx-title-label-menu,
 .jfx-title-label-AcercaDe {
@@ -265,6 +276,8 @@ BorderPane {
     -fx-border-color: black;
     -fx-border-width: 2px;
     -fx-font-size: 12px;
+/*    -fx-padding: 5px;*/
+    -fx-margen:5px;
 }
 
 .table-view .column-header {

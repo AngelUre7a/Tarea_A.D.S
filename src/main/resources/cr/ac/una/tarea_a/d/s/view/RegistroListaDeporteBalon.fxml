@@ -18,7 +18,7 @@
          <children>
             <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="112.0" prefWidth="760.0" spacing="20.0" stylesheets="@../css/Style.css">
                <children>
-                  <Label alignment="TOP_CENTER" text="Lista de Deportes con balón " />
+                  <Label alignment="TOP_CENTER" styleClass="jfx-title-label" stylesheets="@../css/Style.css" text="Lista de Deportes con balón " />
                   <HBox alignment="CENTER" prefHeight="23.0" prefWidth="778.0" spacing="10.0">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0">

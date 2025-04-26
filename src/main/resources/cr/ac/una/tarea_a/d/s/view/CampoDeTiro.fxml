@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -11,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="root" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.CampoDeTiroController">
+<BorderPane fx:id="root" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="modal-vista" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.tarea_a.d.s.controller.CampoDeTiroController">
    <top>
       <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="700.0" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
@@ -22,12 +21,6 @@
                   <Label fx:id="lblTemporizador" prefHeight="37.0" prefWidth="146.0" text="Tiempo" />
                </children>
             </HBox>
-            <MFXButton fx:id="btnIniciar" onAction="#onActionBtnIniciar" prefHeight="37.0" prefWidth="90.0" text="Iniciar">
-               <HBox.margin>
-                  <Insets left="50.0" />
-               </HBox.margin>
-            </MFXButton>
-            <MFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" prefHeight="37.0" prefWidth="78.0" text="Volver" />
          </children></HBox>
    </top>
    <center>
@@ -35,7 +28,7 @@
          <children>
             <AnchorPane fx:id="CampoTiro" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
-                  <ImageView fitHeight="459.0" fitWidth="700.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <ImageView fitHeight="458.0" fitWidth="694.0" layoutY="6.0" pickOnBounds="true" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <image>
                         <Image url="@../resources/FondoCampoDeTiro.png" />
                      </image>
@@ -47,6 +40,8 @@
                         <Font size="23.0" />
                      </font>
                   </Label>
+                  <MFXButton fx:id="btnIniciar" layoutX="475.0" layoutY="405.0" onAction="#onActionBtnIniciar" prefHeight="35.0" prefWidth="80.0" text="Iniciar" />
+                  <MFXButton fx:id="btnVolver" layoutX="582.0" layoutY="405.0" onAction="#onActionBtnVolver" prefHeight="35.0" prefWidth="80.0" text="Volver" />
                </children>
             </AnchorPane>
          </children>
